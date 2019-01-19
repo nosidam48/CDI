@@ -1,0 +1,16 @@
+img {
+    width: 8rem;
+}
+
+.navbar {
+    background-color: white;
+    height: 80px;
+}
+
+.nav-link {
+    color:black!important;
+}
+
+a:hover {
+    color: #97442f!important;
+}
