@@ -1,30 +1,32 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import "./components/Sponsored-Photos";
-import "./components/Sponsored-List";
-import "./components/Sponsored-Bio";
-import SponsoredPhotos from "./components/Sponsored-Photos";
-import SponsoredBio from "./components/Sponsored-Bio";
-import SponsoredList from "./components/Sponsored-List";
-import MsgReceived from "./components/Msg-Received";
 import Navbar from "./components/Navbar";
+import Admin from "./pages/Admin";
+import Donors from "./pages/Donors";
+import Home from "./pages/Home";
+import KidProfilePublic from "./pages/KidProfilePublic";
+import Kids from "./pages/Kids";
 
 class App extends Component {
   render() {
     return (
-      <div>
-      <Navbar/>
-      <div className="container">
-      <div className="row">
-      <SponsoredPhotos/>
-      <SponsoredBio/>
-      <SponsoredList/>
-      </div>
-      </div>
-      </div>
+      <Router>
+        <div>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/kids" component={Kids} />
+            <Route exact path="/kids/:id" component={KidProfilePublic} />
+            <Route exact path="/donors" component={Donors} />
+            <Route exact path="/admin" component={Admin} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
 
 export default App;
+
+
