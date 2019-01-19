@@ -2,7 +2,7 @@ import React from "react";
 
 function Row({ children }) {
     return (
-        <div className="row">{children}</div>
+        <div className="row align-items-start">{children}</div>
     )
 }
 
