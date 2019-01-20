@@ -10,16 +10,16 @@ class SponsoredPhotos extends React.Component {
     const images = [
       {
         original: "../images/Carlitos.jpg",
-        thumbnail: '../images/Carlitos.jpg',
+        thumbnail: '../images/Carlitos.jpg'
       },
       {
         original: '../images/Carlitos2.jpg',
-        thumbnail: '../images/Carlitos2.jpg',
+        thumbnail: '../images/Carlitos2.jpg'
       },
     ]
  
     return (
-      <div className="col-5 image">
+      <div className="col-3 image">
       <ImageGallery items={images} showPlayButton={false}/>
       </div>
     );

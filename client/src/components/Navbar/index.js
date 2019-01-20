@@ -14,13 +14,13 @@ function Navbar() {
       <div className="collapse navbar-collapse mt-4 mr-5" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto right">
           <li className="nav-item">
-            <a className="nav-link" href="/donors">Donors</a>
-          </li>
-          <li className="nav-item">
             <a className="nav-link" href="/kids">Kids</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/login">Log In</a>
+            <a className="nav-link" href="/donors">{'\u00A0'}{'\u00A0'}Donors</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/login">{'\u00A0'}{'\u00A0'}Log In</a>
           </li>
         </ul>
       </div>

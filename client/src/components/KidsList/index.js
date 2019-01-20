@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import SponsorButton from "../SponsorButton";
 
 function KidsList({ children }) {
     return (
@@ -18,7 +19,7 @@ function KidsList({ children }) {
                                     <h6><span className="font-weight-bold">Birthday:</span> April 23</h6>
                                     <h6><span className="font-weight-bold">Location:</span> Choluteca, Honduras</h6>
                                     <h6 className="learn"><a href="#">Learn more about me</a></h6>
-                                    <button type="button" class="btn btn-primary btn-sponsor">Sponsor Me!</button>
+                                    <SponsorButton />
                                 </div>
                             </div>
                         </div>
@@ -37,7 +38,7 @@ function KidsList({ children }) {
                                     <h6><span className="font-weight-bold">Birthday:</span> March 13</h6>
                                     <h6><span className="font-weight-bold">Location:</span> Managua, Nicaragua</h6>
                                     <h6 className="learn"><a href="#">Learn more about me</a></h6>
-                                    <button type="button" class="btn btn-primary btn-sponsor">Sponsor Me!</button>
+                                    <SponsorButton />
                                 </div>
                             </div>
                         </div>
@@ -56,7 +57,7 @@ function KidsList({ children }) {
                                     <h6><span className="font-weight-bold">Birthday:</span> March 13</h6>
                                     <h6><span className="font-weight-bold">Location:</span> Managua, Nicaragua</h6>
                                     <h6 className="learn"><a href="#">Learn more about me</a></h6>
-                                    <button type="button" class="btn btn-primary btn-sponsor">Sponsor Me!</button>
+                                    <SponsorButton />
                                 </div>
                             </div>
                         </div>
@@ -75,7 +76,7 @@ function KidsList({ children }) {
                                     <h6><span className="font-weight-bold">Birthday:</span> March 13</h6>
                                     <h6><span className="font-weight-bold">Location:</span> Managua, Nicaragua</h6>
                                     <h6 className="learn"><a href="#">Learn more about me</a></h6>
-                                    <button type="button" class="btn btn-primary btn-sponsor">Sponsor Me!</button>
+                                    <SponsorButton />
                                 </div>
                             </div>
                         </div>
