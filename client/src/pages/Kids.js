@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import SponsoredPhotos from "../components/Sponsored-Photos"
-import SponsoredBio from "../components/Sponsored-Bio"
-import SponsoredList from "../components/Sponsored-List"
-import Container from "../components/Container"
+import Container from "../components/Container";
+import Row from "../components/Row";
+import KidsList from "../components/KidsList";
+import FilterPublic from "../components/FilterPublic";
 
 class Kids extends Component {
     render() {
         return (
             <Container>
-                XXXX<div className="row">
-                    <SponsoredPhotos />
-                    <SponsoredBio />
-                    <SponsoredList />                
-                </div>
+                <Row>
+                    <KidsList />
+                    <FilterPublic />
+                </Row>
             </Container>
         )
     } 

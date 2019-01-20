@@ -1,0 +1,18 @@
+.btn-sponsor {
+    background-color: #97442f;
+    border: none;
+}
+
+.card {
+    background-color: #f7f7f7;
+}
+
+.kidsListPic {
+    height: 14rem;
+    object-fit: cover;
+}
+
+.learn {
+    line-height:2.35rem;
+}
+

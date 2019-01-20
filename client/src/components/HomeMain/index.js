@@ -3,7 +3,7 @@ import "./style.css";
 
 function HomeMain({ children }) {
     return (
-        <div className="col-md-9">
+        <div className="col-md-10">
             <img src="../images/cdi-logo.png" class="pl-3" id="home-logo" alt="logo" />
 
             <h5>Centro de Desarrollo Infantil (Children Development Center) oversees the health and development of at-risk boys and girls.</h5>
