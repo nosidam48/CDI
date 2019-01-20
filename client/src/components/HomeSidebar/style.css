@@ -1,5 +1,10 @@
-#more {
+#more.white-text {
     color: white;
+}
+
+#more.white-text:hover {
+    color: white!important;
+    font-style: italic;
 }
 
 #sidebar {

@@ -13,11 +13,11 @@ function PublicKidCard({ children }) {
                     <h5><span className="font-weight-bold">Grade: </span>Pre-K </h5>
                     <h5><span className="font-weight-bold">Location: </span>Choluteca, Honduras</h5>
                     <br />
-                    <h5 className="aboutKid">About Carlitos</h5>
+                    <h5 className="text-uppercase">About Carlitos</h5>
                     <p>Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake. Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake. Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake.</p>
                     <SponsorButton />
                     <br /><br />
-                    <a href="/kids">Back to all kids</a>
+                    <a href="/kids"><i class="fas fa-child mr-2"></i>Back to all kids</a>
                 </div>
             </Row>
         </div>

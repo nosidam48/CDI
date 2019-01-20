@@ -1,0 +1,9 @@
+.parallax { 
+    background-image: url("/images/group.jpg");
+    height: 250px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+ 

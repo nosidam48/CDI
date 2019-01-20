@@ -8,7 +8,11 @@ import SidebarCard from "../components/SidebarCard"
 class Home extends Component {
     render() {
         return (
-            <Container>
+            <div>
+                <img src="../images/group.jpg" className="mb-3" width="100%" alt="Kids"/>
+                <Container>
+                <Row>
+                </Row>
                 <Row>
                     <HomeMain />
                     <HomeSidebar>
@@ -16,6 +20,7 @@ class Home extends Component {
                     </HomeSidebar>
                 </Row>
             </Container>
+            </div>
         )
     } 
 }

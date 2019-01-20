@@ -4,7 +4,7 @@ import "./style.css";
 function SidebarCard({ children }) {
     return (
         <div>
-        <div className="card m-2">
+        <div className="card border-0 m-2">
             <img className="card-img-top" src="../images/Bairon2.jpg" alt="Child" />
                 <div className="card-body p-1">
                     <h6><strong>Bairon Duban</strong></h6>
@@ -12,7 +12,7 @@ function SidebarCard({ children }) {
                     <i class="fas fa-globe-americas mr-2"></i>Choluteca, Honduras</div>
                 </div>
         </div>
-        <div className="card m-2">
+        <div className="card border-0 m-2">
             <img className="card-img-top" src="../images/Solanyi.jpg" alt="Child" />
                 <div className="card-body p-1">
                     <h6><strong>Solanyi Nicol</strong></h6>
