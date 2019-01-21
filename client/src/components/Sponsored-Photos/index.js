@@ -1,4 +1,5 @@
 import React from "react";
+import { Col } from "reactstrap";
 import "./style.css";
 import ImageGallery from 'react-image-gallery';
 
@@ -33,9 +34,9 @@ class SponsoredPhotos extends React.Component {
     ]
  
     return (
-      <div className="col-4 image">
-      <ImageGallery items={images} showPlayButton={false} showFullscreenButton={false} showNav={true}/>
-      </div>
+      <Col xs="4" className="image">
+        <ImageGallery items={images} showPlayButton={false} showFullscreenButton={false} showNav={true}/>
+      </Col>
     );
   }
  

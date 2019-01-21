@@ -1,18 +1,20 @@
 import React, { Component } from "react";
-import Container from "../components/Container";
+import { Row } from 'reactstrap';
+import MainContainer from "../components/Container";
 import PublicKidCard from "../components/BigKidsCardPublic"
 import SponsoredPhotos from "../components/Sponsored-Photos";
-import Row from "../components/Row";
+// import Row from "../components/Row";
 
 class KidProfilePublic extends Component {
+        
     render() {
         return (
-            <Container>
+            <MainContainer>
                 <Row>    
                     <SponsoredPhotos />
                     <PublicKidCard />
                 </Row>
-            </Container>
+            </MainContainer>
         )
     } 
 }
