@@ -1,5 +1,28 @@
 @import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
+.image-gallery-thumbnail {
+    width: 75px; 
+}
+
 .image-gallery-thumbnail img {
-    width: 100%;
+    width: auto;
+    height: 75px;
+}
+
+.image-gallery-thumbnail.active {
+    border: #717175 1px solid;
+    width: auto;
+}
+
+.image-gallery-image {
+    width: auto;
+    max-height: 500px;
+}
+
+.image-gallery-left-nav {
+    font-size: 3rem;
+}
+
+.image-gallery-right-nav {
+    font-size: 3rem;
 }
