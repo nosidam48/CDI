@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "padrinos",
+    "host": "localhost",
+    "port": 8889,
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "padrinos",
+    "host": "localhost",
+    "port": 8889,
+    "dialect": "mysql",
+    "logging": false
+  },
+  "production": {
+    "username": "jrtzchimp42twzk6",
+    "password": "z8q47703w6tz13z3",
+    "database": "yxnubphrxcm9api2",
+    "host": "icopoghru9oezxh8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql",
+    "port":3306
+  }
+}
