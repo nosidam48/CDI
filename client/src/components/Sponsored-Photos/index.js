@@ -20,7 +20,7 @@ class SponsoredPhotos extends React.Component {
  
     return (
       <div className="col-3 image">
-      <ImageGallery items={images} showPlayButton={false}/>
+      <ImageGallery items={images} showPlayButton={false} showFullscreenButton={false} showNav={false}/>
       </div>
     );
   }
