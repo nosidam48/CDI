@@ -7,6 +7,8 @@ import Donors from "./pages/Donors";
 import Home from "./pages/Home";
 import KidProfilePublic from "./pages/KidProfilePublic";
 import Kids from "./pages/Kids";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route exact path="/kids/:id" component={KidProfilePublic} />
           <Route exact path="/donors" component={Donors} />
           <Route exact path="/admin" component={Admin} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
         </Switch>
       </div>
     </Router>
