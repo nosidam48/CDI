@@ -1,20 +1,23 @@
 import React from "react";
+import { Col, ListGroup, ListGroupItem } from "reactstrap";
+import AdminMasterSidebar from "../AdminMasterSidebar"
 import "./style.css";
 
 function AdminSidebar() {
   return(
-    <div className="wrapper">
-    <nav id="sidebar" className="">
-        <div class="sidebar-header">
-            <h3>Admin Tools</h3>
-        </div>
-        <ul class="list-unstyled components"/>
-            <li>Add a Child</li>
-            <li>Search for a Child</li>
-            <p>__________________________________</p>
-            <li>Add an Admin</li>
-    </nav> 
-    </div>
+    <Col xs="2" className="p-0 m-0">
+      <div className="label">
+        <h6 className="text-uppercase text-center p-2 mb-0 label-text">Admin tools</h6>
+      </div>
+      <ListGroup>
+          <ListGroupItem tag="button" action>Add a child</ListGroupItem>
+          <ListGroupItem tag="button" action>Update child</ListGroupItem>
+          <ListGroupItem tag="button" action>Connect child with donor</ListGroupItem>
+          <ListGroupItem tag="button" action>Delete child</ListGroupItem>
+      </ListGroup>
+      <AdminMasterSidebar />
+    </Col>
+    
   )
 }
 
