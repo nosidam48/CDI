@@ -1,18 +1,19 @@
 import React from "react";
+import { Row, Col, Card } from "reactstrap";
 import "./style.css";
 import SponsorButton from "../SponsorButton";
 
-function KidsList({ children }) {
+function KidsList() {
     return (
-        <div className="col-md-9 my-4">
-            <div className="row">
-                <div className="col-md-6 mb-3">
-                    <div className="card border-0">
-                        <div className="row no-gutters">
-                            <div className="col-auto">
+        <Col md="9" className="my-4">
+            <Row>
+                <Col md="6" className="mb-3">
+                    <Card className="border-0">
+                        <Row className="no-gutters">
+                            <Col xs="auto">
                                 <img src="../images/Bairon2.jpg" className="img-fluid kidsListPic" alt="Child" />
-                            </div>
-                            <div className="col">
+                            </Col>
+                            <Col>
                                 <div className="card-block p-2">
                                     <h4 className="card-title font-weight-bold">Bairon Dubon</h4>
                                     <h6><span className="font-weight-bold">Age:</span> 15</h6>
@@ -21,16 +22,16 @@ function KidsList({ children }) {
                                     <p className="small"><a href="#">Learn more about me</a></p>
                                     <SponsorButton />
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                    <div className="card border-0">
-                        <div className="row no-gutters">
-                            <div className="col-auto">
+                            </Col>
+                        </Row>
+                    </Card>
+                </Col>
+                <Col md="6" className="mb-3">
+                    <Card className="border-0">
+                        <Row className="no-gutters">
+                            <Col xs="auto">
                                 <img src="../images/Solanyi.jpg" className="img-fluid kidsListPic" alt="Child" />
-                            </div>
+                            </Col>
                             <div className="col">
                                 <div className="card-block p-2">
                                     <h4 className="card-title font-weight-bold">Solanyi Nicol</h4>
@@ -41,15 +42,15 @@ function KidsList({ children }) {
                                     <SponsorButton />
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                    <div className="card border-0">
-                        <div className="row no-gutters">
-                            <div className="col-auto">
+                        </Row>
+                    </Card>
+                </Col>
+                <Col md="6" className="mb-3">
+                    <Card className="border-0">
+                        <Row className="no-gutters">
+                            <Col xs="auto">
                                 <img src="../images/Solanyi.jpg" className="img-fluid kidsListPic" alt="Child" />
-                            </div>
+                            </Col>
                             <div className="col">
                                 <div className="card-block p-2">
                                     <h4 className="card-title font-weight-bold">Solanyi Nicol</h4>
@@ -60,15 +61,15 @@ function KidsList({ children }) {
                                     <SponsorButton />
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                    <div className="card border-0">
-                        <div className="row no-gutters">
-                            <div className="col-auto">
+                        </Row>
+                    </Card>
+                </Col>
+                <Col md="6" className="mb-3">
+                    <Card className="border-0">
+                        <Row className="no-gutters">
+                            <Col xs="auto">
                                 <img src="../images/Solanyi.jpg" className="img-fluid kidsListPic" alt="Child" />
-                            </div>
+                            </Col>
                             <div className="col">
                                 <div className="card-block p-2">
                                     <h4 className="card-title font-weight-bold">Solanyi Nicol</h4>
@@ -79,11 +80,11 @@ function KidsList({ children }) {
                                     <SponsorButton />
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </Row>
+                    </Card>
+                </Col>
+            </Row>
+        </Col>
     )
 }
 

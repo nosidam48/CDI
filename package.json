@@ -29,5 +29,9 @@
     "path": "^0.12.7",
     "react-image-gallery": "^0.8.12",
     "sequelize": "^4.42.0"
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-image-gallery": "^0.8.12",
+    "reactstrap": "^7.1.0"
   }
 }
