@@ -17,7 +17,7 @@ function PublicKidCard({ children }) {
                     <p>Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake. Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake. Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake.</p>
                     <SponsorButton />
                     <br /><br />
-                    <a href="/kids"><i class="fas fa-child mr-2"></i>Back to all kids</a>
+                    <a href="/kids"><span className="small"><i class="fas fa-child mr-2"></i>Back to all kids</span></a>
                 </div>
             </Row>
         </div>

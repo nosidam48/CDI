@@ -1,3 +1,4 @@
+/* 
 .wrapper {
   display: flex;
   align-items: stretch;
@@ -32,7 +33,7 @@ a, a:hover, a:focus {
 
 #sidebar {
   /* don't forget to add all the previously mentioned styles here too */
-  background: #7386D5;
+  /* background: #7386D5;
   color: #fff;
   transition: all 0.3s;
 }
@@ -79,4 +80,4 @@ ul ul a {
   #sidebar.active {
       margin-left: 0;
   }
-}
+/* } */
