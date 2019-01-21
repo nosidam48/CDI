@@ -1,8 +1,14 @@
 #home-logo {
     float:right;
-    width: 20rem;
+    width: 17rem;
 }
 
 a {
     color: #97442f;
 }
+  
+a:hover {
+    text-decoration: none;
+    color:#356377!important;
+}
+  

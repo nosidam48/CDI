@@ -3,13 +3,13 @@ import "./style.css";
 
 function FilterPublic({ children }) {
     return (
-        <div className="col-md-3 my-4 p-0 border">
+        <div className="col-md-2 my-4 p-0 border">
             <div className="label p-0 m-0">
                 <h6 className="text-uppercase text-center py-2 label-text">Search options</h6>
             </div>
             <div className="px-2 pt-2">
-                <h6 className="text-center text-uppercase font-weight-bold">Location</h6>
-                <select className="form-control">
+                <h6 className="text-uppercase font-weight-bold pl-1">Location</h6>
+                <select className="form-control form-control-sm">
                     <option selected>No preference</option>
                     <optgroup label="El Salvador" />
                     <option>-- El Guayabo</option>
@@ -29,16 +29,14 @@ function FilterPublic({ children }) {
                 </select>
             </div>
             <div className="px-2 pt-4">
-                <h6 className="text-center text-uppercase font-weight-bold">Gender</h6>
-                <select className="form-control">
+                <h6 className="text-uppercase pl-1 font-weight-bold">Gender</h6>
+                <select className="form-control form-control-sm">
                     <option selected>No preference</option>
                     <option>Male</option>
                     <option>Female</option>
                 </select>
             </div>
-            <div className="px-2 pt-4">
-                <h6 className="text-center text-uppercase font-weight-bold">Age</h6>
-            </div>
+            <button type="button" class="btn btn-primary btn-sm btn-search ml-2 mt-3 mb-2">Search</button>            
         </div>
     )   
 }
