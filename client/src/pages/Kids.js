@@ -9,8 +9,8 @@ class Kids extends Component {
         return (
             <Container>
                 <Row>
-                    <KidsList />
                     <FilterPublic />
+                    <KidsList />
                 </Row>
             </Container>
         )

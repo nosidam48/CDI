@@ -3,7 +3,7 @@ import "./style.css";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light">
+    <nav className="navbar sticky-top navbar-expand-lg navbar-light">
       <a className="navbar-brand ml-5" href="/">
         <img src="../images/cdi-logo.png" class="brandImage" alt="CDI" />
       </a>

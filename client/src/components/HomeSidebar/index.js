@@ -3,8 +3,11 @@ import "./style.css";
 
 function HomeSidebar({ children }) {
     return (
-        <div class="col-md-2 p-0" id="sidebar">{children}
-            <div class="small mx-2 mb-2" href="/kids" id="more">See more children available for sponsorship</div>
+        <div className="col-md-2 p-0" id="sidebar">{children}
+            <div className="small mx-2 mb-2">
+                <a href="/kids" className="white-text" id="more">
+                   <i className="fas fa-child mr-2"></i>See more</a>
+            </div>
         </div>
     )
 }
