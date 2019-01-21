@@ -1,10 +1,10 @@
 import React from "react";
-import "./style.css";
+import { Container } from "reactstrap";
 
-function Container({ children }) {
-    return (
-        <div className="container my-3">{children}</div>
-    )
+function MainContainer ({ children }) {
+        return (
+            <Container className="container my-3">{ children }</Container>
+        )
 }
 
-export default Container
+export default MainContainer;

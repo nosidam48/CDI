@@ -1,9 +1,11 @@
 import React from "react";
+import { Col, Button} from "reactstrap";
 import "./style.css";
 
 function FilterPublic({ children }) {
     return (
-        <div className="col-md-2 my-4 p-0 border">
+        <Col md="2" className="my-4 p-0 border">
+        {/* <div className="col-md-2 my-4 p-0 border"> */}
             <div className="label p-0 m-0">
                 <h6 className="text-uppercase text-center py-2 label-text">Search options</h6>
             </div>
@@ -36,8 +38,8 @@ function FilterPublic({ children }) {
                     <option>Female</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary btn-sm btn-search ml-2 mt-3 mb-2">Search</button>            
-        </div>
+            <Button size="sm" className="btn-search ml-2 mt-3 mb-2">Search</Button>            
+        </Col>
     )   
 }
         

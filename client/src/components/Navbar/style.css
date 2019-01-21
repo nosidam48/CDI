@@ -11,6 +11,6 @@
     color:black!important;
 }
 
-a:hover {
+.nav-link:hover {
     color: #97442f!important;
 }

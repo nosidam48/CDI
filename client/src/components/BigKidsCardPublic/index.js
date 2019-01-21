@@ -1,13 +1,13 @@
 import React from "react";
+import {Row, Col} from "reactstrap";
 import "./style.css";
-import Row from "../Row"
 import SponsorButton from "../SponsorButton"
 
 function PublicKidCard({ children }) {
     return (
-        <div className="col-8">
+        <Col xs="8">
             <Row>
-                <div className="col-12">
+                <Col>
                     <h2 className="font-weight-bold">Carlitos Jose</h2>
                     <h5><span className="font-weight-bold">Age: </span>3</h5>
                     <h5><span className="font-weight-bold">Grade: </span>Pre-K </h5>
@@ -16,11 +16,11 @@ function PublicKidCard({ children }) {
                     <h5 className="text-uppercase">About Carlitos</h5>
                     <p>Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake. Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake. Reds perfect game gap chin music third baseman swing strike zone choke up. Range mitt plate fair sport wrigley rake.</p>
                     <SponsorButton />
-                    <br /><br />
+                    <hr />
                     <a href="/kids"><span className="small"><i class="fas fa-child mr-2"></i>Back to all kids</span></a>
-                </div>
+                </Col>
             </Row>
-        </div>
+        </Col>
     )
 }
 

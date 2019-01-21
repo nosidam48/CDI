@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import Container from "../components/Container";
-import Row from "../components/Row";
+import { Row } from "reactstrap";
+import MainContainer from "../components/Container";
 import KidsList from "../components/KidsList";
 import FilterPublic from "../components/FilterPublic";
 
 class Kids extends Component {
     render() {
         return (
-            <Container>
+            <MainContainer>
                 <Row>
                     <FilterPublic />
                     <KidsList />
                 </Row>
-            </Container>
+            </MainContainer>
         )
     } 
 }

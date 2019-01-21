@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Container from "../components/Container"
+import { Row } from "reactstrap";
+import MainContainer from "../components/Container"
 import SponsoredPhotos from "../components/Sponsored-Photos"
 import SponsoredBio from "../components/Sponsored-Bio"
 import SponsoredList from "../components/Sponsored-List"
@@ -7,13 +8,13 @@ import SponsoredList from "../components/Sponsored-List"
 class Donors extends Component {
     render() {
         return (
-            <Container>
-                <div className="row">
+            <MainContainer>
+                <Row>
                     <SponsoredPhotos />
                     <SponsoredBio />
                     <SponsoredList />                
-                </div>
-            </Container>
+                </Row>
+            </MainContainer>
         )
     } 
 }
