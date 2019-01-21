@@ -1,18 +1,20 @@
 import React, { Component } from "react";
-import SponsoredPhotos from "../components/Sponsored-Photos"
-import SponsoredBio from "../components/Sponsored-Bio"
-import SponsoredList from "../components/Sponsored-List"
+import AddKidForm from "../components/Add-Kid-Form"
+import AdminSidebar from "../components/Admin-Sidebar"
+import AdminSearch from "../components/Admin-Search"
+import AddAdmin from "../components/Add-Admin"
 import Container from "../components/Container"
+import SidenavButton from "../components/Sidenav-Button";
 
 class Admin extends Component {
     render() {
         return (
             <Container>
-                XXXX<div className="row">
-                    <SponsoredPhotos />
-                    <SponsoredBio />
-                    <SponsoredList />                
-                </div>
+                <AdminSidebar/>
+                <SidenavButton/>
+                <AddKidForm/>
+                <AdminSearch/>
+                <AddAdmin/>
             </Container>
         )
     } 
