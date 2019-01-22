@@ -3,6 +3,7 @@ import { Col, ListGroup, ListGroupItem } from "reactstrap";
 import AdminMasterSidebar from "../AdminMasterSidebar"
 import "./style.css";
 
+// Sidebar for admin page that shows regular admin tools
 function AdminSidebar() {
   return(
     <Col xs="2" className="p-0 m-0">
@@ -11,9 +12,13 @@ function AdminSidebar() {
       </div>
       <ListGroup>
           <ListGroupItem tag="button" action>Add a child</ListGroupItem>
-          <ListGroupItem tag="button" action>Update child</ListGroupItem>
-          <ListGroupItem tag="button" action>Connect child with donor</ListGroupItem>
-          <ListGroupItem tag="button" action>Delete child</ListGroupItem>
+          <ListGroupItem tag="button" action>Update child
+            <ul>
+              <li>Update info</li>
+              <li>Connect to donor</li>
+              <li>Remove child</li>
+            </ul>
+          </ListGroupItem>
       </ListGroup>
       <AdminMasterSidebar />
     </Col>

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Row } from "reactstrap";
-import AddKidForm from "../components/Add-Kid-Form"
-import AdminSidebar from "../components/Admin-Sidebar"
-import AdminSearch from "../components/Admin-Search"
-import AddAdmin from "../components/Add-Admin"
-import MainContainer from "../components/Container"
+import { Row, Col } from "reactstrap";
+import AddKidForm from "../components/Add-Kid-Form";
+import AdminSidebar from "../components/Admin-Sidebar";
+import AdminSearch from "../components/AdminSearch";
+import AddAdmin from "../components/AddAdmin";
+import AdminKidList from "../components/AdminKidList";
+import MainContainer from "../components/Container";
 
 class Admin extends Component {
     render() {
@@ -12,7 +13,12 @@ class Admin extends Component {
             <MainContainer>
                 <Row>
                     <AdminSidebar/>
-                    <AddKidForm/>
+                    <Col xs="10" className="px-5">
+                        {/* <AddKidForm/> */}
+                        {/* <AddAdmin /> */}
+                        <AdminSearch />
+                        <AdminKidList />
+                    </Col>
                 </Row>
             </MainContainer>
         )

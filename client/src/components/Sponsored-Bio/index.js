@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row } from "reactstrap";
 import "./style.css";
 
+// Displays text to donor of child they sponsor
 function SponsoredBio() {
   return (
     <Col xs="5">

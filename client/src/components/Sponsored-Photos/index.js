@@ -3,8 +3,8 @@ import { Col } from "reactstrap";
 import "./style.css";
 import ImageGallery from 'react-image-gallery';
 
+// Displays photo gallery of specific child
 class SponsoredPhotos extends React.Component {
- 
   render() {
  
     const images = [

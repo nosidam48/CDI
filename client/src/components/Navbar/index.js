@@ -9,6 +9,7 @@ import {
   NavLink } from 'reactstrap';
 import "./style.css";
 
+// Navbar for each page
 class MainNavbar extends React.Component {
   constructor(props) {
     super(props);

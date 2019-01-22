@@ -2,6 +2,7 @@ import React from "react";
 import { Col } from "reactstrap";
 import "./style.css";
 
+// Sidebar on home page that shows unsponsored kids
 function HomeSidebar({ children }) {
     return (
         <Col md="2" className="p-0" id="sidebar">{children}
