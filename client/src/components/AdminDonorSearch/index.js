@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import "./style.css";
+import ConnectDonorModal from "../ConnectDonorModal";
 
-// Search bar for 
-function AdminSearch() {
+// Search bar to look up donor
+function AdminDonorSearch() {
   
   return (
     <Form inline>
@@ -15,13 +15,13 @@ function AdminSearch() {
           <Input type="select" name="searchParam" id="searchParam">
             <option selected>Choose search field</option>
             <option>Name</option>
-            <option>Age</option>
-            <option>Location</option>
-            <option>Grade</option>
+            <option>Email</option>
           </Input>
-        <Button className="ml-3">Search</Button>
+        
+        {/* When search button is clicked, modal opens with donor info */}
+        <ConnectDonorModal />
       </Form>
   )
 }
 
-export default AdminSearch;
+export default AdminDonorSearch;
