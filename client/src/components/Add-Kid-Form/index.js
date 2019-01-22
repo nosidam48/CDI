@@ -13,8 +13,8 @@ function AddKidForm() {
           <Input type="text" name="firstNames" id="firstNames" placeholder="First names" />
         </FormGroup>
         <FormGroup>
-          <Label for="lastName">Last names</Label>
-          <Input type="text" name="lastNames" id="lastNames" placeholder="Last names" />
+          <Label for="lastName">Last name</Label>
+          <Input type="text" name="lastName" id="lastName" placeholder="Last name" />
         </FormGroup>
         <FormGroup>
           <Label for="birthdate">Birthdate</Label>
@@ -63,6 +63,10 @@ function AddKidForm() {
         <FormGroup>
           <Label for="bio">Child bio</Label>
           <Input type="textarea" name="bio" id="bio" placeholder="Description of the child" />
+        </FormGroup>
+        <FormGroup>
+          <Label for="note">New note for the donor</Label>
+          <Input type="textarea" name="note" id="note" placeholder="Note for the donor, if any" />
         </FormGroup>
         <FormGroup>
           <Label for="photo">Add a photo</Label>

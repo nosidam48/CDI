@@ -1,5 +1,8 @@
 import React from "react";
 import { Button } from "reactstrap";
+import UpdateKidModal from "../UpdateKidModal";
+import RemoveKidModal from "../RemoveKidModal";
+
 
 // Displays list from admin search for kids
 function AdminKidList() {
@@ -15,9 +18,14 @@ function AdminKidList() {
             
             {/* Button functions */}
             <div className="mt-2">
-                <Button inline size="sm" className="mr-1">Update info</Button>
-                <Button inline size="sm" className="mr-1">Connect to donor</Button>
-                <Button inline size="sm" className="mr-1">Remove child</Button>
+                {/* Button that opens modal to update/add kid info */}
+                <UpdateKidModal />
+
+                {/* Button that displays AdminDonorSearch */}
+                <Button inline size="sm">Connect to donor</Button>
+
+                {/* Button that opens RemoveKidModal */}
+                <RemoveKidModal />
             </div>
             <hr />
             <h5>Bairon Duban Guillen</h5>
@@ -29,9 +37,9 @@ function AdminKidList() {
             
             {/* Button functions */}
             <div className="mt-2">
-                <Button inline size="sm" className="mr-1">Update info</Button>
+                <UpdateKidModal />
                 <Button inline size="sm" className="mr-1">Connect to donor</Button>
-                <Button inline size="sm" className="mr-1">Remove child</Button>
+                <RemoveKidModal />
             </div>
             <hr />
         </div>
