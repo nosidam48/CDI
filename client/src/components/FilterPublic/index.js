@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Button} from "reactstrap";
 import "./style.css";
 
+// Provides search options on /kids page
 function FilterPublic({ children }) {
     return (
         <Col md="2" className="my-4 p-0 border">

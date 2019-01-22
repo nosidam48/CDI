@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 
+// Kid card that shows up in home page sidebar
 function SidebarCard({ children }) {
     return (
         <div>

@@ -2,6 +2,7 @@ import React from "react";
 import { Col } from "reactstrap";
 import "./style.css";
 
+// Main content for home page
 function HomeMain({ children }) {
     return (
         <Col md="10" className="pl-0 pr-4">

@@ -3,6 +3,7 @@ import { Row, Col, Card } from "reactstrap";
 import "./style.css";
 import SponsorButton from "../SponsorButton";
 
+// Shows list of kids available to sponsor; default is to show all kids and user can enter search options
 function KidsList() {
     return (
         <Col md="9" className="my-4">
