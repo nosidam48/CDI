@@ -8,6 +8,8 @@ import AdminDonorSearch from "../components/AdminDonorSearch";
 import AddAdmin from "../components/AddAdmin";
 import AdminKidList from "../components/AdminKidList";
 import AddDonorForm from "../components/AddDonorForm";
+import AdminSearch from "../components/AdminSearch";
+import AdminList from "../components/AdminList";
 import ConnectDonorModal from "../components/ConnectDonorModal";
 import MainContainer from "../components/Container";
 import AdminMasterSidebar from "../components/AdminMasterSidebar";
@@ -17,7 +19,9 @@ class Admin extends Component {
         showAddKidForm: false,
         showKidSearch: false,
         showMultipleKids: false,
-        showAddDonorForm: false
+        showAddDonorForm: false,
+        showAddAdmin: false,
+        showAdminSearch: false
     };
 
     // Toggles display of form to add a kid
@@ -26,39 +30,66 @@ class Admin extends Component {
             showAddKidForm: !this.state.showAddKidForm,
             showKidSearch: false,
             showMultipleKids: false,
-            showAddDonorForm: false
+            showAddDonorForm: false,
+            showAddAdmin: false,
+            showAdminSearch: false
         });
     }
-
     // Lets admin search for specific kid
     showKidSearch = () => {
         this.setState({
             showKidSearch: true,
             showAddKidForm: false,
             showMultipleKids: false,
-            showAddDonorForm: false
+            showAddDonorForm: false,
+            showAddAdmin: false,
+            showAdminSearch: false
         })
     }
-
     // Lets admin search for group of kids
     showMultipleKids = () => {
         this.setState({
             showMultipleKids: true,
             showKidSearch: false,
             showAddKidForm: false,
-            showAddDonorForm: false
+            showAddDonorForm: false,
+            showAddAdmin: false,
+            showAdminSearch: false
         })
     }
-
     // Toggles display of form to add a donor
     toggleAddDonorForm = () => {
-        console.log("click worked")
         this.setState({
             showAddKidForm: false,
             showKidSearch: false,
             showMultipleKids: false,
-            showAddDonorForm: !this.state.showAddDonorForm
+            showAddDonorForm: !this.state.showAddDonorForm,
+            showAddAdmin: false,
+            showAdminSearch: false
         });
+    }
+    // Toggles display of form to add a donor
+    toggleAddAdmin = () => {
+        this.setState({
+            showAddKidForm: false,
+            showKidSearch: false,
+            showMultipleKids: false,
+            showAddDonorForm: false,
+            showAddAdmin: !this.state.showAddAdmin,
+            showAdminSearch: false
+        });
+    } 
+    // Lets admin search for admin
+    showAdminSearch = () => {
+        console.log("this worked")
+        this.setState({
+            showKidSearch: false,
+            showAddKidForm: false,
+            showMultipleKids: false,
+            showAddDonorForm: false,
+            showAddAdmin: false,
+            showAdminSearch: true
+        })
     }
     
     render() {
@@ -71,6 +102,8 @@ class Admin extends Component {
                         onClickKidSearch={this.showKidSearch}
                         onClickMultipleKidSearch={this.showMultipleKids} 
                         onClickAddDonor={this.toggleAddDonorForm}
+                        onClickAddAdmin={this.toggleAddAdmin}
+                        onClickAdminSearch={this.showAdminSearch}
                     />
                     <Col xs="10" className="px-5">
                         {/* Shows AddKidForm if true and passes onClick to AddKidForm button */}
@@ -97,9 +130,24 @@ class Admin extends Component {
                             /> : 
                             null
                         }
+                        {/* Shows form to add admin */}
+                        {this.state.showAddAdmin ? 
+                            <AddAdmin 
+                                onClickAddAdmin={this.toggleAddAdmin}
+                            /> :
+                            null
+                        }
+                        {/* Shows admin search bar*/}
+                        {this.state.showAdminSearch ? 
+                            <AdminSearch 
+                                onClickAdminSearch={this.showAdminSearch}
+                            /> :
+                            null
+                        }
+                        {/* <AdminList /> */}
+
                         {/* <AdminDonorSearch /> */}
                         {/* <ConnectDonorModal /> */}
-                        {/* <AddAdmin /> */}
                     </Col>
                 </Row>
             </MainContainer>

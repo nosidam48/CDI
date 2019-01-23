@@ -3,18 +3,18 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import "./style.css";
 
 // Form that is called when admin wants to add another admin
-function AddAdmin() {
+function AddAdmin(props) {
   return (
     <div>
       <h4 className="border-bottom">Add an admin</h4>
       <Form className="mt-4">
         <FormGroup>
-          <Label for="nombres">Nombres</Label>
-          <Input type="text" name="nombres" id="nombres" placeholder="Nombres" />
+          <Label for="firstNames">First Names</Label>
+          <Input type="text" name="firstNames" id="firstNames" placeholder="First names" />
         </FormGroup>
         <FormGroup>
-          <Label for="apellido">Apellido</Label>
-          <Input type="text" name="apellido" id="apellido" placeholder="Apellido" />
+          <Label for="lastName">Last Name</Label>
+          <Input type="text" name="lastName" id="lastName" placeholder="Last name" />
         </FormGroup>
         <FormGroup>
           <Label for="email">Email</Label>
@@ -40,7 +40,9 @@ function AddAdmin() {
             </Label>
           </FormGroup>
         </FormGroup>
-        <Button>Submit</Button>
+        <Button inline>Submit</Button>
+        <Button inline className="ml-2" onClick={props.onClickAddAdmin}>Discard</Button> 
+
       </Form>
     </div>
   )

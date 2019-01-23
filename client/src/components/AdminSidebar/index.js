@@ -27,9 +27,11 @@ function AdminSidebar(props) {
           <ListGroupItem onClick={props.onClickMultipleKidSearch} tag="button" action>View Children</ListGroupItem>
       </ListGroup>
       
-      {/* Pass props to master admin sidebar */}
+      {/* Display, pass props to master admin sidebar */}
       <AdminMasterSidebar 
-        onClickAddDonor={props.onClickAddDonor} 
+        onClickAddDonor={props.onClickAddDonor}
+        onClickAddAdmin={props.onClickAddAdmin}
+        onClickAdminSearch={props.onClickAdminSearch} 
       />
     </Col>
     
