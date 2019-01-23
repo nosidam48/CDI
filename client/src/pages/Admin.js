@@ -4,15 +4,15 @@ import AddKidForm from "../components/AddKidForm";
 import AdminSidebar from "../components/AdminSidebar";
 import AdminKidSearch from "../components/AdminKidSearch";
 import AdminMultipleKids from "../components/AdminMultipleKidList";
-import AdminDonorSearch from "../components/AdminDonorSearch";
+// import AdminDonorSearch from "../components/AdminDonorSearch";
 import AddAdmin from "../components/AddAdmin";
-import AdminKidList from "../components/AdminKidList";
+// import AdminKidList from "../components/AdminKidList";
 import AddDonorForm from "../components/AddDonorForm";
 import AdminSearch from "../components/AdminSearch";
 import ViewDonors from "../components/ViewDonors";
 import ViewAdmins from "../components/ViewAdmins";
-import AdminList from "../components/AdminList";
-import ConnectDonorModal from "../components/ConnectDonorModal";
+// import AdminList from "../components/AdminList";
+// import ConnectDonorModal from "../components/ConnectDonorModal";
 import MainContainer from "../components/Container";
 
 class Admin extends Component {
