@@ -4,26 +4,33 @@ import AdminMasterSidebar from "../AdminMasterSidebar"
 import "./style.css";
 
 // Sidebar for admin page that shows regular admin tools
-function AdminSidebar() {
-  return(
+function AdminSidebar(props) {
+  return (
     <Col xs="2" className="p-0 m-0">
       <div className="label">
         <h6 className="text-uppercase text-center p-2 mb-0 label-text">Admin tools</h6>
       </div>
       <ListGroup>
-          {/* Add a child displays Add-Kid-Form to be filled out */}
-          <ListGroupItem tag="button" action>Add a child</ListGroupItem>
+          {/* Add a child displays AddKidForm to be filled out */}
+          <ListGroupItem onClick={props.onClickAddKid} tag="button" action>Add a child</ListGroupItem>
           
           {/* Update child displays AdminKidSearch, which lets the admin search for a child */}
-          <ListGroupItem tag="button" action>Update child
+          <ListGroupItem onClick={props.onClickKidSearch} tag="button" action>Update child
             <ul>
               <li>Update info</li>
               <li>Connect to donor</li>
               <li>Remove child</li>
             </ul>
           </ListGroupItem>
+
+          {/* View all children, sponsored/unsponsored/both */}
+          <ListGroupItem onClick={props.onClickMultipleKidSearch} tag="button" action>View Children</ListGroupItem>
       </ListGroup>
-      <AdminMasterSidebar />
+      
+      {/* Pass props to master admin sidebar */}
+      <AdminMasterSidebar 
+        onClickAddDonor={props.onClickAddDonor} 
+      />
     </Col>
     
   )

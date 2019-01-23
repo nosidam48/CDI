@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import AddKidForm from "../Add-Kid-Form";
+import AddKidForm from "../AddKidForm";
 
 class UpdateKidModal extends React.Component {
     constructor(props) {

@@ -28,7 +28,7 @@ class MainNavbar extends React.Component {
     return (
         <Navbar color="white" light expand="md" className="sticky-top">
           <NavbarBrand href="/">
-            <img src="../images/cdi-logo.png" class="brandImage ml-5" alt="CDI" />
+            <img src="../images/cdi-logo.png" className="brandImage ml-5" alt="CDI" />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
