@@ -34,6 +34,10 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.STRING,
           allowNull: false
       },
+      user_zip: {
+          type: DataTypes.STRING,
+          allowNull: false
+      },
       admin_status: {
         type: DataTypes.STRING,
         default: NULL

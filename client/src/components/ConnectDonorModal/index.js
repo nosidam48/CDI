@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import AddKidForm from "../Add-Kid-Form";
+import AddKidForm from "../AddKidForm";
 
 // Modal displaying donor info where admin can connect donor with child
 class ConnectDonorModal extends React.Component {

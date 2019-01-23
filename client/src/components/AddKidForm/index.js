@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input, CustomInput } from "reactstrap";
 import "./style.css";
 
 // Form that is called when an admin wants to add a child to the database
-function AddKidForm() {
+function AddKidForm(props) {
   return (
     <div>
       <h5 className="border-bottom">Add a child to the database</h5>
@@ -72,7 +72,8 @@ function AddKidForm() {
           <Label for="photo">Add a photo</Label>
           <CustomInput type="file" id="photo" name="photo" />
         </FormGroup>
-        <Button>Submit</Button>
+        <Button inline>Submit</Button>
+        <Button inline className="ml-2" onClick={props.onClickAddKid}>Discard</Button> 
       </Form>
     </div>
   )
