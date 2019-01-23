@@ -4,7 +4,7 @@ const db = require("../models");
 module.exports = {
     // Query to find all kids
     findAll: function(req, res) {
-    db.Kids.findAll({})
+    db.kids.findAll({})
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
   },

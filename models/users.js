@@ -18,34 +18,39 @@ module.exports = function(sequelize, DataTypes) {
       },
       user_address: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: true
       },
       user_city: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: true
       },
       user_state: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: true
       },
       user_zip: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: true
       },
       admin_status: {
         type: DataTypes.BOOLEAN,
-        default: false
+        default: false,
+        allowNull: true
       },
       master_admin_status: {
         type: DataTypes.BOOLEAN,
-        default: false
+        default: false,
+        allowNull: true
       },
-      kid_id: {
-          type: DataTypes.INTEGER
-      }
   }, {
       freezeTableName: true,
       timestamps: false
   });
+
+  // Creating association for users and kids
+  users.associate = function(models) {
+    users.belongsToMany(models.kids, {through: "KidsUsers"});
+    };
+
   return users;
 };
