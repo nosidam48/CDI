@@ -1,6 +1,6 @@
 //Create the sequelize object for our Event table
 module.exports = function(sequelize, DataTypes) {
-  var content = sequelize.define("eventTable", {
+  var content = sequelize.define("content", {
       id: {
           type: DataTypes.INTEGER,
           allowNull: false,

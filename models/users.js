@@ -1,11 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var users = sequelize.define("eventTable", {
-      id: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true
-      },
+  var users = sequelize.define("users", {
       first_name: {
           type: DataTypes.STRING,
           allowNull: false
@@ -39,8 +33,12 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
       },
       admin_status: {
-        type: DataTypes.STRING,
-        default: NULL
+        type: DataTypes.BOOLEAN,
+        default: false
+      },
+      master_admin_status: {
+        type: DataTypes.BOOLEAN,
+        default: false
       },
       kid_id: {
           type: DataTypes.INTEGER
