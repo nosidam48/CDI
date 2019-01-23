@@ -2,17 +2,25 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
+const routes = require("./routes");
 const app = express();
 const db = require("./models");
+const logger = require("morgan");
 
+app.use(logger("dev"));
 
-// Serve up static assets (usually on heroku)
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Serve up static assets on heroku
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
 // Send every request to the React app
-// Define any API routes before this runs
+app.use(routes);
+
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });

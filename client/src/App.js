@@ -9,6 +9,7 @@ import KidProfilePublic from "./pages/KidProfilePublic";
 import Kids from "./pages/Kids";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import NoMatch from "./pages/NoMatch";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route component={NoMatch} />
         </Switch>
       </div>
     </Router>

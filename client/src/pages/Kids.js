@@ -3,8 +3,26 @@ import { Row } from "reactstrap";
 import MainContainer from "../components/Container";
 import KidsList from "../components/KidsList";
 import FilterPublic from "../components/FilterPublic";
+import API from "../utils/API";
 
 class Kids extends Component {
+    state = {
+        kids: []
+    }
+
+    componentDidMount() {
+        this.loadKids();
+    }
+
+    loadKids = () => {
+        console.log("load kids request sent")
+        API.getKids()
+            .then(res =>
+                console.log(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+    
     render() {
         return (
             <MainContainer>

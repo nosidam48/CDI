@@ -1,6 +1,6 @@
 //Create the sequelize object for our Event table
 module.exports = function(sequelize, DataTypes) {
-  var kids = sequelize.define("kids", {
+  var Kids = sequelize.define("Kids", {
       first_name: {
           type: DataTypes.STRING,
           allowNull: false
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
       },
       birth_date: {
-          type: DataTypes.DATE,
+          type: DataTypes.DATEONLY,
           allowNull: false
       },
       grade: {
@@ -27,8 +27,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       need_sponsor: {
           type: DataTypes.BOOLEAN,
-          default: false,
-          allowNull: false
+          defaultValue: true
       },
       donor_id: {
         type: DataTypes.INTEGER,
@@ -38,5 +37,5 @@ module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       timestamps: false
   });
-  return kids;
+  return Kids;
 };
