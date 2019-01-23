@@ -13,6 +13,8 @@ function AdminMasterSidebar(props) {
           <ListGroupItem onClick={props.onClickAddDonor} tag="button" action>Add donor</ListGroupItem>
           <ListGroupItem onClick={props.onClickAddAdmin} tag="button" action>Add admin</ListGroupItem>
           <ListGroupItem onClick={props.onClickAdminSearch} tag="button" action>Update admin</ListGroupItem>
+          <ListGroupItem onClick={props.onClickShowDonors} tag="button" action>View all donors</ListGroupItem>
+          <ListGroupItem onClick={props.onClickShowAdmins} tag="button" action>View all admins</ListGroupItem>
       </ListGroup>
     </div>    
   )
