@@ -9,10 +9,11 @@ import AddAdmin from "../components/AddAdmin";
 import AdminKidList from "../components/AdminKidList";
 import AddDonorForm from "../components/AddDonorForm";
 import AdminSearch from "../components/AdminSearch";
+import ViewDonors from "../components/ViewDonors";
+import ViewAdmins from "../components/ViewAdmins";
 import AdminList from "../components/AdminList";
 import ConnectDonorModal from "../components/ConnectDonorModal";
 import MainContainer from "../components/Container";
-import AdminMasterSidebar from "../components/AdminMasterSidebar";
 
 class Admin extends Component {
     state = {
@@ -21,7 +22,9 @@ class Admin extends Component {
         showMultipleKids: false,
         showAddDonorForm: false,
         showAddAdmin: false,
-        showAdminSearch: false
+        showAdminSearch: false,
+        showDonors: false,
+        showAdmins: false
     };
 
     // Toggles display of form to add a kid
@@ -32,7 +35,10 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddDonorForm: false,
             showAddAdmin: false,
-            showAdminSearch: false
+            showAdminSearch: false,
+            showDonors: false,
+            showAdmins: false
+
         });
     }
     // Lets admin search for specific kid
@@ -43,7 +49,11 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddDonorForm: false,
             showAddAdmin: false,
-            showAdminSearch: false
+            showAdminSearch: false,
+            showDonors: false,
+            showAdmins: false
+
+
         })
     }
     // Lets admin search for group of kids
@@ -54,7 +64,11 @@ class Admin extends Component {
             showAddKidForm: false,
             showAddDonorForm: false,
             showAddAdmin: false,
-            showAdminSearch: false
+            showAdminSearch: false,
+            showDonors: false,
+            showAdmins: false
+
+
         })
     }
     // Toggles display of form to add a donor
@@ -65,7 +79,11 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddDonorForm: !this.state.showAddDonorForm,
             showAddAdmin: false,
-            showAdminSearch: false
+            showAdminSearch: false,
+            showDonors: false,
+            showAdmins: false
+
+
         });
     }
     // Toggles display of form to add a donor
@@ -76,7 +94,11 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddDonorForm: false,
             showAddAdmin: !this.state.showAddAdmin,
-            showAdminSearch: false
+            showAdminSearch: false,
+            showDonors: false,
+            showAdmins: false
+
+
         });
     } 
     // Lets admin search for admin
@@ -88,7 +110,40 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddDonorForm: false,
             showAddAdmin: false,
-            showAdminSearch: true
+            showAdminSearch: true,
+            showDonors: false,
+            showAdmins: false
+
+        })
+    }
+
+    // Lets admin see all donors
+    showDonors = () => {
+        this.setState({
+            showMultipleKids: false,
+            showKidSearch: false,
+            showAddKidForm: false,
+            showAddDonorForm: false,
+            showAddAdmin: false,
+            showAdminSearch: false,
+            showDonors: true,
+            showAdmins: false
+
+        })
+    }
+
+    // Lets admin see all admins
+    showAdmins = () => {
+        this.setState({
+            showMultipleKids: false,
+            showKidSearch: false,
+            showAddKidForm: false,
+            showAddDonorForm: false,
+            showAddAdmin: false,
+            showAdminSearch: false,
+            showDonors: false,
+            showAdmins: true
+
         })
     }
     
@@ -104,6 +159,8 @@ class Admin extends Component {
                         onClickAddDonor={this.toggleAddDonorForm}
                         onClickAddAdmin={this.toggleAddAdmin}
                         onClickAdminSearch={this.showAdminSearch}
+                        onClickShowDonors={this.showDonors}
+                        onClickShowAdmins={this.showAdmins}
                     />
                     <Col xs="10" className="px-5">
                         {/* Shows AddKidForm if true and passes onClick to AddKidForm button */}
@@ -145,6 +202,17 @@ class Admin extends Component {
                             null
                         }
                         {/* <AdminList /> */}
+                        
+                        {/* Shows all donors */}
+                        {this.state.showDonors ?
+                            <ViewDonors /> :
+                            null
+                        }
+
+                        {this.state.showAdmins ?
+                            <ViewAdmins /> :
+                            null
+                        }
 
                         {/* <AdminDonorSearch /> */}
                         {/* <ConnectDonorModal /> */}
