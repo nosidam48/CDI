@@ -23,6 +23,7 @@ class Login extends Component {
     handleSubmit(event) {
         event.preventDefault()
         console.log('handleSubmit')
+        
         axios
             .post('/user/login', {
                 email: this.state.email,
@@ -56,7 +57,7 @@ class Login extends Component {
             return (
                 <div>
                     <h4>Login</h4>
-                    <form className="form-horizontal">
+                    <form className="form-horizontal" method="post" action="/login">
                         <div className="form-group">
                             <div className="col-1 col-ml-auto">
                                 <label className="form-label" htmlFor="username">Username</label>

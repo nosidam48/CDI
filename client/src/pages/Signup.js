@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom'
 import axios from 'axios';
 
 class Signup extends Component {
@@ -38,8 +39,9 @@ class Signup extends Component {
       address: this.state.address,
       city: this.state.city,
       state: this.state.state,
-		})
-			.then(response => {
+    })
+    .then(response => {
+        console.log("response")
 				console.log(response)
 				if (!response.data.errmsg) {
 					console.log('successful signup')
@@ -56,13 +58,16 @@ class Signup extends Component {
 			})
 	}
 
-  render() {  
+  render() { 
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />
+  } else { 
     return (
       <div className="container">
     <div className="row">
       <div className="col-md-6 col-md-offset-3">
         <h2>Sign Up Form</h2>
-        <form className="signup" method="post" action="/api/signup">
+        <form className="signup" method="post" action="/signup">
           <div className="form-group">
             <label for="first_input">First Name</label>
             <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} className="form-control" id="first-input" placeholder="First Name"/>
@@ -108,6 +113,7 @@ class Signup extends Component {
   </div>
     )
   }
+}
 }
 
 
