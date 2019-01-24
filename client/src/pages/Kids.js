@@ -15,7 +15,6 @@ class Kids extends Component {
     }
 
     loadKidsUnsponsored = () => {
-        console.log("load kids request sent")
         API.getKidsUnsponsored()
             .then(res =>
                 console.log(res.data)
