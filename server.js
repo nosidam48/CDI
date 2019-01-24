@@ -1,9 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
+var session = require("express-session");
+var passport = require("./passport");
 const PORT = process.env.PORT || 3001;
 const routes = require("./routes");
 const app = express();
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const user = require('./routes/user');
 const db = require("./models");
 const logger = require("morgan");
 
@@ -15,6 +20,36 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve up static assets on heroku
+
+app.use(morgan('dev'))
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
+app.use(bodyParser.json())
+
+// Sessions
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
+
+// Routes
+app.use('/user', user)
+
+
+// require("./routes/api-routes")(app);
+// require("./routes/html-routes")(app);
+// Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
@@ -25,6 +60,12 @@ app.use(routes);
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+
+// Define any API routes before this runs
+// app.get("*", function(req, res) {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
+
 
 var syncOptions = { force: false };
 
