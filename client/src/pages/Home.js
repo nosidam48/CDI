@@ -11,7 +11,7 @@ class Home extends Component {
             <div>
                 <img src="../images/banner.jpg" className="mb-3" width="100%" alt="Kids"/>
                 <MainContainer>
-                    <Row>
+                    <Row className="align-items-start">
                         <HomeMain />
                         <HomeSidebar>
                             <SidebarCard />

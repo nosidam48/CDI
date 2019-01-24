@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
     // EXAMPLE FUNCTION
-    getKids: function() {
+    getKidsUnsponsored: function() {
         console.log("API file received request")
         return axios.get("/api/kids");
     }

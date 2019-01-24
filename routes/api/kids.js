@@ -3,7 +3,7 @@ const kidsController = require("../../controllers/kidsController");
 
 // Matches with "/api/kids"
 router.route("/")
-  .get(kidsController.findAll)
+  .get(kidsController.findAllUnsponsored)
 //   .post(booksController.create);
 
 // Matches with "/api/kids/:id"

@@ -11,12 +11,12 @@ class Kids extends Component {
     }
 
     componentDidMount() {
-        this.loadKids();
+        this.loadKidsUnsponsored();
     }
 
-    loadKids = () => {
+    loadKidsUnsponsored = () => {
         console.log("load kids request sent")
-        API.getKids()
+        API.getKidsUnsponsored()
             .then(res =>
                 console.log(res.data)
             )
