@@ -9,8 +9,12 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.STRING,
           allowNull: false
       },
+      gender: {
+          type: DataTypes.STRING,
+          allowNull: false
+      },
       birth_date: {
-          type: DataTypes.DATE,
+          type: DataTypes.DATEONLY,
           allowNull: false
       },
       grade: {
@@ -27,16 +31,20 @@ module.exports = function(sequelize, DataTypes) {
       },
       need_sponsor: {
           type: DataTypes.BOOLEAN,
-          default: false,
-          allowNull: false
+          defaultValue: true
       },
-      donor_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-      }
   }, {
       freezeTableName: true,
       timestamps: false
   });
+
+  // Creating association for kids with users and content
+  kids.associate = function(models) {
+    kids.belongsToMany(models.users, {through: "KidsUsers"}),
+    kids.hasMany(models.content);
+    };
+
+
+
   return kids;
 };

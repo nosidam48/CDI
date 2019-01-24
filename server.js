@@ -4,11 +4,21 @@ const path = require("path");
 var session = require("express-session");
 var passport = require("./passport");
 const PORT = process.env.PORT || 3001;
+const routes = require("./routes");
 const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const user = require('./routes/user');
 const db = require("./models");
+const logger = require("morgan");
+
+app.use(logger("dev"));
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Serve up static assets on heroku
 
 app.use(morgan('dev'))
 app.use(
@@ -44,10 +54,17 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Send every request to the React app
+app.use(routes);
+
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
 // Define any API routes before this runs
 // app.get("*", function(req, res) {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
+
 
 var syncOptions = { force: false };
 

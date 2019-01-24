@@ -9,6 +9,7 @@ import KidProfilePublic from "./pages/KidProfilePublic";
 import Kids from "./pages/Kids";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import NoMatch from "./pages/NoMatch";
 import axios from "axios";
 
 
@@ -72,6 +73,7 @@ class App extends React.Component {
               updateUser={this.updateUser}
             />} />
           <Route exact path="/signup" component={Signup} />
+          <Route component={NoMatch} />
         </Switch>
       </div>
     </Router>

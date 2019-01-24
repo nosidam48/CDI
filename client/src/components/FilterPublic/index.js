@@ -5,8 +5,7 @@ import "./style.css";
 // Provides search options on /kids page
 function FilterPublic({ children }) {
     return (
-        <Col md="2" className="my-4 p-0 border">
-        {/* <div className="col-md-2 my-4 p-0 border"> */}
+        <Col md="2" className="my-4 p-0">
             <div className="label p-0 m-0">
                 <h6 className="text-uppercase text-center py-2 label-text">Search options</h6>
             </div>

@@ -17,6 +17,13 @@ function AddKidForm(props) {
           <Input type="text" name="lastName" id="lastName" placeholder="Last name" />
         </FormGroup>
         <FormGroup>
+          <Label for="sex">Sex</Label>
+          <Input type="select" name="sex" id="sex">
+            <option>Female</option>
+            <option>Male</option>
+          </Input>
+        </FormGroup>
+        <FormGroup>
           <Label for="birthdate">Birthdate</Label>
           <Input type="date" name="birthdate" id="birthdate" placeholder="mm/dd/yyyy" />
         </FormGroup>

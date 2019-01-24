@@ -1,16 +1,6 @@
 //Create the sequelize object for our Event table
 module.exports = function(sequelize, DataTypes) {
   var content = sequelize.define("content", {
-      id: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true
-      },
-      kid_id: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-      },
       kid_notes: {
           type: DataTypes.STRING,
           allowNull: false
@@ -22,5 +12,11 @@ module.exports = function(sequelize, DataTypes) {
   }, {
       freezeTableName: true,
   });
+
+    // Creating association between content and kids
+    content.associate = function(models) {
+        content.belongsTo(models.kids);
+    };
+    
   return content;
 };
