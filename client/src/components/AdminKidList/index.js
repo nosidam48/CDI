@@ -18,8 +18,8 @@ function AdminKidList() {
             
             {/* Button functions */}
             <div className="mt-2">
-                {/* Button that opens modal to update/add kid info */}
-                <UpdateKidModal />
+                {/* Button that toggles update child form and includes data from search*/ }
+                <UpdateKidModal />                
 
                 {/* Button that displays AdminDonorSearch */}
                 <Button inline size="sm">Connect to donor</Button>

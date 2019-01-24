@@ -1,10 +1,12 @@
 import axios from "axios";
 
 export default {
-    // EXAMPLE FUNCTION
     getKidsUnsponsored: function() {
-        console.log("API file received request")
         return axios.get("/api/kids");
+    },
+
+    addKid: function(kidData) {
+        return axios.post("api/kids", kidData);
     }
 
 };

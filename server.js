@@ -12,9 +12,10 @@ const user = require('./routes/user');
 const db = require("./models");
 const logger = require("morgan");
 
-app.use(logger("dev"));
 
 // Middleware
+app.use(logger("dev"));
+app.use("/uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
