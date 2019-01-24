@@ -1,13 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 var session = require("express-session");
 var passport = require("./passport");
-var db = require("./models");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const user = require('./routes/user');
+const db = require("./models");
 
 app.use(morgan('dev'))
 app.use(
@@ -48,13 +49,14 @@ if (process.env.NODE_ENV === "production") {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
 
-var syncOptions = { force: false};
+var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
 if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
+
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
   app.listen(PORT, function() {

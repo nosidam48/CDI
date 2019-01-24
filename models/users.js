@@ -36,7 +36,12 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
       },
       admin_status: {
-        type: DataTypes.STRING,
+        type: DataTypes.BOOLEAN,
+        default: false
+      },
+      master_admin_status: {
+        type: DataTypes.BOOLEAN,
+        default: false
       },
       kid_id: {
           type: DataTypes.INTEGER
