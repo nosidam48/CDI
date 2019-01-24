@@ -23,15 +23,16 @@ class Login extends Component {
     handleSubmit(event) {
         event.preventDefault()
         console.log('handleSubmit')
-        
-        axios
-            .post('/user/login', {
-                email: this.state.email,
-                password: this.state.password
-            })
-            .then(response => {
-                console.log('login response: ')
-                console.log(response.status)
+        let formData = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        axios({
+            method: "post",
+            url:'user/login',
+            data: formData,
+        }).then(response => {
+                console.log('client side response: ' + JSON.stringify(response))
                 if (response.status === 200) {
                     // update App.js state
                     this.props.updateUser({
@@ -57,7 +58,7 @@ class Login extends Component {
             return (
                 <div>
                     <h4>Login</h4>
-                    <form className="form-horizontal" method="post" action="/login">
+                    <form className="form-horizontal">
                         <div className="form-group">
                             <div className="col-1 col-ml-auto">
                                 <label className="form-label" htmlFor="username">Username</label>

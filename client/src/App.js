@@ -9,7 +9,7 @@ import KidProfilePublic from "./pages/KidProfilePublic";
 import Kids from "./pages/Kids";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import axios from "axios"
+import axios from "axios";
 
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
     super()
     this.state = {
       loggedIn: false,
-      username: null
+      email: null
     }
 
     this.getUser = this.getUser.bind(this)
@@ -42,13 +42,13 @@ class App extends React.Component {
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          email: response.data.user.email
         })
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null
+          email: null
         })
       }
     })
@@ -59,7 +59,7 @@ class App extends React.Component {
       <div>
         <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn}/>
         {this.state.loggedIn &&
-          <p>Join the party, {this.state.username}!</p>
+          <p>Join the party, {this.state.email}!</p>
         }
         <Switch>
           <Route exact path="/" component={Home} />

@@ -41,7 +41,7 @@ class Signup extends Component {
       state: this.state.state,
     })
     .then(response => {
-        console.log("response")
+        console.log("Client Side Good")
 				console.log(response)
 				if (!response.data.errmsg) {
 					console.log('successful signup')
@@ -67,7 +67,7 @@ class Signup extends Component {
     <div className="row">
       <div className="col-md-6 col-md-offset-3">
         <h2>Sign Up Form</h2>
-        <form className="signup" method="post" action="/signup">
+        <form className="signup" >
           <div className="form-group">
             <label for="first_input">First Name</label>
             <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} className="form-control" id="first-input" placeholder="First Name"/>

@@ -48,7 +48,7 @@ if (process.env.NODE_ENV === "production") {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
 
-var syncOptions = { force: false };
+var syncOptions = { force: false};
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`

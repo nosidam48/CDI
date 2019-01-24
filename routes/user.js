@@ -1,17 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../models')
 const passport = require('../passport')
+const db = require('../models')
 
 router.post('/', (req, res) => {
-    console.log('user signup');
+    console.log('Server Side Good');
 
     // ADD VALIDATION
     db.users.findOne({ where: {email: req.body.email}})
         .then(function(found) {
              if (found) {
                 res.json({
-                    error: `Sorry, already a user with the username: ${email}`
+                    error: `Sorry, already a user with the username: ${req.body.email}`
                 })
             }
             else {
@@ -26,6 +26,8 @@ router.post('/', (req, res) => {
                     user_state: req.body.state,
     
                 })
+                res.send("User Created");
+                
             }
         })
 })
@@ -34,16 +36,19 @@ router.post('/', (req, res) => {
 router.post(
     '/login',
     function (req, res, next) {
-        console.log('routes/user.js, login, req.body: ');
+        console.log('routes / login, req.body: ');
         console.log(req.body)
         next()
     },
     passport.authenticate('local'),
     (req, res) => {
-        console.log('logged in', req.user);
+        console.log('log in route', req.user.email, req.user.password);
         var userInfo = {
-            email: req.body.email
+            email: req.user.email,
+            password: req.user.password
         };
+        console.log("User Found" + JSON.stringify(userInfo));
+        
         res.send(userInfo);
     }
 )
