@@ -1,46 +1,105 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 class Signup extends Component {
-  render() {
+	constructor() {
+		super()
+		this.state = {
+      firstName: '',
+      lastName: '',
+      address: '',
+      city: '',
+      state: '',
+			email: '',
+			password: '',
+			confirmPassword: '',
+
+		}
+		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleChange = this.handleChange.bind(this)
+	}
+	handleChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	}
+	handleSubmit(event) {
+		console.log('sign-up handleSubmit, username: ')
+		console.log(this.state)
+		event.preventDefault()
+
+		//request to server to add a new username/password
+		axios.post('/user/', {
+			email: this.state.email,
+      password: this.state.password,
+      confirmPassword: this.state.confirmPassword,
+      first_name: this.state.firstName,
+      last_name: this.state.lastName,
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.state,
+		})
+			.then(response => {
+				console.log(response)
+				if (!response.data.errmsg) {
+					console.log('successful signup')
+					this.setState({ //redirect to login page
+						redirectTo: '/login'
+					})
+				} else {
+					console.log('username already taken')
+				}
+			}).catch(error => {
+				console.log('signup error: ')
+				console.log(error)
+
+			})
+	}
+
+  render() {  
     return (
-      <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
+      <div className="container">
+    <div className="row">
+      <div className="col-md-6 col-md-offset-3">
         <h2>Sign Up Form</h2>
-        <form class="signup">
-          <div class="form-group">
+        <form className="signup" method="post" action="/api/signup">
+          <div className="form-group">
             <label for="first_input">First Name</label>
-            <input type="text" class="form-control" id="first-input" placeholder="First Name"/>
+            <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} className="form-control" id="first-input" placeholder="First Name"/>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label for="last-input">Last Name</label>
-            <input type="text" class="form-control" id="last-input" placeholder="Last Name"/>
+            <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} className="form-control" id="last-input" placeholder="Last Name"/>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label for="address-input">Street Address</label>
-            <input type="text" class="form-control" id="address-input" placeholder="Address"/>
+            <input type="text" name="address" value={this.state.address} onChange={this.handleChange} className="form-control" id="address-input" placeholder="Address"/>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label for="city-input">City</label>
-            <input type="text" class="form-control" id="city-input" placeholder="City"/>
+            <input type="text" name="city" value={this.state.city} onChange={this.handleChange} className="form-control" id="city-input" placeholder="City"/>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label for="state-input">State</label>
-            <input type="text" class="form-control" id="state-input" placeholder="State"/>
+            <input type="text" name="state" value={this.state.state} onChange={this.handleChange} className="form-control" id="state-input" placeholder="State"/>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="email-input" placeholder="Email"/>
+            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} className="form-control" id="email-input" placeholder="Email"/>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password-input" placeholder="Password"/>
+            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} className="form-control" id="password-input" placeholder="Password"/>
           </div>
-          <div style={{display: "none"}} id="alert" class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span> <span class="msg"></span>
+          <div className="form-group">
+            <label for="exampleInputPassword1">Confirm Password</label>
+            <input type="password" name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleChange} className="form-control" id="password-confirm" placeholder="Confirm Password"/>
           </div>
-          <button type="submit" class="btn btn-default">Sign Up</button>
+          <div style={{display: "none"}} id="alert" className="alert alert-danger" role="alert">
+            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span className="sr-only">Error:</span> <span className="msg"></span>
+          </div>
+          <button type="submit" onClick={this.handleSubmit} className="btn btn-default">Sign Up</button>
         </form>
         <br />
         <p>Or log in <a href="/login">here</a></p>
@@ -50,5 +109,6 @@ class Signup extends Component {
     )
   }
 }
+
 
 export default Signup;

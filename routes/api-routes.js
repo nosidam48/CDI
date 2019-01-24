@@ -1,5 +1,7 @@
 var db = require("../models");
-var passport = require("../config/passport");
+var passport = require("../passport");
+const router = require("express").Router();
+//const AppController = require("../Controllers/appController");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -17,8 +19,12 @@ module.exports = function(app) {
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
     console.log(req.body);
-    db.User.create({
-      first_name: req.body.
+    db.users.create({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      user_address: req.body.address,
+      user_city: req.body.city,
+      user_state: req.body.state,
       email: req.body.email,
       password: req.body.password
     }).then(function() {

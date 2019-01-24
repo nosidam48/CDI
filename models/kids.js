@@ -1,12 +1,6 @@
 //Create the sequelize object for our Event table
 module.exports = function(sequelize, DataTypes) {
-  var kids = sequelize.define("eventTable", {
-      id: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true
-      },
+  var kids = sequelize.define("kids", {
       first_name: {
           type: DataTypes.STRING,
           allowNull: false
@@ -37,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
       },
       donor_id: {
-        type: DataTypes.INT,
+        type: DataTypes.INTEGER,
         allowNull: true
       }
   }, {
