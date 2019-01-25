@@ -11,6 +11,7 @@ class Signup extends Component {
       address: '',
       city: '',
       state: '',
+      zip: '',
 			email: '',
 			password: '',
 			confirmPassword: '',
@@ -39,6 +40,7 @@ class Signup extends Component {
       address: this.state.address,
       city: this.state.city,
       state: this.state.state,
+      zip: this.state.zip
     })
     .then(response => {
         console.log("Client Side Good")
@@ -87,6 +89,10 @@ class Signup extends Component {
           <div className="form-group">
             <label for="state-input">State</label>
             <input type="text" name="state" value={this.state.state} onChange={this.handleChange} className="form-control" id="state-input" placeholder="State"/>
+          </div>
+          <div className="form-group">
+            <label for="zip-input">Zip Code</label>
+            <input type="text" name="zip" value={this.state.state} onChange={this.handleChange} className="form-control" id="zip-input" placeholder="Zip Code"/>
           </div>
           <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>

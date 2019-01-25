@@ -24,6 +24,7 @@ router.post('/', (req, res) => {
                     user_address: req.body.address,
                     user_city: req.body.city,
                     user_state: req.body.state,
+                    user_zip: req.body.zip
     
                 })
                 res.send("User Created");

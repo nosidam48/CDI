@@ -57,9 +57,9 @@ if (process.env.NODE_ENV === "production") {
 // Send every request to the React app
 app.use(routes);
 
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// app.get("*", function(req, res) {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 // Define any API routes before this runs
 // app.get("*", function(req, res) {
@@ -67,7 +67,7 @@ app.get("*", function(req, res) {
 // });
 
 
-var syncOptions = { force: false };
+var syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
