@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Form, Label, Button } from "reactstrap";
+import { Row, Col, Form, Label } from "reactstrap";
 import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SubmitBtn, DiscardBtn } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
 import AdminKidSearch from "../components/AdminKidSearch";
@@ -162,11 +162,12 @@ class Admin extends Component {
     // ==============================================================
 
     kidAdded = () => {
-        this.setState({ kidFirstNames: "", kidLastName: "", gender: "", birth_date: "",
-        grade: "", kidLocation: "", bio: "",
-        showAddKidForm: false,
-        success: true,
-        message: "A child was added to the database."
+        this.setState({
+            kidFirstNames: "", kidLastName: "", gender: "", birth_date: "",
+            grade: "", kidLocation: "", bio: "",
+            showAddKidForm: false,
+            success: true,
+            message: "A child was added to the database."
         })
     }
 
@@ -178,7 +179,7 @@ class Admin extends Component {
     };
 
     fileSelectedHandler = event => {
-        console.log(event.target.files);
+        console.log(event.target.files[0]);
         this.setState({
             selectedFile: event.target.files[0]
         })
@@ -186,18 +187,32 @@ class Admin extends Component {
 
     handleKidFormSubmit = event => {
         event.preventDefault();
-        API.addKid({
-            first_name: this.state.kidFirstNames,
-            last_name: this.state.kidLastName,
-            gender: this.state.gender,
-            birth_date: this.state.birth_date,
-            grade: this.state.grade,
-            location: this.state.kidLocation,
-            kid_bio: this.state.bio,
-            need_sponsor: true
-        })
+        let kidData = new FormData();
+        kidData.append("first_name", this.state.kidFirstNames);
+        kidData.append("last_name", this.state.kidLastName);
+        kidData.append("gender", this.state.gender);
+        kidData.append("birth_date", this.state.birth_date);
+        kidData.append("grade", this.state.grade);
+        kidData.append("location", this.state.kidLocation);
+        kidData.append("kid_bio", this.state.bio);
+        kidData.append("need_sponsor", true);
+        kidData.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
+        
+        API.addKid(kidData)
             .then(res => this.kidAdded())
             .catch(err => console.log(err));
+            
+            // first_name: this.state.kidFirstNames,
+            // last_name: this.state.kidLastName,
+            // gender: this.state.gender,
+            // birth_date: this.state.birth_date,
+            // grade: this.state.grade,
+            // location: this.state.kidLocation,
+            // kid_bio: this.state.bio,
+            // need_sponsor: true,
+            // selectedFile: this.state.selectedFile
+    //     })
+            
     }
 
     render() {
@@ -215,7 +230,7 @@ class Admin extends Component {
                         onClickShowDonors={this.showDonors}
                         onClickShowAdmins={this.showAdmins}
                     />
-                    <Col xs="10" className="px-5">                        
+                    <Col xs="10" className="px-5">
                         {/* Renders AddKidForm if true */}
                         {this.state.showAddKidForm ?
                             <div>
@@ -271,7 +286,8 @@ class Admin extends Component {
                                     <Label>Photo</Label>
                                     <UploadPhoto
                                         onChange={this.fileSelectedHandler}
-                                        
+                                        name="selectedFile"
+                                        id=""
                                     />
                                     <SubmitBtn
                                         onClick={this.handleKidFormSubmit}
@@ -328,13 +344,13 @@ class Admin extends Component {
                             null
                         }
                         {/* Shows success message */}
-                        {this.state.success ? 
+                        {this.state.success ?
                             <MainContainer>
                                 <h4 className="text-center">{this.state.message}</h4>
                             </MainContainer> :
                             null
                         }
-                        
+
                         {/* <AdminDonorSearch /> */}
                         {/* <ConnectDonorModal /> */}
                     </Col>

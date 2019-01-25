@@ -2,7 +2,7 @@ const router = require("express").Router();
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: (req, file, cb)  => 
-    cb(null, "./uploads"),
+    cb(null, "./uploads/"),
   filename: (req, file, cb) => 
     cb(null, file.originalname)
 });
@@ -14,7 +14,7 @@ const kidsController = require("../../controllers/kidsController");
 router.route("/")
   .get(kidsController.findAllUnsponsored)
   .post(upload.single('selectedFile'), kidsController.create);
-
+   
 // Matches with "/api/kids/:id"
 router
   .route("/:id")
