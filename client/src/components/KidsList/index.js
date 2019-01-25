@@ -4,22 +4,24 @@ import "./style.css";
 import SponsorButton from "../SponsorButton";
 
 // Shows list of kids available to sponsor; default is to show all kids and user can enter search options
-function KidsList() {
+function KidsList(props) {
     return (
         <Col md="9" className="my-4">
+            {props.state.length ? (
             <Row>
-                <Col md="6" className="mb-3">
+            {props.state.map(kid => (
+                <Col md="6" key={kid.id} className="mb-3">
                     <Card className="border-0">
                         <Row className="no-gutters">
                             <Col xs="auto">
-                                <img src="../images/Bairon2.jpg" className="img-fluid kidsListPic" alt="Child" />
+                                <img src={kid.profile_image} className="img-fluid kidsListPic" alt="Child" />
                             </Col>
                             <Col>
                                 <div className="card-block p-2">
-                                    <h4 className="card-title font-weight-bold">Bairon Dubon</h4>
-                                    <h6><span className="font-weight-bold">Age:</span> 15</h6>
-                                    <h6><span className="font-weight-bold">Birthday:</span> April 23</h6>
-                                    <h6><span className="font-weight-bold">Location:</span> Choluteca, Honduras</h6>
+                                    <h4 className="card-title font-weight-bold">{kid.first_name} {kid.last_name}</h4>
+                                    <h6><span className="font-weight-bold">Age:</span>7</h6>
+                                    <h6><span className="font-weight-bold">Birthday:</span> {kid.birth_date}</h6>
+                                    <h6><span className="font-weight-bold">Location:</span> {kid.location}</h6>
                                     <p className="small"><a href="#">Learn more about me</a></p>
                                     <SponsorButton />
                                 </div>
@@ -27,64 +29,11 @@ function KidsList() {
                         </Row>
                     </Card>
                 </Col>
-                <Col md="6" className="mb-3">
-                    <Card className="border-0">
-                        <Row className="no-gutters">
-                            <Col xs="auto">
-                                <img src="../images/Solanyi.jpg" className="img-fluid kidsListPic" alt="Child" />
-                            </Col>
-                            <div className="col">
-                                <div className="card-block p-2">
-                                    <h4 className="card-title font-weight-bold">Solanyi Nicol</h4>
-                                    <h6><span className="font-weight-bold">Age:</span> 4</h6>
-                                    <h6><span className="font-weight-bold">Birthday:</span> March 13</h6>
-                                    <h6><span className="font-weight-bold">Location:</span> Managua, Nicaragua</h6>
-                                    <p className="small"><a href="#">Learn more about me</a></p>
-                                    <SponsorButton />
-                                </div>
-                            </div>
-                        </Row>
-                    </Card>
-                </Col>
-                <Col md="6" className="mb-3">
-                    <Card className="border-0">
-                        <Row className="no-gutters">
-                            <Col xs="auto">
-                                <img src="../images/Solanyi.jpg" className="img-fluid kidsListPic" alt="Child" />
-                            </Col>
-                            <div className="col">
-                                <div className="card-block p-2">
-                                    <h4 className="card-title font-weight-bold">Solanyi Nicol</h4>
-                                    <h6><span className="font-weight-bold">Age:</span> 4</h6>
-                                    <h6><span className="font-weight-bold">Birthday:</span> March 13</h6>
-                                    <h6><span className="font-weight-bold">Location:</span> Managua, Nicaragua</h6>
-                                    <p className="small"><a href="#">Learn more about me</a></p>
-                                    <SponsorButton />
-                                </div>
-                            </div>
-                        </Row>
-                    </Card>
-                </Col>
-                <Col md="6" className="mb-3">
-                    <Card className="border-0">
-                        <Row className="no-gutters">
-                            <Col xs="auto">
-                                <img src="../images/Solanyi.jpg" className="img-fluid kidsListPic" alt="Child" />
-                            </Col>
-                            <div className="col">
-                                <div className="card-block p-2">
-                                    <h4 className="card-title font-weight-bold">Solanyi Nicol</h4>
-                                    <h6><span className="font-weight-bold">Age:</span> 4</h6>
-                                    <h6><span className="font-weight-bold">Birthday:</span> March 13</h6>
-                                    <h6><span className="font-weight-bold">Location:</span> Managua, Nicaragua</h6>
-                                    <p className="small"><a href="#">Learn more about me</a></p>
-                                    <SponsorButton />
-                                </div>
-                            </div>
-                        </Row>
-                    </Card>
-                </Col>
+                ))}
             </Row>
+           ) : (
+               <h3>No results</h3>
+           )}
         </Col>
     )
 }

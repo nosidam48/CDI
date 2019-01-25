@@ -17,7 +17,9 @@ class Kids extends Component {
     loadKidsUnsponsored = () => {
         API.getKidsUnsponsored()
             .then(res =>
-                console.log(res.data)
+                this.setState({
+                    kids: res.data
+                })
             )
             .catch(err => console.log(err));
     };
@@ -27,7 +29,7 @@ class Kids extends Component {
             <MainContainer>
                 <Row>
                     <FilterPublic />
-                    <KidsList />
+                    <KidsList state={this.state.kids}/>
                 </Row>
             </MainContainer>
         )
