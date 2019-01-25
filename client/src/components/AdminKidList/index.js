@@ -5,16 +5,15 @@ import RemoveKidModal from "../RemoveKidModal";
 
 
 // Displays list from admin search for kids
-function AdminKidList() {
+function AdminKidList(props) {
     return (
         <div className="my-4">
-            <h4 className="mt-2 mb-4">Search Results</h4>
-            <h5>Bairon Duban Guillen</h5>
-            ID: 001<br /> 
-            Birthdate: 4/23/2003<br />
-            Grade: 8th<br /> 
-            Location: Choluteca, Honduras<br />
-            Needs sponsor?: Yes<br />
+            <h5>{props.firstName} {props.lastName}</h5>
+            ID: {props.id}<br /> 
+            Birthdate: {props.birthdate}<br />
+            Grade: {props.grade}<br /> 
+            Location: {props.location}<br />
+            Needs sponsor?: {props.needSponsor ? "Yes" : "No"}<br />
             
             {/* Button functions */}
             <div className="mt-2">
@@ -25,20 +24,6 @@ function AdminKidList() {
                 <Button inline size="sm">Connect to donor</Button>
 
                 {/* Button that opens RemoveKidModal */}
-                <RemoveKidModal />
-            </div>
-            <hr />
-            <h5>Bairon Duban Guillen</h5>
-            ID: 001<br /> 
-            Birthdate: 4/23/2003<br />
-            Grade: 8th<br /> 
-            Location: Choluteca, Honduras<br />
-            Needs sponsor?: Yes<br />
-            
-            {/* Button functions */}
-            <div className="mt-2">
-                <UpdateKidModal />
-                <Button inline size="sm" className="mr-1">Connect to donor</Button>
                 <RemoveKidModal />
             </div>
             <hr />

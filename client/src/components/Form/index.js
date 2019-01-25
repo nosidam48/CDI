@@ -2,7 +2,7 @@ import React from "react";
 import { Button, FormGroup, Input, CustomInput } from "reactstrap";
 import "./style.css";
 
-// Form that is called when an admin wants to add a child to the database
+// Form inputs used throughout the site
 export function InputField(props) {
   return (
     <FormGroup>
@@ -73,6 +73,17 @@ export function UploadPhoto(props) {
     <FormGroup>
       <Input type="file" {...props} />
     </FormGroup> 
+  )
+}
+
+export function SearchType(props) {
+  return (
+    <FormGroup>
+      <Input type="select" className="mx-2" value={props.value} onChange={props.onChange} name={props.name} >
+        <option>Name</option>
+        <option>Location</option>
+      </Input>
+    </FormGroup>
   )
 }
 

@@ -5,6 +5,23 @@ export default {
         return axios.get("/api/kids");
     },
 
+    kidSearch: function(searchData) {
+        // Switch statement to determine which search to run based on admin search type                
+        switch(searchData.searchType) {
+            case "Name": 
+            console.log(searchData);
+            return axios.post("/api/kids/name/", searchData);
+            break;
+
+            case "Location": 
+            return axios.post("/api/kids/location/", searchData)
+            break;
+
+            default:
+            console.log("something isn't working");
+        }        
+    },
+
     addKid: function(kidData) {
         for (var pair of kidData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]); 

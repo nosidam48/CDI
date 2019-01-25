@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, List } from "react";
 import { Row, Col, Form, Label } from "reactstrap";
-import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SubmitBtn, DiscardBtn } from "../components/Form";
+import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
-import AdminKidSearch from "../components/AdminKidSearch";
 import AdminMultipleKids from "../components/AdminMultipleKidList";
 // import AdminDonorSearch from "../components/AdminDonorSearch";
 import AddAdmin from "../components/AddAdmin";
@@ -32,7 +31,7 @@ class Admin extends Component {
         // Success message
         message: "",
 
-        // Add Kid inputs
+        // Form inputs
         kidFirstNames: "",
         kidLastName: "",
         gender: "",
@@ -40,9 +39,14 @@ class Admin extends Component {
         grade: "",
         kidLocation: "",
         bio: "",
+        searchTerm: "",
+        searchType: "Name",
 
         // Photo upload
-        selectedFile: null
+        selectedFile: null,
+
+        // Results arrays
+        kids: []
 
     };
 
@@ -161,6 +165,7 @@ class Admin extends Component {
     }
     // ==============================================================
 
+    // Function that runs after a kid has been added
     kidAdded = () => {
         this.setState({
             kidFirstNames: "", kidLastName: "", gender: "", birth_date: "",
@@ -185,8 +190,10 @@ class Admin extends Component {
         })
     }
 
+    // Handles when an admin adds a new child
     handleKidFormSubmit = event => {
         event.preventDefault();
+        // Use FormData to handle both text and the binary file
         let kidData = new FormData();
         kidData.append("first_name", this.state.kidFirstNames);
         kidData.append("last_name", this.state.kidLastName);
@@ -197,22 +204,30 @@ class Admin extends Component {
         kidData.append("kid_bio", this.state.bio);
         kidData.append("need_sponsor", true);
         kidData.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
-        
+
         API.addKid(kidData)
             .then(res => this.kidAdded())
             .catch(err => console.log(err));
-            
-            // first_name: this.state.kidFirstNames,
-            // last_name: this.state.kidLastName,
-            // gender: this.state.gender,
-            // birth_date: this.state.birth_date,
-            // grade: this.state.grade,
-            // location: this.state.kidLocation,
-            // kid_bio: this.state.bio,
-            // need_sponsor: true,
-            // selectedFile: this.state.selectedFile
-    //     })
-            
+    }
+
+    // Handles when an admin is searching for a child
+    handleAdminKidSearch = event => {
+        event.preventDefault();        
+        API.kidSearch({
+            searchTerm: this.state.searchTerm,
+            searchType: this.state.searchType
+        })
+            .then(res => {
+                console.log(res.data)
+                // Set state of search terms back to original state, set state of kids to new search results
+                this.setState({
+                    searchTerm: "",
+                    searchType: "Name",
+                    kids: res.data
+                })
+                console.log(this.state.kids)
+            })
+            .catch(err => console.log(err));
     }
 
     render() {
@@ -231,7 +246,7 @@ class Admin extends Component {
                         onClickShowAdmins={this.showAdmins}
                     />
                     <Col xs="10" className="px-5">
-                        {/* Renders AddKidForm if true */}
+                        {/* ADD KID FORM - displays if true =============== */}
                         {this.state.showAddKidForm ?
                             <div>
                                 <h5 className="border-bottom">Add a child to the database</h5>
@@ -299,9 +314,45 @@ class Admin extends Component {
                             </div> :
                             null
                         }
-                        {/* Shows kid search bar if true */}
+                        {/* END OF ADD KID FORM============= */}
+
+                        {/* SEARCH FOR KID if true================== */}
                         {this.state.showKidSearch ?
-                            <AdminKidSearch /> :
+                            <Form inline>
+                                <InputField
+                                    value={this.state.searchTerm}
+                                    onChange={this.handleInputChange}
+                                    name="searchTerm"
+                                />
+                                <SearchType
+                                    value={this.state.searchType}
+                                    onChange={this.handleInputChange}
+                                    name="searchType"
+                                />
+                                <SubmitBtn
+                                    onClick={this.handleAdminKidSearch}
+                                />
+                            </Form>
+                            :
+                            null
+                        }
+                        {/* If search brings back results, show results */}
+                        {this.state.kids.length ? ( 
+                            <div>
+                                {this.state.kids.map(kid => (
+                                    <AdminKidList 
+                                        key={kid.id}
+                                        id={kid.id}
+                                        firstName={kid.first_name}
+                                        lastName={kid.last_name}
+                                        birthdate={kid.birth_date}
+                                        grade={kid.grade}
+                                        location={kid.location}
+                                        needSponsor={kid.need_sponsor}
+                                    />
+                                ))}
+                            </div>
+                        ) : 
                             null
                         }
 
