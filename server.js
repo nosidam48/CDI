@@ -10,17 +10,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const user = require('./routes/user');
 const db = require("./models");
-const logger = require("morgan");
-
 
 // Middleware
-app.use(logger("dev"));
 app.use("/uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// Serve up static assets on heroku
-
 app.use(morgan('dev'))
 app.use(
 	bodyParser.urlencoded({
@@ -43,31 +37,16 @@ app.use(passport.initialize())
 app.use(passport.session()) // calls the deserializeUser
 
 
-// Routes
+// Send every request to the React app
 app.use('/user', user)
+app.use(routes);
 
-
-// require("./routes/api-routes")(app);
-// require("./routes/html-routes")(app);
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Send every request to the React app
-app.use(routes);
-
-// app.get("*", function(req, res) {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
-
-// Define any API routes before this runs
-// app.get("*", function(req, res) {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
-
-
-var syncOptions = { force: true };
+var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
