@@ -1,15 +1,16 @@
 import axios from "axios";
 
 export default {
+    // Retrieves all unsponsored kids
     getKidsUnsponsored: function() {
         return axios.get("/api/kids");
     },
 
+    // Searches for kid based on criteria
     kidSearch: function(searchData) {
         // Switch statement to determine which search to run based on admin search type                
         switch(searchData.searchType) {
             case "Name": 
-            console.log(searchData);
             return axios.post("/api/kids/name/", searchData);
 
             case "Location": 
@@ -20,10 +21,8 @@ export default {
         }        
     },
 
+    // Adds kid to database
     addKid: function(kidData) {
-        for (var pair of kidData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        };
         return axios({
             "method": "POST",
             "url": "/api/kids",
@@ -32,5 +31,12 @@ export default {
             "contentType": false,
             "mimeType": "multipart/form-data",
         })
+    },
+
+    // Edits existing kid info in db
+    kidEdit: function(kidData) {
+        let id = kidData.id;
+        console.log(id);
+        return axios.put("/api/kids/" + id, kidData)
     }
 };

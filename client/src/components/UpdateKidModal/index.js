@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
 import { InputField, GenderField, GradeField, LocationField } from "../Form";
+import API from "../../utils/API";
 
 class UpdateKidModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      id: props.id,
       kidFirstNames: props.firstNames,
       kidLastName: props.lastName,
       gender: props.gender,
@@ -28,9 +30,40 @@ class UpdateKidModal extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
-        [name]: value,
+      [name]: value,
     })
   };
+
+  // Handles when an admin has edited a child's info
+  handleKidEdit = event => {
+    event.preventDefault();
+    console.log("click worked");
+    API.kidEdit({
+      id: this.state.id,
+      first_name: this.state.kidFirstNames,
+      last_name: this.state.kidLastName,
+      gender: this.state.gender,
+      birth_date: this.state.birth_date,
+      grade: this.state.grade,
+      location: this.state.kidLocation,
+      kid_bio: this.state.bio
+    })
+      .then(res => {
+        console.log(res.data)
+        // Set state of form inputs back to blank
+        this.setState({
+          id: "",
+          first_name: "",
+          last_name: "",
+          gender: "",
+          birth_date: "",
+          grade: "",
+          location: "",
+          kid_bio: ""
+        })
+      })
+      .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -87,7 +120,7 @@ class UpdateKidModal extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={(event) => { this.toggle(); this.props.onClickModal(event) }}>Submit Changes</Button>{' '}
+            <Button color="primary" onClick={(event) => { this.toggle(); this.handleKidEdit(event) }}>Submit Changes</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>

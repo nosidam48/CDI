@@ -198,7 +198,6 @@ class Admin extends Component {
     };
 
     fileSelectedHandler = event => {
-        console.log(event.target.files[0]);
         this.setState({
             selectedFile: event.target.files[0]
         })
@@ -232,14 +231,12 @@ class Admin extends Component {
             searchType: this.state.searchType
         })
             .then(res => {
-                console.log(res.data)
                 // Set state of search terms back to original state, set state of kids to new search results
                 this.setState({
                     searchTerm: "",
                     searchType: "Name",
                     kids: res.data
                 })
-                console.log(this.state.kids)
             })
             .catch(err => console.log(err));
     }

@@ -23,9 +23,9 @@ module.exports = {
         [Op.or]: [
           {
             first_name: {
-              [Op.like]: "%" + req.body.searchTerm + "%" 
+              [Op.like]: "%" + req.body.searchTerm + "%"
             }
-          }, 
+          },
           {
             last_name: {
               [Op.like]: "%" + req.body.searchTerm + "%"
@@ -36,7 +36,7 @@ module.exports = {
     })
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
-},
+  },
 
   // Function to let admin search for a kid by location
   kidSearchLocation: (req, res) => {
@@ -48,7 +48,7 @@ module.exports = {
     })
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
-},
+  },
 
   // Function to add kid from form data
   create: (req, res) => {
@@ -65,6 +65,18 @@ module.exports = {
       profile_image: "/" + req.file.path
     }).then(kidData => res.json(kidData))
       .catch(err => res.status(422).json(err));
-  }
+  },
 
+  // Function to update kid from admin edits
+  update: (req, res) => {
+    console.log("request received")
+    db.kids.update(
+      req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(kidData => res.json(kidData))
+      .catch(err => res.status(422).json(err));
+  },
 };

@@ -8,7 +8,7 @@ import RemoveKidModal from "../RemoveKidModal";
 function AdminKidList(props) {
     return (
         <div className="my-4">
-            <h5>{props.firstName} {props.lastName}</h5>
+            <h5>{props.firstNames} {props.lastName}</h5>
             ID: {props.id}<br /> 
             Gender: {props.gender}<br />
             Birthdate: {props.birthdate}<br />
@@ -28,8 +28,6 @@ function AdminKidList(props) {
                     grade={props.grade}
                     location={props.location}
                     bio={props.bio}
-                    nameFirstName={props.nameFirstName}
-                    onChange={props.handleInputChange}
                     onClickModal={props.onClickModal}
                 />                
 
