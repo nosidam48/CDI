@@ -7,10 +7,13 @@ router.route("/")
   .post(usersController.findByCriteria);
 
 // Matches with "/api/users/:id"
-router
-  .route("/:id")
+router.route("/:id")
   // .get(usersController.findById)
 //   .put(booksController.update)
 //   .delete(booksController.remove);
+
+// Matches with "/api/users/connect"
+router.route("/connect")
+  .post(usersController.connectDonor);
 
 module.exports = router;

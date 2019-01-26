@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component, List } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
 import { InputField, SubmitBtn } from "../Form";
 import API from "../../utils/API";
 
 
 // Modal displaying donor info where admin can connect donor with child
-class ConnectDonorModal extends React.Component {
+class ConnectDonorModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +13,7 @@ class ConnectDonorModal extends React.Component {
       donorFirstName: "",
       donorLastName: "",
       donorEmail: "",
+      donors: [],
     };
 
     this.toggle = this.toggle.bind(this);
@@ -46,7 +47,24 @@ class ConnectDonorModal extends React.Component {
           donorFirstName: "",
           donorLastName: "",
           donorEmail: "",
+          donors: res.data
         })
+      })
+      .catch(err => console.log(err));
+  }
+
+  // Handles the connect donor button when the right donor has been found
+  handleConnectDonor = (donorId, kidId) => {
+    
+    // Create object to send
+    let connectData = {
+      donor_id: donorId,
+      kid_id: kidId
+    }
+    console.log(connectData)
+    API.connectDonor(connectData)
+      .then(res => {
+        console.log(res.data)
       })
       .catch(err => console.log(err));
   }
@@ -54,9 +72,9 @@ class ConnectDonorModal extends React.Component {
   render() {
     return (
       <div className="d-inline ml-2">
-        <Button inline size="sm" onClick={this.toggle}>Connect to Donor</Button>
+        <Button inline size="sm" onClick={this.toggle}>Connect Donor to Child</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Connect child/donor</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Connect donor to {this.props.kidfirstNames + " " + this.props.kidlastName}</ModalHeader>
           <ModalBody>
             <h5>Search for donor (one field required)</h5>
             <Form>
@@ -78,10 +96,27 @@ class ConnectDonorModal extends React.Component {
                 name="donorEmail"
                 placeholder="Email address"
               />
-              <SubmitBtn 
+              <SubmitBtn
                 onClick={this.handleDonorSearch}
               />
             </Form>
+            {this.state.donors.length ? (
+              <div className="mt-2">
+                <hr />
+                {this.state.donors.map(donor => (
+                  <div>
+                    <SubmitBtn
+                      size="sm"
+                      onClick={() => this.handleConnectDonor(donor.id, this.props.kidId)}
+                      donorId={donor.id}
+                      kidId={this.props.kidId}
+                      className="mr-2"
+                    />
+                    {donor.first_name + "  " + "  " + donor.last_name + "  " + donor.email}
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </ModalBody>
           <ModalFooter>
             <Button onClick={this.toggle}>Cancel</Button>

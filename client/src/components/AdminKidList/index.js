@@ -35,6 +35,8 @@ function AdminKidList(props) {
                 {/* Button that displays AdminDonorSearch */}
                 <ConnectDonorModal
                     kidId={props.id}
+                    kidfirstNames={props.firstNames}
+                    kidlastName={props.lastName}
                     onChange={props.onChange}    
                 />
 

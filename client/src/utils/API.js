@@ -44,8 +44,11 @@ export default {
     // USER FUNCTIONS ============================================================
     // Function for donor search to connect child
     donorSearch: (searchData) => {
-        console.log("request received");
         return axios.post("/api/users/", searchData);
+    },
+    // Function to connect donor to child
+    connectDonor: (connectData) => {
+        return axios.post("/api/users/connect", connectData);
     }
 
 };
