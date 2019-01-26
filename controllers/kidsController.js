@@ -69,12 +69,22 @@ module.exports = {
 
   // Function to update kid from admin edits
   update: (req, res) => {
-    console.log("request received")
     db.kids.update(
       req.body,
       {
         where: {
           id: req.body.id
+        }
+      }).then(kidData => res.json(kidData))
+      .catch(err => res.status(422).json(err));
+  },
+  // Function to remove kid from db
+  remove: (req, res) => {
+    console.log("request received")
+    db.kids.destroy(
+      {
+        where: {
+          id: req.params.id
         }
       }).then(kidData => res.json(kidData))
       .catch(err => res.status(422).json(err));

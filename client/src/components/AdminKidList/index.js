@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "reactstrap";
 import UpdateKidModal from "../UpdateKidModal";
 import RemoveKidModal from "../RemoveKidModal";
 import ConnectDonorModal from "../ConnectDonorModal";
@@ -29,19 +28,21 @@ function AdminKidList(props) {
                     grade={props.grade}
                     location={props.location}
                     bio={props.bio}
-                    onClickModal={props.onClickModal}
                 />                
-
                 {/* Button that displays AdminDonorSearch */}
                 <ConnectDonorModal
                     kidId={props.id}
-                    kidfirstNames={props.firstNames}
-                    kidlastName={props.lastName}
+                    kidFirstNames={props.firstNames}
+                    kidLastName={props.lastName}
                     onChange={props.onChange}    
                 />
-
                 {/* Button that opens RemoveKidModal */}
-                <RemoveKidModal />
+                <RemoveKidModal 
+                    kidId={props.id}
+                    kidFirstNames={props.firstNames}
+                    kidLastName={props.lastName}
+                    onClick={props.onClick}
+                />
             </div>
             <hr />
         </div>

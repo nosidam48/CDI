@@ -1,5 +1,5 @@
-import React, { Component, List } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
 import { InputField, SubmitBtn } from "../Form";
 import API from "../../utils/API";
 
@@ -74,7 +74,7 @@ class ConnectDonorModal extends Component {
       <div className="d-inline ml-2">
         <Button inline size="sm" onClick={this.toggle}>Connect Donor to Child</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Connect donor to {this.props.kidfirstNames + " " + this.props.kidlastName}</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Connect donor to {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
           <ModalBody>
             <h5>Search for donor (one field required)</h5>
             <Form>

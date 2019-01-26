@@ -49,6 +49,12 @@ export default {
     // Function to connect donor to child
     connectDonor: (connectData) => {
         return axios.post("/api/users/connect", connectData);
+    },
+
+    // Function to remove child
+    removeKid: (id) => {
+        console.log(id);
+        return axios.delete("api/kids/" + id);
     }
 
 };

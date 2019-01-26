@@ -19,7 +19,7 @@ router.route("/")
   router.route("/:id")
   // .get(kidsController.findById)
     .put(kidsController.update)
-  //   .delete(booksController.remove);
+    .delete(kidsController.remove);
   
   // Matches with "/api/kids/name"
   router.route("/name")
