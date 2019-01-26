@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "reactstrap";
 import UpdateKidModal from "../UpdateKidModal";
 import RemoveKidModal from "../RemoveKidModal";
+import ConnectDonorModal from "../ConnectDonorModal";
 
 
 // Displays list from admin search for kids
@@ -32,7 +33,10 @@ function AdminKidList(props) {
                 />                
 
                 {/* Button that displays AdminDonorSearch */}
-                <Button inline size="sm" className="ml-2">Connect to donor</Button>
+                <ConnectDonorModal
+                    kidId={props.id}
+                    onChange={props.onChange}    
+                />
 
                 {/* Button that opens RemoveKidModal */}
                 <RemoveKidModal />

@@ -37,7 +37,6 @@ class UpdateKidModal extends React.Component {
   // Handles when an admin has edited a child's info
   handleKidEdit = event => {
     event.preventDefault();
-    console.log("click worked");
     API.kidEdit({
       id: this.state.id,
       first_name: this.state.kidFirstNames,
@@ -49,25 +48,13 @@ class UpdateKidModal extends React.Component {
       kid_bio: this.state.bio
     })
       .then(res => {
-        console.log(res.data)
-        // Set state of form inputs back to blank
-        this.setState({
-          id: "",
-          first_name: "",
-          last_name: "",
-          gender: "",
-          birth_date: "",
-          grade: "",
-          location: "",
-          kid_bio: ""
-        })
       })
       .catch(err => console.log(err));
   }
 
   render() {
     return (
-      <div className="d-inline mr-2">
+      <div className="d-inline">
         <Button inline size="sm" onClick={this.toggle}>Update info</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Update child info</ModalHeader>

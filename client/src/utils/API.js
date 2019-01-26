@@ -1,13 +1,14 @@
 import axios from "axios";
 
 export default {
+// KID FUNCTIONS===============================================================
     // Retrieves all unsponsored kids
-    getKidsUnsponsored: function() {
+    getKidsUnsponsored: () => {
         return axios.get("/api/kids");
     },
 
     // Searches for kid based on criteria
-    kidSearch: function(searchData) {
+    kidSearch: searchData => {
         // Switch statement to determine which search to run based on admin search type                
         switch(searchData.searchType) {
             case "Name": 
@@ -22,7 +23,7 @@ export default {
     },
 
     // Adds kid to database
-    addKid: function(kidData) {
+    addKid: (kidData) => {
         return axios({
             "method": "POST",
             "url": "/api/kids",
@@ -34,9 +35,17 @@ export default {
     },
 
     // Edits existing kid info in db
-    kidEdit: function(kidData) {
+    kidEdit: (kidData) => {
         let id = kidData.id;
         console.log(id);
         return axios.put("/api/kids/" + id, kidData)
+    },
+
+    // USER FUNCTIONS ============================================================
+    // Function for donor search to connect child
+    donorSearch: (searchData) => {
+        console.log("request received");
+        return axios.post("/api/users/", searchData);
     }
+
 };

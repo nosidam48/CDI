@@ -36,7 +36,7 @@ class Admin extends Component {
         // Success message
         message: "",
 
-        // Form inputs
+        // Kid form inputs
         kidFirstNames: "",
         kidLastName: "",
         gender: "",
@@ -44,6 +44,8 @@ class Admin extends Component {
         grade: "",
         kidLocation: "",
         bio: "",
+
+        // Search inputs
         searchTerm: "",
         searchType: "Name",
 
@@ -362,10 +364,6 @@ class Admin extends Component {
                                         location={kid.location}
                                         needSponsor={kid.need_sponsor}
                                         bio={kid.kid_bio}
-                                        onChange={this.handleInputChange}
-                                        onClickModal={this.handleKidFormSubmit}
-                                        nameFirstName="kidFirstNames"
-
                                     />
                                 ))}
                             </div>
