@@ -14,7 +14,7 @@ function KidsList(props) {
                     <Card className="border-0">
                         <Row className="no-gutters">
                             <Col xs="auto">
-                                <img src={kid.profile_image} className="img-fluid kidsListPic" alt="Child" />
+                                <img src={"/" + kid.profile_image} className="img-fluid kidsListPic" alt="Child" />
                             </Col>
                             <Col>
                                 <div className="card-block p-2">

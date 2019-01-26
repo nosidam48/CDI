@@ -1,45 +1,48 @@
 import React from "react";
-import { Button } from "reactstrap";
 import UpdateKidModal from "../UpdateKidModal";
 import RemoveKidModal from "../RemoveKidModal";
+import ConnectDonorModal from "../ConnectDonorModal";
 
 
 // Displays list from admin search for kids
-function AdminKidList() {
+function AdminKidList(props) {
     return (
         <div className="my-4">
-            <h4 className="mt-2 mb-4">Search Results</h4>
-            <h5>Bairon Duban Guillen</h5>
-            ID: 001<br /> 
-            Birthdate: 4/23/2003<br />
-            Grade: 8th<br /> 
-            Location: Choluteca, Honduras<br />
-            Needs sponsor?: Yes<br />
+            <h5>{props.firstNames} {props.lastName}</h5>
+            ID: {props.id}<br /> 
+            Gender: {props.gender}<br />
+            Birthdate: {props.birthdate}<br />
+            Grade: {props.grade}<br /> 
+            Location: {props.location}<br />
+            Needs sponsor?: {props.needSponsor ? "Yes" : "No"}<br />
             
             {/* Button functions */}
             <div className="mt-2">
                 {/* Button that toggles update child form and includes data from search*/ }
-                <UpdateKidModal />                
-
+                <UpdateKidModal 
+                    id={props.id}
+                    firstNames={props.firstNames}
+                    lastName={props.lastName}
+                    gender={props.gender}
+                    birthdate={props.birthdate}
+                    grade={props.grade}
+                    location={props.location}
+                    bio={props.bio}
+                />                
                 {/* Button that displays AdminDonorSearch */}
-                <Button inline size="sm">Connect to donor</Button>
-
+                <ConnectDonorModal
+                    kidId={props.id}
+                    kidFirstNames={props.firstNames}
+                    kidLastName={props.lastName}
+                    onChange={props.onChange}    
+                />
                 {/* Button that opens RemoveKidModal */}
-                <RemoveKidModal />
-            </div>
-            <hr />
-            <h5>Bairon Duban Guillen</h5>
-            ID: 001<br /> 
-            Birthdate: 4/23/2003<br />
-            Grade: 8th<br /> 
-            Location: Choluteca, Honduras<br />
-            Needs sponsor?: Yes<br />
-            
-            {/* Button functions */}
-            <div className="mt-2">
-                <UpdateKidModal />
-                <Button inline size="sm" className="mr-1">Connect to donor</Button>
-                <RemoveKidModal />
+                <RemoveKidModal 
+                    kidId={props.id}
+                    kidFirstNames={props.firstNames}
+                    kidLastName={props.lastName}
+                    onClick={props.onClick}
+                />
             </div>
             <hr />
         </div>
