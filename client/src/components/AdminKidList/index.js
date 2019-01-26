@@ -10,6 +10,7 @@ function AdminKidList(props) {
         <div className="my-4">
             <h5>{props.firstName} {props.lastName}</h5>
             ID: {props.id}<br /> 
+            Gender: {props.gender}<br />
             Birthdate: {props.birthdate}<br />
             Grade: {props.grade}<br /> 
             Location: {props.location}<br />
@@ -18,10 +19,22 @@ function AdminKidList(props) {
             {/* Button functions */}
             <div className="mt-2">
                 {/* Button that toggles update child form and includes data from search*/ }
-                <UpdateKidModal />                
+                <UpdateKidModal 
+                    id={props.id}
+                    firstNames={props.firstNames}
+                    lastName={props.lastName}
+                    gender={props.gender}
+                    birthdate={props.birthdate}
+                    grade={props.grade}
+                    location={props.location}
+                    bio={props.bio}
+                    nameFirstName={props.nameFirstName}
+                    onChange={props.handleInputChange}
+                    onClickModal={props.onClickModal}
+                />                
 
                 {/* Button that displays AdminDonorSearch */}
-                <Button inline size="sm">Connect to donor</Button>
+                <Button inline size="sm" className="ml-2">Connect to donor</Button>
 
                 {/* Button that opens RemoveKidModal */}
                 <RemoveKidModal />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, FormGroup, Input, CustomInput } from "reactstrap";
+import { Button, FormGroup, Input } from "reactstrap";
 import "./style.css";
 
 // Form inputs used throughout the site
@@ -27,18 +27,18 @@ export function GradeField(props) {
     <FormGroup>
       <Input type="select" value={props.value} onChange={props.onChange} name={props.name} >
         <option>Pre-K</option>
-        <option>1st</option>
-        <option>2nd</option>
-        <option>3rd</option>
-        <option>4th</option>
-        <option>5th</option>
-        <option>6th</option>
-        <option>7th</option>
-        <option>8th</option>
-        <option>9th</option>
-        <option>10th</option>
-        <option>11th</option>
-        <option>12th</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
         <option>None</option>
       </Input>
     </FormGroup>

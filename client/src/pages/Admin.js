@@ -1,4 +1,4 @@
-import React, { Component, List } from "react";
+import React, { Component } from "react";
 import { Row, Col, Form, Label } from "reactstrap";
 import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
@@ -16,6 +16,11 @@ import MainContainer from "../components/Container";
 import API from "../utils/API";
 
 class Admin extends Component {
+    constructor(props) {
+        super(props);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+    
     state = {
         // Toolbar functions
         showAddKidForm: false,
@@ -176,6 +181,15 @@ class Admin extends Component {
         })
     }
 
+    // Function that runs when kid has been discarded
+    kidDiscarded = () => {
+        this.setState({
+            kidFirstNames: "", kidLastName: "", gender: "", birth_date: "",
+            grade: "", kidLocation: "", bio: "",
+            showAddKidForm: false,
+        })
+    }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -298,7 +312,7 @@ class Admin extends Component {
                                         name="bio"
                                         placeholder="Description of the child"
                                     />
-                                    <Label>Photo</Label>
+                                    <Label>Profile Photo</Label>
                                     <UploadPhoto
                                         onChange={this.fileSelectedHandler}
                                         name="selectedFile"
@@ -308,7 +322,7 @@ class Admin extends Component {
                                         onClick={this.handleKidFormSubmit}
                                     />
                                     <DiscardBtn
-                                        onClick={this.toggleAddKidForm}
+                                        onClick={this.kidDiscarded}
                                     />
                                 </Form>
                             </div> :
@@ -343,12 +357,18 @@ class Admin extends Component {
                                     <AdminKidList 
                                         key={kid.id}
                                         id={kid.id}
-                                        firstName={kid.first_name}
+                                        firstNames={kid.first_name}
                                         lastName={kid.last_name}
+                                        gender={kid.gender}
                                         birthdate={kid.birth_date}
                                         grade={kid.grade}
                                         location={kid.location}
                                         needSponsor={kid.need_sponsor}
+                                        bio={kid.kid_bio}
+                                        onChange={this.handleInputChange}
+                                        onClickModal={this.handleKidFormSubmit}
+                                        nameFirstName="kidFirstNames"
+
                                     />
                                 ))}
                             </div>

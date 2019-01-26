@@ -11,11 +11,9 @@ export default {
             case "Name": 
             console.log(searchData);
             return axios.post("/api/kids/name/", searchData);
-            break;
 
             case "Location": 
             return axios.post("/api/kids/location/", searchData)
-            break;
 
             default:
             console.log("something isn't working");
