@@ -107,8 +107,8 @@ class UpdateKidModal extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={(event) => { this.toggle(); this.handleKidEdit(event) }}>Submit Changes</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button onClick={(event) => { this.toggle(); this.handleKidEdit(event) }}>Submit Changes</Button>{' '}
+            <Button onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>

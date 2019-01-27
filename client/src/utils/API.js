@@ -36,8 +36,7 @@ export default {
 
     findOneKid: function() {
        return axios.get("/api/kids/1")
-    }
-};
+    },
 
     // Edits existing kid info in db
     kidEdit: (kidData) => {
@@ -58,9 +57,24 @@ export default {
 
     // Function to remove child
     removeKid: (id) => {
-        console.log(id);
         return axios.delete("api/kids/" + id);
-    }
+    },
+
+    // CONTENT FUNCTIONS
+    // Add content for child
+    addContent: (contentData) => {
+        // Extract id from contentData 
+        let id = contentData.get("kidId")
+        let url = "/api/content/" + id;
+        return axios({
+            "method": "POST",
+            "url": url,
+            "data": contentData,
+            "processData": false,
+            "contentType": false,
+            "mimeType": "multipart/form-data",
+        })
+    },
 
 };
 
