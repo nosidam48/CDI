@@ -36,6 +36,7 @@
     "react-dom": "^16.7.0",
     "react-image-gallery": "^0.8.12",
     "reactstrap": "^7.1.0",
-    "sequelize": "^4.42.0"
+    "sequelize": "^4.42.0",
+    "serve": "^10.1.1"
   }
 }
