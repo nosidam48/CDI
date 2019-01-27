@@ -28,6 +28,16 @@ module.exports = {
       profile_image: req.file.path
     }).then(kidData => res.json(kidData))
       .catch(err => res.status(422).json(err));
-  }
+  },
 
+  findOneKid: (req, res) => {
+    console.log(req);
+    db.kids.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(data => res.json(data))
+    .catch(err => res.status(422).json(err))
+  }
 };

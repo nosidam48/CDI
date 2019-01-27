@@ -18,8 +18,6 @@ router.route("/")
 // Matches with "/api/kids/:id"
 router
   .route("/:id")
-  // .get(kidsController.findById)
-//   .put(booksController.update)
-//   .delete(booksController.remove);
+  .get(kidsController.findOneKid);
 
 module.exports = router;

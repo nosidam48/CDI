@@ -3,8 +3,8 @@ import { Button } from 'reactstrap';
 import "./style.css";
 
 // Button to sponsor a child
-function SponsorButton({ children }) {
-    return <Button size="sm" className="btn-sponsor">Sponsor Me!</Button>
+function SponsorButton(props) {
+    return <Button size="sm" href={"/kids/" + props.id} className="btn-sponsor">Sponsor Me!</Button>
 };
 
 export default SponsorButton;

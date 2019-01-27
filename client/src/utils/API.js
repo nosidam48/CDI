@@ -17,5 +17,9 @@ export default {
             "contentType": false,
             "mimeType": "multipart/form-data",
         })
+    },
+
+    findOneKid: function() {
+       return axios.get("/api/kids/1")
     }
 };
