@@ -4,7 +4,6 @@ const db = require("../models");
 module.exports = {
     // Function to let admin search for a donor and connect kid
     findByCriteria: (req, res) => {
-        console.log(req.body);
         // Create variable to store only search data that admin entered
         let whereStatement = {};
         if (req.body.first_name) {

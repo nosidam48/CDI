@@ -1,5 +1,6 @@
 import React from "react";
 import UpdateKidModal from "../UpdateKidModal";
+import AddContentModal from "../AddContentModal";
 import RemoveKidModal from "../RemoveKidModal";
 import ConnectDonorModal from "../ConnectDonorModal";
 
@@ -29,6 +30,13 @@ function AdminKidList(props) {
                     location={props.location}
                     bio={props.bio}
                 />                
+                {/* Button that displays form to add updates to a kid */}
+                <AddContentModal
+                    kidId={props.id}
+                    kidFirstNames={props.firstNames}
+                    kidLastName={props.lastName}
+                    onChange={props.onChange}
+                />              
                 {/* Button that displays AdminDonorSearch */}
                 <ConnectDonorModal
                     kidId={props.id}
