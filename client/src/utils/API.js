@@ -1,14 +1,29 @@
 import axios from "axios";
 
 export default {
-    getKidsUnsponsored: function() {
+// KID FUNCTIONS===============================================================
+    // Retrieves all unsponsored kids
+    getKidsUnsponsored: () => {
         return axios.get("/api/kids");
     },
 
-    addKid: function(kidData) {
-        for (var pair of kidData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        };
+    // Searches for kid based on criteria
+    kidSearch: searchData => {
+        // Switch statement to determine which search to run based on admin search type                
+        switch(searchData.searchType) {
+            case "Name": 
+            return axios.post("/api/kids/name/", searchData);
+
+            case "Location": 
+            return axios.post("/api/kids/location/", searchData)
+
+            default:
+            console.log("something isn't working");
+        }        
+    },
+
+    // Adds kid to database
+    addKid: (kidData) => {
         return axios({
             "method": "POST",
             "url": "/api/kids",
@@ -23,3 +38,29 @@ export default {
        return axios.get("/api/kids/1")
     }
 };
+
+    // Edits existing kid info in db
+    kidEdit: (kidData) => {
+        let id = kidData.id;
+        console.log(id);
+        return axios.put("/api/kids/" + id, kidData)
+    },
+
+    // USER FUNCTIONS ============================================================
+    // Function for donor search to connect child
+    donorSearch: (searchData) => {
+        return axios.post("/api/users/", searchData);
+    },
+    // Function to connect donor to child
+    connectDonor: (connectData) => {
+        return axios.post("/api/users/connect", connectData);
+    },
+
+    // Function to remove child
+    removeKid: (id) => {
+        console.log(id);
+        return axios.delete("api/kids/" + id);
+    }
+
+};
+

@@ -1,6 +1,6 @@
 //Create the sequelize object for our Event table
 module.exports = function (sequelize, DataTypes) {
-    var kids = sequelize.define("kids", {
+    var Kids = sequelize.define("kids", {
         first_name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -43,12 +43,12 @@ module.exports = function (sequelize, DataTypes) {
         });
 
     // Creating association for kids with users and content
-    kids.associate = function (models) {
-        kids.belongsToMany(models.users, { through: "KidsUsers" }),
-            kids.hasMany(models.content);
+    Kids.associate = function (models) {
+        Kids.belongsToMany(models.users, { through: "KidsUsers" }),
+            Kids.hasMany(models.content);
     };
 
 
 
-    return kids;
+    return Kids;
 };

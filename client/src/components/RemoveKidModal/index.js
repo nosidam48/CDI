@@ -22,13 +22,13 @@ class RemoveChildModal extends React.Component {
       <div className="d-inline ml-2">
         <Button inline size="sm" onClick={this.toggle}>Remove Child</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Remove child?</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Remove {this.props.kidFirstNames}?</ModalHeader>
           <ModalBody>
-            Are you sure you want to remove this child's record from the database? It will be removed permanently.
+            Are you sure you want to remove {this.props.kidFirstNames} {this.props.kidLastName}'s record from the database? It will be removed permanently.
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Yes, remove record</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button size="sm" onClick={() => { this.toggle(); this.props.onClick(this.props.kidId) }}>Yes, remove record</Button>{' '}
+            <Button size="sm" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
