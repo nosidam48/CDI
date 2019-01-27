@@ -30,7 +30,7 @@ class App extends React.Component {
     this.getUser()
   }
 
-  updateUser (userObject) {
+  updateUser(userObject) {
     this.setState(userObject)
   }
 
@@ -55,30 +55,30 @@ class App extends React.Component {
     })
   }
   render() {
-  return (
-    <Router>
-      <div>
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn}/>
-        {this.state.loggedIn &&
-          <p>Join the party, {this.state.email}!</p>
-        }
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/kids" component={Kids} />
-          <Route exact path="/kids/:id" component={KidProfilePublic} />
-          <Route exact path="/donors" component={Donors} />
-          <Route exact path="/admin" component={Admin} />
-          <Route exact path="/login" render={() =>
-            <Login
-              updateUser={this.updateUser}
-            />} />
-          <Route exact path="/signup" component={Signup} />
-          <Route component={NoMatch} />
-        </Switch>
-      </div>
-    </Router>
-  );
-}
+    return (
+      <Router>
+        <div>
+          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+          {this.state.loggedIn &&
+            <p>Join the party, {this.state.email}!</p>
+          }
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/kids" component={Kids} />
+            <Route exact path="/kids/:id" component={KidProfilePublic} />
+            <Route exact path="/donors" component={Donors} />
+            <Route exact path="/admin" component={Admin} />
+            <Route exact path="/login" render={() =>
+              <Login
+                updateUser={this.updateUser}
+              />} />
+            <Route exact path="/signup" component={Signup} />
+            <Route component={NoMatch} />
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
