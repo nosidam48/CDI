@@ -14,6 +14,7 @@ const kidsController = require("../../controllers/kidsController");
 router.route("/")
   .get(kidsController.findAllUnsponsored)
   .post(upload.single('selectedFile'), kidsController.create);
+
   
   // Matches with "/api/kids/:id"
   router.route("/:id")
@@ -28,6 +29,7 @@ router.route("/")
     // Matches with "/api/kids/location"
   router.route("/location")
     .post(kidsController.kidSearchLocation)
+
 
 
 module.exports = router;

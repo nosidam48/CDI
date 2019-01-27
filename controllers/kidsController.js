@@ -67,6 +67,18 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+
+  findOneKid: (req, res) => {
+    console.log(req);
+    db.kids.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(data => res.json(data))
+    .catch(err => res.status(422).json(err))
+  },
+
   // Function to update kid from admin edits
   update: (req, res) => {
     db.kids.update(

@@ -34,6 +34,11 @@ export default {
         })
     },
 
+    findOneKid: function() {
+       return axios.get("/api/kids/1")
+    }
+};
+
     // Edits existing kid info in db
     kidEdit: (kidData) => {
         let id = kidData.id;
@@ -58,3 +63,4 @@ export default {
     }
 
 };
+
