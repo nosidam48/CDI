@@ -20,7 +20,7 @@ module.exports = {
         } else {
             kid_pics = null
         };
-
+        //create the new entry in the content table
         db.content.create({
             kidId: kidId,
             kid_notes: kid_notes,

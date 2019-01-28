@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-// Search bar for 
+// Search bar for Admins
 function AdminSearch() {
   
   return (

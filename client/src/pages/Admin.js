@@ -14,7 +14,7 @@ import ViewAdmins from "../components/ViewAdmins";
 // import ConnectDonorModal from "../components/ConnectDonorModal";
 import MainContainer from "../components/Container";
 import API from "../utils/API";
-
+//Component for the various admin tools
 class Admin extends Component {
     constructor(props) {
         super(props);

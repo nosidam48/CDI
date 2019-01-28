@@ -6,15 +6,16 @@ import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
 
 class Kids extends Component {
+    //set the kids state to an empty array
     state = {
         kids: [],
         loading: true
     }
-
+    //on mount call the function to return kids cards
     componentDidMount() {
         this.loadKidsUnsponsored();
     }
-
+    //a function to get several kid profiles from the database
     loadKidsUnsponsored = () => {
         API.getKidsUnsponsored()
             .then(res =>

@@ -17,20 +17,20 @@ class ConnectDonorModal extends Component {
 
         this.toggle = this.toggle.bind(this);
     }
-
+    //A function that toggles whether the modal will be shown
     toggle() {
         this.setState({
             modal: !this.state.modal
         });
     }
-
+    //a function to get the form info
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value,
         })
     };
-
+    //A function to retrieve the uploaded file from the form
     fileSelectedHandler = event => {
         this.setState({
             selectedFile: event.target.files[0]
@@ -52,7 +52,7 @@ class ConnectDonorModal extends Component {
         if (this.state.selectedFile) {
             contentData.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
         }
-
+        //call the add content function
         API.addContent(contentData)
             .then(res => console.log(res))
             .catch(err => console.log(err));
