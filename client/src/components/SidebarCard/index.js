@@ -4,7 +4,7 @@ import moment from "moment";
 
 // Kid card that shows up in home page sidebar
 function SidebarCard(props) {
-    console.log("these be props " + props.kids);
+    console.log("these be props: " + props.kids);
     
     return (
     <div>

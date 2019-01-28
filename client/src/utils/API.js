@@ -76,7 +76,7 @@ export default {
             "mimeType": "multipart/form-data",
         })
     },
-    
+    //Show 2 kids on the front page
     homeKids: () => {
         console.log("API route hit! (API.js)");
         
