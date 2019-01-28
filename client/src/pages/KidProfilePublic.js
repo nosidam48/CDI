@@ -7,29 +7,34 @@ import API from "../utils/API";
 // import Row from "../components/Row";
 
 class KidProfilePublic extends Component {
+    
        state = {
-           kid: ""
+           kid: "",
+           content: []
        } 
        //On mount, return the kid with an id that matches the url
        componentDidMount() {
         this.loadOneKid();
     }
         //Call the findOneKid function by passing in the url id
-       loadOneKid = () => {
+       loadOneKid = (res) => {
         API.findOneKid(this.props.match.params.id)
-        .then(res =>
-                this.setState({
-                    kid: res.data
-                })
-            )
-            .catch(err => console.log(err));
+        .then(res => {
+
+            this.setState({
+                kid: res.data,
+                content: res.data.contents
+            })
+            console.log(res.data);
+        })
+        .catch(err => console.log(err));
     };
     render() {
         return (
             <MainContainer>
                 <Row>    
-                    <SponsoredPhotos state={this.state.kid} />
-                    <PublicKidCard state={this.state.kid}/>
+                    <SponsoredPhotos kid={this.state.kid} content={this.state.content}/>
+                    <PublicKidCard kid={this.state.kid}/>
                 </Row>
             </MainContainer>
         )

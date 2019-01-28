@@ -6,6 +6,12 @@ import HomeSidebar from "../components/HomeSidebar"
 import SidebarCard from "../components/SidebarCard"
 
 class Home extends Component {
+    
+    componentDidMount() {
+        this.homeKids();
+    }
+
+    
     render() {
         return (
             <div>

@@ -30,6 +30,8 @@ router.route("/")
   router.route("/location")
     .post(kidsController.kidSearchLocation)
 
+  router.route("/random")
+    .get(kidsController.findRandom)
 
 
 module.exports = router;

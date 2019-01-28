@@ -76,6 +76,10 @@ export default {
             "mimeType": "multipart/form-data",
         })
     },
+    
+    homeKids:() => {
+        return axios.get("/api/kids/random")
+    }
 
 };
 
