@@ -17,7 +17,7 @@ class Home extends Component {
     }
 
     kidsCall() {
-        console.log("kids call function");
+        console.log("kidsCall function hit (pages/Home.js)");
         
         API.homeKids()
         .then(res => {

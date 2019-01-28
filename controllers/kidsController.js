@@ -16,7 +16,7 @@ module.exports = {
   },
   // Function to find 2 random unsponsored kids for the home page
   findRandom: (req,res) => {
-    console.log("random hit");
+    console.log("findRandom hit! (kidsController");
     
     db.kids.findAll({
       where: {
