@@ -8,11 +8,12 @@
 }
 
 .kidsListPic {
-    height: 14rem;
-    object-fit: cover;
+    /* max-height: 20rem;
+    object-fit: cover; */
 }
 
 .learn {
     line-height:2.35rem;
 }
+
 
