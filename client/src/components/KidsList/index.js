@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Card } from "reactstrap";
 import "./style.css";
 import SponsorButton from "../SponsorButton";
+import moment from "moment";
 
 // Shows list of kids available to sponsor; default is to show all kids and user can enter search options
 function KidsList(props) {
@@ -22,7 +23,7 @@ function KidsList(props) {
                                     <h6><span className="font-weight-bold">Age: </span>
                                      {props.calculateAge(kid.birth_date)}
                                     </h6>
-                                    <h6><span className="font-weight-bold">Birthday:</span> {kid.birth_date}</h6>
+                                    <h6><span className="font-weight-bold">Birthday: </span>{moment(kid.birth_date).format("MMMM D")}</h6>
                                     <h6><span className="font-weight-bold">Location:</span> {kid.location}</h6>
                                     <p className="small"><a href="#">Learn more about me</a></p>
                                     <SponsorButton id={kid.id}/>
