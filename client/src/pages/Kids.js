@@ -9,7 +9,7 @@ class Kids extends Component {
     //set the kids state to an empty array
     state = {
         kids: [],
-        loading: true
+        loading: null
     }
     //on mount call the function to return kids cards
     componentDidMount() {
@@ -17,10 +17,12 @@ class Kids extends Component {
     }
     //a function to get several kid profiles from the database
     loadKidsUnsponsored = () => {
+        this.setState({
+        })
         API.getKidsUnsponsored()
             .then(res =>
                 this.setState({
-                    kids: res.data
+                    kids: res.data,
                 })
             )
             .catch(err => console.log(err));
@@ -48,10 +50,10 @@ class Kids extends Component {
             <MainContainer>
                 <Row>
                     <FilterPublic />
-                        <KidsList
-                            state={this.state.kids}
-                            calculateAge={this.calculateAge}
-                        />
+                    <KidsList
+                        state={this.state.kids}
+                        calculateAge={this.calculateAge}
+                    />
                 </Row>
             </MainContainer>
         )

@@ -21,13 +21,13 @@ class UpdateKidModal extends React.Component {
 
     this.toggle = this.toggle.bind(this);
   }
-  //toggles the modal between show and hide (true/false)
+  // Toggles the modal between show and hide
   toggle() {
     this.setState({
       modal: !this.state.modal
     });
   }
-  //function that listens for the inputs of the form data
+  // Function that listens for the inputs of the form data
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -48,7 +48,9 @@ class UpdateKidModal extends React.Component {
       location: this.state.kidLocation,
       kid_bio: this.state.bio
     })
-      .then(res => {
+      .then(res => { 
+        // When update was received, the original search will fire again, which will show the updated data
+        this.props.redoSearch(event)
       })
       .catch(err => console.log(err));
   }
