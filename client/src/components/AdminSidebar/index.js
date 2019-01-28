@@ -6,7 +6,7 @@ import "./style.css";
 // Sidebar for admin page that shows regular admin tools
 function AdminSidebar(props) {
   return (
-    <Col xs="2" className="p-0 m-0">
+    <Col xs="12" sm="4" md="3" xl="2">
       <div className="label">
         <h6 className="text-uppercase text-center p-2 mb-0 label-text">Admin tools</h6>
       </div>
