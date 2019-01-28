@@ -25,8 +25,8 @@ function KidsList(props) {
                                             </h6>
                                             <h6><span className="font-weight-bold">Birthday: </span>{moment(kid.birth_date).format("MMMM D")}</h6>
                                             <h6><span className="font-weight-bold">Location:</span> {kid.location}</h6>
-                                            <p className="small"><a href="#">Learn more about me</a></p>
-                                            <SponsorButton id={kid.id} />
+                                            <p className="small"><a href={"/kids/" + kid.id}>Learn more about me</a></p>
+                                            <SponsorButton />
                                         </div>
                                     </Col>
                                 </Row>
