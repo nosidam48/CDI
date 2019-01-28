@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 
 import { InputField, GenderField, GradeField, LocationField } from "../Form";
 import API from "../../utils/API";
 
+//A modal to update a kid's profile
 class UpdateKidModal extends React.Component {
   constructor(props) {
     super(props);
@@ -20,13 +21,13 @@ class UpdateKidModal extends React.Component {
 
     this.toggle = this.toggle.bind(this);
   }
-
+  //toggles the modal between show and hide (true/false)
   toggle() {
     this.setState({
       modal: !this.state.modal
     });
   }
-
+  //function that listens for the inputs of the form data
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddAdmin from "../AddAdmin";
 
+//A modal to udate an Admin
 class UpdateAdminModal extends React.Component {
     constructor(props) {
       super(props);
@@ -11,7 +12,7 @@ class UpdateAdminModal extends React.Component {
   
       this.toggle = this.toggle.bind(this);
     }
-  
+    //toggle the modal between show and hide (true/false)
     toggle() {
       this.setState({
         modal: !this.state.modal

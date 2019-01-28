@@ -9,7 +9,7 @@ class SponsoredPhotos extends React.Component {
     super(props)
   }
   render() {
- 
+    //The array of images we want to use
     const images = [
       {
         original: this.props.state.profile_image,

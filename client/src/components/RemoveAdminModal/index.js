@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
+//A modal to remove an admin
 class RemoveAdminModal extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +11,7 @@ class RemoveAdminModal extends React.Component {
 
     this.toggle = this.toggle.bind(this);
   }
-
+  //toggles the modal from show to hide (true/false)
   toggle() {
     this.setState({
       modal: !this.state.modal
