@@ -34,8 +34,8 @@ export default {
         })
     },
 
-    findOneKid: function() {
-       return axios.get("/api/kids/1")
+    findOneKid: function(id) {
+       return axios.get("/api/kids/" + id)
     },
 
     // Edits existing kid info in db

@@ -191,7 +191,7 @@ class Admin extends Component {
             showAddKidForm: false,
         })
     }
-
+    //function that sets the state to the name and value of the form input when the form data is changed
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({

@@ -5,13 +5,15 @@ import ImageGallery from 'react-image-gallery';
 
 // Displays photo gallery of specific child
 class SponsoredPhotos extends React.Component {
-  
+  constructor(props) {
+    super(props)
+  }
   render() {
  
     const images = [
       {
-        original: "../images/Carlitos.jpg",
-        thumbnail: '../images/Carlitos.jpg'
+        original: this.props.state.profile_image,
+        thumbnail: this.props.state.profile_image
       },
       {
         original: '../images/Carlitos2.jpg',
@@ -36,6 +38,7 @@ class SponsoredPhotos extends React.Component {
  
     return (
       <Col xs="4" className="image">
+      {/* Passes the image array in as items, takes away play and fullscreen buttons */}
         <ImageGallery items={images} showPlayButton={false} showFullscreenButton={false} showNav={true}/>
       </Col>
     );
