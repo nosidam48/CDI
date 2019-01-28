@@ -57,8 +57,8 @@ class UpdateKidModal extends React.Component {
 
   render() {
     return (
-      <div className="d-inline">
-        <Button inline size="sm" onClick={this.toggle}>Update info</Button>
+      <div className="d-inline mr-2">
+        <Button inline size="sm" className="mt-2" onClick={this.toggle}>Update info</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Update child info</ModalHeader>
           <ModalBody>
@@ -110,8 +110,8 @@ class UpdateKidModal extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={(event) => { this.toggle(); this.handleKidEdit(event) }}>Submit Changes</Button>{' '}
-            <Button onClick={this.toggle}>Cancel</Button>
+            <Button onClick={(event) => { this.toggle(); this.handleKidEdit(event) }} className="modalBtn">Submit Changes</Button>{' '}
+            <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>

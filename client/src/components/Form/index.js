@@ -78,7 +78,7 @@ export function UploadPhoto(props) {
 
 export function SearchType(props) {
   return (
-    <FormGroup>
+    <FormGroup id={props.id}>
       <Input type="select" className="mx-2" value={props.value} onChange={props.onChange} name={props.name} >
         <option>Name</option>
         <option>Location</option>

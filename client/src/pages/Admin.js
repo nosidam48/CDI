@@ -54,6 +54,8 @@ class Admin extends Component {
     };
 
     // FUNCTIONS FOR TOOLBAR ON LEFT================================================
+    // The toggles below set state as true for the tool the admin wants to see and sets state as false for all other tools
+
     // Toggles display of form to add a kid
     toggleAddKidForm = () => {
         this.setState({
@@ -254,7 +256,7 @@ class Admin extends Component {
                         onClickShowDonors={this.showDonors}
                         onClickShowAdmins={this.showAdmins}
                     />
-                    <Col xs="10" className="px-5">
+                    <Col xs="12" sm="8" md="9" lg="9" className="px-5" id="addKid">
                         {/* ADD KID FORM - displays if true =============== */}
                         {this.state.showAddKidForm ?
                             <div>
@@ -337,8 +339,11 @@ class Admin extends Component {
                                     value={this.state.searchType}
                                     onChange={this.handleInputChange}
                                     name="searchType"
+                                    id="searchKid"
+
                                 />
                                 <SubmitBtn
+                                    id="searchSubmit"
                                     onClick={this.handleAdminKidSearch}
                                 />
                             </Form>

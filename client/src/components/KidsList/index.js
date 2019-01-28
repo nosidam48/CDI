@@ -15,7 +15,7 @@ function KidsList(props) {
                             <Card className="border-0">
                                 <Row className="no-gutters">
                                     <Col lg="6">
-                                        <img src={kid.profile_image} className="img-fluid kidsListPic" alt="Child" />
+                                        <img src={kid.profile_image} className="img-fluid" alt="Child" />
                                     </Col>
                                     <Col>
                                         <div className="card-block p-2">

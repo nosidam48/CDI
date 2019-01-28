@@ -68,8 +68,8 @@ class ConnectDonorModal extends Component {
 
     render() {
         return (
-            <div className="d-inline ml-2">
-                <Button inline size="sm" onClick={this.toggle}>Add Content</Button>
+            <div className="d-inline mr-2">
+                <Button inline size="sm" className="mt-2" onClick={this.toggle}>Add Content</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Add Content for {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
                     
@@ -98,8 +98,8 @@ class ConnectDonorModal extends Component {
                                     </Form>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button onClick={(event) => this.handleContentSubmit(event)}>Submit</Button>{' '}
-                                    <Button onClick={this.toggle}>Cancel</Button>
+                                    <Button onClick={(event) => this.handleContentSubmit(event)} className="modalBtn">Submit</Button>{' '}
+                                    <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
                                 </ModalFooter>
                             </div>
                         )}

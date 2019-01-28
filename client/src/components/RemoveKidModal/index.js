@@ -34,8 +34,8 @@ class RemoveChildModal extends React.Component {
 
   render() {
     return (
-      <div className="d-inline ml-2">
-        <Button inline size="sm" onClick={this.toggle}>Remove Child</Button>
+      <div className="d-inline">
+        <Button inline size="sm" className="mt-2" onClick={this.toggle}>Remove Child</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Remove {this.props.kidFirstNames}?</ModalHeader>
 
@@ -49,8 +49,8 @@ class RemoveChildModal extends React.Component {
                   Are you sure you want to remove {this.props.kidFirstNames} {this.props.kidLastName}'s record from the database? It will be removed permanently.
                 </ModalBody>
                 <ModalFooter>
-                  <Button size="sm" onClick={() => this.handleRemoveKid(this.props.id)}>Yes, remove record</Button>{' '}
-                  <Button size="sm" onClick={this.toggle}>Cancel</Button>
+                  <Button size="sm" onClick={() => this.handleRemoveKid(this.props.id)} className="modalBtn">Yes, remove record</Button>{' '}
+                  <Button size="sm" onClick={this.toggle} className="modalCancel">Cancel</Button>
                 </ModalFooter>
               </div>
             )}
