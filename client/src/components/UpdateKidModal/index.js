@@ -21,13 +21,13 @@ class UpdateKidModal extends React.Component {
 
     this.toggle = this.toggle.bind(this);
   }
-  //toggles the modal between show and hide (true/false)
+  // Toggles the modal between show and hide
   toggle() {
     this.setState({
       modal: !this.state.modal
     });
   }
-  //function that listens for the inputs of the form data
+  // Function that listens for the inputs of the form data
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -48,15 +48,17 @@ class UpdateKidModal extends React.Component {
       location: this.state.kidLocation,
       kid_bio: this.state.bio
     })
-      .then(res => {
+      .then(res => { 
+        // When update was received, the original search will fire again, which will show the updated data
+        this.props.redoSearch(event)
       })
       .catch(err => console.log(err));
   }
 
   render() {
     return (
-      <div className="d-inline">
-        <Button inline size="sm" onClick={this.toggle}>Update info</Button>
+      <div className="d-inline mr-2">
+        <Button inline size="sm" className="mt-2" onClick={this.toggle}>Update info</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Update child info</ModalHeader>
           <ModalBody>
@@ -108,8 +110,8 @@ class UpdateKidModal extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={(event) => { this.toggle(); this.handleKidEdit(event) }}>Submit Changes</Button>{' '}
-            <Button onClick={this.toggle}>Cancel</Button>
+            <Button onClick={(event) => { this.toggle(); this.handleKidEdit(event) }} className="modalBtn">Submit Changes</Button>{' '}
+            <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>

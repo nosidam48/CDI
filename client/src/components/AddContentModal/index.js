@@ -13,24 +13,26 @@ class ConnectDonorModal extends Component {
             update: "",
             kidId: props.kidId,
             selectedFile: null,
+            message: ""
         };
 
         this.toggle = this.toggle.bind(this);
     }
-    //A function that toggles whether the modal will be shown
+    //A function that toggles whether the modal will be shown. Also resets the message.
     toggle() {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            message: ""
         });
     }
-    //a function to get the form info
+    // A function to get the form info
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value,
         })
     };
-    //A function to retrieve the uploaded file from the form
+    // A function to retrieve the uploaded file from the form
     fileSelectedHandler = event => {
         this.setState({
             selectedFile: event.target.files[0]
@@ -44,7 +46,8 @@ class ConnectDonorModal extends Component {
         // Use FormData to handle both text and the binary file
         let contentData = new FormData();
         contentData.append("kidId", this.state.kidId);
-        // Check to see if an update was submitted. If so, append to contentData 
+        // The user can submit an update or a photo but doesn't have to do both. 
+        // So check to see if an update was submitted. If so, append to contentData 
         if (this.state.update) {
             contentData.append("kid_notes", this.state.update);
         }
@@ -52,40 +55,54 @@ class ConnectDonorModal extends Component {
         if (this.state.selectedFile) {
             contentData.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
         }
-        //call the add content function
+        //Call the add content function
         API.addContent(contentData)
-            .then(res => console.log(res))
+            .then(res => {
+                // Update message to success to alert the user the content went through
+                this.setState({
+                    message: "Content successfully added"
+                })
+            })
             .catch(err => console.log(err));
     }
 
     render() {
         return (
-            <div className="d-inline ml-2">
-                <Button inline size="sm" onClick={this.toggle}>Add Content</Button>
+            <div className="d-inline mr-2">
+                <Button inline size="sm" className="mt-2" onClick={this.toggle}>Add Content</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Add Content for {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
-                    <ModalBody>
-                        <Form>
-                            <Label>Update for donor</Label>
-                            <InputField
-                                type="textarea"
-                                value={this.state.update}
-                                onChange={this.handleInputChange}
-                                name="update"
-                                placeholder="Not required"
-                            />
-                            <Label>Add photo (not required)</Label>
-                            <UploadPhoto
-                                onChange={this.fileSelectedHandler}
-                                name="selectedFile"
-                                id=""
-                            />
-                        </Form>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={(event) => { this.toggle(); this.handleContentSubmit(event) }}>Submit</Button>{' '}
-                        <Button onClick={this.toggle}>Cancel</Button>
-                    </ModalFooter>
+                    
+                    {/* If message has success text, show the text */}
+                    {this.state.message ? (
+                        <h4 className="text-center py-3">{this.state.message}</h4>
+                    ) : (
+                            <div>
+                            {/* If there is no success message, show the content submission form */}
+                                <ModalBody>
+                                    <Form>
+                                        <Label>Update for donor</Label>
+                                        <InputField
+                                            type="textarea"
+                                            value={this.state.update}
+                                            onChange={this.handleInputChange}
+                                            name="update"
+                                            placeholder="Not required"
+                                        />
+                                        <Label>Add photo (not required)</Label>
+                                        <UploadPhoto
+                                            onChange={this.fileSelectedHandler}
+                                            name="selectedFile"
+                                            id=""
+                                        />
+                                    </Form>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button onClick={(event) => this.handleContentSubmit(event)} className="modalBtn">Submit</Button>{' '}
+                                    <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
+                                </ModalFooter>
+                            </div>
+                        )}
                 </Modal>
             </div>
         );

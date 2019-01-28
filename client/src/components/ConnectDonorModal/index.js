@@ -71,8 +71,8 @@ class ConnectDonorModal extends Component {
 
   render() {
     return (
-      <div className="d-inline ml-2">
-        <Button inline size="sm" onClick={this.toggle}>Connect Donor to Child</Button>
+      <div className="d-inline mr-2">
+        <Button inline size="sm" className="mt-2" onClick={this.toggle}>Connect Donor to Child</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Connect donor to {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
           <ModalBody>
@@ -119,7 +119,7 @@ class ConnectDonorModal extends Component {
             ) : null}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={this.toggle}>Cancel</Button>
+            <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
