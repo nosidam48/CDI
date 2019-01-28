@@ -29,6 +29,7 @@ function AdminKidList(props) {
                     grade={props.grade}
                     location={props.location}
                     bio={props.bio}
+                    redoSearch={props.redoSearch}
                 />                
                 {/* Button that displays form to add updates to a kid */}
                 <AddContentModal
@@ -49,7 +50,6 @@ function AdminKidList(props) {
                     kidId={props.id}
                     kidFirstNames={props.firstNames}
                     kidLastName={props.lastName}
-                    onClick={props.onClick}
                 />
             </div>
             <hr />
