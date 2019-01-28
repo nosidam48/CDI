@@ -67,7 +67,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
-
+  // function to find a single kid
   findOneKid: (req, res) => {
     console.log(req);
     db.kids.findOne({

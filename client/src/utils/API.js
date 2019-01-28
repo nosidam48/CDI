@@ -33,7 +33,7 @@ export default {
             "mimeType": "multipart/form-data",
         })
     },
-
+    // the route to find one kid
     findOneKid: function(id) {
        return axios.get("/api/kids/" + id)
     },
