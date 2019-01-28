@@ -9,7 +9,7 @@ function KidsList(props) {
         <Col md="9" className="my-4">
             {props.state.length ? (
             <Row>
-            {props.state.map(kid => (
+            {props.state.map(kid => (                
                 <Col md="6" key={kid.id} className="mb-3">
                     <Card className="border-0">
                         <Row className="no-gutters">
@@ -19,7 +19,9 @@ function KidsList(props) {
                             <Col>
                                 <div className="card-block p-2">
                                     <h4 className="card-title font-weight-bold">{kid.first_name} {kid.last_name}</h4>
-                                    <h6><span className="font-weight-bold">Age:</span>7</h6>
+                                    <h6><span className="font-weight-bold">Age: </span>
+                                     {props.calculateAge(kid.birth_date)}
+                                    </h6>
                                     <h6><span className="font-weight-bold">Birthday:</span> {kid.birth_date}</h6>
                                     <h6><span className="font-weight-bold">Location:</span> {kid.location}</h6>
                                     <p className="small"><a href="#">Learn more about me</a></p>

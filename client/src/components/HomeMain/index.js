@@ -5,7 +5,7 @@ import "./style.css";
 // Main content for home page
 function HomeMain({ children }) {
     return (
-        <Col md="10" className="pl-0 pr-4">
+        <Col sm="8" md="9" lg="10" className="pl-0 pr-4" id="main-container">
             <h3>Centro de Desarrollo Infantil (Children Development Center) oversees the health and development of at-risk boys and girls.</h3>
             <br />
             <p>We believe that the impact we might be able to have in these children’s lives is limited and temporary and the only solution for a long-term impact is for each child to understand how important they are to God and that He has a perfect plan for each of their lives.</p>

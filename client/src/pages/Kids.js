@@ -7,7 +7,7 @@ import API from "../utils/API";
 
 class Kids extends Component {
     state = {
-        kids: []
+        kids: [],
     }
 
     componentDidMount() {
@@ -16,24 +16,44 @@ class Kids extends Component {
 
     loadKidsUnsponsored = () => {
         API.getKidsUnsponsored()
-            .then(res =>
+        .then(res =>              
                 this.setState({
                     kids: res.data
                 })
             )
             .catch(err => console.log(err));
     };
-    
+
+    // Calculate age by using today's date and birthdate
+    calculateAge = (dateString) => {
+    var today = new Date();
+    var birthday = new Date(dateString);
+    console.log(today);
+    console.log(birthday);
+    // Use .getFullYear method to set age variable by subtracting birth year from current year
+    var age = today.getFullYear() - birthday.getFullYear();
+    // Use .getMonth method to subtract birth month from current month
+    var months = today.getMonth() - birthday.getMonth();
+    // If months is less than 0 or if months = 0 and days in the current month is less than days in birth month, decrease age by a year
+    if (months < 0 || (months === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+    }
+    return age;
+}
+
     render() {
         return (
             <MainContainer>
                 <Row>
                     <FilterPublic />
-                    <KidsList state={this.state.kids}/>
+                    <KidsList
+                        state={this.state.kids}
+                        calculateAge={this.calculateAge}
+                    />
                 </Row>
             </MainContainer>
         )
-    } 
+    }
 }
 
 export default Kids;
