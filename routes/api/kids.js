@@ -16,7 +16,7 @@ router.route("/")
   .post(upload.single('selectedFile'), kidsController.create);
 
   
-  // Matches with "/api/kids/:id"
+  // Matches with "/api/kids/:id" totally
   router.route("/:id")
   .get(kidsController.findOneKid)
     .put(kidsController.update)
