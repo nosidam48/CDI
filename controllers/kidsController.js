@@ -67,6 +67,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+
   //A database call to find one kid by a passed in id
   findOneKid: (req, res) => {
     console.log(req);
