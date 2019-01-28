@@ -3,7 +3,7 @@ import {Row, Col} from "reactstrap";
 import "./style.css";
 import SponsorButton from "../SponsorButton"
 
-// Card that appears when a user clicks to see more about a kid!
+// Card that appears when a user clicks to see more about a kid. Props is one kid based on the id in the url.
 function PublicKidCard(props) {
     return (
         <Col xs="8">

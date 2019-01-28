@@ -10,3 +10,13 @@
 #sidebar {
     background-color: #97442f;
 }
+
+@media screen and (max-width: 575.98px) {
+    #sidebar {
+        display: none
+    }
+
+    h3 {
+        font-size: 1.25rem
+    }
+}

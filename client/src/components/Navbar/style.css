@@ -14,3 +14,14 @@
 .nav-link:hover {
     color: #97442f!important;
 }
+
+@media screen and (max-width: 767.98px) {
+    .navbar-collapse {
+        background-color:lightgray;
+      }
+
+    .nav-item {
+        padding-left: .5rem!important;
+    }
+    
+}

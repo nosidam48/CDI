@@ -18,13 +18,13 @@ class ConnectDonorModal extends Component {
 
     this.toggle = this.toggle.bind(this);
   }
-
+  //toggle the modal state between true and false to show or hide it
   toggle() {
     this.setState({
       modal: !this.state.modal
     });
   }
-
+  //function to listen for the input data on the forms
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
