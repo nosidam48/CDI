@@ -30,6 +30,7 @@ router.route("/")
   router.route("/location")
     .post(kidsController.kidSearchLocation)
 
+  // Matches with "/api/kids/random"
   router.route("/random")
     .get(kidsController.findRandom)
 

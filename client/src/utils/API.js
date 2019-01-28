@@ -77,8 +77,10 @@ export default {
         })
     },
     
-    homeKids:() => {
-        return axios.get("/api/kids/random")
+    homeKids: () => {
+        console.log("API route hit");
+        
+        return axios.get("/api/kids/random");
     }
 
 };

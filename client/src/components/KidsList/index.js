@@ -8,9 +8,9 @@ import moment from "moment";
 function KidsList(props) {
     return (
         <Col md="9" className="my-4">
-            {props.state.length ? (
+            {props.kids.length ? (
                 <Row>
-                    {props.state.map(kid => (
+                    {props.kids.map(kid => (
                         <Col md="6" key={kid.id} className="mb-3">
                             <Card className="border-0">
                                 <Row className="no-gutters">

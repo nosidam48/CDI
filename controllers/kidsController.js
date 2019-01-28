@@ -14,13 +14,17 @@ module.exports = {
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
   },
-
+  // Function to find 2 random unsponsored kids for the home page
   findRandom: (req,res) => {
+    console.log("random hit");
+    
     db.kids.findAll({
       where: {
         need_sponsor: true
       },
-      order: 'rand()',
+      order: [
+    Sequelize.fn( 'RAND' ),
+  ],
       limit: 2
     })
       .then(data => res.json(data))
