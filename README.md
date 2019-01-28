@@ -42,5 +42,8 @@ This web applicaton attempts to serve the following:
   ### Remove child
    * A modal appears asking the admin to verify that they want to remove the child. When the button is clicked, the child's record is removed from the Kids table.
   
-## Technical Features
+## Technical Notes
+  * This web app utilizes Javascript, React, Node, Express, MySQL and Sequelize.
+  * Uses multer to allow handling of forms that include both text and binary images. 
+ 
   
