@@ -10,13 +10,13 @@ class KidProfilePublic extends Component {
        state = {
            kid: ""
        } 
-    
+       //On mount, return the kid with an id that matches the url
        componentDidMount() {
         this.loadOneKid();
     }
-
+        //Call the findOneKid function by passing in the url id
        loadOneKid = () => {
-        API.findOneKid()
+        API.findOneKid(this.props.match.params.id)
         .then(res =>
                 this.setState({
                     kid: res.data
