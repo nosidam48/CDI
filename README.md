@@ -28,19 +28,19 @@ This web applicaton attempts to serve the following:
 ## Admin features
   * CDI workers with admin privileges have access to several tools to help them manage children and donors.
   ### Add a child
-    * The admin fills out a form with the new child's information and adds a profile image. This child will now appear in the list of unsponsored children that prospective donors are able to see.
+   * The admin fills out a form with the new child's information and adds a profile image. This child will now appear in the list of unsponsored children that prospective donors are able to see.
   ### Update a child
-    * The admin first finds the child they'd like to update by either searching by name or location.
-    * Once the child is found, the admin has several options available
+   * The admin first finds the child they'd like to update by either searching by name or location.
+   * Once the child is found, the admin has several options available
   ### Update info
-    * A modal appears that includes the information that is currently in the child's profile. The admin can make any changes necessary and submit. Those new changes will edit the child's entry in the database.
+   * A modal appears that includes the information that is currently in the child's profile. The admin can make any changes necessary and submit. Those new changes will edit the child's entry in the database.
   ### Add content
-    * A modal appears that lets the admin add a text update to the child or add a new photo. On submit, a new entry is created in the Content table that includes the selected kid's ID.
+   * A modal appears that lets the admin add a text update to the child or add a new photo. On submit, a new entry is created in the Content table that includes the selected kid's ID.
   ### Connect donor to child
-    * When a donor has decided to sponsor a child, an admin can find the child and click Connect to Donor. A modal appears, prompting the admin to search for a donor by name or email.
-    * The search displays all donors that match the search criteria. When the submit button is clicked next to the donor's name, a record is created in the KidsUsers table that connects the donor and child.
+   * When a donor has decided to sponsor a child, an admin can find the child and click Connect to Donor. A modal appears, prompting the admin to search for a donor by name or email.
+   * The search displays all donors that match the search criteria. When the submit button is clicked next to the donor's name, a record is created in the KidsUsers table that connects the donor and child.
   ### Remove child
-    * A modal appears asking the admin to verify that they want to remove the child. When the button is clicked, the child's record is removed from the Kids table.
+   * A modal appears asking the admin to verify that they want to remove the child. When the button is clicked, the child's record is removed from the Kids table.
   
 ## Technical Features
   
