@@ -15,6 +15,18 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  findRandom: (req,res) => {
+    db.kids.findAll({
+      where: {
+        need_sponsor: true
+      },
+      order: 'rand()',
+      limit: 2
+    })
+      .then(data => res.json(data))
+      .catch(err =>res.status(422).json(err))
+  },
+
   // Function to let admin search for a kid by first/last name
   kidSearchName: (req, res) => {
     console.log(req.body);
@@ -70,13 +82,17 @@ module.exports = {
 
   //A database call to find one kid by a passed in id
   findOneKid: (req, res) => {
-    console.log(req);
+    //req.params
     db.kids.findOne({
       where: {
         id: req.params.id
-      }
+      },
+      include: [db.content]
     })
-    .then(data => res.json(data))
+    .then(data => {
+      console.log("data in controller" + data); 
+      res.json(data);
+    })
     .catch(err => res.status(422).json(err))
   },
 

@@ -7,35 +7,30 @@ import ImageGallery from 'react-image-gallery';
 class SponsoredPhotos extends React.Component {
   constructor(props) {
     super(props)
-  }
-  render() {
-    //The array of images we want to use
+    console.log(props);
+    }
+  
+    render() {
     const images = [
       {
-        original: this.props.state.profile_image,
-        thumbnail: this.props.state.profile_image
-      },
-      {
-        original: '../images/Carlitos2.jpg',
-        thumbnail: '../images/Carlitos2.jpg'
-      },
-
-      {
-        original: '../images/Solanyi.jpg',
-        thumbnail: '../images/Solanyi.jpg'
-      },
-
-      {
-        original: '../images/Solanyi2.jpg',
-        thumbnail: '../images/Solanyi2.jpg'
-      },
-
-      {
-        original: '../images/group1.jpg',
-        thumbnail: '../images/group1.jpg'
-      },
+        original: this.props.kid.profile_image,
+        thumbnail: this.props.kid.profile_image
+      }
     ]
- 
+
+    //wait till we have images
+    if (this.props.content.length > 0) {
+      console.log("props" + this.props.content);
+        //push into array
+        this.props.content.map(pic => (
+          images.push({
+            original: pic.kid_pics,
+            thumbnail: pic.kid_pics
+          })
+        ))  
+    }
+    console.log(images);
+    
     return (
       <Col xs="4" className="image">
       {/* Passes the image array in as items, takes away play and fullscreen buttons */}
