@@ -1,0 +1,50 @@
+.btn {
+    background-color: #97442f;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #717175;
+}
+
+.modalCancel {
+    background-color: #717175;
+}
+
+@media screen and (max-width: 767.98px) {
+    .btn {
+        margin-top: .5rem;
+    }
+
+    .form-control {
+        margin-left: 0!important;
+    }
+
+    #searchKid {
+        padding-top: .5rem;
+    }
+}
+
+@media screen and (max-width: 575.98px) {
+    .btn {
+        margin-top: -1rem;
+    }
+
+    .form-control {
+        margin-left: 0!important;
+    }
+
+    #searchKid {
+        padding-top: 0;
+        margin-left: .3rem;
+        margin-right: .3rem;
+    }
+
+    .modalBtn {
+        margin-top: 0;
+    }
+
+    .modalCancel {
+        margin-top: 0;
+    }
+}

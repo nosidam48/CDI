@@ -6,3 +6,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Aleo', serif;
 }
+
+@media screen and (max-width: 575.98px) {
+  #addKid {
+      padding-top: 1.5rem;
+  }
+}
+
