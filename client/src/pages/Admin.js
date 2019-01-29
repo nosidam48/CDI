@@ -10,6 +10,7 @@ import AdminSearch from "../components/AdminSearch";
 import ViewDonors from "../components/ViewDonors";
 import ViewAdmins from "../components/ViewAdmins";
 import MainContainer from "../components/Container";
+import LoadSpinner from "../components/LoadSpinner";
 import API from "../utils/API";
 
 //Component for the various admin tools
@@ -226,6 +227,9 @@ class Admin extends Component {
     // Handles when an admin is searching for a child
     handleAdminKidSearch = event => {
         event.preventDefault();
+        this.setState({
+            loading: true
+        })
         API.kidSearch({
             searchTerm: this.state.searchTerm,
             searchType: this.state.searchType
@@ -235,11 +239,13 @@ class Admin extends Component {
                 this.setState({
                     searchTerm: "",
                     searchType: "Name",
-                    kids: res.data
+                    kids: res.data,
+                    loading: false
                 })
             })
             .catch(err => {
                 this.setState({
+                    loading: false,
                     message: "We're sorry, there was a problem with the search."
                 })
                 console.log(err)
@@ -414,9 +420,15 @@ class Admin extends Component {
                             null
                         }
                         {/* Shows message on screen depending on task run and result */}
-                            <MainContainer>
-                                <h4 className="text-center">{this.state.message}</h4>
-                            </MainContainer>
+                        <MainContainer>
+                            <h4 className="text-center">{this.state.message}</h4>
+                        </MainContainer>
+                        
+                        {/* Shows loading spinner if loading is true */}
+                        {this.state.loading ? (
+                            <LoadSpinner className="kidsSpin" />
+                        ) : null
+                        }    
                     </Col>
                 </Row>
             </MainContainer>
