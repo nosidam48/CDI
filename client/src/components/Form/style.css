@@ -11,6 +11,10 @@
     background-color: #717175;
 }
 
+.discardBtn {
+    background-color: #717175;
+}
+
 @media screen and (max-width: 767.98px) {
     .btn {
         margin-top: .5rem;

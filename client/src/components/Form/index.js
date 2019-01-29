@@ -95,7 +95,7 @@ export function SubmitBtn(props) {
 
 export function DiscardBtn(props) {
   return (
-    <Button inline className="ml-2" {...props}>Discard</Button> 
+    <Button inline className="ml-2 discardBtn" {...props}>Discard</Button> 
   )
 }
 
