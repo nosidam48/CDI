@@ -4,7 +4,6 @@ import MainContainer from "../components/Container";
 import KidsList from "../components/KidsList";
 import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
-import LoadSpinner from "../components/LoadSpinner";
 
 class Kids extends Component {
     //set the kids state to an empty array

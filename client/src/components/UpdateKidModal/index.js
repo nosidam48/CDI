@@ -48,11 +48,17 @@ class UpdateKidModal extends React.Component {
       location: this.state.kidLocation,
       kid_bio: this.state.bio
     })
-      .then(res => { 
+      .then(res => {
         // When update was received, the original search will fire again, which will show the updated data
         this.props.redoSearch(event)
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({
+          loading: false,
+          message: "We're sorry, there was a problem updating the child's record."
+        })
+        console.log(err);
+      })
   }
 
   render() {

@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-import moment from "moment";
 
 // Kid card that shows up in home page sidebar
 function SidebarCard(props) {
