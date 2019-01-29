@@ -18,7 +18,7 @@ class SponsoredPhotos extends React.Component {
       }
     ]
 
-    //wait till we have images
+    // wait till we have images
     if (this.props.content.length > 0) {
       console.log("props" + this.props.content);
         //push into array

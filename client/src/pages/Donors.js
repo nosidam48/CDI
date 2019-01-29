@@ -17,19 +17,21 @@ class Donors extends Component {
  }
      //Call the findOneKid function by passing in the url id
     loadOneKid = (res) => {
-        console.log(this.props.match.params.id);
         
      API.donorKid(this.props.match.params.id)
      .then(res => {
-
+        console.log(res.data.content);
+        
          this.setState({
-             kid: res.data,
-             content: res.data.contents
+             kid: res.data.kid,
+             content: res.data.content
          })
-         console.log(res.data);
+         console.log(this.state);
+         
      })
      .catch(err => console.log(err));
  };
+
  calculateAge = (dateString) => {
     var today = new Date();
     var birthday = new Date(dateString);

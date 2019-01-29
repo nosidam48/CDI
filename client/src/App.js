@@ -19,7 +19,8 @@ class App extends React.Component {
     // Set the state to default (no user)
     this.state = {
       loggedIn: false,
-      email: null
+      email: null,
+      id: ""
     }
     // Bind our functions to this component 
     this.getUser = this.getUser.bind(this)
@@ -46,7 +47,8 @@ class App extends React.Component {
         //set the state to loggedIn: true, and set the user email
         this.setState({
           loggedIn: true,
-          email: response.data.user.email
+          email: response.data.user.email,
+          id: response.data.user.id
         })
       } else {
         console.log('Get user: no user');
@@ -62,7 +64,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.id} />
           {this.state.loggedIn &&
             <p>Join the party, {this.state.email}!</p>
           }
