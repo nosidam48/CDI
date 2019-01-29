@@ -5,7 +5,7 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 function AdminSearch() {
   
   return (
-    <Form inline>
+    <Form inline="true">
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label for="search-input" className="mr-sm-2">Search term</Label>
           <Input type="text" name="search" id="search" placeholder="" />

@@ -4,7 +4,6 @@ import MainContainer from "../components/Container";
 import KidsList from "../components/KidsList";
 import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
-import LoadSpinner from "../components/LoadSpinner";
 
 class Kids extends Component {
     //set the kids state to an empty array
@@ -32,8 +31,6 @@ class Kids extends Component {
     calculateAge = (dateString) => {
         var today = new Date();
         var birthday = new Date(dateString);
-        console.log(today);
-        console.log(birthday);
         // Use .getFullYear method to set age variable by subtracting birth year from current year
         var age = today.getFullYear() - birthday.getFullYear();
         // Use .getMonth method to subtract birth month from current month

@@ -21,7 +21,7 @@ class RemoveAdminModal extends React.Component {
   render() {
     return (
       <div className="d-inline ml-2">
-        <Button inline size="sm" onClick={this.toggle}>Remove Admin</Button>
+        <Button inline="true" size="sm" onClick={this.toggle}>Remove Admin</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Remove Admin?</ModalHeader>
           <ModalBody>

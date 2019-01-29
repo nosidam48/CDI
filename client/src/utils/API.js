@@ -18,7 +18,7 @@ export default {
             return axios.post("/api/kids/location/", searchData)
 
             default:
-            console.log("something isn't working");
+            console.log("Route error");
         }        
     },
 
@@ -42,7 +42,6 @@ export default {
     // Edits existing kid info in db
     kidEdit: (kidData) => {
         let id = kidData.id;
-        console.log(id);
         return axios.put("/api/kids/kid/" + id, kidData)
     },
 
@@ -77,15 +76,11 @@ export default {
         })
     },
     //Show 2 kids on the front page
-    homeKids: () => {
-        console.log("API route hit! (API.js)");
-        
+    homeKids: () => {        
         return axios.get("/api/kids/random");
     },
 
-    donorKid: (id) => {
-        console.log("API hit" + id);
-        
+    donorKid: (id) => {        
         return axios.get("/api/donors/" + id)
     }
 

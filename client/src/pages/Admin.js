@@ -2,14 +2,9 @@ import React, { Component } from "react";
 import { Row, Col, Form, Label } from "reactstrap";
 import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
-import AdminMultipleKids from "../components/AdminMultipleKidList";
-import AddAdmin from "../components/AddAdmin";
 import AdminKidList from "../components/AdminKidList";
-import AddDonorForm from "../components/AddDonorForm";
-import AdminSearch from "../components/AdminSearch";
-import ViewDonors from "../components/ViewDonors";
-import ViewAdmins from "../components/ViewAdmins";
 import MainContainer from "../components/Container";
+import LoadSpinner from "../components/LoadSpinner";
 import API from "../utils/API";
 
 //Component for the various admin tools
@@ -22,6 +17,7 @@ class Admin extends Component {
         // Toolbar functions
         showAddKidForm: false,
         showKidSearch: false,
+        showSearchResults: false,
         showMultipleKids: false,
         showAddDonorForm: false,
         showAddAdmin: false,
@@ -60,6 +56,7 @@ class Admin extends Component {
         this.setState({
             showAddKidForm: !this.state.showAddKidForm,
             showKidSearch: false,
+            showSearchResults: false,
             showMultipleKids: false,
             showAddDonorForm: false,
             showAddAdmin: false,
@@ -74,6 +71,7 @@ class Admin extends Component {
         this.setState({
             showKidSearch: true,
             showAddKidForm: false,
+            showSearchResults: false,
             showMultipleKids: false,
             showAddDonorForm: false,
             showAddAdmin: false,
@@ -88,6 +86,7 @@ class Admin extends Component {
         this.setState({
             showMultipleKids: true,
             showKidSearch: false,
+            showSearchResults: false,
             showAddKidForm: false,
             showAddDonorForm: false,
             showAddAdmin: false,
@@ -102,6 +101,7 @@ class Admin extends Component {
         this.setState({
             showAddKidForm: false,
             showKidSearch: false,
+            showSearchResults: false,
             showMultipleKids: false,
             showAddDonorForm: !this.state.showAddDonorForm,
             showAddAdmin: false,
@@ -116,6 +116,7 @@ class Admin extends Component {
         this.setState({
             showAddKidForm: false,
             showKidSearch: false,
+            showSearchResults: false,
             showMultipleKids: false,
             showAddDonorForm: false,
             showAddAdmin: !this.state.showAddAdmin,
@@ -129,6 +130,7 @@ class Admin extends Component {
     showAdminSearch = () => {
         this.setState({
             showKidSearch: false,
+            showSearchResults: false,
             showAddKidForm: false,
             showMultipleKids: false,
             showAddDonorForm: false,
@@ -144,6 +146,7 @@ class Admin extends Component {
         this.setState({
             showMultipleKids: false,
             showKidSearch: false,
+            showSearchResults: false,
             showAddKidForm: false,
             showAddDonorForm: false,
             showAddAdmin: false,
@@ -158,6 +161,7 @@ class Admin extends Component {
         this.setState({
             showMultipleKids: false,
             showKidSearch: false,
+            showSearchResults: false,
             showAddKidForm: false,
             showAddDonorForm: false,
             showAddAdmin: false,
@@ -220,12 +224,17 @@ class Admin extends Component {
                     message: "There was an error adding the child to the database."
                 });
                 console.log(err);
-            }) 
+            })
     }
 
     // Handles when an admin is searching for a child
     handleAdminKidSearch = event => {
         event.preventDefault();
+        this.setState({
+            loading: true,
+            kids: [],
+            showSearchResults: false,
+        })
         API.kidSearch({
             searchTerm: this.state.searchTerm,
             searchType: this.state.searchType
@@ -235,12 +244,15 @@ class Admin extends Component {
                 this.setState({
                     searchTerm: "",
                     searchType: "Name",
-                    kids: res.data
+                    kids: res.data,
+                    loading: false,
+                    showSearchResults: true,
                 })
             })
             .catch(err => {
                 this.setState({
-                    message: "We're sorry, there was a problem with the search."
+                    loading: false,
+                    message: "We're sorry. We encountered an error."
                 })
                 console.log(err)
             });
@@ -345,7 +357,6 @@ class Admin extends Component {
                                     onChange={this.handleInputChange}
                                     name="searchType"
                                     id="searchKid"
-
                                 />
                                 <SubmitBtn
                                     id="searchSubmit"
@@ -356,67 +367,43 @@ class Admin extends Component {
                             null
                         }
                         {/* If search brings back results, show results */}
-                        {this.state.kids.length ? (
+                        {this.state.showSearchResults ? (
                             <div>
-                                {this.state.kids.map(kid => (
-                                    <AdminKidList
-                                        key={kid.id}
-                                        id={kid.id}
-                                        firstNames={kid.first_name}
-                                        lastName={kid.last_name}
-                                        gender={kid.gender}
-                                        birthdate={kid.birth_date}
-                                        grade={kid.grade}
-                                        location={kid.location}
-                                        needSponsor={kid.need_sponsor}
-                                        bio={kid.kid_bio}
-                                        redoSearch={this.handleAdminKidSearch}
-                                    />
-                                ))}
+                                {this.state.kids.length ? (
+                                    <div>
+                                        {this.state.kids.map(kid => (
+                                            <AdminKidList
+                                                key={kid.id}
+                                                id={kid.id}
+                                                firstNames={kid.first_name}
+                                                lastName={kid.last_name}
+                                                gender={kid.gender}
+                                                birthdate={kid.birth_date}
+                                                grade={kid.grade}
+                                                location={kid.location}
+                                                needSponsor={kid.need_sponsor}
+                                                bio={kid.kid_bio}
+                                                redoSearch={this.handleAdminKidSearch}
+                                            />
+                                        ))}
+                                    </div>
+                                ) : (
+                                        <h4 className="text-center mt-3">Your search did not return any results.</h4>
+                                    )}
                             </div>
-                        ) :
-                            null
+                        ) : null
                         }
-                        {/* Shows multiple kids  */}
-                        {this.state.showMultipleKids ?
-                            <AdminMultipleKids /> :
-                            null
-                        }
-                        {/* Shows form to add donor */}
-                        {this.state.showAddDonorForm ?
-                            <AddDonorForm
-                                onClickAddDonor={this.toggleAddDonorForm}
-                            /> :
-                            null
-                        }
-                        {/* Shows form to add admin */}
-                        {this.state.showAddAdmin ?
-                            <AddAdmin
-                                onClickAddAdmin={this.toggleAddAdmin}
-                            /> :
-                            null
-                        }
-                        {/* Shows admin search bar*/}
-                        {this.state.showAdminSearch ?
-                            <AdminSearch
-                                onClickAdminSearch={this.showAdminSearch}
-                            /> :
-                            null
-                        }
-                        {/* Shows all donors */}
-                        {this.state.showDonors ?
-                            <ViewDonors /> :
-                            null
-                        }
-                        {/* Shows all admins */}
-                        {this.state.showAdmins ?
-                            <ViewAdmins /> :
-                            null
-                        }
+
                         {/* Shows message on screen depending on task run and result */}
-                            <MainContainer>
-                                <h4 className="text-center">{this.state.message}</h4>
-                            </MainContainer>
+                        <MainContainer>
+                            <h4 className="text-center">{this.state.message}</h4>
+                        </MainContainer>
+
+                        {/* Shows loading spinner if loading is true */}
+                        {this.state.loading ? (
+                            <LoadSpinner className="kidsSpin" />
+                        ) : null
+                        }
                     </Col>
                 </Row>
             </MainContainer>

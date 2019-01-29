@@ -14,7 +14,8 @@ class Signup extends Component {
       zip: '',
 			email: '',
 			password: '',
-			confirmPassword: '',
+      confirmPassword: '',
+      redirectTo: ''
 
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -48,7 +49,7 @@ class Signup extends Component {
 				if (!response.data.errmsg) {
 					console.log('successful signup')
 					this.setState({ //redirect to login page
-						redirectTo: '/login'
+						redirectTo: '/kids'
 					})
 				} else {
 					console.log('username already taken')

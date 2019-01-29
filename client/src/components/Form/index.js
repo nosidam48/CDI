@@ -89,13 +89,13 @@ export function SearchType(props) {
 
 export function SubmitBtn(props) {
   return (
-    <Button inline {...props}>Submit </Button>
+    <Button inline="true" {...props}>Submit </Button>
   )
 }
 
 export function DiscardBtn(props) {
   return (
-    <Button inline className="ml-2 discardBtn" {...props}>Discard</Button> 
+    <Button inline="true" className="ml-2 discardBtn" {...props}>Discard</Button> 
   )
 }
 

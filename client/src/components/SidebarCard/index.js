@@ -1,23 +1,20 @@
 import React from "react";
 import "./style.css";
-import moment from "moment";
 
 // Kid card that shows up in home page sidebar
-function SidebarCard(props) {
-    console.log("these be props: " + props.kids);
-    
+function SidebarCard(props) {    
     return (
     <div>
             {props.kids.length ? (
         <div>
                 {props.kids.map(kid =>
-        <div className="card border-0 m-2">
+        <div key={kid.id} className="card border-0 m-2">
             <img className="card-img-top" src={kid.profile_image} alt="Child" />
                 <div className="card-body p-1">
-                    <h6><strong><a href={"/kids/" + kid.id}>{kid.first_name} {kid.last_name}
+                    <h6><strong><a href={"/kids/" + kid.id}>{kid.first_name}
                     </a></strong></h6>
-                    <div class="small"><i class="fas fa-birthday-cake mr-2"></i>{props.age(kid.birth_date)}<br />
-                    <i class="fas fa-globe-americas mr-2"></i>{kid.location}</div>
+                    <div className="small"><i className="fas fa-birthday-cake mr-2"></i>{props.age(kid.birth_date) + " years old"}<br />
+                    <i className="fas fa-globe-americas mr-2"></i>{kid.location}</div>
                 </div>
         </div>
             )}

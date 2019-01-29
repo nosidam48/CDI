@@ -25,7 +25,6 @@ module.exports = {
 
     // Function to connect donor to kid
     connectDonor: (req, res) => {        
-        console.log(req.body);
         db.users.findOne({
             where: {
                 id: req.body.donor_id

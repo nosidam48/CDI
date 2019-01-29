@@ -39,8 +39,8 @@ function AddDonorForm(props) {
           <Label for="zip">Zip Code</Label>
           <Input type="text" name="zip" id="zip" placeholder="Zip Code" />
         </FormGroup>
-        <Button inline>Submit</Button>
-        <Button inline className="ml-2" onClick={props.onClickAddDonor}>Discard</Button> 
+        <Button inline="true">Submit</Button>
+        <Button inline="true" className="ml-2" onClick={props.onClickAddDonor}>Discard</Button> 
       </Form>
     </div>
   )

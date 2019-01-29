@@ -15,9 +15,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   // Function to find 2 random unsponsored kids for the home page
-  findRandom: (req,res) => {
-    console.log("findRandom hit! (kidsController");
-    
+  findRandom: (req,res) => {    
     db.kids.findAll({
       where: {
         need_sponsor: true
@@ -33,7 +31,6 @@ module.exports = {
 
   // Function to let admin search for a kid by first/last name
   kidSearchName: (req, res) => {
-    console.log(req.body);
     db.kids.findAll({
       where: {
         [Op.or]: [
@@ -56,7 +53,6 @@ module.exports = {
 
   // Function to let admin search for a kid by location
   kidSearchLocation: (req, res) => {
-    console.log(req.body);
     db.kids.findAll({
       where: {
         location: req.body.searchTerm
@@ -68,7 +64,6 @@ module.exports = {
 
   // Function to add kid from form data
   create: (req, res) => {
-    console.log(req.file);
     db.kids.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -113,7 +108,6 @@ module.exports = {
   },
   // Function to remove kid from db
   remove: (req, res) => {
-    console.log("request received")
     db.kids.destroy(
       {
         where: {

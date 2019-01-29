@@ -41,7 +41,6 @@ class ConnectDonorModal extends Component {
       email: this.state.donorEmail,
     })
       .then(res => {
-        console.log(res.data)
         // Set state of form inputs back to blank
         this.setState({
           donorFirstName: "",
@@ -61,10 +60,8 @@ class ConnectDonorModal extends Component {
       donor_id: donorId,
       kid_id: kidId
     }
-    console.log(connectData)
     API.connectDonor(connectData)
       .then(res => {
-        console.log(res.data)
       })
       .catch(err => console.log(err));
   }
@@ -72,7 +69,7 @@ class ConnectDonorModal extends Component {
   render() {
     return (
       <div className="d-inline mr-2">
-        <Button inline size="sm" className="mt-2" onClick={this.toggle}>Connect Donor to Child</Button>
+        <Button inline="true" size="sm" className="mt-2" onClick={this.toggle}>Connect Donor to Child</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Connect donor to {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
           <ModalBody>
@@ -112,7 +109,7 @@ class ConnectDonorModal extends Component {
                       kidId={this.props.kidId}
                       className="mr-2"
                     />
-                    {donor.first_name + "  " + "  " + donor.last_name + "  " + donor.email}
+                    {donor.first_name} {donor.last_name} {donor.email}
                   </div>
                 ))}
               </div>
