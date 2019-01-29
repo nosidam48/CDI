@@ -93,7 +93,7 @@ class Signup extends Component {
           </div>
           <div className="form-group">
             <label for="zip-input">Zip Code</label>
-            <input type="text" name="zip" value={this.state.state} onChange={this.handleChange} className="form-control" id="zip-input" placeholder="Zip Code"/>
+            <input type="text" name="zip" value={this.state.zip} onChange={this.handleChange} className="form-control" id="zip-input" placeholder="Zip Code"/>
           </div>
           <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>
