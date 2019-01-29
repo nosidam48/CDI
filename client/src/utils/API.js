@@ -81,6 +81,12 @@ export default {
         console.log("API route hit! (API.js)");
         
         return axios.get("/api/kids/random");
+    },
+
+    donorKid: (id) => {
+        console.log("API hit" + id);
+        
+        return axios.get("/api/donors/" + id)
     }
 
 };
