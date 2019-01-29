@@ -7,11 +7,11 @@ import moment from "moment";
 // Shows list of kids available to sponsor; default is to show all kids and user can enter search options
 function KidsList(props) {
     return (
-        <Col md="10" className="my-4">
-            {props.state.length ? (
+        <Col md="9" className="my-4">
+            {props.kids.length ? (
                 <Row>
-                    {props.state.map(kid => (
-                        <Col xs="6" md="4" lg="6" key={kid.id} className="mb-3">
+                    {props.kids.map(kid => (
+                        <Col md="6" key={kid.id} className="mb-3">
                             <Card className="border-0">
                                 <Row className="no-gutters">
                                     <Col lg="6">

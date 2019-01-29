@@ -4,14 +4,31 @@ import MainContainer from "../components/Container"
 import HomeMain from "../components/HomeMain"
 import HomeSidebar from "../components/HomeSidebar"
 import SidebarCard from "../components/SidebarCard"
+import API from "../utils/API";
 
 class Home extends Component {
+
+    state = {
+        kids: []
+    }
     
     componentDidMount() {
-        this.homeKids();
+        this.kidsCall();
     }
 
-    
+    kidsCall() {
+        console.log("kidsCall function hit (pages/Home.js)");
+        
+        API.homeKids()
+        .then(res => {
+            this.setState({
+                kids: res.data
+            })
+            console.log("res.data: " + res.data);
+        })
+        .catch(err => console.log(err))
+    }
+
     render() {
         return (
             <div>
@@ -20,7 +37,7 @@ class Home extends Component {
                     <Row className="align-items-start">
                         <HomeMain />
                         <HomeSidebar>
-                            <SidebarCard />
+                            <SidebarCard kids={this.state.kids} />
                         </HomeSidebar>
                     </Row>
                 </MainContainer>

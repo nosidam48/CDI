@@ -18,6 +18,8 @@ class KidProfilePublic extends Component {
     }
         //Call the findOneKid function by passing in the url id
        loadOneKid = (res) => {
+        //    console.log(this.props.match.params.id);
+           
         API.findOneKid(this.props.match.params.id)
         .then(res => {
 

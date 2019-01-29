@@ -50,10 +50,10 @@ class Kids extends Component {
             <MainContainer>
                 <Row>
                     <FilterPublic />
-                    <KidsList
-                        state={this.state.kids}
-                        calculateAge={this.calculateAge}
-                    />
+                        <KidsList
+                            kids={this.state.kids}
+                            calculateAge={this.calculateAge}
+                        />
                 </Row>
             </MainContainer>
         )

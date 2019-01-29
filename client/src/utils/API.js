@@ -36,14 +36,14 @@ export default {
 
     //to return a single kid by id
     findOneKid: function(id) {
-       return axios.get("/api/kids/" + id)
+       return axios.get("/api/kids/kid/" + id)
     },
 
     // Edits existing kid info in db
     kidEdit: (kidData) => {
         let id = kidData.id;
         console.log(id);
-        return axios.put("/api/kids/" + id, kidData)
+        return axios.put("/api/kids/kid/" + id, kidData)
     },
 
     // USER FUNCTIONS ============================================================
@@ -58,7 +58,7 @@ export default {
 
     // Function to remove child
     removeKid: (id) => {
-        return axios.delete("api/kids/" + id);
+        return axios.delete("api/kids/kid/" + id);
     },
 
     // CONTENT FUNCTIONS
@@ -76,9 +76,11 @@ export default {
             "mimeType": "multipart/form-data",
         })
     },
-    
-    homeKids:() => {
-        return axios.get("/api/kids/random")
+    //Show 2 kids on the front page
+    homeKids: () => {
+        console.log("API route hit! (API.js)");
+        
+        return axios.get("/api/kids/random");
     }
 
 };
