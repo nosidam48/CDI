@@ -12,7 +12,7 @@ function SidebarCard(props) {
         <div>
                 {props.kids.map(kid =>
         <div className="card border-0 m-2">
-            <img className="card-img-top" src={kid.profile_pic} alt="Child" />
+            <img className="card-img-top" src={kid.profile_image} alt="Child" />
                 <div className="card-body p-1">
                     <h6><strong>{kid.first_name} {kid.last_name}</strong></h6>
                     <div class="small"><i class="fas fa-birthday-cake mr-2"></i>{moment(kid.birth_date).format("MMMM D")}<br />
