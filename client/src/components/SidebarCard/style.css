@@ -1,7 +1,3 @@
-.card {
-    /* border: 1px solid white; */
-}
-
 .card-img-top {
     height: 9rem;
     object-fit: cover;
@@ -9,4 +5,8 @@
 
 .card-body {
     padding: 0;
+}
+
+.noData {
+    color: white;
 }

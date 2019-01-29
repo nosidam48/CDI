@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { Row } from "reactstrap";
-import MainContainer from "../components/Container"
-import HomeMain from "../components/HomeMain"
-import HomeSidebar from "../components/HomeSidebar"
-import SidebarCard from "../components/SidebarCard"
+import MainContainer from "../components/Container";
+import HomeMain from "../components/HomeMain";
+import HomeSidebar from "../components/HomeSidebar";
+import SidebarCard from "../components/SidebarCard";
 import API from "../utils/API";
+import LoadSpinner from "../components/LoadSpinner";
+import LoadingSpinner from "../components/LoadSpinner";
 
 class Home extends Component {
 
     state = {
-        kids: []
+        kids: [],
+        loading: true
     }
     
     componentDidMount() {
@@ -22,7 +25,8 @@ class Home extends Component {
         API.homeKids()
         .then(res => {
             this.setState({
-                kids: res.data
+                kids: res.data,
+                loading: false
             })
             console.log("res.data: " + res.data);
         })
@@ -37,7 +41,13 @@ class Home extends Component {
                     <Row className="align-items-start">
                         <HomeMain />
                         <HomeSidebar>
+                            {this.state.loading ? (
+                                <LoadingSpinner 
+                                    className="whiteSpin"    
+                                />
+                                ) : (
                             <SidebarCard kids={this.state.kids} />
+                            )}
                         </HomeSidebar>
                     </Row>
                 </MainContainer>
