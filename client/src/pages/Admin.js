@@ -238,7 +238,12 @@ class Admin extends Component {
                     kids: res.data
                 })
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                this.setState({
+                    message: "We're sorry, there was a problem with the search."
+                })
+                console.log(err)
+            });
     }
 
     render() {
