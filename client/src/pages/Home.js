@@ -1,32 +1,33 @@
 import React, { Component } from "react";
 import { Row } from "reactstrap";
-import MainContainer from "../components/Container"
-import HomeMain from "../components/HomeMain"
-import HomeSidebar from "../components/HomeSidebar"
-import SidebarCard from "../components/SidebarCard"
+import MainContainer from "../components/Container";
+import HomeMain from "../components/HomeMain";
+import HomeSidebar from "../components/HomeSidebar";
+import SidebarCard from "../components/SidebarCard";
 import API from "../utils/API";
+import LoadSpinner from "../components/LoadSpinner";
 
 class Home extends Component {
 
     state = {
-        kids: []
+        kids: [],
+        loading: true
     }
-    
+
     componentDidMount() {
         this.kidsCall();
     }
 
     kidsCall() {
-        console.log("kidsCall function hit (pages/Home.js)");
-        
         API.homeKids()
-        .then(res => {
-            this.setState({
-                kids: res.data
+            .then(res => {
+                this.setState({
+                    kids: res.data,
+                    loading: false
+                })
+                console.log("res.data: " + res.data);
             })
-            console.log("res.data: " + res.data);
-        })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
 
     calculateAge = (dateString) => {
@@ -48,18 +49,24 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <img src="../images/banner.jpg" className="mb-3" width="100%" alt="Kids"/>
+                <img src="../images/banner.jpg" className="mb-3" width="100%" alt="Kids" />
                 <MainContainer>
                     <Row className="align-items-start">
                         <HomeMain />
                         <HomeSidebar>
-                            <SidebarCard kids={this.state.kids} age={this.calculateAge}/>
+                            {this.state.loading ? (
+                                <LoadSpinner
+                                    className="whiteSpin"
+                                />
+                            ) : (
+                                    <SidebarCard kids={this.state.kids} age={this.calculateAge} />
+                                )}
                         </HomeSidebar>
                     </Row>
                 </MainContainer>
             </div>
         )
-    } 
+    }
 }
 
 export default Home;

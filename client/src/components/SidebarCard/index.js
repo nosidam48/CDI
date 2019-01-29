@@ -23,7 +23,7 @@ function SidebarCard(props) {
             )}
         </div>
         ) : (
-            <h4 className="text-center">We're sorry. We're unable to display any kid profiles at this time.</h4>  
+            <p className="text-center m-2 noData">We're sorry. We're unable to display any kid profiles at this time.</p>  
         )}
     </div>    
     )}

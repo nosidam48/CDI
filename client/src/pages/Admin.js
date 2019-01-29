@@ -28,10 +28,9 @@ class Admin extends Component {
         showAdminSearch: false,
         showDonors: false,
         showAdmins: false,
-        success: false,
 
-        // Success message
-        message: "",
+        // Message
+        message: "Choose an admin tool from the menu to get started.",
 
         // Kid form inputs
         kidFirstNames: "",
@@ -67,7 +66,7 @@ class Admin extends Component {
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
-            success: false,
+            message: "",
         });
     }
     // Lets admin search for specific kid
@@ -81,7 +80,7 @@ class Admin extends Component {
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
-            success: false,
+            message: "",
         })
     }
     // Lets admin search for group of kids
@@ -95,7 +94,7 @@ class Admin extends Component {
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
-            success: false,
+            message: "",
         })
     }
     // Toggles display of form to add a donor
@@ -109,7 +108,7 @@ class Admin extends Component {
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
-            success: false,
+            message: "",
         });
     }
     // Toggles display of form to add a donor
@@ -123,7 +122,7 @@ class Admin extends Component {
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
-            success: false,
+            message: "",
         });
     }
     // Lets admin search for admin
@@ -137,7 +136,7 @@ class Admin extends Component {
             showAdminSearch: true,
             showDonors: false,
             showAdmins: false,
-            success: false,
+            message: "",
         })
     }
     // Lets admin see all donors
@@ -151,7 +150,7 @@ class Admin extends Component {
             showAdminSearch: false,
             showDonors: true,
             showAdmins: false,
-            success: false,
+            message: "",
         })
     }
     // Lets admin see all admins
@@ -165,30 +164,20 @@ class Admin extends Component {
             showAdminSearch: false,
             showDonors: false,
             showAdmins: true,
-            success: false,
+            message: "",
         })
     }
     // ==============================================================
 
     // Function that runs after a kid has been added
-    kidAdded = () => {
+    resetKidForm = () => {
         this.setState({
             kidFirstNames: "", kidLastName: "", gender: "", birth_date: "",
             grade: "", kidLocation: "", bio: "",
             showAddKidForm: false,
-            success: true,
-            message: "A child was added to the database."
         })
     }
 
-    // Function that runs when kid has been discarded
-    kidDiscarded = () => {
-        this.setState({
-            kidFirstNames: "", kidLastName: "", gender: "", birth_date: "",
-            grade: "", kidLocation: "", bio: "",
-            showAddKidForm: false,
-        })
-    }
     //function that sets the state to the name and value of the form input when the form data is changed
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -219,8 +208,19 @@ class Admin extends Component {
         kidData.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
 
         API.addKid(kidData)
-            .then(res => this.kidAdded())
-            .catch(err => console.log(err));
+            .then(res => {
+                this.resetKidForm();
+                this.setState({
+                    message: "A child was added to the database."
+                })
+            })
+            .catch(err => {
+                this.resetKidForm();
+                this.setState({
+                    message: "There was an error adding the child to the database."
+                });
+                console.log(err);
+            }) 
     }
 
     // Handles when an admin is searching for a child
@@ -238,7 +238,12 @@ class Admin extends Component {
                     kids: res.data
                 })
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                this.setState({
+                    message: "We're sorry, there was a problem with the search."
+                })
+                console.log(err)
+            });
     }
 
     render() {
@@ -319,7 +324,7 @@ class Admin extends Component {
                                         onClick={this.handleKidFormSubmit}
                                     />
                                     <DiscardBtn
-                                        onClick={this.kidDiscarded}
+                                        onClick={this.resetKidForm}
                                     />
                                 </Form>
                             </div> :
@@ -408,13 +413,10 @@ class Admin extends Component {
                             <ViewAdmins /> :
                             null
                         }
-                        {/* Shows message if a task was successful */}
-                        {this.state.success ?
+                        {/* Shows message on screen depending on task run and result */}
                             <MainContainer>
                                 <h4 className="text-center">{this.state.message}</h4>
-                            </MainContainer> :
-                            null
-                        }
+                            </MainContainer>
                     </Col>
                 </Row>
             </MainContainer>
