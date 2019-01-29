@@ -20,7 +20,9 @@ function SponsoredBio(props) {
           <Col className="text-center">
             <div>
               <h4>Latest message</h4>
-              <div>Message area</div>
+              {props.content.map(note => (
+              <div><p>{note.kid_notes}</p></div>
+              ))}
             </div>
             <button>View more Messages</button>
           </Col>

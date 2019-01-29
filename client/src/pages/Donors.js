@@ -50,7 +50,7 @@ class Donors extends Component {
             <MainContainer>
                 <Row>
                     <SponsoredPhotos kid={this.state.kid} content={this.state.content}/>
-                    <SponsoredBio kid={this.state.kid} age={this.calculateAge}/>
+                    <SponsoredBio kid={this.state.kid} age={this.calculateAge} content={this.state.content}/>
                     <SponsoredList />                
                 </Row>
             </MainContainer>
