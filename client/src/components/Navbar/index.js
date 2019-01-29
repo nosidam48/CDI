@@ -37,13 +37,16 @@ class MainNavbar extends React.Component {
                 <NavLink href="/kids/" className="mr-4">Kids</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/donors" className="mr-4">Donors</NavLink>
+                <NavLink href={"/donors" + this.props.userID}className="mr-4">Donors</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/admin" className="mr-4">Admin</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/login">Log In</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/logout">Log Out</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

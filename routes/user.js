@@ -38,7 +38,7 @@ router.post(
     '/login',
     function (req, res, next) {
         console.log('routes / login, req.body: ');
-        console.log(req.body)
+        console.log("router login req.body: " + req.body)
         next()
     },
     passport.authenticate('local'),

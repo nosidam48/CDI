@@ -15,7 +15,8 @@ const strategy = new LocalStrategy(
 			else if (!dbUser.validPassword(password)) {
 				return done(null, false, console.log("Incorrect Password"));	
 			}
-			console.log(dbUser);
+			console.log("this is dbUser: " + 
+			dbUser);
 			
 			return done(null, dbUser)
 		})

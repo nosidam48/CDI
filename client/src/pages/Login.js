@@ -7,7 +7,9 @@ class Login extends Component {
         super()
         this.state = {
             email: '',
+            id: '',
             password: '',
+            loggedIn: false,
             redirectTo: null
         }
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -37,12 +39,15 @@ class Login extends Component {
                     // update App.js state
                     this.props.updateUser({
                         loggedIn: true,
-                        email: response.data.email
+                        email: response.data.email,
+                        password: response.data.password,
                     })
                     // update the state to redirect to home
                     this.setState({
                         redirectTo: '/'
                     })
+                    console.log(this.state);
+                    
                 }
             }).catch(error => {
                 console.log('login error: ')

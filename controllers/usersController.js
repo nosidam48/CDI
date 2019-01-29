@@ -42,6 +42,34 @@ module.exports = {
     },
 
     // viewSponsees: (req, res)
+    donorKid: (req, res) => {
+        db.users.findOne({
+            where: {
+                id: req.params.id
+            },
+        }).then(user => user.getKids())
+        .then(data => 
+            
+            db.content.findAll({
+                where: {
+                    kidId: data[0].dataValues.id
+                }
+            }).then(data2 => {
+                console.log(data2);
+                
+                let donorObject = {
+                    kid: data[0].dataValues,
+                    content: data2
+                }
+                console.log(donorObject);
+                
+                res.json(donorObject)
+                
+            })
+        )
+        .catch(err => res.status(422).json(err))
+      }
+
 };
 
     
