@@ -18,7 +18,7 @@ function PublicKidCard(props) {
                     <p>{props.kid.kid_bio}</p>
                     <SponsorButton />
                     <hr />
-                    <a href="/kids"><span className="small"><i class="fas fa-child mr-2"></i>Back to all kids</span></a>
+                    <a href="/kids"><span className="small"><i className="fas fa-child mr-2"></i>Back to all kids</span></a>
                 </Col>
             </Row>
         </Col>

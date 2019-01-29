@@ -33,8 +33,6 @@ class Donors extends Component {
  calculateAge = (dateString) => {
     var today = new Date();
     var birthday = new Date(dateString);
-    console.log(today);
-    console.log(birthday);
     // Use .getFullYear method to set age variable by subtracting birth year from current year
     var age = today.getFullYear() - birthday.getFullYear();
     // Use .getMonth method to subtract birth month from current month

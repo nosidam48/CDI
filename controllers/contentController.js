@@ -4,8 +4,6 @@ const db = require("../models");
 module.exports = {
     // Function to add content for a kid
     create: (req, res) => {
-        console.log(req.body);
-        console.log(req.file);
         // Create variable to store only content data that admin entered
         kidId = req.body.kidId;
         // Check if kid_notes was completed and store value or null. 

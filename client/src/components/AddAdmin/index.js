@@ -40,8 +40,8 @@ function AddAdmin(props) {
             </Label>
           </FormGroup>
         </FormGroup>
-        <Button inline>Submit</Button>
-        <Button inline className="ml-2" onClick={props.onClickAddAdmin}>Discard</Button> 
+        <Button inline="true">Submit</Button>
+        <Button inline="true" className="ml-2" onClick={props.onClickAddAdmin}>Discard</Button> 
 
       </Form>
     </div>

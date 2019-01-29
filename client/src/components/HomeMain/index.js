@@ -10,7 +10,7 @@ function HomeMain({ children }) {
             <br />
             <p>We believe that the impact we might be able to have in these children’s lives is limited and temporary and the only solution for a long-term impact is for each child to understand how important they are to God and that He has a perfect plan for each of their lives.</p>
             We have four areas in which we serve at-risk kids:
-            <img src="../images/cdi-logo.png" class="pl-3" id="home-logo" alt="logo" />
+            <img src="../images/cdi-logo.png" className="pl-3" id="home-logo" alt="logo" />
             <ul>
                 <li>Nutritional meals/dietary supplements as needed</li>
                 <li>Academic support (tutoring and support for the family with uniforms and school supplies)</li>
@@ -27,8 +27,8 @@ function HomeMain({ children }) {
             </ul>
 
             <p>Your sponsorship of $45/month for a preK-6th grade student or $58/month for a 7th-12th grade student provides the opportunity for a child to attend a CDI near him or her.</p>
-            <p><a href="/kids"><i class="fas fa-child mr-2"></i>See the children who are available for sponsorship.</a></p>
-            <p><a href="/login"><i class="fas fa-chevron-circle-right mr-2"></i>Already a donor? Sign in</a> to see updates for the child you sponsor.</p>
+            <p><a href="/kids"><i className="fas fa-child mr-2"></i>See the children who are available for sponsorship.</a></p>
+            <p><a href="/login"><i className="fas fa-chevron-circle-right mr-2"></i>Already a donor? Sign in</a> to see updates for the child you sponsor.</p>
         </Col>              
     )
 }

@@ -34,8 +34,7 @@ router.post('/', (req, res) => {
 })
     
 
-router.post(
-    '/login',
+router.post('/login',
     function (req, res, next) {
         console.log('routes / login, req.body: ');
         console.log(req.body)
@@ -55,8 +54,7 @@ router.post(
 )
 
 router.get('/', (req, res, next) => {
-    console.log('===== user!!======')
-    console.log(req.user)
+    console.log("User signed in? " + req.user)
     if (req.user) {
         res.json({ user: req.user })
     } else {

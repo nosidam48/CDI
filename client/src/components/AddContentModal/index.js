@@ -3,7 +3,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 
 import { InputField, UploadPhoto } from "../Form";
 import API from "../../utils/API";
 
-
 // Modal where admin can add photo or update to a child
 class ConnectDonorModal extends Component {
     constructor(props) {
@@ -13,7 +12,8 @@ class ConnectDonorModal extends Component {
             update: "",
             kidId: props.kidId,
             selectedFile: null,
-            message: ""
+            message: "",
+            loading: false
         };
 
         this.toggle = this.toggle.bind(this);
@@ -41,8 +41,10 @@ class ConnectDonorModal extends Component {
 
     // Handles when an admin adds content
     handleContentSubmit = event => {
-        console.log(this.state.kidId);
         event.preventDefault();
+        this.setState({
+            loading: true
+        })
         // Use FormData to handle both text and the binary file
         let contentData = new FormData();
         contentData.append("kidId", this.state.kidId);
@@ -60,7 +62,8 @@ class ConnectDonorModal extends Component {
             .then(res => {
                 // Update message to success to alert the user the content went through
                 this.setState({
-                    message: "Content successfully added"
+                    message: "Content successfully added",
+                    loading: false
                 })
             })
             .catch(err => console.log(err));
@@ -69,7 +72,7 @@ class ConnectDonorModal extends Component {
     render() {
         return (
             <div className="d-inline mr-2">
-                <Button inline size="sm" className="mt-2" onClick={this.toggle}>Add Content</Button>
+                <Button inline="true" size="sm" className="mt-2" onClick={this.toggle}>Add Content</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Add Content for {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
                     
@@ -81,13 +84,12 @@ class ConnectDonorModal extends Component {
                             {/* If there is no success message, show the content submission form */}
                                 <ModalBody>
                                     <Form>
-                                        <Label>Update for donor</Label>
+                                        <Label>Update for donor (not required)</Label>
                                         <InputField
                                             type="textarea"
                                             value={this.state.update}
                                             onChange={this.handleInputChange}
                                             name="update"
-                                            placeholder="Not required"
                                         />
                                         <Label>Add photo (not required)</Label>
                                         <UploadPhoto

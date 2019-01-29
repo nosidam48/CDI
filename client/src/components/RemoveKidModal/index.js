@@ -35,7 +35,7 @@ class RemoveChildModal extends React.Component {
   render() {
     return (
       <div className="d-inline">
-        <Button inline size="sm" className="mt-2" onClick={this.toggle}>Remove Child</Button>
+        <Button inline="true" size="sm" className="mt-2" onClick={this.toggle}>Remove Child</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Remove {this.props.kidFirstNames}?</ModalHeader>
 

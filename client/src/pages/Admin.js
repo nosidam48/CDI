@@ -2,13 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Form, Label } from "reactstrap";
 import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
-import AdminMultipleKids from "../components/AdminMultipleKidList";
-import AddAdmin from "../components/AddAdmin";
 import AdminKidList from "../components/AdminKidList";
-import AddDonorForm from "../components/AddDonorForm";
-import AdminSearch from "../components/AdminSearch";
-import ViewDonors from "../components/ViewDonors";
-import ViewAdmins from "../components/ViewAdmins";
 import MainContainer from "../components/Container";
 import LoadSpinner from "../components/LoadSpinner";
 import API from "../utils/API";
@@ -238,7 +232,8 @@ class Admin extends Component {
         event.preventDefault();
         this.setState({
             loading: true,
-            kids: []
+            kids: [],
+            showSearchResults: false,
         })
         API.kidSearch({
             searchTerm: this.state.searchTerm,
@@ -257,7 +252,7 @@ class Admin extends Component {
             .catch(err => {
                 this.setState({
                     loading: false,
-                    message: "We're sorry. We encoutered an error."
+                    message: "We're sorry. We encountered an error."
                 })
                 console.log(err)
             });
@@ -362,7 +357,6 @@ class Admin extends Component {
                                     onChange={this.handleInputChange}
                                     name="searchType"
                                     id="searchKid"
-
                                 />
                                 <SubmitBtn
                                     id="searchSubmit"
@@ -395,69 +389,32 @@ class Admin extends Component {
                                     </div>
                                 ) : (
                                         <h4 className="text-center mt-3">Your search did not return any results.</h4>
-                                )}
+                                    )}
                             </div>
-                        ) : null 
+                        ) : null
                         }
 
-                                {/* FUNCTIONS FOR THE FUTURE - NOT OPERATIONAL NOW */}
-                                {/* Shows multiple kids  */}
-                                {/* {this.state.showMultipleKids ?
-                            <AdminMultipleKids /> :
-                            null
-                        } */}
-                                {/* Shows form to add donor */}
-                                {/* {this.state.showAddDonorForm ?
-                            <AddDonorForm
-                                onClickAddDonor={this.toggleAddDonorForm}
-                            /> :
-                            null
-                        } */}
-                                {/* Shows form to add admin */}
-                                {/* {this.state.showAddAdmin ?
-                            <AddAdmin
-                                onClickAddAdmin={this.toggleAddAdmin}
-                            /> :
-                            null
-                        } */}
-                                {/* Shows admin search bar*/}
-                                {/* {this.state.showAdminSearch ?
-                            <AdminSearch
-                                onClickAdminSearch={this.showAdminSearch}
-                            /> :
-                            null
-                        } */}
-                                {/* Shows all donors */}
-                                {/* {this.state.showDonors ?
-                            <ViewDonors /> :
-                            null
-                        } */}
-                                {/* Shows all admins */}
-                                {/* {this.state.showAdmins ?
-                            <ViewAdmins /> :
-                            null
-                        } */}
-                                {/* Shows message on screen depending on task run and result */}
-                                <MainContainer>
-                                    <h4 className="text-center">{this.state.message}</h4>
-                                </MainContainer>
+                        {/* Shows message on screen depending on task run and result */}
+                        <MainContainer>
+                            <h4 className="text-center">{this.state.message}</h4>
+                        </MainContainer>
 
-                                {/* Shows loading spinner if loading is true */}
-                                {this.state.loading ? (
-                                    <LoadSpinner className="kidsSpin" />
-                                ) : null
-                                }
+                        {/* Shows loading spinner if loading is true */}
+                        {this.state.loading ? (
+                            <LoadSpinner className="kidsSpin" />
+                        ) : null
+                        }
                     </Col>
                 </Row>
             </MainContainer>
-                    )
-                }
-            }
-            
-            export default Admin;
-            
-            
-            
-            
-            
-            
+        )
+    }
+}
+
+export default Admin;
+
+
+
+
+
+

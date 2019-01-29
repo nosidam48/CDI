@@ -5,9 +5,9 @@ import { Table, Button } from "reactstrap";
 function AdminMultipleKids() {
     return (
         <div>
-            <Button inline size="sm" className="mr-2">View all children</Button>
-            <Button inline size="sm" className="mr-2">View sponsored children</Button>
-            <Button inline size="sm">View unsponsored children</Button>
+            <Button inline="true" size="sm" className="mr-2">View all children</Button>
+            <Button inline="true" size="sm" className="mr-2">View sponsored children</Button>
+            <Button inline="true" size="sm">View unsponsored children</Button>
             <Table className="mt-3">
                 <thead>
                     <tr>
