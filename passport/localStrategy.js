@@ -8,7 +8,11 @@ const strategy = new LocalStrategy(
 	function(email, password, done) {
 		console.log("looking for user");
 		
-		db.users.findOne({where: { email: email }}).then(function(dbUser) {
+		db.users.findOne({
+				where: { 
+					email: email 
+			}
+		}).then(function(dbUser) {
 			if (!dbUser) {
 				return done(null, false, console.log("Incorrect email"));
 			}
