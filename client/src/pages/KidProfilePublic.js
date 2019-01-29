@@ -1,46 +1,61 @@
 import React, { Component } from "react";
-import { Row } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import MainContainer from "../components/Container";
 import PublicKidCard from "../components/BigKidsCardPublic"
 import SponsoredPhotos from "../components/Sponsored-Photos";
 import API from "../utils/API";
-// import Row from "../components/Row";
+import LoadSpinner from "../components/LoadSpinner";
 
 class KidProfilePublic extends Component {
-    
-       state = {
-           kid: "",
-           content: []
-       } 
-       //On mount, return the kid with an id that matches the url
-       componentDidMount() {
+
+    state = {
+        kid: "",
+        content: [],
+        loading: true
+    }
+    //On mount, return the kid with an id that matches the url
+    componentDidMount() {
         this.loadOneKid();
     }
-        //Call the findOneKid function by passing in the url id
-       loadOneKid = (res) => {
-        //    console.log(this.props.match.params.id);
-           
+    //Call the findOneKid function by passing in the url id
+    loadOneKid = (res) => {
         API.findOneKid(this.props.match.params.id)
-        .then(res => {
+            .then(res => {
 
-            this.setState({
-                kid: res.data,
-                content: res.data.contents
+                this.setState({
+                    kid: res.data,
+                    content: res.data.contents,
+                    loading: false
+                })
             })
-            console.log(res.data);
-        })
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
     };
     render() {
         return (
             <MainContainer>
-                <Row>    
-                    <SponsoredPhotos kid={this.state.kid} content={this.state.content}/>
-                    <PublicKidCard kid={this.state.kid}/>
-                </Row>
+                {this.state.loading ? (
+                    <Row className="justify-content-center">
+                        <Col xs="auto">
+                            <LoadSpinner
+                                className="kidsSpin"
+                            />
+                        </Col>
+                    </Row>
+                ) : (
+                        <div>
+                            {this.state.kid ? (
+                                <Row>
+                                    <SponsoredPhotos kid={this.state.kid} content={this.state.content} />
+                                    <PublicKidCard kid={this.state.kid} />
+                                </Row>
+                            ) : (
+                                    <h4 className="text-center">We're sorry. We're unable to display this kid's profile at this time.</h4>
+                                )}
+                        </div>
+                    )}
             </MainContainer>
         )
-    } 
+    }
 }
 
 export default KidProfilePublic;

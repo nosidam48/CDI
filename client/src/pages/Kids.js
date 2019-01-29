@@ -4,12 +4,13 @@ import MainContainer from "../components/Container";
 import KidsList from "../components/KidsList";
 import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
+import LoadSpinner from "../components/LoadSpinner";
 
 class Kids extends Component {
     //set the kids state to an empty array
     state = {
         kids: [],
-        loading: null
+        loading: true
     }
     //on mount call the function to return kids cards
     componentDidMount() {
@@ -17,12 +18,11 @@ class Kids extends Component {
     }
     //a function to get several kid profiles from the database
     loadKidsUnsponsored = () => {
-        this.setState({
-        })
         API.getKidsUnsponsored()
             .then(res =>
                 this.setState({
                     kids: res.data,
+                    loading: false
                 })
             )
             .catch(err => console.log(err));
@@ -50,10 +50,11 @@ class Kids extends Component {
             <MainContainer>
                 <Row>
                     <FilterPublic />
-                        <KidsList
-                            kids={this.state.kids}
-                            calculateAge={this.calculateAge}
-                        />
+                    <KidsList
+                        kids={this.state.kids}
+                        calculateAge={this.calculateAge}
+                        loading={this.state.loading}
+                    />
                 </Row>
             </MainContainer>
         )

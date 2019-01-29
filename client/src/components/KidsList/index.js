@@ -3,11 +3,18 @@ import { Row, Col, Card } from "reactstrap";
 import "./style.css";
 import SponsorButton from "../SponsorButton";
 import moment from "moment";
+import LoadSpinner from "../LoadSpinner"
 
 // Shows list of kids available to sponsor; default is to show all kids and user can enter search options
 function KidsList(props) {
     return (
         <Col md="9" className="my-4">
+            {props.loading ? (
+                <LoadSpinner
+                    className="kidsSpin" 
+                />
+            ) : (
+            <div>
             {props.kids.length ? (
                 <Row>
                     {props.kids.map(kid => (
@@ -37,6 +44,8 @@ function KidsList(props) {
             ) : (
                     <h4 className="text-center">We're sorry. We're unable to display any kid profiles at this time.</h4>
                 )}
+            </div>
+            )}
         </Col>
     )
 }
