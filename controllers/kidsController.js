@@ -117,6 +117,17 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  kidSearch: (req, res) => {
+    console.log(req.body);
+    
+    db.kids.findAll({
+      where: {
+        location: req.body.location,
+        gender: req.body.gender
+      }
+    }).then(data => res.json(data))
+    .catch(err => res.status(422).json(err))
+  }
 };
 
 

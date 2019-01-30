@@ -4,12 +4,15 @@ import MainContainer from "../components/Container";
 import KidsList from "../components/KidsList";
 import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
+import axios from "axios";
 
 class Kids extends Component {
     //set the kids state to an empty array
     state = {
         kids: [],
-        loading: true
+        loading: true,
+        location: "",
+        gender: ""
     }
     //on mount call the function to return kids cards
     componentDidMount() {
@@ -26,6 +29,30 @@ class Kids extends Component {
             )
             .catch(err => console.log(err));
     };
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value,
+        })
+        console.log(this.state);
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        
+        
+        API.getKidsSearch({
+            location: this.state.location,
+            gender: this.state.gender
+        })
+            .then(res =>
+                this.setState({
+                    kids: res.data
+                })
+            )
+        .catch(err => console.log(err))
+    }
 
     // Calculate age by using today's date and birthdate
     calculateAge = (dateString) => {
@@ -46,7 +73,7 @@ class Kids extends Component {
         return (
             <MainContainer>
                 <Row>
-                    <FilterPublic />
+            <FilterPublic onChange={this.handleInputChange} onClick={this.handleSubmit} value={this.state} />
                     <KidsList
                         kids={this.state.kids}
                         calculateAge={this.calculateAge}

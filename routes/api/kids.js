@@ -34,5 +34,9 @@ router.route("/")
   router.route("/random")
     .get(kidsController.findRandom)
 
+  // Matches with "api/kids/search"
+  router.route("/search")
+    .post(kidsController.kidSearch)
+
 
 module.exports = router;

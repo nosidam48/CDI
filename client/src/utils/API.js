@@ -83,7 +83,10 @@ export default {
 
     donorKid: (id) => {        
         return axios.get("/api/donors/" + id)
-    }
+    },
 
+    getKidsSearch: (searchData) => {
+        return axios.post("/api/kids/search", searchData)
+    }
 };
 

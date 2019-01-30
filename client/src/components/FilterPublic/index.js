@@ -1,46 +1,39 @@
-import React from "react";
-import { Col, Button} from "reactstrap";
+import React, { Component } from "react";
+import { Col, Form, Label} 
+from "reactstrap";
 import "./style.css";
+import {GenderField, LocationField, SubmitBtn} from "../Form"
+import axios from "axios";
+import API from "../../utils/API";
 
 // Provides search options on /kids page
-function FilterPublic({ children }) {
+class FilterPublic extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    state = {
+        kids: [],
+        location: "",
+        gender: ""
+    }
+    
+    render() {
     return (
         <Col md="2" className="my-4 p-0">
             <div className="label p-0 m-0">
                 <h6 className="text-uppercase text-center py-2 label-text">Search options</h6>
             </div>
-            <div className="px-2 pt-2">
-                <h6 className="text-uppercase font-weight-bold pl-1">Location</h6>
-                <select className="form-control form-control-sm">
-                    <option selected>No preference</option>
-                    <optgroup label="El Salvador" />
-                    <option>-- El Guayabo</option>
-                    <option>-- La Libertad</option>
-                    <option>-- Soyapango</option>
-                    <optgroup label="Honduras" />
-                    <option>-- Choluteca</option>
-                    <option>-- Danli</option>
-                    <option>-- La Ceiba</option>
-                    <option>-- La Lima</option>
-                    <option>-- Los Cruces</option>
-                    <option>-- San Pedro Sula</option>
-                    <optgroup label="Guatemala" />
-                    <option>-- Guatemala City</option>
-                    <optgroup label="Nicaragua" />
-                    <option>-- Managua</option>
-                </select>
-            </div>
-            <div className="px-2 pt-4">
-                <h6 className="text-uppercase pl-1 font-weight-bold">Gender</h6>
-                <select className="form-control form-control-sm">
-                    <option selected>No preference</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                </select>
-            </div>
-            <Button size="sm" className="btn-search ml-2 mt-3 mb-2">Search</Button>            
+            <Form className="px-2 pt-2">
+            <Label>Location</Label>
+            <LocationField name="location" value={this.props.value.location} onChange={this.props.onChange}/>
+            <Label>Gender</Label>
+                <GenderField name="gender" value={this.props.value.gender} onChange={this.props.onChange}/>
+            <SubmitBtn onClick={this.props.onClick}/>
+            </Form>           
         </Col>
-    )   
+        )
+    }
 }
         
 export default FilterPublic
