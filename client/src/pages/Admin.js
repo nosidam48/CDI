@@ -4,6 +4,8 @@ import { InputField, GenderField, GradeField, LocationField, UploadPhoto, Search
 import AdminSidebar from "../components/AdminSidebar";
 import AdminKidList from "../components/AdminKidList";
 import AdminMultipleKids from "../components/AdminMultipleKidList";
+import AddDonorForm from "../components/AddDonorForm";
+import AddAdmin from "../components/AddDonorForm";
 import ViewAdmins from "../components/ViewAdmins"
 import ViewDonors from "../components/ViewDonors"
 import MainContainer from "../components/Container";
@@ -401,7 +403,19 @@ class Admin extends Component {
                         {this.state.showMultipleKids ? (
                             <AdminMultipleKids />
                         ): null }
+                        
+                        {/* Shows form to add donor */}
+                        {this.state.showAddDonorForm ? (
+                            <AddDonorForm />
+                        ): null }
+                        
+                        {/* Shows form to add admin */}
+                        {this.state.showAddAdmin ? (
+                            <AddAdmin />
+                        ): null }
 
+                        
+                        
                         {/* Shows users for admins */}
                         {this.state.showDonors ? (
                             <ViewDonors />
