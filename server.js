@@ -38,10 +38,10 @@ app.use(passport.initialize())
 // Send every request to the React app
 app.use('/user', user)
 app.use(routes);
+app.use(passport.session()) // calls the deserializeUser
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(passport.session()) // calls the deserializeUser
   app.use(express.static("client/build"));
   app.get("/*", function(req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
