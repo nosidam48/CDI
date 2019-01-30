@@ -1,13 +1,52 @@
 import React from "react";
 import { Table, Button } from "reactstrap";
-
+import API from "../../utils/API";
 // Displays table of kid results
-function AdminMultipleKids() {
+class AdminMultipleKids extends React.Component {
+
+    state = {
+        kids: []
+    }
+
+    componentDidMount() {
+        this.loadKids();
+    }
+
+    loadKids = (res) => {
+        API.viewKids()
+        .then(res => {
+            this.setState({
+                kids: res.data
+            })
+            
+        }) 
+
+    }
+
+    sponsoredKids = (res) => {
+        API.viewSponsored()
+        .then(res => {
+            this.setState({
+                kids: res.data
+            })
+        })
+    }
+
+    unsponsoredKids = (res) => {
+        API.getKidsUnsponsored()
+        .then(res => {
+            this.setState({
+                kids: res.data
+            })
+        })
+    }
+ 
+    render() {
     return (
         <div>
-            <Button inline="true" size="sm" className="mr-2">View all children</Button>
-            <Button inline="true" size="sm" className="mr-2">View sponsored children</Button>
-            <Button inline="true" size="sm">View unsponsored children</Button>
+            <Button inline="true" size="sm" className="mr-2" onClick={this.loadKids}>View all children</Button>
+            <Button inline="true" size="sm" className="mr-2" onClick={this.sponsoredKids}>View sponsored children</Button>
+            <Button inline="true" size="sm" onClick={this.unsponsoredKids}>View unsponsored children</Button>
             <Table className="mt-3">
                 <thead>
                     <tr>
@@ -21,30 +60,22 @@ function AdminMultipleKids() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {this.state.kids.map(kid => (
+                    <tr key={kid.id}>
                         <th scope="row">1</th>
-                        <td>Bairon</td>
-                        <td>Duban Guillen</td>
-                        <td>4/23/03</td>
-                        <td>8th</td>
-                        <td>Choluteca, Honduras</td>
-                        <td>Yes</td>
+                        <td>{kid.first_name}</td>
+                        <td>{kid.last_name}</td>
+                        <td>{kid.birth_date}</td>
+                        <td>{kid.grade}</td>
+                        <td>{kid.location}</td>
+                        <td>{kid.need_sponsor ? "Yes" : "No"}</td>
+                        
                     </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Bairon</td>
-                        <td>Duban Guillen</td>
-                        <td>4/23/03</td>
-                        <td>8th</td>
-                        <td>Choluteca, Honduras</td>
-                        <td>Yes</td>
-                    </tr>
+                    ))}
                 </tbody>
             </Table>
         </div>
-    );
+    )};
 }
 
 export default AdminMultipleKids;

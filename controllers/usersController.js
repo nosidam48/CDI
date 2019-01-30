@@ -67,6 +67,35 @@ module.exports = {
             })
         )
         .catch(err => res.status(422).json(err))
+      },
+
+      viewAdmins: (req, res) => {
+        db.users.findAll({
+            where: {
+                admin_status: 1
+            }
+        }).then(data => res.json(data))
+      },
+
+      viewDonors: (req, res) => {
+          db.users.findAll({
+              where: {
+                  admin_status: !1
+              },
+              include: [db.kids]
+          }).then(data => res.json(data))
+      },
+
+      viewAllKids: (req, res) => {
+        db.kids.findAll().then(data => res.json(data))
+    },
+
+      viewSponsored: (req,res) => {
+          db.kids.findAll({
+              where: {
+                need_sponsor: false
+              }
+          }).then(data => res.json(data))
       }
 
 };

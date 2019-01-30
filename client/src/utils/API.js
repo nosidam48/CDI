@@ -87,6 +87,22 @@ export default {
 
     getKidsSearch: (searchData) => {
         return axios.post("/api/kids/search", searchData)
+    },
+
+    viewAdmins: () => {
+        return axios.get("api/admin/viewAdmins")
+    },
+
+    viewDonors: () => {
+        return axios.get("api/admin/viewDonors")
+    },
+
+    viewKids: () => {
+        return axios.get("api/admin/viewKids")
+    },
+
+    viewSponsored: () => {
+        return axios.get("api/admin/viewSponsored")
     }
-};
+ };
 

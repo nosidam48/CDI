@@ -1,8 +1,31 @@
 import React from "react";
 import { Table } from "reactstrap";
+import API from "../../utils/API";
 
 // Displays table of kid results
-function ViewAdmins() {
+class ViewAdmins extends React.Component {
+
+    state = {
+        admins: []
+    }
+
+    componentDidMount() {
+        this.loadAdmins();
+    }
+
+    loadAdmins = (res) => {
+    
+        API.viewAdmins()
+        .then(res => {
+            this.setState({
+                admins: res.data
+            })
+            
+        }) 
+
+    }
+
+    render() {
     return (
         <div>
             <Table className="mt-3">
@@ -16,26 +39,19 @@ function ViewAdmins() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {this.state.admins.map(admin => (
+                    <tr key={admin.id}>
                         <th scope="row">1</th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>johndoe@gmail.com</td>
-                        <td>Master</td>
+                        <td>{admin.first_name}</td>
+                        <td>{admin.last_name}</td>
+                        <td>{admin.email}</td>
+                        <td>{admin.master_admin_status ? "Yes" : "No"}</td>
                     </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>johndoe@gmail.com</td>
-                        <td>No</td>
-                    </tr>
+                    ))}
                 </tbody>
             </Table>
         </div>
-    );
+    )};
 }
 
 export default ViewAdmins;
