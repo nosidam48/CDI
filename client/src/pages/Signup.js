@@ -141,8 +141,8 @@ class Signup extends Component {
 
                 {/* Display submit button once first name, last name and email have values and the passwords match */}
                 <SubmitBtn
-                  disabled={(!(this.state.firstName && this.state.lastName 
-                    && this.state.email && this.state.password) || (this.state.password !== this.state.confirmPassword))}
+                  disabled={!(this.state.firstName && this.state.lastName 
+                    && this.state.email && this.state.password) || (this.state.password !== this.state.confirmPassword)}
                   onClick={this.handleSubmit}
                 />
                 <p className="mt-3">Or log in <a href="/login">here</a></p>

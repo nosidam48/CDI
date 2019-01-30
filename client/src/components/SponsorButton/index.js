@@ -4,7 +4,11 @@ import "./style.css";
 
 // Button to sponsor a child
 function SponsorButton(props) {
-    return <Button size="sm" href="" className="btn-sponsor">Sponsor Me!</Button>
+    return (
+        <a href="mailto:edccourtney@gmail.com?Subject=Child Sponsorship">    
+            <Button size="sm" href="" className="btn-sponsor">Sponsor Me!</Button>
+        </a>
+    )
 };
 
 export default SponsorButton;

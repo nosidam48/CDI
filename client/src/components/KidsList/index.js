@@ -42,7 +42,7 @@ function KidsList(props) {
                     ))}
                 </Row>
             ) : (
-                    <h4 className="text-center">We're sorry. We're unable to display any kid profiles at this time.</h4>
+                    <h4 className="text-center">We're sorry. We're unable to find any kid profiles.</h4>
                 )}
             </div>
             )}

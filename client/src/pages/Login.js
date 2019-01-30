@@ -84,6 +84,8 @@ class Login extends Component {
                                     placeholder="Password"
                                 />
                                 <SubmitBtn
+                                    disabled={!(this.state.email && this.state.password)}
+                                    onClick={this.handleSubmit}
                                     onClick={this.handleSubmit}
                                 />
                             </Form>
