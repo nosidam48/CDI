@@ -3,6 +3,9 @@ import { Row, Col, Form, Label } from "reactstrap";
 import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
 import AdminKidList from "../components/AdminKidList";
+import AdminMultipleKids from "../components/AdminMultipleKidList";
+import ViewAdmins from "../components/ViewAdmins"
+import ViewDonors from "../components/ViewDonors"
 import MainContainer from "../components/Container";
 import LoadSpinner from "../components/LoadSpinner";
 import API from "../utils/API";
@@ -394,6 +397,21 @@ class Admin extends Component {
                         ) : null
                         }
 
+                        {/* Shows kids for admins */}
+                        {this.state.showMultipleKids ? (
+                            <AdminMultipleKids />
+                        ): null }
+
+                        {/* Shows users for admins */}
+                        {this.state.showDonors ? (
+                            <ViewDonors />
+                        ): null }
+
+                        {/* Shows admins for admins */}
+                        {this.state.showAdmins ? (
+                            <ViewAdmins />
+                        ): null }
+                        
                         {/* Shows message on screen depending on task run and result */}
                         <MainContainer>
                             <h4 className="text-center">{this.state.message}</h4>
