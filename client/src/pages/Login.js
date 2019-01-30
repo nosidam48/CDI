@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Row, Col, Form, Label } from "reactstrap";
-import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn } from "../components/Form";
+import { InputField, SubmitBtn } from "../components/Form";
 import axios from 'axios'
 import MainContainer from "../components/Container"
 
@@ -66,8 +66,8 @@ class Login extends Component {
                 <MainContainer>
                     <Row>
                         <Col md={{ size: 6, offset: 3 }}>
-                            <h4>Login</h4>
-                            <Form>
+                            <h4>Log In</h4>
+                            <Form className="mt-3">
                                 <Label>Email address</Label>
                                 <InputField
                                     value={this.state.email}
@@ -95,5 +95,4 @@ class Login extends Component {
     }
 }
 
-export default Login
-    ;
+export default Login;
