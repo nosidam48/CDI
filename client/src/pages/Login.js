@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import { Row, Col, Form, Label } from "reactstrap";
+import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn } from "../components/Form";
 import axios from 'axios'
+import MainContainer from "../components/Container"
 
 class Login extends Component {
     constructor() {
@@ -31,29 +34,28 @@ class Login extends Component {
         }
         axios({
             method: "post",
-            url:'user/login',
+            url: 'user/login',
             data: formData,
         }).then(response => {
-                console.log('client side response: ' + JSON.stringify(response))
-                if (response.status === 200) {
-                    // update App.js state
-                    this.props.updateUser({
-                        loggedIn: true,
-                        email: response.data.email,
-                        password: response.data.password,
-                    })
-                    // update the state to redirect to home
-                    this.setState({
-                        redirectTo: '/'
-                    })
-                    console.log(this.state);
-                    
-                }
-            }).catch(error => {
-                console.log('login error: ')
-                console.log(error);
-                
-            })
+            console.log('client side response: ' + JSON.stringify(response))
+            if (response.status === 200) {
+                // update App.js state
+                this.props.updateUser({
+                    loggedIn: true,
+                    email: response.data.email,
+                    password: response.data.password,
+                })
+                // update the state to redirect to home
+                this.setState({
+                    redirectTo: '/'
+                })
+
+            }
+        }).catch(error => {
+            console.log('login error: ')
+            console.log(error);
+
+        })
     }
 
     render() {
@@ -61,52 +63,37 @@ class Login extends Component {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
-                <div>
-                    <h4>Login</h4>
-                    <form className="form-horizontal">
-                        <div className="form-group">
-                            <div className="col-1 col-ml-auto">
-                                <label className="form-label" htmlFor="username">Username</label>
-                            </div>
-                            <div className="col-3 col-mr-auto">
-                                <input className="form-input"
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Email"
+                <MainContainer>
+                    <Row>
+                        <Col md={{ size: 6, offset: 3 }}>
+                            <h4>Login</h4>
+                            <Form>
+                                <Label>Email address</Label>
+                                <InputField
                                     value={this.state.email}
                                     onChange={this.handleChange}
+                                    name="email"
+                                    placeholder="Email address"
                                 />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-1 col-ml-auto">
-                                <label className="form-label" htmlFor="password">Password: </label>
-                            </div>
-                            <div className="col-3 col-mr-auto">
-                                <input className="form-input"
-                                    placeholder="password"
+                                <Label>Password</Label>
+                                <InputField
                                     type="password"
-                                    name="password"
                                     value={this.state.password}
                                     onChange={this.handleChange}
+                                    name="password"
+                                    placeholder="Password"
                                 />
-                            </div>
-                        </div>
-                        <div className="form-group ">
-                            <div className="col-7"></div>
-                            <button
-                                className="btn btn-primary col-1 col-mr-auto"
-                               
-                                onClick={this.handleSubmit}
-                                type="submit">Login</button>
-                        </div>
-                    </form>
-                </div>
+                                <SubmitBtn
+                                    onClick={this.handleSubmit}
+                                />
+                            </Form>
+                        </Col>
+                    </Row>
+                </MainContainer>
             )
         }
     }
 }
 
 export default Login
-;
+    ;
