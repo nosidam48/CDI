@@ -11,6 +11,7 @@ class KidProfilePublic extends Component {
     state = {
         kid: "",
         content: [],
+        photos: [],
         loading: true
     }
     //On mount, return the kid with an id that matches the url
@@ -21,6 +22,7 @@ class KidProfilePublic extends Component {
     loadOneKid = (res) => {
         API.findOneKid(this.props.match.params.id)
             .then(res => {                
+                this.removePhoto(res.data.contents);
                 this.setState({
                     kid: res.data,
                     content: res.data.contents,
@@ -43,6 +45,15 @@ class KidProfilePublic extends Component {
         }
         return age;
     }
+
+    // Function to filter photos returned and save only photos that contain content
+    removePhoto = photo => {
+        // Filter this.state.content and remove any blank notes
+        const photos = photo.filter(note => note.kid_pics);
+        // Set this.state.photos equal to the new array
+        this.setState({ photos });
+    };
+
     render() {
         return (
             <MainContainer>
@@ -58,7 +69,7 @@ class KidProfilePublic extends Component {
                         <div>
                             {this.state.kid ? (
                                 <Row>
-                                    <SponsoredPhotos kid={this.state.kid} content={this.state.content} />
+                                    <SponsoredPhotos kid={this.state.kid} content={this.state.photos} />
                                     <PublicKidCard kid={this.state.kid} age={this.calculateAge} />
                                 </Row>
                             ) : (
