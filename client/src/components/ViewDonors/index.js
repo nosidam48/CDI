@@ -1,8 +1,33 @@
 import React from "react";
 import { Table } from "reactstrap";
+import API from "../../utils/API";
 
 // Displays table of kid results
-function ViewDonors() {
+class ViewDonors extends React.Component {
+
+    state = {
+        donors: []
+    }
+
+    componentDidMount() {
+        this.loadDonors();
+    }
+
+    loadDonors = (res) => {
+    
+        API.viewDonors()
+        .then(res => {
+            console.log(res.data);
+            
+            this.setState({
+                donors: res.data
+            })
+            
+        }) 
+
+    }
+
+    render() {
     return (
         <div>
             <Table className="mt-3">
@@ -16,26 +41,19 @@ function ViewDonors() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                {this.state.donors.map(donor => (
+                    <tr key={donor.id}>
                         <th scope="row">1</th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>johndoe@gmail.com</td>
-                        <td>001</td>
+                        <td>{donor.first_name}</td>
+                        <td>{donor.last_name}</td>
+                        <td>{donor.email}</td>
+                        <td><a href={"/kids/" + donor.kids[0].id} >{donor.kids[0].first_name}</a></td>
                     </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>johndoe@gmail.com</td>
-                        <td>001</td>
-                    </tr>
+                    ))}
                 </tbody>
             </Table>
         </div>
-    );
+    )};
 }
 
 export default ViewDonors;
