@@ -15,7 +15,7 @@ function SponsoredBio(props) {
       <p>{props.kid.kid_bio}</p>
       <h5 className="text-uppercase mt-4">Latest messages</h5>
       <div>
-        {props.content.map(note => (
+        {props.notes.map(note => (
           <div>
             <p>{note.kid_notes}</p>
             <hr />
