@@ -6,7 +6,7 @@ import SponsorButton from "../SponsorButton"
 // Card that appears when a user clicks to see more about a kid. Props is one kid based on the id in the url.
 function PublicKidCard(props) {
     return (
-        <Col xs="8">
+        <Col xs="12" sm="6" md="8">
             <Row>
                 <Col>
                     <h2 className="font-weight-bold">{props.kid.first_name} {props.kid.last_name}</h2>
