@@ -46,10 +46,13 @@ class Kids extends Component {
             location: this.state.location,
             gender: this.state.gender
         })
-            .then(res =>
+            .then(res => {
+                console.log("this is the return data: " + res.data);
+                
                 this.setState({
                     kids: res.data
                 })
+            }
             )
         .catch(err => console.log(err))
     }

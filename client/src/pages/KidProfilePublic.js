@@ -21,7 +21,7 @@ class KidProfilePublic extends Component {
     loadOneKid = (res) => {
         API.findOneKid(this.props.match.params.id)
             .then(res => {
-
+                
                 this.setState({
                     kid: res.data,
                     content: res.data.contents,
