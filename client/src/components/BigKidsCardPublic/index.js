@@ -9,8 +9,8 @@ function PublicKidCard(props) {
         <Col xs="8">
             <Row>
                 <Col>
-                    <h2 className="font-weight-bold">{props.kid.first_name} {props.kid.last_name}</h2>
-                    <h5><span className="font-weight-bold">Age: </span>{props.kid.age}</h5>
+                    <h2 className="font-weight-bold">{props.kid.first_name}</h2>
+                    <h5><span className="font-weight-bold">Age: </span>{props.age(props.kid.birth_date)}</h5>
                     <h5><span className="font-weight-bold">Grade: </span>{props.kid.grade}</h5>
                     <h5><span className="font-weight-bold">Location: </span>{props.kid.location}</h5>
                     <br />
