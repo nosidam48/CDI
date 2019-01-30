@@ -23,4 +23,9 @@ router.route("/admin/viewKids")
 router.route("/admin/viewSponsored")
     .get(usersController.viewSponsored)
 
+router.route("/admin/addUser")
+    .post(usersController.addUser)
+
+
+
 module.exports = router;
