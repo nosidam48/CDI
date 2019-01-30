@@ -3,14 +3,9 @@ import { Col, Form, Label}
 from "reactstrap";
 import "./style.css";
 import {GenderField, LocationField, SubmitBtn} from "../Form"
-import axios from "axios";
-import API from "../../utils/API";
 
 // Provides search options on /kids page
 class FilterPublic extends Component {
-    constructor(props) {
-        super(props);
-    }
     
     render() {
     return (

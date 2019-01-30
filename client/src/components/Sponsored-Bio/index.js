@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row } from "reactstrap";
+import { Col } from "reactstrap";
 import "./style.css";
 
 // Displays text to donor of child they sponsor

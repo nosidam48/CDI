@@ -74,14 +74,14 @@ class Signup extends Component {
             <Col md={{ size: 6, offset: 3 }}>
               <h4>Create an Account</h4>
               <Form className="mt-3">
-                <Label>First Name</Label>
+                <Label>First Name*</Label>
                 <InputField
                   value={this.state.firstName}
                   onChange={this.handleChange}
                   name="firstName"
                   placeholder="Joe"
                 />
-                <Label>Last Name</Label>
+                <Label>Last Name*</Label>
                 <InputField
                   value={this.state.lastName}
                   onChange={this.handleChange}
@@ -116,7 +116,7 @@ class Signup extends Component {
                   name="zip"
                   placeholder="33129"
                 />
-                <Label>Email Address</Label>
+                <Label>Email Address*</Label>
                 <InputField
                   type="email"
                   value={this.state.email}
@@ -124,14 +124,14 @@ class Signup extends Component {
                   name="email"
                   placeholder="joesmith@gmail.com"
                 />
-                <Label>Password</Label>
+                <Label>Password*</Label>
                 <InputField
                   type="password"
                   value={this.state.password}
                   onChange={this.handleChange}
                   name="password"
                 />
-                <Label>Confirm Password</Label>
+                <Label>Confirm Password*</Label>
                 <InputField
                   type="password"
                   value={this.state.confirmPassword}
@@ -139,7 +139,10 @@ class Signup extends Component {
                   name="confirmPassword"
                 />
 
+                {/* Display submit button once first name, last name and email have values and the passwords match */}
                 <SubmitBtn
+                  disabled={(!(this.state.firstName && this.state.lastName 
+                    && this.state.email && this.state.password) || (this.state.password !== this.state.confirmPassword))}
                   onClick={this.handleSubmit}
                 />
                 <p className="mt-3">Or log in <a href="/login">here</a></p>
