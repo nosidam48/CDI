@@ -11,12 +11,6 @@ class FilterPublic extends Component {
     constructor(props) {
         super(props);
     }
-
-    state = {
-        kids: [],
-        location: "",
-        gender: ""
-    }
     
     render() {
     return (
