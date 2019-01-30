@@ -9,7 +9,8 @@ import API from "../utils/API";
 class Donors extends Component {
     state = {
         kid: "",
-        content: []
+        content: [],
+        notes: []
     } 
     //On mount, return the kid with an id that matches the url
     componentDidMount() {
@@ -26,6 +27,7 @@ class Donors extends Component {
              kid: res.data.kid,
              content: res.data.content
          })
+         this.removeNote(res.data.content);
          console.log(this.state);
          
      })
@@ -45,12 +47,21 @@ class Donors extends Component {
     }
     return age;
 };
+
+// Function to filter content returned and save only notes that contain content
+removeNote = note => {
+    // Filter this.state.content and remove any blank notes
+    const notes = this.state.content.filter(note => note.kid_notes);
+    // Set this.state.friends equal to the new friends array
+    this.setState({ notes });
+  };
+
     render() {
         return (
             <MainContainer>
                 <Row>
                     <SponsoredPhotos kid={this.state.kid} content={this.state.content}/>
-                    <SponsoredBio kid={this.state.kid} age={this.calculateAge} content={this.state.content}/>
+                    <SponsoredBio kid={this.state.kid} age={this.calculateAge} notes={this.state.notes}/>
                 </Row>
             </MainContainer>
         )
