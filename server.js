@@ -36,7 +36,6 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session()) // calls the deserializeUser
 
-
 // Send every request to the React app
 app.use('/user', user)
 app.use(routes);
@@ -53,7 +52,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "./client/public/index.html"));
   });
 }
-
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true

@@ -23,43 +23,43 @@ class App extends React.Component {
       id: ""
     }
     // Bind our functions to this component 
-    this.getUser = this.getUser.bind(this)
-    this.componentDidMount = this.componentDidMount.bind(this)
+    // this.getUser = this.getUser.bind(this)
+    // this.componentDidMount = this.componentDidMount.bind(this)
     this.updateUser = this.updateUser.bind(this)
   }
 
   //On page load run the getUser function
-  componentDidMount() {
-    this.getUser()
-  }
+  // componentDidMount() {
+  //   this.getUser()
+  // }
   // an updateUser function to pass to the login page
   updateUser(userObject) {
     this.setState(userObject)
   }
 //A function to check for a user
-  getUser() {
-    axios.get('/user/').then(response => {
-      console.log('Get user response: ')
-      console.log(response.data)
-      //if there is a user
-      if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ')
-        //set the state to loggedIn: true, and set the user email
-        this.setState({
-          loggedIn: true,
-          email: response.data.user.email,
-          id: response.data.user.id
-        })
-      } else {
-        console.log('Get user: no user');
-        //Otherwise, set state to default (no user)
-        this.setState({
-          loggedIn: false,
-          email: null
-        })
-      }
-    })
-  }
+  // getUser() {
+  //   axios.get('/user/').then(response => {
+  //     console.log('Get user response: ')
+  //     console.log(response.data)
+  //     //if there is a user
+  //     if (response.data.user) {
+  //       console.log('Get User: There is a user saved in the server session: ')
+  //       //set the state to loggedIn: true, and set the user email
+  //       this.setState({
+  //         loggedIn: true,
+  //         email: response.data.user.email,
+  //         id: response.data.user.id
+  //       })
+  //     } else {
+  //       console.log('Get user: no user');
+  //       //Otherwise, set state to default (no user)
+  //       this.setState({
+  //         loggedIn: false,
+  //         email: null
+  //       })
+  //     }
+  //   })
+  // }
   render() {
     return (
       <Router>

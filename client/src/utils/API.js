@@ -77,6 +77,7 @@ export default {
     },
     //Show 2 kids on the front page
     homeKids: () => {        
+        console.log("request received");
         return axios.get("/api/kids/random");
     },
 
