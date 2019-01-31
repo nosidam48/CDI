@@ -222,14 +222,15 @@ class Admin extends Component {
             showSearchResults: false,
             message: ""
         })
+        console.log("Calling this again: " + this.state.searchTerm)
+        console.log("Calling this again: " + this.state.searchType)
         API.kidSearch({
             searchTerm: this.state.searchTerm,
             searchType: this.state.searchType
         })
             .then(res => {
-                // Set state of search terms back to original state, set state of kids to new search results
+                // Set state of kids to new search results
                 this.setState({
-                    searchTerm: "",
                     kids: res.data,
                     loading: false,
                     showSearchResults: true,
