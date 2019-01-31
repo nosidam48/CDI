@@ -7,7 +7,7 @@ import API from "../../utils/API";
 class UpdateKidModal extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       modal: false,
       id: props.id,
@@ -37,7 +37,7 @@ class UpdateKidModal extends React.Component {
   };
 
   // Handles when an admin has edited a child's info
-  handleKidEdit = event => {
+  handleKidEdit = (event) => {
     event.preventDefault();
     API.kidEdit({
       id: this.state.id,
@@ -50,8 +50,7 @@ class UpdateKidModal extends React.Component {
       kid_bio: this.state.bio
     })
       .then(res => {
-        // When update was received, the original search will fire again, which will show the updated data
-        this.props.redoSearch(event)
+        this.props.redoSearch(event);
       })
       .catch(err => {
         this.setState({

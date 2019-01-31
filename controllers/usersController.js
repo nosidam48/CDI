@@ -26,17 +26,17 @@ module.exports = {
     },
 
     // Function to connect donor to kid
-    connectDonor: (req, res) => {        
+    connectDonor: (req, res) => {
         db.users.findOne({
             where: {
                 id: req.body.donor_id
             }
-        }).then(function(user) {
+        }).then(function (user) {
             db.kids.findOne({
                 where: {
                     id: req.body.kid_id
                 }
-            }).then(function(kid) {
+            }).then(function (kid) {
                 user.setKids((kid))
             })
         })
@@ -49,58 +49,64 @@ module.exports = {
                 id: req.params.id
             },
         }).then(user => user.getKids())
-        .then(data => 
-            
-            db.content.findAll({
-                where: {
-                    kidId: data[0].dataValues.id
-                }
-            }).then(data2 => {
-                
-                let donorObject = {
-                    kid: data[0].dataValues,
-                    content: data2
-                }
-                
-                res.json(donorObject)
-                
-            })
-        )
-        .catch(err => res.status(422).json(err))
-      },
+            .then(data =>
 
-      viewAdmins: (req, res) => {
+                db.content.findAll({
+                    where: {
+                        kidId: data[0].dataValues.id
+                    }
+                }).then(data2 => {
+
+                    let donorObject = {
+                        kid: data[0].dataValues,
+                        content: data2
+                    }
+
+                    res.json(donorObject)
+
+                })
+            )
+            .catch(err => res.status(422).json(err))
+    },
+
+    viewAdmins: (req, res) => {
         db.users.findAll({
             where: {
                 admin_status: 1
             }
         }).then(data => res.json(data))
-      },
+    },
 
-      viewDonors: (req, res) => {
-          db.users.findAll({
-              where: {
-                  admin_status: !1
-              },
-              include: [db.kids]
-          }).then(data => res.json(data))
-      },
+    viewDonors: (req, res) => {
+        db.users.findAll({
+            where: {
+                admin_status: !1
+            },
+            include: [db.kids]
+        }).then(data => res.json(data))
+    },
 
-      viewAllKids: (req, res) => {
+    viewAllKids: (req, res) => {
         db.kids.findAll().then(data => res.json(data))
     },
 
-      viewSponsored: (req,res) => {
-          db.kids.findAll({
-              where: {
+    viewSponsored: (req, res) => {
+        db.kids.findAll({
+            where: {
                 need_sponsor: false
-              }
-          }).then(data => res.json(data))
-      },
+            }
+        }).then(data => res.json(data))
+    },
 
-      addUser: (req, res) => {
-          
-        db.users.create({
+    addUser: (req, res) => {
+        console.log("Received by controller");
+        // Convert yes admin response to true boolean; default is false
+        let admin = false;
+        if (req.body.admin === "Yes") {
+            admin = true;
+        }
+
+          db.users.create({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             email: req.body.email,
@@ -109,67 +115,67 @@ module.exports = {
             user_city: req.body.city,
             user_state: req.body.state,
             user_zip: req.body.zip,
-            admin_status: req.body.admin,
-            master_admin_status: 0,
+            admin_status: admin,
+            master_admin_status: false,
 
         }).then(userData => res.json(userData))
-        .catch(err => res.status(422).json(err))
+                .catch(err => res.status(422).json(err))
       },
 
-      editUser: (req, res) => {
+    editUser: (req, res) => {
         db.users.update(
             req.body,
             {
-              where: {
-                id: req.body.id
-              }
+                where: {
+                    id: req.body.id
+                }
             }).then(userData => res.json(userData))
             .catch(err => res.status(422).json(err));
     },
 
     userSearchState: (req, res) => {
         db.users.findAll({
-          where: {
-            email: req.body.searchTerm
-          }
-        })
-          .then(data => res.json(data))
-          .catch(err => res.status(422).json(err));
-      },
-
-      userSearchName: (req, res) => {
-        db.users.findAll({
-          where: {
-            [Op.or]: [
-              {
-                first_name: {
-                  [Op.like]: "%" + req.body.searchTerm + "%"
-                }
-              },
-              {
-                last_name: {
-                  [Op.like]: "%" + req.body.searchTerm + "%"
-                }
-              }
-            ]
-          }
-        })
-          .then(data => res.json(data))
-          .catch(err => res.status(422).json(err));
-      },
-
-      removeUser: (req, res) => {
-          
-        db.users.destroy(
-          {
             where: {
-              id: req.params.id
+                email: req.body.searchTerm
             }
-          }).then(userData => res.json(userData))
-          .catch(err => res.status(422).json(err));
-      },
-      
+        })
+            .then(data => res.json(data))
+            .catch(err => res.status(422).json(err));
+    },
+
+    userSearchName: (req, res) => {
+        db.users.findAll({
+            where: {
+                [Op.or]: [
+                    {
+                        first_name: {
+                            [Op.like]: "%" + req.body.searchTerm + "%"
+                        }
+                    },
+                    {
+                        last_name: {
+                            [Op.like]: "%" + req.body.searchTerm + "%"
+                        }
+                    }
+                ]
+            }
+        })
+            .then(data => res.json(data))
+            .catch(err => res.status(422).json(err));
+    },
+
+    removeUser: (req, res) => {
+
+        db.users.destroy(
+            {
+                where: {
+                    id: req.params.id
+                }
+            }).then(userData => res.json(userData))
+            .catch(err => res.status(422).json(err));
+    },
+
 
 };
 
-    
+

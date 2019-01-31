@@ -222,14 +222,15 @@ class Admin extends Component {
             showSearchResults: false,
             message: ""
         })
+        console.log("Calling this again: " + this.state.searchTerm)
+        console.log("Calling this again: " + this.state.searchType)
         API.kidSearch({
             searchTerm: this.state.searchTerm,
             searchType: this.state.searchType
         })
             .then(res => {
-                // Set state of search terms back to original state, set state of kids to new search results
+                // Set state of kids to new search results
                 this.setState({
-                    searchTerm: "",
                     kids: res.data,
                     loading: false,
                     showSearchResults: true,
@@ -289,7 +290,7 @@ class Admin extends Component {
                         onClickShowDonors={this.showDonors}
                         onClickShowAdmins={this.showAdmins}
                     />
-                    <Col xs="12" sm="8" md="9" lg="9" className="px-5" id="addKid">
+                    <Col xs="12" sm="8" md="9" className="px-3" id="addKid">
                         {/* ADD KID FORM - displays if true =============== */}
                         {this.state.showAddKidForm ?
                             <div>
@@ -465,7 +466,9 @@ class Admin extends Component {
                         
                         {/* Shows form to add donor */}
                         {this.state.showAddUserForm ? (
-                            <AddUserForm />
+                            <AddUserForm 
+                                toggle={this.toggleAddUserForm}    
+                            />
                         ): null }
                         
                         {/* Shows users for admins */}
