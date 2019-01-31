@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col, Form, Label } from "reactstrap";
-import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn } from "../components/Form";
+import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn, UserSearchType } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
 import AdminKidList from "../components/AdminKidList";
+import AdminUserList from "../components/AdminUserList"
 import AdminMultipleKids from "../components/AdminMultipleKidList";
 import AddUserForm from "../components/AddUserForm";
 import ViewAdmins from "../components/ViewAdmins"
@@ -43,12 +44,15 @@ class Admin extends Component {
         // Search inputs
         searchTerm: "",
         searchType: "Name",
+        userSearchType: "Name",
+        userSearchTerm: "",
 
         // Photo upload
         selectedFile: null,
 
         // Results arrays
-        kids: []
+        kids: [],
+        users: [],
     };
 
     // FUNCTIONS FOR TOOLBAR ON LEFT================================================
@@ -240,6 +244,36 @@ class Admin extends Component {
             });
     }
 
+    handleAdminSearch = event => {
+        event.preventDefault();
+        this.setState({
+            loading: true,
+            users: [],
+            showSearchResults: false,
+        })
+        API.userSearch({
+            searchTerm: this.state.searchTerm,
+            searchType: this.state.searchType
+        })
+            .then(res => {
+                // Set state of search terms back to original state, set state of kids to new search results
+                this.setState({
+                    searchTerm: "",
+                    searchType: "Name",
+                    kids: res.data,
+                    loading: false,
+                    showSearchResults: true,
+                })
+            })
+            .catch(err => {
+                this.setState({
+                    loading: false,
+                    message: "We're sorry. We encountered an error."
+                })
+                console.log(err)
+            });
+    }
+
     render() {
         return (
             <MainContainer>
@@ -365,6 +399,56 @@ class Admin extends Component {
                                                 needSponsor={kid.need_sponsor}
                                                 bio={kid.kid_bio}
                                                 redoSearch={this.handleAdminKidSearch}
+                                            />
+                                        ))}
+                                    </div>
+                                ) : (
+                                        <h4 className="text-center mt-3">Your search did not return any results.</h4>
+                                    )}
+                            </div>
+                        ) : null
+                        }
+
+                        {/* SEARCH FOR USER if true================== */}
+                        {this.state.showAdminSearch ?
+                            <Form inline>
+                                <InputField
+                                    value={this.state.userSearchTerm}
+                                    onChange={this.handleInputChange}
+                                    name="searchTerm"
+                                />
+                                <UserSearchType
+                                    value={this.state.userSearchType}
+                                    onChange={this.handleInputChange}
+                                    name="searchType"
+                                    id="searchUser"
+                                />
+                                <SubmitBtn
+                                    id="searchSubmit"
+                                    onClick={this.handleAdminSearch}
+                                />
+                            </Form>
+                            :
+                            null
+                        }
+                        {/* If search brings back results, show results */}
+                        {this.state.showSearchResults ? (
+                            <div>
+                                {this.state.users.length ? (
+                                    <div>
+                                        {this.state.users.map(user => (
+                                            <AdminUserList
+                                                key={user.id}
+                                                id={user.id}
+                                                firstNames={user.first_name}
+                                                lastName={user.last_name}
+                                                email={user.email}
+                                                password={user.password}
+                                                user_address={user.address}
+                                                user_city={user.city}
+                                                user_state={user.state}
+                                                user_zip={user.zip}
+                                                redoSearch={this.handleAdminSearch}
                                             />
                                         ))}
                                     </div>

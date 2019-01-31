@@ -110,5 +110,18 @@ export default {
         return axios.post("/api/admin/addUser", userData)
     },
     
+    userSearch: (searchData) => {
+        switch(searchData.searchType) {
+            case "Name": 
+            return axios.post("/api/admin/searchName/", searchData);
+
+            case "State": 
+            return axios.post("/api/admin/searchState/", searchData)
+
+            default:
+            console.log("Route error");
+        }
+    }
+
  };
 

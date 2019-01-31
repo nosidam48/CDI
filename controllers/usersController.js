@@ -106,16 +106,59 @@ module.exports = {
             last_name: req.body.last_name,
             email: req.body.email,
             password: req.body.password,
-            address: req.body.address,
-            city: req.body.city,
-            state: req.body.state,
-            zip: req.body.zip,
+            user_address: req.body.address,
+            user_city: req.body.city,
+            user_state: req.body.state,
+            user_zip: req.body.zip,
             admin_status: req.body.admin,
             master_admin_status: 0,
 
         }).then(userData => res.json(userData))
         .catch(err => res.status(422).json(err))
       },
+
+      editUser: (req, res) => {
+        db.kids.update(
+            req.body,
+            {
+              where: {
+                id: req.body.id
+              }
+            }).then(userData => res.json(userData))
+            .catch(err => res.status(422).json(err));
+    },
+
+    userSearchState: (req, res) => {
+        db.users.findAll({
+          where: {
+            state: req.body.userSearchTerm
+          }
+        })
+          .then(data => res.json(data))
+          .catch(err => res.status(422).json(err));
+      },
+
+      userSearchName: (req, res) => {
+        db.users.findAll({
+          where: {
+            [Op.or]: [
+              {
+                first_name: {
+                  [Op.like]: "%" + req.body.userSearchTerm + "%"
+                }
+              },
+              {
+                last_name: {
+                  [Op.like]: "%" + req.body.userSearchTerm + "%"
+                }
+              }
+            ]
+          }
+        })
+          .then(data => res.json(data))
+          .catch(err => res.status(422).json(err));
+      },
+      
 
 };
 
