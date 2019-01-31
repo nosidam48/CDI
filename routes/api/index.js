@@ -26,6 +26,15 @@ router.route("/admin/viewSponsored")
 router.route("/admin/addUser")
     .post(usersController.addUser)
 
+router.route("/admin/editUser")
+    .put(usersController.editUser)
+
+router.route("/admin/searchName")
+    .post(usersController.userSearchName)
+
+router.route("/admin/searchState")
+    .post(usersController.userSearchState)
+
 
 
 module.exports = router;

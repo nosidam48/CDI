@@ -87,6 +87,17 @@ export function SearchType(props) {
   )
 }
 
+export function UserSearchType(props) {
+  return (
+    <FormGroup id={props.id}>
+      <Input type="select" className="mx-2" value={props.value} onChange={props.onChange} name={props.name} >
+        <option>Name</option>
+        <option>State</option>
+      </Input>
+    </FormGroup>
+  )
+}
+
 export function SubmitBtn(props) {
   return (
     <Button inline="true" {...props}>Submit </Button>
