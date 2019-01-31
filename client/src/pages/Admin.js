@@ -406,7 +406,7 @@ class Admin extends Component {
                                             />
                                         ))}
                                     </div>
-                                ) : null }
+                                ) : <h4 className="text-center mt-4">We couldn't find any profiles that match your search.</h4> }
                             </div>
                         ) : null
                         }

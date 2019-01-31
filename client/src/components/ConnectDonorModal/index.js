@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
-import { InputField, SubmitBtn } from "../Form";
+import { InputField, SubmitBtn, DiscardBtn } from "../Form";
 import API from "../../utils/API";
 
 
@@ -14,6 +14,9 @@ class ConnectDonorModal extends Component {
       donorLastName: "",
       donorEmail: "",
       donors: [],
+      message: "",
+      loading: false,
+      connected: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -21,7 +24,12 @@ class ConnectDonorModal extends Component {
   //toggle the modal state between true and false to show or hide it
   toggle() {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
+      message: "",
+      donorFirstName: "",
+      donorLastName: "",
+      donors: [],
+      connected: false
     });
   }
   //function to listen for the input data on the forms
@@ -35,6 +43,9 @@ class ConnectDonorModal extends Component {
   // Handles the admin search for a donor to connect to
   handleDonorSearch = event => {
     event.preventDefault();
+    this.setState({
+      loading: true
+    })
     API.donorSearch({
       first_name: this.state.donorFirstName,
       last_name: this.state.donorLastName,
@@ -46,7 +57,9 @@ class ConnectDonorModal extends Component {
           donorFirstName: "",
           donorLastName: "",
           donorEmail: "",
-          donors: res.data
+          message: "No donors matched your search",
+          donors: res.data,
+          loading: false
         })
       })
       .catch(err => console.log(err));
@@ -54,6 +67,9 @@ class ConnectDonorModal extends Component {
 
   // Handles the connect donor button when the right donor has been found
   handleConnectDonor = (donorId, kidId) => {
+    this.setState({
+      loading: true
+    })
     
     // Create object to send
     let connectData = {
@@ -62,8 +78,12 @@ class ConnectDonorModal extends Component {
     }
     API.connectDonor(connectData)
       .then(res => {
-      })
-      .catch(err => console.log(err));
+          this.setState({
+            message: "The donor and child have been successfully connected.",
+            loading: false,
+            connected: true  
+          })
+    }).catch(err => console.log(err));
   }
 
   render() {
@@ -94,14 +114,16 @@ class ConnectDonorModal extends Component {
                 placeholder="Email address"
               />
               <SubmitBtn
+                disabled={!(this.state.donorFirstName || this.state.donorLastName || this.state.donorEmail)}
                 onClick={this.handleDonorSearch}
               />
             </Form>
-            {this.state.donors.length ? (
+            {this.state.donors.length > 0 ? (
               <div className="mt-2">
                 <hr />
+                <p className="font-weight-bold">Users found</p>
                 {this.state.donors.map(donor => (
-                  <div>
+                  <div className="mb-1">
                     <SubmitBtn
                       size="sm"
                       onClick={() => this.handleConnectDonor(donor.id, this.props.kidId)}
@@ -113,10 +135,17 @@ class ConnectDonorModal extends Component {
                   </div>
                 ))}
               </div>
-            ) : null}
+            ) : (
+              <h4 className="text-center py-3">{this.state.message}</h4>
+            )}
+            { this.state.connected ? (
+              <h4 className="text-center py-3">{this.state.message}</h4>
+            ) : (
+              <h4 className="text-center py-3"></h4>
+            )}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
+            <DiscardBtn onClick={this.toggle} className="modalCancel"></DiscardBtn>
           </ModalFooter>
         </Modal>
       </div>
