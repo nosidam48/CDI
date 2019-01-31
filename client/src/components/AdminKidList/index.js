@@ -50,6 +50,7 @@ function AdminKidList(props) {
                     kidId={props.id}
                     kidFirstNames={props.firstNames}
                     kidLastName={props.lastName}
+                    redoSearch={props.redoSearch}
                 />
             </div>
             <hr />
