@@ -13,8 +13,7 @@ class FilterPublic extends Component {
                 <div className="label p-0 m-0">
                     <h6 className="text-uppercase text-center py-2 label-text">Search options</h6>
                 </div>
-                <Form className="px-2 pt-2">
-                    <Label>Location</Label>
+                <Form className="pt-2">
                     <LocationField name="location" value={this.props.value.location} onChange={this.props.onChange} />
                     
                     <GenderField name="gender" value={this.props.value.gender} onChange={this.props.onChange} />

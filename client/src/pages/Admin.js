@@ -220,6 +220,7 @@ class Admin extends Component {
             loading: true,
             kids: [],
             showSearchResults: false,
+            message: ""
         })
         API.kidSearch({
             searchTerm: this.state.searchTerm,
@@ -229,10 +230,10 @@ class Admin extends Component {
                 // Set state of search terms back to original state, set state of kids to new search results
                 this.setState({
                     searchTerm: "",
-                    searchType: "Name",
                     kids: res.data,
                     loading: false,
                     showSearchResults: true,
+                    message: ""
                 })
             })
             .catch(err => {
@@ -347,7 +348,9 @@ class Admin extends Component {
                                         name="selectedFile"
                                         id=""
                                     />
+                                    {/* Set Submit Button to disabled until all fields are filled out */}
                                     <SubmitBtn
+                                        disabled={!(this.state.kidFirstNames && this.state.kidLastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.kidLocation && this.state.bio && this.state.selectedFile)}        
                                         onClick={this.handleKidFormSubmit}
                                     />
                                     <DiscardBtn
@@ -402,9 +405,7 @@ class Admin extends Component {
                                             />
                                         ))}
                                     </div>
-                                ) : (
-                                        <h4 className="text-center mt-3">Your search did not return any results.</h4>
-                                    )}
+                                ) : null }
                             </div>
                         ) : null
                         }
@@ -452,9 +453,7 @@ class Admin extends Component {
                                             />
                                         ))}
                                     </div>
-                                ) : (
-                                        <h4 className="text-center mt-3">Your search did not return any results.</h4>
-                                    )}
+                                ) : null}
                             </div>
                         ) : null
                         }
