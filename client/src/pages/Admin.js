@@ -229,7 +229,6 @@ class Admin extends Component {
             .then(res => {
                 // Set state of search terms back to original state, set state of kids to new search results
                 this.setState({
-                    searchTerm: "",
                     kids: res.data,
                     loading: false,
                     showSearchResults: true,
@@ -405,7 +404,7 @@ class Admin extends Component {
                                             />
                                         ))}
                                     </div>
-                                ) : null }
+                                ) : <h4 className="text-center mt-4">We couldn't find any profiles that match your search.</h4> }
                             </div>
                         ) : null
                         }
