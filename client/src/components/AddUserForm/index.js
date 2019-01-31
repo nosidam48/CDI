@@ -21,6 +21,14 @@ class AddUserForm extends React.Component {
     admin: false
   }
 
+  // Function that runs after a user has been added
+  resetUserForm = () => {
+    this.setState({
+        firstName: "", lastName: "",email: "", password: "",
+        address: "", city: "", state: "", zip: "", admin: false
+    })
+}
+  
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -43,7 +51,7 @@ class AddUserForm extends React.Component {
       admin: this.state.admin
     })
       .then(res => {
-        console.log(res);
+        this.resetUserForm();
       }
       )
       .catch(err => console.log(err))
@@ -92,7 +100,7 @@ class AddUserForm extends React.Component {
           </FormGroup>
           <SubmitBtn
             disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.password)}
-            onClick={this.handleSubmit} inline="true"></SubmitBtn>
+            onClick={() => { this.handleSubmit(); this.props.toggle()} }  inline="true"></SubmitBtn>
           <DiscardBtn inline="true" className="ml-2" />
         </Form>
       </div>

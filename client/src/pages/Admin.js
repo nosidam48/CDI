@@ -465,7 +465,9 @@ class Admin extends Component {
                         
                         {/* Shows form to add donor */}
                         {this.state.showAddUserForm ? (
-                            <AddUserForm />
+                            <AddUserForm 
+                                toggle={this.toggleAddUserForm}    
+                            />
                         ): null }
                         
                         {/* Shows users for admins */}
