@@ -89,7 +89,6 @@ module.exports = {
       include: [db.content]
     })
       .then(data => {
-        console.log("data in controller" + data);
         res.json(data);
       })
       .catch(err => res.status(422).json(err))

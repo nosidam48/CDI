@@ -20,7 +20,6 @@ class SponsoredPhotos extends React.Component {
 
     // wait till we have images
     if (this.props.content.length > 0) {
-      console.log("props" + this.props.content);
         //push into array
         this.props.content.map(pic => (
           images.push({
@@ -29,7 +28,6 @@ class SponsoredPhotos extends React.Component {
           })
         ))  
     }
-    console.log(images);
     
     return (
       <Col sm="5" lg="4" className="image my-4">

@@ -27,7 +27,6 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        console.log('handleSubmit')
         let formData = {
             email: this.state.email,
             password: this.state.password
@@ -37,7 +36,6 @@ class Login extends Component {
             url: 'user/login',
             data: formData,
         }).then(response => {
-            console.log('client side response: ' + JSON.stringify(response))
             if (response.status === 200) {
                 // update App.js state
                 this.props.updateUser({
@@ -51,11 +49,7 @@ class Login extends Component {
                 })
 
             }
-        }).catch(error => {
-            console.log('login error: ')
-            console.log(error);
-
-        })
+        }).catch(err => console.log(err))
     }
 
     render() {

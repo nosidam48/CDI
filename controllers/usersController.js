@@ -54,13 +54,11 @@ module.exports = {
                     kidId: data[0].dataValues.id
                 }
             }).then(data2 => {
-                console.log(data2);
                 
                 let donorObject = {
                     kid: data[0].dataValues,
                     content: data2
                 }
-                console.log(donorObject);
                 
                 res.json(donorObject)
                 
@@ -99,7 +97,6 @@ module.exports = {
       },
 
       addUser: (req, res) => {
-          console.log(req.body);
           
         db.users.create({
             first_name: req.body.first_name,

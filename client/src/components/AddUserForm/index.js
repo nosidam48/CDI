@@ -42,7 +42,7 @@ class AddUserForm extends React.Component {
         admin: this.state.admin
     })
         .then(res => {
-            console.log("this is the return data: " + res.data);
+            
         }
         )
     .catch(err => console.log(err))
