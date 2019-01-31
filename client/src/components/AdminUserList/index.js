@@ -1,5 +1,6 @@
 import React from "react";
 import UpdateAdminModal from "../UpdateAdminModal";
+import RemoveUserModal from "../RemoveUserModal";
 
 function AdminUserList(props) {
     return (
@@ -26,11 +27,11 @@ function AdminUserList(props) {
                     redoSearch={props.redoSearch}
                 />                        
                 {/* Button that opens RemoveKidModal */}
-                {/* <RemoveKidModal 
-                    kidId={props.id}
-                    kidFirstNames={props.firstNames}
-                    kidLastName={props.lastName}
-                /> */}
+                <RemoveUserModal 
+                    userId={props.id}
+                    userFirstName={props.firstName}
+                    userLastName={props.lastName}
+                />
             </div>
             <hr />
         </div>

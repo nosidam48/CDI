@@ -157,6 +157,18 @@ module.exports = {
           .then(data => res.json(data))
           .catch(err => res.status(422).json(err));
       },
+
+      removeUser: (req, res) => {
+          console.log(req);
+          
+        db.users.destroy(
+          {
+            where: {
+              id: req.params.id
+            }
+          }).then(userData => res.json(userData))
+          .catch(err => res.status(422).json(err));
+      },
       
 
 };

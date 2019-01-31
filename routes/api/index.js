@@ -37,6 +37,7 @@ router.route("/admin/searchState")
 
 router.route("/admin/users/:id")
     .put(usersController.editUser)
+    .delete(usersController.removeUser)
 
 
 
