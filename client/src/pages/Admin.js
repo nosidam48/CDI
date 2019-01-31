@@ -220,6 +220,7 @@ class Admin extends Component {
             loading: true,
             kids: [],
             showSearchResults: false,
+            message: ""
         })
         API.kidSearch({
             searchTerm: this.state.searchTerm,
@@ -452,9 +453,7 @@ class Admin extends Component {
                                             />
                                         ))}
                                     </div>
-                                ) : (
-                                        <h4 className="text-center mt-3">Your search did not return any results.</h4>
-                                    )}
+                                ) : null}
                             </div>
                         ) : null
                         }
