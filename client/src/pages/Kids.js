@@ -11,7 +11,7 @@ class Kids extends Component {
         kids: [],
         loading: true,
         location: "",
-        gender: ""
+        gender: "",
     }
     //on mount call the function to return kids cards
     componentDidMount() {

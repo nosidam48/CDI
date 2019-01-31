@@ -27,15 +27,17 @@ class App extends React.Component {
     super()
     // Set the state to default (no user)
     this.state = {
-      loggedIn: false,
-      email: null,
-      id: ""
+      isAuthenticated: false
     }
     // Bind our functions to this component 
     this.getUser = this.getUser.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.updateUser = this.updateUser.bind(this)
   }
+
+userHasAuthenticated = authenticated => {
+  this.setState({ isAuthenticated: authenticated });
+}
 
   //On page load run the getUser function
   componentDidMount() {
@@ -74,7 +76,13 @@ class App extends React.Component {
       })
     }
 
+    
+
     render() {
+      const childProps = {
+        isAuthenticated: this.state.isAuthenticated,
+        userHasAuthenticated: this.userHasAuthenticated
+      };
       return (
         <Router>
           <div>
@@ -91,6 +99,7 @@ class App extends React.Component {
               <Route exact path="/login" render={() =>
                 <Login
                   updateUser={this.updateUser}
+                  childProps={childProps}
                 />} />
               <Route exact path="/signup" component={Signup} />
               <Route component={NoMatch} />

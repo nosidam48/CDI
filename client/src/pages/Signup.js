@@ -18,7 +18,7 @@ class Signup extends Component {
       email: '',
       password: '',
       confirmPassword: '',
-      redirectTo: ''
+      redirectTo: '',
 
     }
     this.handleSubmit = this.handleSubmit.bind(this)
