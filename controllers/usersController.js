@@ -1,4 +1,6 @@
 const db = require("../models");
+var Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // Defining methods for the usersController
 module.exports = {
@@ -115,7 +117,7 @@ module.exports = {
       },
 
       editUser: (req, res) => {
-        db.kids.update(
+        db.users.update(
             req.body,
             {
               where: {
@@ -128,7 +130,7 @@ module.exports = {
     userSearchState: (req, res) => {
         db.users.findAll({
           where: {
-            state: req.body.userSearchTerm
+            state: req.body.searchTerm
           }
         })
           .then(data => res.json(data))
@@ -141,12 +143,12 @@ module.exports = {
             [Op.or]: [
               {
                 first_name: {
-                  [Op.like]: "%" + req.body.userSearchTerm + "%"
+                  [Op.like]: "%" + req.body.searchTerm + "%"
                 }
               },
               {
                 last_name: {
-                  [Op.like]: "%" + req.body.userSearchTerm + "%"
+                  [Op.like]: "%" + req.body.searchTerm + "%"
                 }
               }
             ]

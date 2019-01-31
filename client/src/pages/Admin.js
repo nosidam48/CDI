@@ -252,15 +252,15 @@ class Admin extends Component {
             showSearchResults: false,
         })
         API.userSearch({
-            searchTerm: this.state.searchTerm,
-            searchType: this.state.searchType
+            searchTerm: this.state.userSearchTerm,
+            searchType: this.state.userSearchType
         })
             .then(res => {
                 // Set state of search terms back to original state, set state of kids to new search results
                 this.setState({
-                    searchTerm: "",
-                    searchType: "Name",
-                    kids: res.data,
+                    userSearchTerm: "",
+                    userSearchType: "Name",
+                    users: res.data,
                     loading: false,
                     showSearchResults: true,
                 })
@@ -415,13 +415,13 @@ class Admin extends Component {
                                 <InputField
                                     value={this.state.userSearchTerm}
                                     onChange={this.handleInputChange}
-                                    name="searchTerm"
+                                    name="userSearchTerm"
                                 />
                                 <UserSearchType
                                     value={this.state.userSearchType}
                                     onChange={this.handleInputChange}
-                                    name="searchType"
-                                    id="searchUser"
+                                    name="userSearchType"
+                                    id="userSearchType"
                                 />
                                 <SubmitBtn
                                     id="searchSubmit"
@@ -440,14 +440,14 @@ class Admin extends Component {
                                             <AdminUserList
                                                 key={user.id}
                                                 id={user.id}
-                                                firstNames={user.first_name}
+                                                firstName={user.first_name}
                                                 lastName={user.last_name}
                                                 email={user.email}
                                                 password={user.password}
-                                                user_address={user.address}
-                                                user_city={user.city}
-                                                user_state={user.state}
-                                                user_zip={user.zip}
+                                                user_address={user.user_address}
+                                                user_city={user.user_city}
+                                                user_state={user.user_state}
+                                                user_zip={user.user_zip}
                                                 redoSearch={this.handleAdminSearch}
                                             />
                                         ))}

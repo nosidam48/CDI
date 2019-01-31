@@ -10,8 +10,7 @@ class ConnectDonorModal extends Component {
         this.state = {
             modal: false,
             update: "",
-            kidId: props.kidId,
-            selectedFile: null,
+            userId: props.id,
             message: "",
             loading: false
         };

@@ -35,6 +35,10 @@ router.route("/admin/searchName")
 router.route("/admin/searchState")
     .post(usersController.userSearchState)
 
+router.route("/admin/users/:id")
+    .put(usersController.editUser)
+
+
 
 
 module.exports = router;

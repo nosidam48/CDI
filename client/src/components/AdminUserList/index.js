@@ -4,26 +4,25 @@ import UpdateAdminModal from "../UpdateAdminModal";
 function AdminUserList(props) {
     return (
         <div className="my-4">
-            <h5>{props.firstNames} {props.lastName}</h5>
+            <h5>{props.firstName} {props.lastName}</h5>
             ID: {props.id}<br /> 
-            Gender: {props.gender}<br />
-            Birthdate: {props.birthdate}<br />
-            Grade: {props.grade}<br /> 
-            Location: {props.location}<br />
-            Needs sponsor?: {props.needSponsor ? "Yes" : "No"}<br />
+            Email: {props.email}<br />
+            Password: {props.password}<br />
+            Address: {props.user_address} {props.user_city} {props.user_state} {props.user_zip}<br /> 
             
             {/* Button functions */}
             <div className="mt-2">
                 {/* Button that toggles update child form and includes data from search*/ }
                 <UpdateAdminModal 
                     id={props.id}
-                    firstNames={props.firstNames}
+                    firstName={props.firstName}
                     lastName={props.lastName}
-                    gender={props.gender}
-                    birthdate={props.birthdate}
-                    grade={props.grade}
-                    location={props.location}
-                    bio={props.bio}
+                    email={props.email}
+                    password={props.password}
+                    address={props.user_address}
+                    city={props.user_city}
+                    state={props.user_state}
+                    zip={props.user_zip}
                     redoSearch={props.redoSearch}
                 />                        
                 {/* Button that opens RemoveKidModal */}
