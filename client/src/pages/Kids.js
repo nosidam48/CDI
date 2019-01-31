@@ -4,7 +4,6 @@ import MainContainer from "../components/Container";
 import KidsList from "../components/KidsList";
 import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
-import axios from "axios";
 
 class Kids extends Component {
     //set the kids state to an empty array
@@ -40,21 +39,20 @@ class Kids extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        
-        
+        // Set state to loading so spinner appears while getting data
+        this.setState({
+            loading: true
+        })
         API.getKidsSearch({
             location: this.state.location,
             gender: this.state.gender
         })
             .then(res => {
-                console.log("this is the return data: " + res.data);
-                
                 this.setState({
-                    kids: res.data
+                    kids: res.data,
+                    loading: false
                 })
-            }
-            )
-        .catch(err => console.log(err))
+            }).catch(err => console.log(err))
     }
 
     // Calculate age by using today's date and birthdate
@@ -76,7 +74,10 @@ class Kids extends Component {
         return (
             <MainContainer>
                 <Row>
-            <FilterPublic onChange={this.handleInputChange} onClick={this.handleSubmit} value={this.state} />
+                    <FilterPublic
+                        onChange={this.handleInputChange}
+                        onClick={this.handleSubmit}
+                        value={this.state} />
                     <KidsList
                         kids={this.state.kids}
                         calculateAge={this.calculateAge}

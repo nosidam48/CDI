@@ -15,8 +15,9 @@ export function GenderField(props) {
   return (
     <FormGroup>
       <Input type="select" value={props.value} onChange={props.onChange} name={props.name} >
-        <option>Female</option>
-        <option>Male</option>
+        <option value="">Gender</option>
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
       </Input>
     </FormGroup>
   )
@@ -48,22 +49,23 @@ export function GradeField(props) {
 export function LocationField(props) {
   return (
     <FormGroup>
-      <Input type="select" value={props.value} onChange={props.onChange} name={props.name} >
+      <Input type="select" value={props.location} onChange={props.onChange} name={props.name} >
+        <option value="">Location</option>
         <optgroup label="El Salvador" />
-        <option>El Guayabo, El Salvador</option>
-        <option>La Libertad, El Salvador</option>
-        <option>Soyapango, El Salvador</option>
+        <option value="El Guayabo, El Salvador">-- El Guayabo</option>
+        <option value="La Libertad, El Salvador">-- La Libertad</option>
+        <option value="Soyapango, El Salvador">-- Soyapango</option>
         <optgroup label="Honduras" />
-        <option>Choluteca, Honduras</option>
-        <option>Danli, Honduras</option>
-        <option>La Ceiba, Honduras</option>
-        <option>La Lima, Honduras</option>
-        <option>Los Cruces, Honduras</option>
-        <option>San Pedro Sula, Honduras</option>
+        <option value="Choluteca, Honduras">-- Choluteca</option>
+        <option value="Danli, Honduras">-- Danli</option>
+        <option value="La Ceiba, Honduras">-- La Ceiba</option>
+        <option value="La Lima, Honduras">-- La Lima</option>
+        <option value="Los Cruces, Honduras">-- Los Cruces</option>
+        <option value="San Pedro Sula, Honduras">-- San Pedro Sula</option>
         <optgroup label="Guatemala" />
-        <option>Guatemala City, Guatemala</option>
+        <option value="Guatemala City, Guatemala">-- Guatemala City</option>
         <optgroup label="Nicaragua" />
-        <option>Managua, Nicaragua</option>
+        <option value="Managua, Nicaragua">-- Managua</option>
       </Input>
     </FormGroup>
   )
