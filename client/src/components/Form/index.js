@@ -94,7 +94,7 @@ export function UserSearchType(props) {
     <FormGroup id={props.id}>
       <Input type="select" className="mx-2" value={props.value} onChange={props.onChange} name={props.name} >
         <option>Name</option>
-        <option>State</option>
+        <option>Email</option>
       </Input>
     </FormGroup>
   )

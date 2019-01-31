@@ -20,8 +20,6 @@ class ViewDonors extends React.Component {
             this.setState({
                 donors: res.data
             })
-            
-            console.log(this.state);
         }) 
     }
 
@@ -46,7 +44,7 @@ class ViewDonors extends React.Component {
                         <td>{donor.last_name}</td>
                         <td>{donor.email}</td>
                         {donor.kids.map(kid =>
-                        <td key={kid.id}><a href={"/kids/" + kid.id}></a>{kid.first_name}</td>
+                        <td key={kid.id}><a href={"/kids/" + kid.id}>{kid.first_name}</a></td>
                         )}
                     </tr>
                     ))}

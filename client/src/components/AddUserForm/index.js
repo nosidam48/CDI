@@ -4,7 +4,7 @@ import API from "../../utils/API";
 // Form that is called when an admin wants to add a child to the database
 class AddUserForm extends React.Component {
     constructor(props) {
-      super(props);
+      super(props)
     }
 
     state = {

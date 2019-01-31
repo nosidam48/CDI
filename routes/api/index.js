@@ -32,7 +32,7 @@ router.route("/admin/editUser")
 router.route("/admin/searchName")
     .post(usersController.userSearchName)
 
-router.route("/admin/searchState")
+router.route("/admin/searchEmail")
     .post(usersController.userSearchState)
 
 router.route("/admin/users/:id")
