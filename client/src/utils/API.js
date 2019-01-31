@@ -126,5 +126,11 @@ export default {
         return axios.put("/api/admin/users/" + id, userData)
     },
 
+    removeUser: (id) => {
+        console.log(id);
+        
+        return axios.delete("api/admin/users/" + id);
+    },
+
  };
 

@@ -88,7 +88,7 @@ class AddUserForm extends React.Component {
         <FormGroup>
           <Label for="admin">Admin Status</Label>
       <Input width="25%" type="select" value={this.state.admin} onChange={this.handleInputChange} name="admin" >
-        <option selected>Choose admin status</option>
+        <option defaultValue>Choose admin status</option>
         <option>true</option>
         <option>false</option>
       </Input>
