@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
+import {SubmitBtn} from "../Form"
 import { InputField, UploadPhoto } from "../Form";
 import API from "../../utils/API";
 
@@ -46,7 +47,7 @@ class ConnectDonorModal extends Component {
         })
         // Use FormData to handle both text and the binary file
         let contentData = new FormData();
-        contentData.append("kidId", this.state.kidId);
+        contentData.append("kidId", this.props.kidId);
         // The user can submit an update or a photo but doesn't have to do both. 
         // So check to see if an update was submitted. If so, append to contentData 
         if (this.state.update) {
@@ -99,7 +100,10 @@ class ConnectDonorModal extends Component {
                                     </Form>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button onClick={(event) => this.handleContentSubmit(event)} className="modalBtn">Submit</Button>{' '}
+                                    <SubmitBtn 
+                                        onClick={(event) => this.handleContentSubmit(event)} 
+                                        disabled={!(this.state.update || this.state.selectedFile)}
+                                        className="modalBtn">Submit</SubmitBtn>{' '}
                                     <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
                                 </ModalFooter>
                             </div>
