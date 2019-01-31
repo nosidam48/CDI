@@ -10,8 +10,7 @@ function AdminMasterSidebar(props) {
         <h6 className="text-uppercase text-center p-2 mb-0 label-text">Master Admin tools</h6>
       </div>
       <ListGroup>
-          <ListGroupItem onClick={props.onClickAddDonor} tag="button" action>Add donor</ListGroupItem>
-          <ListGroupItem onClick={props.onClickAddAdmin} tag="button" action>Add admin</ListGroupItem>
+          <ListGroupItem onClick={props.onClickAddUser} tag="button" action>Add User</ListGroupItem>
           <ListGroupItem onClick={props.onClickAdminSearch} tag="button" action>Update admin</ListGroupItem>
           <ListGroupItem onClick={props.onClickShowDonors} tag="button" action>View all donors</ListGroupItem>
           <ListGroupItem onClick={props.onClickShowAdmins} tag="button" action>View all admins</ListGroupItem>

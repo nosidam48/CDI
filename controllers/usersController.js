@@ -96,7 +96,26 @@ module.exports = {
                 need_sponsor: false
               }
           }).then(data => res.json(data))
-      }
+      },
+
+      addUser: (req, res) => {
+          console.log(req.body);
+          
+        db.users.create({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            password: req.body.password,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            zip: req.body.zip,
+            admin_status: req.body.admin,
+            master_admin_status: 0,
+
+        }).then(userData => res.json(userData))
+        .catch(err => res.status(422).json(err))
+      },
 
 };
 

@@ -90,19 +90,25 @@ export default {
     },
 
     viewAdmins: () => {
-        return axios.get("api/admin/viewAdmins")
+        return axios.get("/api/admin/viewAdmins")
     },
 
     viewDonors: () => {
-        return axios.get("api/admin/viewDonors")
+        return axios.get("/api/admin/viewDonors")
     },
 
     viewKids: () => {
-        return axios.get("api/admin/viewKids")
+        return axios.get("/api/admin/viewKids")
     },
 
     viewSponsored: () => {
-        return axios.get("api/admin/viewSponsored")
-    }
+        return axios.get("/api/admin/viewSponsored")
+    },
+    
+    addUser: (userData) => {
+        console.log(userData);
+        return axios.post("/api/admin/addUser", userData)
+    },
+    
  };
 

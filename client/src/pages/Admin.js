@@ -4,8 +4,7 @@ import { InputField, GenderField, GradeField, LocationField, UploadPhoto, Search
 import AdminSidebar from "../components/AdminSidebar";
 import AdminKidList from "../components/AdminKidList";
 import AdminMultipleKids from "../components/AdminMultipleKidList";
-import AddDonorForm from "../components/AddDonorForm";
-import AddAdmin from "../components/AddDonorForm";
+import AddUserForm from "../components/AddUserForm";
 import ViewAdmins from "../components/ViewAdmins"
 import ViewDonors from "../components/ViewDonors"
 import MainContainer from "../components/Container";
@@ -24,8 +23,7 @@ class Admin extends Component {
         showKidSearch: false,
         showSearchResults: false,
         showMultipleKids: false,
-        showAddDonorForm: false,
-        showAddAdmin: false,
+        showAddUserForm: false,
         showAdminSearch: false,
         showDonors: false,
         showAdmins: false,
@@ -63,8 +61,7 @@ class Admin extends Component {
             showKidSearch: false,
             showSearchResults: false,
             showMultipleKids: false,
-            showAddDonorForm: false,
-            showAddAdmin: false,
+            showAddUserForm: false,
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
@@ -78,8 +75,7 @@ class Admin extends Component {
             showAddKidForm: false,
             showSearchResults: false,
             showMultipleKids: false,
-            showAddDonorForm: false,
-            showAddAdmin: false,
+            showAddUserForm: false,
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
@@ -93,8 +89,7 @@ class Admin extends Component {
             showKidSearch: false,
             showSearchResults: false,
             showAddKidForm: false,
-            showAddDonorForm: false,
-            showAddAdmin: false,
+            showAddUserForm: false,
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
@@ -102,35 +97,20 @@ class Admin extends Component {
         })
     }
     // Toggles display of form to add a donor
-    toggleAddDonorForm = () => {
+    toggleAddUserForm = () => {
         this.setState({
             showAddKidForm: false,
             showKidSearch: false,
             showSearchResults: false,
             showMultipleKids: false,
-            showAddDonorForm: !this.state.showAddDonorForm,
-            showAddAdmin: false,
+            showAddUserForm: !this.state.showAddUserForm,
             showAdminSearch: false,
             showDonors: false,
             showAdmins: false,
             message: "",
         });
     }
-    // Toggles display of form to add a donor
-    toggleAddAdmin = () => {
-        this.setState({
-            showAddKidForm: false,
-            showKidSearch: false,
-            showSearchResults: false,
-            showMultipleKids: false,
-            showAddDonorForm: false,
-            showAddAdmin: !this.state.showAddAdmin,
-            showAdminSearch: false,
-            showDonors: false,
-            showAdmins: false,
-            message: "",
-        });
-    }
+    
     // Lets admin search for admin
     showAdminSearch = () => {
         this.setState({
@@ -138,8 +118,7 @@ class Admin extends Component {
             showSearchResults: false,
             showAddKidForm: false,
             showMultipleKids: false,
-            showAddDonorForm: false,
-            showAddAdmin: false,
+            showAddUserForm: false,
             showAdminSearch: true,
             showDonors: false,
             showAdmins: false,
@@ -153,8 +132,7 @@ class Admin extends Component {
             showKidSearch: false,
             showSearchResults: false,
             showAddKidForm: false,
-            showAddDonorForm: false,
-            showAddAdmin: false,
+            showAddUserForm: false,
             showAdminSearch: false,
             showDonors: true,
             showAdmins: false,
@@ -168,8 +146,7 @@ class Admin extends Component {
             showKidSearch: false,
             showSearchResults: false,
             showAddKidForm: false,
-            showAddDonorForm: false,
-            showAddAdmin: false,
+            showAddUserForm: false,
             showAdminSearch: false,
             showDonors: false,
             showAdmins: true,
@@ -272,8 +249,7 @@ class Admin extends Component {
                         onClickAddKid={this.toggleAddKidForm}
                         onClickKidSearch={this.showKidSearch}
                         onClickMultipleKidSearch={this.showMultipleKids}
-                        onClickAddDonor={this.toggleAddDonorForm}
-                        onClickAddAdmin={this.toggleAddAdmin}
+                        onClickAddUser={this.toggleAddUserForm}
                         onClickAdminSearch={this.showAdminSearch}
                         onClickShowDonors={this.showDonors}
                         onClickShowAdmins={this.showAdmins}
@@ -405,16 +381,9 @@ class Admin extends Component {
                         ): null }
                         
                         {/* Shows form to add donor */}
-                        {this.state.showAddDonorForm ? (
-                            <AddDonorForm />
+                        {this.state.showAddUserForm ? (
+                            <AddUserForm />
                         ): null }
-                        
-                        {/* Shows form to add admin */}
-                        {this.state.showAddAdmin ? (
-                            <AddAdmin />
-                        ): null }
-
-                        
                         
                         {/* Shows users for admins */}
                         {this.state.showDonors ? (
