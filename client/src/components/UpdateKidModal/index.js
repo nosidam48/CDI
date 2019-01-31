@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
-import { InputField, GenderField, GradeField, LocationField } from "../Form";
+import { InputField, GenderField, GradeField, LocationField, SubmitBtn, DiscardBtn } from "../Form";
 import API from "../../utils/API";
 
 //A modal to update a kid's profile
@@ -118,8 +118,8 @@ class UpdateKidModal extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={(event) => { this.toggle(); this.handleKidEdit(event) }} className="modalBtn">Submit Changes</Button>{' '}
-            <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
+            <SubmitBtn onClick={(event) => { this.toggle(); this.handleKidEdit(event) }} className="modalBtn"></SubmitBtn>{' '}
+            <DiscardBtn onClick={this.toggle} className="modalCancel"></DiscardBtn>
           </ModalFooter>
         </Modal>
       </div>

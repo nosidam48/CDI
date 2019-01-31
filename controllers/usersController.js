@@ -38,7 +38,8 @@ module.exports = {
                 }
             }).then(function(kid) {
                 user.setKids((kid))
-            })
+            }).then(data => res.json(data))
+            .catch(err => res.status(422).json(err))
         })
     },
 

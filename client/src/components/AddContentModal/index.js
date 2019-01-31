@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
-import {SubmitBtn} from "../Form"
+import {SubmitBtn, DiscardBtn} from "../Form"
 import { InputField, UploadPhoto } from "../Form";
 import API from "../../utils/API";
 
@@ -104,7 +104,7 @@ class ConnectDonorModal extends Component {
                                         onClick={(event) => this.handleContentSubmit(event)} 
                                         disabled={!(this.state.update || this.state.selectedFile)}
                                         className="modalBtn">Submit</SubmitBtn>{' '}
-                                    <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
+                                    <DiscardBtn onClick={this.toggle} className="modalCancel">Cancel</DiscardBtn>
                                 </ModalFooter>
                             </div>
                         )}
