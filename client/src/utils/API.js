@@ -113,8 +113,8 @@ export default {
             case "Name": 
             return axios.post("/api/admin/searchName/", searchData);
 
-            case "State": 
-            return axios.post("/api/admin/searchState/", searchData)
+            case "Email": 
+            return axios.post("/api/admin/searchEmail/", searchData)
 
             default:
             console.log("Route error");
@@ -127,8 +127,6 @@ export default {
     },
 
     removeUser: (id) => {
-        console.log(id);
-        
         return axios.delete("api/admin/users/" + id);
     },
 

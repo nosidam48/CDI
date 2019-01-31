@@ -130,7 +130,7 @@ module.exports = {
     userSearchState: (req, res) => {
         db.users.findAll({
           where: {
-            state: req.body.searchTerm
+            email: req.body.searchTerm
           }
         })
           .then(data => res.json(data))
