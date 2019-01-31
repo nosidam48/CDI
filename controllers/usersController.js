@@ -159,7 +159,6 @@ module.exports = {
       },
 
       removeUser: (req, res) => {
-          console.log(req);
           
         db.users.destroy(
           {

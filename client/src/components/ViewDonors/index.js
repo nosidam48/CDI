@@ -21,8 +21,8 @@ class ViewDonors extends React.Component {
                 donors: res.data
             })
             
+            console.log(this.state);
         }) 
-
     }
 
     render() {
@@ -45,7 +45,9 @@ class ViewDonors extends React.Component {
                         <td>{donor.first_name}</td>
                         <td>{donor.last_name}</td>
                         <td>{donor.email}</td>
-                        <td><a href={"/kids/" + donor.kids[0].id} >{donor.kids[0].first_name}</a></td>
+                        {donor.kids.map(kid =>
+                        <td key={kid.id}><a href={"/kids/" + kid.id}></a>{kid.first_name}</td>
+                        )}
                     </tr>
                     ))}
                 </tbody>

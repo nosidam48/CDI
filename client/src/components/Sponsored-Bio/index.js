@@ -16,7 +16,7 @@ function SponsoredBio(props) {
       <h5 className="text-uppercase mt-4">Latest messages</h5>
       <div>
         {props.notes.map(note => (
-          <div>
+          <div key={note.id}>
             <p>{note.kid_notes}</p>
             <hr />
           </div>

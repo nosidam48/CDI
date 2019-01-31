@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Form, Label }
+import { Col, Form }
     from "reactstrap";
 import "./style.css";
 import { GenderField, LocationField, SubmitBtn } from "../Form"

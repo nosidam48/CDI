@@ -11,7 +11,7 @@ class Home extends Component {
 
     state = {
         kids: [],
-        loading: true
+        loading: true,
     }
 
     componentDidMount() {

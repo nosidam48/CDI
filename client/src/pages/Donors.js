@@ -12,7 +12,7 @@ class Donors extends Component {
         content: [],
         notes: [],
         photos: [],
-        loading: true
+        loading: true,
     }
     //On mount, return the kid with an id that matches the url
     componentDidMount() {

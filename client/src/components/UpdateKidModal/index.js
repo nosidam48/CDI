@@ -7,7 +7,6 @@ import API from "../../utils/API";
 class UpdateKidModal extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     
     this.state = {
       modal: false,

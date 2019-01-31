@@ -13,7 +13,7 @@ class Login extends Component {
             id: '',
             password: '',
             loggedIn: false,
-            redirectTo: null
+            redirectTo: null,
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -42,6 +42,7 @@ class Login extends Component {
                     loggedIn: true,
                     email: response.data.email,
                     password: response.data.password,
+                    id: response.data.id
                 })
                 // update the state to redirect to home
                 this.setState({
@@ -79,7 +80,6 @@ class Login extends Component {
                                 />
                                 <SubmitBtn
                                     disabled={!(this.state.email && this.state.password)}
-                                    onClick={this.handleSubmit}
                                     onClick={this.handleSubmit}
                                 />
                             </Form>
