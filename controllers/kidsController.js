@@ -15,18 +15,18 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   // Function to find 2 random unsponsored kids for the home page
-  findRandom: (req,res) => {    
+  findRandom: (req, res) => {
     db.kids.findAll({
       where: {
         need_sponsor: true
       },
       order: [
-    Sequelize.fn( 'RAND' ),
-  ],
+        Sequelize.fn('RAND'),
+      ],
       limit: 2
     })
       .then(data => res.json(data))
-      .catch(err =>res.status(422).json(err))
+      .catch(err => res.status(422).json(err))
   },
 
   // Function to let admin search for a kid by first/last name
@@ -88,11 +88,11 @@ module.exports = {
       },
       include: [db.content]
     })
-    .then(data => {
-      console.log("data in controller" + data); 
-      res.json(data);
-    })
-    .catch(err => res.status(422).json(err))
+      .then(data => {
+        console.log("data in controller" + data);
+        res.json(data);
+      })
+      .catch(err => res.status(422).json(err))
   },
 
   // Function to update kid from admin edits
@@ -118,15 +118,21 @@ module.exports = {
   },
 
   kidSearch: (req, res) => {
-    console.log(req.body);
-    
+    // Create object to hold where statement variables
+    let whereStatement = {};
+
+    // Check to see if values are present. If not, discard them
+    if (req.body.location) {
+      whereStatement.location = req.body.location
+    }
+    if (req.body.gender) {
+      whereStatement.gender = req.body.gender
+    }
+
     db.kids.findAll({
-      where: {
-        location: req.body.location,
-        gender: req.body.gender
-      }
+      where: whereStatement
     }).then(data => res.json(data))
-    .catch(err => res.status(422).json(err))
+      .catch(err => res.status(422).json(err))
   }
 };
 

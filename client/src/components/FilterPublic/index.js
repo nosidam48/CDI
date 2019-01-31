@@ -16,7 +16,7 @@ class FilterPublic extends Component {
                 <Form className="px-2 pt-2">
                     <Label>Location</Label>
                     <LocationField name="location" value={this.props.value.location} onChange={this.props.onChange} />
-                    <Label>Gender</Label>
+                    
                     <GenderField name="gender" value={this.props.value.gender} onChange={this.props.onChange} />
                     <SubmitBtn onClick={this.props.onClick} />
                 </Form>
