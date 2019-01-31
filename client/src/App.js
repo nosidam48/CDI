@@ -40,13 +40,11 @@ class App extends React.Component {
   //On page load run the getUser function
   componentDidMount() {
     this.getUser()
-    // console.log("User info from req.user: " + req.user)
     }
 
     // an updateUser function to pass to the login page
     updateUser = (userObject) => {
       this.setState(userObject)
-      console.log(this.state);
     }
 
     // // A function to check for a user

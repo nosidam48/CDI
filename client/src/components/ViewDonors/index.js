@@ -17,8 +17,6 @@ class ViewDonors extends React.Component {
     
         API.viewDonors()
         .then(res => {
-            console.log(res.data);
-            
             this.setState({
                 donors: res.data
             })
