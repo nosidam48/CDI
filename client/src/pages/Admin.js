@@ -229,10 +229,10 @@ class Admin extends Component {
                 // Set state of search terms back to original state, set state of kids to new search results
                 this.setState({
                     searchTerm: "",
-                    searchType: "Name",
                     kids: res.data,
                     loading: false,
                     showSearchResults: true,
+                    message: ""
                 })
             })
             .catch(err => {
@@ -404,9 +404,7 @@ class Admin extends Component {
                                             />
                                         ))}
                                     </div>
-                                ) : (
-                                        <h4 className="text-center mt-3">Your search did not return any results.</h4>
-                                    )}
+                                ) : null }
                             </div>
                         ) : null
                         }
