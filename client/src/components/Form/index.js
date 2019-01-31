@@ -100,6 +100,18 @@ export function UserSearchType(props) {
   )
 }
 
+export function AdminField(props) {
+  return (
+    <FormGroup>
+      <Input type="select" value={props.value} onChange={props.onChange} name={props.name} >
+        <option value="">Choose admin status</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </Input>
+    </FormGroup>
+  )
+}
+
 export function SubmitBtn(props) {
   return (
     <Button type="submit" inline="true" {...props}>Submit </Button>

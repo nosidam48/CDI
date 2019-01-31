@@ -289,7 +289,7 @@ class Admin extends Component {
                         onClickShowDonors={this.showDonors}
                         onClickShowAdmins={this.showAdmins}
                     />
-                    <Col xs="12" sm="8" md="9" lg="9" className="px-5" id="addKid">
+                    <Col xs="12" sm="8" md="9" className="px-3" id="addKid">
                         {/* ADD KID FORM - displays if true =============== */}
                         {this.state.showAddKidForm ?
                             <div>

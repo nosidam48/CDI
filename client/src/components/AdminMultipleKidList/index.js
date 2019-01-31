@@ -62,7 +62,7 @@ class AdminMultipleKids extends React.Component {
                 <tbody>
                     {this.state.kids.map(kid => (
                     <tr key={kid.id}>
-                        <th scope="row">1</th>
+                        <th scope="row">{kid.id}</th>
                         <td>{kid.first_name}</td>
                         <td>{kid.last_name}</td>
                         <td>{kid.birth_date}</td>
