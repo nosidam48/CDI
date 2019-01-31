@@ -1,25 +1,25 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Input, Label } from 'reactstrap';
-import { InputField, GenderField, GradeField, LocationField } from "../Form";
+import { InputField } from "../Form";
 import API from "../../utils/API";
 
 //A modal to udate an Admin
 class UpdateAdminModal extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
+    
     this.state = {
       modal: false,
-      id: "",
-      userFirstName: "",
-      userLastName: "",
-      email: "",
-      password: "",
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      admin: {},
-      masterAdmin: {}
+      id: this.props.id,
+      userFirstName: this.props.firstName,
+      userLastName: this.props.lastName,
+      email: this.props.email,
+      password: this.props.password,
+      address: this.props.address,
+      city: this.props.city,
+      state: this.props.state,
+      zip: this.props.zip,
     };
 
     this.toggle = this.toggle.bind(this);
@@ -41,10 +41,10 @@ class UpdateAdminModal extends React.Component {
   // Handles when an admin has edited a child's info
   handleUserEdit = event => {
     event.preventDefault();
-    API.UserEdit({
+    API.userEdit({
       id: this.state.id,
-      first_name: this.state.adminFirstNames,
-      last_name: this.state.adminLastName,
+      first_name: this.state.userFirstName,
+      last_name: this.state.userLastName,
       email: this.state.email,
       password: this.state.password,
       user_address: this.state.address,
@@ -81,10 +81,11 @@ class UpdateAdminModal extends React.Component {
                 onChange={this.handleInputChange}
                 name="id"
               />
+              <Label>First Name</Label>
               <InputField
                 value={this.state.userFirstName}
                 onChange={this.handleInputChange}
-                name="userFirstNames"
+                name="userFirstName"
               />
               <Label>Last Name</Label>
               <InputField
@@ -93,40 +94,37 @@ class UpdateAdminModal extends React.Component {
                 name="userLastName"
               />
               <Label>Email</Label>
-              <GenderField
+              <InputField
                 value={this.state.email}
                 onChange={this.handleInputChange}
                 name="email"
               />
               <Label>Password</Label>
               <InputField
-                type="date"
                 value={this.state.password}
                 onChange={this.handleInputChange}
                 name="password"
               />
               <Label>Address</Label>
-              <GradeField
+              <InputField
                 value={this.state.address}
                 onChange={this.handleInputChange}
                 name="address"
               />
               <Label>City</Label>
-              <LocationField
+              <InputField
                 value={this.state.city}
                 onChange={this.handleInputChange}
                 name="city"
               />
               <Label>State</Label>
               <InputField
-                type="textarea"
                 value={this.state.state}
                 onChange={this.handleInputChange}
                 name="state"
               />
               <Label>Zip</Label>
               <InputField
-                type="textarea"
                 value={this.state.zip}
                 onChange={this.handleInputChange}
                 name="zip"

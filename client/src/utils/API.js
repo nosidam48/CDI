@@ -119,7 +119,12 @@ export default {
             default:
             console.log("Route error");
         }
-    }
+    },
+
+    userEdit: (userData) => {
+        let id = userData.id;
+        return axios.put("/api/admin/users/" + id, userData)
+    },
 
  };
 
