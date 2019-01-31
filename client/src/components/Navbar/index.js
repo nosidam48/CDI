@@ -45,9 +45,6 @@ class MainNavbar extends React.Component {
               <NavItem>
                 <NavLink href="/login">Log In</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/logout">Log Out</NavLink>
-              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>

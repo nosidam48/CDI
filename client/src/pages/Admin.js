@@ -347,7 +347,9 @@ class Admin extends Component {
                                         name="selectedFile"
                                         id=""
                                     />
+                                    {/* Set Submit Button to disabled until all fields are filled out */}
                                     <SubmitBtn
+                                        disabled={!(this.state.kidFirstNames && this.state.kidLastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.kidLocation && this.state.bio && this.state.selectedFile)}        
                                         onClick={this.handleKidFormSubmit}
                                     />
                                     <DiscardBtn
