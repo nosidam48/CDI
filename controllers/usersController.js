@@ -38,8 +38,18 @@ module.exports = {
                 }
             }).then(function (kid) {
                 user.setKids((kid))
+            }).then(function (data) {
+                db.kids.update(
+                    {
+                        need_sponsor: false
+                    },
+                    {
+                        where: {
+                            id: req.body.kid_id
+                        }
+                    })
             }).then(data => res.json(data))
-            .catch(err => res.status(422).json(err))
+                .catch(err => res.status(422).json(err))
         })
     },
 
@@ -107,7 +117,7 @@ module.exports = {
             admin = true;
         }
 
-          db.users.create({
+        db.users.create({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             email: req.body.email,
@@ -120,8 +130,8 @@ module.exports = {
             master_admin_status: false,
 
         }).then(userData => res.json(userData))
-                .catch(err => res.status(422).json(err))
-      },
+            .catch(err => res.status(422).json(err))
+    },
 
     editUser: (req, res) => {
         db.users.update(
