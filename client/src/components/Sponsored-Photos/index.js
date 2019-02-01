@@ -5,10 +5,6 @@ import ImageGallery from 'react-image-gallery';
 
 // Displays photo gallery of specific child
 class SponsoredPhotos extends React.Component {
-  constructor(props) {
-    super(props);
-    }
-  
     render() {
     const images = [
       {
