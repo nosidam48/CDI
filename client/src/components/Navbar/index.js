@@ -7,6 +7,8 @@ import {
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
+import { Link, withRouter } from 'react-router-dom';
+import auth0Client from "../../Auth";
 import "./style.css";
 
 // Navbar for each page
@@ -24,6 +26,12 @@ class MainNavbar extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  signOut = () => {
+    auth0Client.signOut();
+    this.props.history.replace('/');
+  };
+
   render() {
     return (
         <Navbar color="white" light expand="md" className="sticky-top">
@@ -43,7 +51,11 @@ class MainNavbar extends React.Component {
                 <NavLink href="/admin" className="mr-4">Admin</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/login">Log In</NavLink>
+                {!auth0Client.isAuthenticated() ? (
+                  <NavLink onClick={auth0Client.signIn}>Log In</NavLink>
+                ) : (
+                  <NavLink onClick={() => {this.signOut()}}>Log Out</NavLink>
+                )}
               </NavItem>
             </Nav>
           </Collapse>
@@ -52,4 +64,4 @@ class MainNavbar extends React.Component {
   }
 }
 
-export default MainNavbar;
+export default withRouter(MainNavbar);
