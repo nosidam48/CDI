@@ -9,13 +9,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 const contentController = require("../../controllers/contentController");
-
-// Matches with "/api/content"
-router.route("/")
-
+const checkJwt = require("../../config/middleware/checkJwt");
   
 // Matches with "/api/content/:id"
 router.route("/:id")
-    .post(upload.single('selectedFile'), contentController.create)
+    .post(upload.single('selectedFile'), checkJwt, contentController.create)
 
 module.exports = router;

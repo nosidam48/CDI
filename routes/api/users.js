@@ -1,19 +1,14 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
+const checkJwt = require("../../config/middleware/checkJwt");
 
 // Matches with "/api/users"
 router.route("/")
   // .get(usersController.findAll)
-  .post(usersController.findByCriteria);
-
-// Matches with "/api/users/:id"
-router.route("/:id")
-  // .get(usersController.findById)
-//   .put(booksController.update)
-//   .delete(booksController.remove);
+  .post(checkJwt, usersController.findByCriteria);
 
 // Matches with "/api/users/connect"
 router.route("/connect")
-  .post(usersController.connectDonor);
+  .post(checkJwt, usersController.connectDonor);
 
 module.exports = router;

@@ -1,13 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
-var session = require("express-session");
-var passport = require("./passport");
 const PORT = process.env.PORT || 3001;
 const routes = require("./routes");
 const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
 const user = require('./routes/user');
 const db = require("./models");
 
@@ -21,24 +21,19 @@ app.use(
 		extended: false
 	})
 )
+
+// Parse app/json content-type
 app.use(bodyParser.json())
 
-// Sessions
-app.use(
-	session({
-		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
-		resave: false, //required
-		saveUninitialized: false //required
-	})
-)
+// Enhance app security
+app.use(helmet());
 
-// Passport
-app.use(passport.initialize())
+// Enable CORS requests
+app.use(cors());
 
 // Send every request to the React app
 app.use('/user', user)
 app.use(routes);
-app.use(passport.session()) // calls the deserializeUser
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

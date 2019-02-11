@@ -3,6 +3,8 @@ const kidRoutes = require("./kids");
 const userRoutes = require("./users");
 const contentRoutes = require("./content");
 const usersController = require("../../controllers/usersController");
+const checkJwt = require("../../config/middleware/checkJwt");
+
 // Routes
 router.use("/kids", kidRoutes);
 router.use("/users", userRoutes);
@@ -24,22 +26,19 @@ router.route("/admin/viewSponsored")
     .get(usersController.viewSponsored)
 
 router.route("/admin/addUser")
-    .post(usersController.addUser)
+    .post(checkJwt, usersController.addUser)
 
 router.route("/admin/editUser")
-    .put(usersController.editUser)
+    .put(checkJwt, usersController.editUser)
 
 router.route("/admin/searchName")
-    .post(usersController.userSearchName)
+    .post(checkJwt, usersController.userSearchName)
 
 router.route("/admin/searchEmail")
-    .post(usersController.userSearchState)
+    .post(checkJwt, usersController.userSearchState)
 
 router.route("/admin/users/:id")
-    .put(usersController.editUser)
-    .delete(usersController.removeUser)
-
-
-
+    .put(checkJwt, usersController.editUser)
+    .delete(checkJwt, usersController.removeUser)
 
 module.exports = router;

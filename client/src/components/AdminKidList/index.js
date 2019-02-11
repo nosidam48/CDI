@@ -43,7 +43,8 @@ function AdminKidList(props) {
                     kidId={props.id}
                     kidFirstNames={props.firstNames}
                     kidLastName={props.lastName}
-                    onChange={props.onChange}    
+                    onChange={props.onChange}
+                    redoSearch={props.redoSearch}    
                 />
                 {/* Button that opens RemoveKidModal */}
                 <RemoveKidModal 
