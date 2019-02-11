@@ -68,4 +68,4 @@ Note: For demo purposes, all routes (public, donor and admin) are viewable.
 ![Add a Child process](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-AddChild.gif "Add a Child")
 
 ### Add a Photo/Note
-![Add a Photo process](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-addphoto.gif "Add a Photo/Note")
+![Add a Photo process](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/Readme-addphoto.gif "Add a Photo/Note")
