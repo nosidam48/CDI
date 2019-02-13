@@ -7,7 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink } from 'reactstrap';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import auth0Client from "../../Auth";
 import "./style.css";
 

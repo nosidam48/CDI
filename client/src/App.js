@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Admin from "./pages/Admin";
 import Donors from "./pages/Donors";
@@ -21,7 +21,7 @@ class App extends React.Component {
 
   async componentDidMount() {
     if (this.props.location.pathname === '/callback') {
-      this.setState({checkingSession:false});
+      this.setState({ checkingSession: false });
       return;
     }
     try {
@@ -30,25 +30,27 @@ class App extends React.Component {
     } catch (err) {
       if (err.error !== 'login_required') console.log(err.error);
     }
-    this.setState({checkingSession:false});
-  }   
-
-    render() {
-      return (
-          <div>
-            <Navbar/>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/kids" component={Kids} />
-              <Route exact path="/kids/:id" component={KidProfilePublic} />
-              <Route exact path="/donors/:id" component={Donors} />
-              <SecuredRoute path="/admin" component={Admin} checkingSession={this.state.checkingSession} />
-              <Route exact path="/callback" component={Callback} />
-              <Route component={NoMatch} />
-          </div>
-      );
-    }
+    this.setState({ checkingSession: false });
   }
 
-  export default withRouter(App);
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/kids" component={Kids} />
+          <Route exact path="/kids/:id" component={KidProfilePublic} />
+          <Route exact path="/donors/:id" component={Donors} />
+          <SecuredRoute path="/admin" component={Admin} checkingSession={this.state.checkingSession} />
+          <Route exact path="/callback" component={Callback} />
+          <Route component={NoMatch} />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+export default withRouter(App);
 
 
