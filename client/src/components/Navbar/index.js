@@ -44,12 +44,20 @@ class MainNavbar extends React.Component {
               <NavItem>
                 <NavLink href="/kids/" className="mr-4">Kids</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href={"/donors/1"}className="mr-4">Donors</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/admin" className="mr-4">Admin</NavLink>
-              </NavItem>
+
+              {/* Only show Donors link if user is signed in */}
+              {auth0Client.isAuthenticated() ? (
+                <NavItem>
+                  <NavLink href={"/donors/1"}className="mr-4">Donors</NavLink>
+                </NavItem>
+                ) : null }
+
+              {/* Only show Donors link if user is signed in */}
+              {auth0Client.isAuthenticated() ? (             
+                <NavItem>
+                  <NavLink href="/admin" className="mr-4">Admin</NavLink>
+                </NavItem>
+              ) : null }
               <NavItem>
                 {!auth0Client.isAuthenticated() ? (
                   <NavLink onClick={auth0Client.signIn}>Log In</NavLink>
