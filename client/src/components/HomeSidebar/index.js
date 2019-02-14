@@ -2,7 +2,7 @@ import React from "react";
 import { Col } from "reactstrap";
 import "./style.css";
 
-// Sidebar on home page that shows unsponsored kids
+// Sidebar on home page that shows two random unsponsored kids
 function HomeSidebar({ children }) {
     return (
         <Col sm= "4" md="3" lg="2" className="p-0" id="sidebar">{children}
@@ -13,5 +13,4 @@ function HomeSidebar({ children }) {
         </Col>
     )
 }
-
 export default HomeSidebar

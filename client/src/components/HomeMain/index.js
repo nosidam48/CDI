@@ -29,8 +29,7 @@ function HomeMain(props) {
             <p>Your sponsorship of $45/month for a preK-6th grade student or $58/month for a 7th-12th grade student provides the opportunity for a child to attend a CDI near him or her.</p>
             <p><a href="/kids"><i className="fas fa-child mr-2"></i>See the children who are available for sponsorship.</a></p>
             <p><Button id="signIn" onClick={props.onClick}><i className="fas fa-chevron-circle-right mr-2"></i>Already a donor? Sign in</Button> to see updates for the child you sponsor.</p>
-        </Col>              
+        </Col>
     )
 }
-
 export default HomeMain

@@ -46,7 +46,7 @@ class App extends React.Component {
           <Route exact path="/kids" component={Kids} />
           <Route exact path="/kids/:id" component={KidProfilePublic} />
           <Route path="/donors/:id" component={Donors} checkingSession={this.state.checkingSession}/>
-          <SecuredRoute path="/admin" component={Admin}  />
+          <SecuredRoute path="/admin" component={Admin} checkingSession={this.state.checkingSession}/>
           <SecuredRoute path="/userprofile" component={Profile} checkingSession={this.state.checkingSession} />
           <Route exact path="/callback" component={Callback} />
           <Route component={NoMatch} />
