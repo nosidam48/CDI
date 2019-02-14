@@ -4,6 +4,32 @@ const Op = Sequelize.Op;
 
 // Defining methods for the usersController
 module.exports = {
+    // Function to let donor update profile
+    profileUpdate: (req, res) => {
+        // See if user is already in the database
+        db.users.findOne({
+            where: {
+                email: req.body.email
+            }
+        }).then(function (data) {
+            if (!data) {
+                db.users.create(req.body)
+                    .then(userData => res.json(userData))
+                    .catch(err => res.status(422).json(err));
+            } else {
+                db.users.update(req.body,
+                    {
+                        where: {
+                            email: req.body.email
+                        }
+                    }
+                )
+                    .then(userData => res.json(userData))
+                    .catch(err => res.status(422).json(err));
+            }
+        })
+    },
+
     // Function to let admin search for a donor and connect kid
     findByCriteria: (req, res) => {
         // Create variable to store only search data that admin entered

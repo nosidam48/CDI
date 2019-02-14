@@ -8,12 +8,13 @@ router.route("/")
 
 // Matches with "/api/users/:id"
 router.route("/:id")
-  // .get(usersController.findById)
-//   .put(booksController.update)
-//   .delete(booksController.remove);
 
 // Matches with "/api/users/connect"
 router.route("/connect")
   .post(usersController.connectDonor);
+
+  // Matches with "/api/users/profile"
+router.route("/profile")
+  .post(usersController.profileUpdate);
 
 module.exports = router;
