@@ -33,11 +33,9 @@ class Profile extends Component {
     // Grab the user's email address from the jwt token and update state
     let profile = auth0Client.getProfile();
     this.setState({ email: profile.name})
-    console.log(profile.name);
     // Get user info if user is already in db to put in form
     API.getDonor({ email: profile.name })
       .then(response => {
-        console.log(response);
         // If the user has profile info already, set state with response data to fill in form with previous data and set state to false
         if (response.data) {
           this.setState({
@@ -71,15 +69,12 @@ class Profile extends Component {
       zip: this.state.zip
     })
       .then(response => {
-        console.log(response)
         // Set state with db results and set loading to false
         this.setState({
           results: response.data,
           loading: false
         })
-        console.log(this.state);
       }).catch(error => {
-        console.log('Error updating the database')
         console.log(error)
       })
   }
@@ -98,7 +93,7 @@ class Profile extends Component {
         ) : (
             <Row>
               <Col md={{ size: 6, offset: 3 }}>
-                <h4>Update Profile</h4>
+                <h4>Update Your Current Profile</h4>
                 <Form className="mt-3">
                   <Label>First Name*</Label>
                   <InputField

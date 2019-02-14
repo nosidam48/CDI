@@ -39,7 +39,4 @@ router.route("/admin/users/:id")
     .put(usersController.editUser)
     .delete(usersController.removeUser)
 
-
-
-
 module.exports = router;

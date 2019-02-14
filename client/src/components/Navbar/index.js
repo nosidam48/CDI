@@ -68,8 +68,7 @@ class MainNavbar extends React.Component {
             ) : null}
 
             {/* If user is not signed in, show Log in button and click to go to log in. If use is signed in, show dropdown menu with links to user profile and log out */}
-            <NavItem>
-              {!auth0Client.isAuthenticated() ? (
+            {!auth0Client.isAuthenticated() ? (
                 <NavLink onClick={auth0Client.signIn}>Log In</NavLink>
               ) : (
                   <UncontrolledDropdown nav inNavbar>
@@ -90,7 +89,6 @@ class MainNavbar extends React.Component {
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 )}
-            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
