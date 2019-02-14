@@ -4,13 +4,26 @@
 }
 
 a {
-    color: #97442f;
+    color: #97442f!important;
 }
   
 a:hover {
     text-decoration: none;
     color:#356377!important;
+    cursor: pointer;
 }
+
+.btn {
+    vertical-align: none;
+    padding: 0;
+}
+
+#signIn {
+    background-color: transparent;
+    color: #97442f;
+}
+
+
 
 @media screen and (max-width: 575.98px) {
     #main-container {

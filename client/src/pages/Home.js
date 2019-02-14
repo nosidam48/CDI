@@ -6,18 +6,16 @@ import HomeSidebar from "../components/HomeSidebar";
 import SidebarCard from "../components/SidebarCard";
 import API from "../utils/API";
 import LoadSpinner from "../components/LoadSpinner";
+import auth0Client from "../Auth";
 
 class Home extends Component {
-
     state = {
         kids: [],
         loading: true,
     }
-
     componentDidMount() {
         this.kidsCall();
     }
-
     kidsCall() {
         API.homeKids()
             .then(res => {
@@ -49,7 +47,7 @@ class Home extends Component {
                 <img src="../images/banner.jpg" className="mb-3" width="100%" alt="Kids" />
                 <MainContainer>
                     <Row className="align-items-start">
-                        <HomeMain />
+                        <HomeMain onClick={auth0Client.signIn} />
                         <HomeSidebar>
                             {this.state.loading ? (
                                 <LoadSpinner

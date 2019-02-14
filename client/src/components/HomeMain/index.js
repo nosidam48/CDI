@@ -1,9 +1,9 @@
 import React from "react";
-import { Col } from "reactstrap";
+import { Col, Button } from "reactstrap";
 import "./style.css";
 
 // Main content for home page
-function HomeMain({ children }) {
+function HomeMain(props) {
     return (
         <Col sm="8" md="9" lg="10" className="pl-0 pr-4" id="main-container">
             <h3>Centro de Desarrollo Infantil (Children Development Center) oversees the health and development of at-risk boys and girls.</h3>
@@ -28,7 +28,7 @@ function HomeMain({ children }) {
 
             <p>Your sponsorship of $45/month for a preK-6th grade student or $58/month for a 7th-12th grade student provides the opportunity for a child to attend a CDI near him or her.</p>
             <p><a href="/kids"><i className="fas fa-child mr-2"></i>See the children who are available for sponsorship.</a></p>
-            <p><a href="/login"><i className="fas fa-chevron-circle-right mr-2"></i>Already a donor? Sign in</a> to see updates for the child you sponsor.</p>
+            <p><Button id="signIn" onClick={props.onClick}><i className="fas fa-chevron-circle-right mr-2"></i>Already a donor? Sign in</Button> to see updates for the child you sponsor.</p>
         </Col>              
     )
 }

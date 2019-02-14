@@ -1,5 +1,6 @@
 import auth0 from 'auth0-js';
 
+// Sets user authentication functions through Auth0
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
