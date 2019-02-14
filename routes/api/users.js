@@ -17,4 +17,7 @@ router.route("/connect")
 router.route("/profile")
   .post(usersController.profileUpdate);
 
+router.route("/profile-check")
+  .post(usersController.getDonor);
+
 module.exports = router;

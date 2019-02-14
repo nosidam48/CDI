@@ -55,6 +55,11 @@ export default {
     },
 
     // DONOR FUNCTIONS ============================================================
+    // Get donor info
+    getDonor: (email) => {
+        return axios.post("/api/users/profile-check", email)
+    },
+    
     // Show donor the child they are connected to
     donorKid: (id) => {
         return axios.get("/api/donors/" + id)

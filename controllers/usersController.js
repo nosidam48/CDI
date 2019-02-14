@@ -4,6 +4,15 @@ const Op = Sequelize.Op;
 
 // Defining methods for the usersController
 module.exports = {
+    // Function to retrieve donor profile info
+    getDonor: (req, res) => {
+        db.users.findOne({
+            where: {
+                email: req.body.email
+            }
+        }).then(userData => res.json(userData))
+    },
+    
     // Function to let donor update profile
     profileUpdate: (req, res) => {
         // See if user is already in the database
