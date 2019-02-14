@@ -140,9 +140,7 @@ class ConnectDonorModal extends Component {
             )}
             { this.state.connected ? (
               <h4 className="text-center py-3">{this.state.message}</h4>
-            ) : (
-              <h4 className="text-center py-3"></h4>
-            )}
+            ) : null }
           </ModalBody>
           <ModalFooter>
             <DiscardBtn onClick={this.toggle} className="modalCancel"></DiscardBtn>
