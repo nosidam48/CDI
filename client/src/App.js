@@ -6,6 +6,7 @@ import Donors from "./pages/Donors";
 import Home from "./pages/Home";
 import KidProfilePublic from "./pages/KidProfilePublic";
 import Kids from "./pages/Kids";
+import Profile from "./pages/Profile";
 import NoMatch from "./pages/NoMatch";
 import Callback from "./Callback";
 import SecuredRoute from "./SecuredRoute/SecuredRoute";
@@ -43,6 +44,7 @@ class App extends React.Component {
           <Route exact path="/kids/:id" component={KidProfilePublic} />
           <Route exact path="/donors/:id" component={Donors} />
           <SecuredRoute path="/admin" component={Admin} checkingSession={this.state.checkingSession} />
+          <Route path="/userprofile" component={Profile} />
           <Route exact path="/callback" component={Callback} />
           <Route component={NoMatch} />
         </Switch>
