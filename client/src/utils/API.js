@@ -119,6 +119,7 @@ export default {
     },
 
     addUser: (userData) => {
+        console.log("request received");
         return axios.post("/api/admin/addUser", userData)
     },
 
