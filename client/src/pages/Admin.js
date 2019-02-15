@@ -222,8 +222,6 @@ class Admin extends Component {
             showSearchResults: false,
             message: ""
         })
-        console.log("Calling this again: " + this.state.searchTerm)
-        console.log("Calling this again: " + this.state.searchType)
         API.kidSearch({
             searchTerm: this.state.searchTerm,
             searchType: this.state.searchType
