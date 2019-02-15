@@ -30,8 +30,9 @@ class Admin extends Component {
         showDonors: false,
         showAdmins: false,
 
-        // Message
+        // Message & loading
         message: "Choose an admin tool from the menu to get started.",
+        loading: false,
 
         // Kid form inputs
         kidFirstNames: "",
@@ -187,6 +188,9 @@ class Admin extends Component {
     // Handles when an admin adds a new child
     handleKidFormSubmit = event => {
         event.preventDefault();
+        // Set state to loading
+        this.setState({ loading: true})
+
         // Use FormData to handle both text and the binary file
         let kidData = new FormData();
         kidData.append("first_name", this.state.kidFirstNames);
@@ -203,13 +207,15 @@ class Admin extends Component {
             .then(res => {
                 this.resetKidForm();
                 this.setState({
-                    message: "A child was added to the database."
+                    message: "A child was added to the database.",
+                    loading: false
                 })
             })
             .catch(err => {
                 this.resetKidForm();
                 this.setState({
-                    message: "There was an error adding the child to the database."
+                    message: "There was an error adding the child to the database.",
+                    loading: false
                 });
                 console.log(err);
             })
@@ -291,6 +297,12 @@ class Admin extends Component {
                         onClickShowAdmins={this.showAdmins}
                     />
                     <Col xs="12" sm="8" md="9" className="px-3" id="addKid">
+                        {/* Shows loading spinner if loading is true */}
+                        {this.state.loading ? (
+                            <LoadSpinner className="kidsSpin" />
+                        ) : null
+                        }
+
                         {/* ADD KID FORM - displays if true =============== */}
                         {this.state.showAddKidForm ?
                             <AddKidForm
@@ -439,12 +451,6 @@ class Admin extends Component {
                         <MainContainer>
                             <h4 className="text-center">{this.state.message}</h4>
                         </MainContainer>
-
-                        {/* Shows loading spinner if loading is true */}
-                        {this.state.loading ? (
-                            <LoadSpinner className="kidsSpin" />
-                        ) : null
-                        }
                     </Col>
                 </Row>
             </MainContainer>
