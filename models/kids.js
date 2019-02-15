@@ -48,7 +48,5 @@ module.exports = function (sequelize, DataTypes) {
             Kids.hasMany(models.content);
     };
 
-
-
     return Kids;
 };

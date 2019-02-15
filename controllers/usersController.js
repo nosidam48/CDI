@@ -4,6 +4,41 @@ const Op = Sequelize.Op;
 
 // Defining methods for the usersController
 module.exports = {
+    // Function to retrieve donor profile info
+    getDonor: (req, res) => {
+        db.users.findOne({
+            where: {
+                email: req.body.email
+            }
+        }).then(userData => res.json(userData))
+    },
+    
+    // Function to let donor update profile
+    profileUpdate: (req, res) => {
+        // See if user is already in the database
+        db.users.findOne({
+            where: {
+                email: req.body.email
+            }
+        }).then(function (data) {
+            if (!data) {
+                db.users.create(req.body)
+                    .then(userData => res.json(userData))
+                    .catch(err => res.status(422).json(err));
+            } else {
+                db.users.update(req.body,
+                    {
+                        where: {
+                            email: req.body.email
+                        }
+                    }
+                )
+                    .then(userData => res.json(userData))
+                    .catch(err => res.status(422).json(err));
+            }
+        })
+    },
+
     // Function to let admin search for a donor and connect kid
     findByCriteria: (req, res) => {
         // Create variable to store only search data that admin entered
@@ -61,20 +96,16 @@ module.exports = {
             },
         }).then(user => user.getKids())
             .then(data =>
-
                 db.content.findAll({
                     where: {
                         kidId: data[0].dataValues.id
                     }
                 }).then(data2 => {
-
                     let donorObject = {
                         kid: data[0].dataValues,
                         content: data2
                     }
-
                     res.json(donorObject)
-
                 })
             )
             .catch(err => res.status(422).json(err))
@@ -117,20 +148,50 @@ module.exports = {
             admin = true;
         }
 
-        db.users.create({
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
-            password: req.body.password,
-            user_address: req.body.address,
-            user_city: req.body.city,
-            user_state: req.body.state,
-            user_zip: req.body.zip,
-            admin_status: admin,
-            master_admin_status: false,
-
-        }).then(userData => res.json(userData))
-            .catch(err => res.status(422).json(err))
+        // See if user is already in the database
+        db.users.findOne({
+            where: {
+                email: req.body.email
+            }
+        }).then(function (data) {
+            // If not, then create new record
+            if (!data) {
+                db.users.create({
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email: req.body.email,
+                    user_address: req.body.address,
+                    user_city: req.body.city,
+                    user_state: req.body.state,
+                    user_zip: req.body.zip,
+                    admin_status: admin,
+                    master_admin_status: false,
+                })
+                    .then(userData => res.json(userData))
+                    .catch(err => res.status(422).json(err));
+            } else {
+                // If user is in database, update the record
+                db.users.update({
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email: req.body.email,
+                    user_address: req.body.address,
+                    user_city: req.body.city,
+                    user_state: req.body.state,
+                    user_zip: req.body.zip,
+                    admin_status: admin,
+                    master_admin_status: false,
+                },
+                    {
+                        where: {
+                            email: req.body.email
+                        }
+                    }
+                )
+                    .then(userData => res.json(userData))
+                    .catch(err => res.status(422).json(err));
+            }
+        })
     },
 
     editUser: (req, res) => {
@@ -176,7 +237,6 @@ module.exports = {
     },
 
     removeUser: (req, res) => {
-
         db.users.destroy(
             {
                 where: {
@@ -185,8 +245,6 @@ module.exports = {
             }).then(userData => res.json(userData))
             .catch(err => res.status(422).json(err));
     },
-
-
 };
 
 

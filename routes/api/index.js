@@ -2,44 +2,16 @@ const router = require("express").Router();
 const kidRoutes = require("./kids");
 const userRoutes = require("./users");
 const contentRoutes = require("./content");
+const adminRoutes = require("./admin");
 const usersController = require("../../controllers/usersController");
+
 // Routes
 router.use("/kids", kidRoutes);
 router.use("/users", userRoutes);
 router.use("/content", contentRoutes);
+router.use("/admin", adminRoutes);
 
 router.route("/donors/:id")
     .get(usersController.donorKid)
-
-router.route("/admin/viewAdmins")
-    .get(usersController.viewAdmins)
-
-router.route("/admin/viewDonors")
-    .get(usersController.viewDonors)
-
-router.route("/admin/viewKids")
-    .get(usersController.viewAllKids)
-
-router.route("/admin/viewSponsored")
-    .get(usersController.viewSponsored)
-
-router.route("/admin/addUser")
-    .post(usersController.addUser)
-
-router.route("/admin/editUser")
-    .put(usersController.editUser)
-
-router.route("/admin/searchName")
-    .post(usersController.userSearchName)
-
-router.route("/admin/searchEmail")
-    .post(usersController.userSearchState)
-
-router.route("/admin/users/:id")
-    .put(usersController.editUser)
-    .delete(usersController.removeUser)
-
-
-
 
 module.exports = router;

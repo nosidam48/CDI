@@ -6,18 +6,17 @@ import HomeSidebar from "../components/HomeSidebar";
 import SidebarCard from "../components/SidebarCard";
 import API from "../utils/API";
 import LoadSpinner from "../components/LoadSpinner";
+import auth0Client from "../Auth";
 
 class Home extends Component {
-
     state = {
         kids: [],
         loading: true,
     }
-
     componentDidMount() {
         this.kidsCall();
     }
-
+    // Function to display two random unsponsored children in the database
     kidsCall() {
         API.homeKids()
             .then(res => {
@@ -29,6 +28,7 @@ class Home extends Component {
             .catch(err => console.log(err))
     }
 
+    // Function to calculate age using the birthdate in the database
     calculateAge = (dateString) => {
         var today = new Date();
         var birthday = new Date(dateString);
@@ -49,8 +49,10 @@ class Home extends Component {
                 <img src="../images/banner.jpg" className="mb-3" width="100%" alt="Kids" />
                 <MainContainer>
                     <Row className="align-items-start">
-                        <HomeMain />
+                        {/* Passing onClick to HomeMain section for link at the bottom */}
+                        <HomeMain onClick={auth0Client.signIn} />
                         <HomeSidebar>
+                            {/* Loading spinner shows until db returns two kids for sidebar */}
                             {this.state.loading ? (
                                 <LoadSpinner
                                     className="whiteSpin"
@@ -65,7 +67,6 @@ class Home extends Component {
         )
     }
 }
-
 export default Home;
 
 

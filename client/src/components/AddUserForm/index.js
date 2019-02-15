@@ -1,16 +1,14 @@
 import React from "react";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import { Form, FormGroup, Label } from "reactstrap";
 import { InputField, AdminField, SubmitBtn, DiscardBtn } from "../Form";
 import API from "../../utils/API";
 
-// Form that is called when an admin wants to add a child to the database
+// Form that is called when an admin wants to add/update user profile
 class AddUserForm extends React.Component {
-
   state = {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
     address: "",
     city: "",
     state: "",
@@ -18,7 +16,7 @@ class AddUserForm extends React.Component {
     admin: false
   }
 
-  // Function that runs after a user has been added
+  // Function that runs after a user has been updated
   resetUserForm = () => {
     this.setState({
         firstName: "", lastName: "",email: "", password: "",
@@ -35,12 +33,11 @@ class AddUserForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    
+    console.log("Form submitted")
     API.addUser({
       first_name: this.state.firstName,
       last_name: this.state.lastName,
       email: this.state.email,
-      password: this.state.password,
       address: this.state.address,
       city: this.state.city,
       state: this.state.state,
@@ -57,7 +54,7 @@ class AddUserForm extends React.Component {
   render() {
     return (
       <div>
-        <h5 className="border-bottom">Add a user to the database</h5>
+        <h5 className="border-bottom">Add/update user profile</h5>
         <Form className="mt-4">
           <FormGroup>
             <Label>First name</Label>
@@ -70,10 +67,6 @@ class AddUserForm extends React.Component {
           <FormGroup>
             <Label>Email</Label>
             <InputField value={this.state.email} onChange={this.handleInputChange} type="email" name="email" placeholder="donor@gmail.com" />
-          </FormGroup>
-          <FormGroup>
-            <Label>Password</Label>
-            <Input value={this.state.password} onChange={this.handleInputChange} type="password" name="password" placeholder="Temporary password, like CDI2019" />
           </FormGroup>
           <FormGroup>
             <Label>Address</Label>
@@ -96,8 +89,8 @@ class AddUserForm extends React.Component {
             <AdminField value={this.state.admin} onChange={this.handleInputChange} name="admin" />
           </FormGroup>
           <SubmitBtn
-            disabled={!(this.state.firstName && this.state.lastName && this.state.email && this.state.password)}
-            onClick={() => { this.handleSubmit(); this.props.toggle()} }  inline="true"></SubmitBtn>
+            disabled={!(this.state.firstName && this.state.lastName && this.state.email)}
+            onClick={this.handleSubmit}  inline="true"></SubmitBtn>
           <DiscardBtn inline="true" className="ml-2" />
         </Form>
       </div>

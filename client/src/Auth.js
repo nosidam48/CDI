@@ -1,5 +1,6 @@
 import auth0 from 'auth0-js';
 
+// Sets user authentication functions through Auth0
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
@@ -50,7 +51,6 @@ class Auth {
   setSession(authResult) {
     this.idToken = authResult.idToken;
     this.profile = authResult.idTokenPayload;
-    console.log(this.profile);
     // set the time that the id token will expire at
     this.expiresAt = authResult.idTokenPayload.exp * 1000;
   }

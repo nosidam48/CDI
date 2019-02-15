@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-// KID FUNCTIONS===============================================================
+    // KID FUNCTIONS===============================================================
     // Retrieves all unsponsored kids
     getKidsUnsponsored: () => {
         return axios.get("/api/kids");
@@ -10,19 +10,19 @@ export default {
     // Searches for kid based on criteria
     kidSearch: searchData => {
         // Switch statement to determine which search to run based on admin search type                
-        switch(searchData.searchType) {
-            case "Name": 
-            return axios.post("/api/kids/name/", searchData);
+        switch (searchData.searchType) {
+            case "Name":
+                return axios.post("/api/kids/name/", searchData);
 
-            case "Location": 
-            return axios.post("/api/kids/location/", searchData)
+            case "Location":
+                return axios.post("/api/kids/location/", searchData)
 
             default:
-            console.log("Route error");
-        }        
+                console.log("Route error");
+        }
     },
 
-    // Adds kid to database
+    // Adds kid to database using expanded axios request to handle photo
     addKid: (kidData) => {
         return axios({
             "method": "POST",
@@ -35,8 +35,8 @@ export default {
     },
 
     //to return a single kid by id
-    findOneKid: function(id) {
-       return axios.get("/api/kids/kid/" + id)
+    findOneKid: function (id) {
+        return axios.get("/api/kids/kid/" + id)
     },
 
     // Edits existing kid info in db
@@ -45,7 +45,50 @@ export default {
         return axios.put("/api/kids/kid/" + id, kidData)
     },
 
-    // USER FUNCTIONS ============================================================
+    // Function to remove child
+    removeKid: (id) => {
+        return axios.delete("api/kids/kid/" + id);
+    },
+
+    //Show 2 random kids on the front page
+    homeKids: () => {
+        return axios.get("/api/kids/random");
+    },
+
+    // From filter search on Kids page
+    getKidsSearch: (searchData) => {
+        return axios.post("/api/kids/search", searchData)
+    },
+
+    // DONOR FUNCTIONS ============================================================
+    // Get logged-in donor profile
+    getDonor: (email) => {
+        return axios.post("/api/users/profile-check", email)
+    },
+
+    // Show donor the child they are connected to
+    donorKid: (id) => {
+        return axios.get("/api/donors/" + id)
+    },
+
+    //Donor updates profile info
+    donorProfile: (profileData) => {
+        console.log("Update profile request received")
+        return axios.post("/api/users/profile", profileData);
+    },
+
+    // ADMIN-KID FUNCTIONS==============================================================
+
+    // View all kids
+    viewKids: () => {
+        return axios.get("/api/admin/viewKids")
+    },
+
+    // View all sponsored kids
+    viewSponsored: () => {
+        return axios.get("/api/admin/viewSponsored")
+    },
+
     // Function for donor search to connect child
     donorSearch: (searchData) => {
         return axios.post("/api/users/", searchData);
@@ -55,13 +98,7 @@ export default {
         return axios.post("/api/users/connect", connectData);
     },
 
-    // Function to remove child
-    removeKid: (id) => {
-        return axios.delete("api/kids/kid/" + id);
-    },
-
-    // CONTENT FUNCTIONS
-    // Add content for child
+    // Add content for child, includes expanded axios request to handle photo
     addContent: (contentData) => {
         // Extract id from contentData 
         let id = contentData.get("kidId")
@@ -75,49 +112,25 @@ export default {
             "mimeType": "multipart/form-data",
         })
     },
-    //Show 2 kids on the front page
-    homeKids: () => {        
-        return axios.get("/api/kids/random");
-    },
 
-    donorKid: (id) => {        
-        return axios.get("/api/donors/" + id)
-    },
-
-    getKidsSearch: (searchData) => {
-        return axios.post("/api/kids/search", searchData)
-    },
-
-    viewAdmins: () => {
-        return axios.get("/api/admin/viewAdmins")
-    },
-
+    // ADMIN-DONOR FUNCTIONS=======================================================
     viewDonors: () => {
         return axios.get("/api/admin/viewDonors")
     },
 
-    viewKids: () => {
-        return axios.get("/api/admin/viewKids")
-    },
-
-    viewSponsored: () => {
-        return axios.get("/api/admin/viewSponsored")
-    },
-    
     addUser: (userData) => {
+        console.log("request received");
         return axios.post("/api/admin/addUser", userData)
     },
-    
+
     userSearch: (searchData) => {
-        switch(searchData.searchType) {
-            case "Name": 
-            return axios.post("/api/admin/searchName/", searchData);
-
-            case "Email": 
-            return axios.post("/api/admin/searchEmail/", searchData)
-
+        switch (searchData.searchType) {
+            case "Name":
+                return axios.post("/api/admin/searchName/", searchData);
+            case "Email":
+                return axios.post("/api/admin/searchEmail/", searchData)
             default:
-            console.log("Route error");
+                console.log("Route error");
         }
     },
 
@@ -130,5 +143,9 @@ export default {
         return axios.delete("api/admin/users/" + id);
     },
 
- };
+    // ADMIN-ADMIN FUNCTIONS=======================================================
+    viewAdmins: () => {
+        return axios.get("/api/admin/viewAdmins")
+    },
+};
 
