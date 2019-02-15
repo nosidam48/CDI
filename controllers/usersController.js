@@ -12,7 +12,7 @@ module.exports = {
             }
         }).then(userData => res.json(userData))
     },
-    
+
     // Function to let donor update profile
     profileUpdate: (req, res) => {
         // See if user is already in the database
@@ -141,21 +141,22 @@ module.exports = {
     },
 
     addUser: (req, res) => {
-        console.log("Received by controller");
         // Convert yes admin response to true boolean; default is false
         let admin = false;
         if (req.body.admin === "Yes") {
             admin = true;
         }
-
-        // See if user is already in the database
+        // Make sure user doesn't already exist in the database
         db.users.findOne({
             where: {
                 email: req.body.email
-            }
-        }).then(function (data) {
-            // If not, then create new record
-            if (!data) {
+            },
+        }).then(data => {
+            // If a record was found, send back message to admin
+            if (data) {
+                res.send("Already exists.")
+            } else {
+                // If no record, Add new user to the database
                 db.users.create({
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
@@ -167,27 +168,6 @@ module.exports = {
                     admin_status: admin,
                     master_admin_status: false,
                 })
-                    .then(userData => res.json(userData))
-                    .catch(err => res.status(422).json(err));
-            } else {
-                // If user is in database, update the record
-                db.users.update({
-                    first_name: req.body.first_name,
-                    last_name: req.body.last_name,
-                    email: req.body.email,
-                    user_address: req.body.address,
-                    user_city: req.body.city,
-                    user_state: req.body.state,
-                    user_zip: req.body.zip,
-                    admin_status: admin,
-                    master_admin_status: false,
-                },
-                    {
-                        where: {
-                            email: req.body.email
-                        }
-                    }
-                )
                     .then(userData => res.json(userData))
                     .catch(err => res.status(422).json(err));
             }
