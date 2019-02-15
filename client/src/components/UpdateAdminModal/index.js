@@ -15,7 +15,6 @@ class UpdateAdminModal extends React.Component {
       userFirstName: this.props.firstName,
       userLastName: this.props.lastName,
       email: this.props.email,
-      password: this.props.password,
       address: this.props.address,
       city: this.props.city,
       state: this.props.state,
@@ -38,7 +37,7 @@ class UpdateAdminModal extends React.Component {
     })
   };
 
-  // Handles when an admin has edited a child's info
+  // Handles when an admin has edited a user's info
   handleUserEdit = event => {
     event.preventDefault();
     API.userEdit({
@@ -46,7 +45,6 @@ class UpdateAdminModal extends React.Component {
       first_name: this.state.userFirstName,
       last_name: this.state.userLastName,
       email: this.state.email,
-      password: this.state.password,
       user_address: this.state.address,
       user_city: this.state.city,
       user_state: this.state.state,
@@ -61,7 +59,7 @@ class UpdateAdminModal extends React.Component {
       .catch(err => {
         this.setState({
           loading: false,
-          message: "We're sorry, there was a problem updating the child's record."
+          message: "We're sorry, there was a problem updating the user's record."
         })
         console.log(err);
       })

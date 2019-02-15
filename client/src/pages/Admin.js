@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Form, Label } from "reactstrap";
 import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn, UserSearchType } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
+import AddKidForm from "../components/AddKidForm";
 import AdminKidList from "../components/AdminKidList";
 import AdminUserList from "../components/AdminUserList"
 import AdminMultipleKids from "../components/AdminMultipleKidList";
@@ -114,7 +115,7 @@ class Admin extends Component {
             message: "",
         });
     }
-    
+
     // Lets admin search for admin
     showAdminSearch = () => {
         this.setState({
@@ -176,6 +177,7 @@ class Admin extends Component {
         })
     };
 
+    // Function to handle photo uploads
     fileSelectedHandler = event => {
         this.setState({
             selectedFile: event.target.files[0]
@@ -291,75 +293,29 @@ class Admin extends Component {
                     <Col xs="12" sm="8" md="9" className="px-3" id="addKid">
                         {/* ADD KID FORM - displays if true =============== */}
                         {this.state.showAddKidForm ?
-                            <div>
-                                <h5 className="border-bottom">Add a child to the database</h5>
-                                <Form className="mt-4">
-                                    <Label>First Names</Label>
-                                    <InputField
-                                        value={this.state.kidFirstNames}
-                                        onChange={this.handleInputChange}
-                                        name="kidFirstNames"
-                                        placeholder="First names"
-                                    />
-                                    <Label>Last Names</Label>
-                                    <InputField
-                                        value={this.state.kidLastName}
-                                        onChange={this.handleInputChange}
-                                        name="kidLastName"
-                                        placeholder="Last name"
-                                    />
-                                    <Label>Gender</Label>
-                                    <GenderField
-                                        value={this.state.gender}
-                                        onChange={this.handleInputChange}
-                                        name="gender"
-                                    />
-                                    <Label>Birthdate</Label>
-                                    <InputField
-                                        type="date"
-                                        value={this.state.birth_date}
-                                        onChange={this.handleInputChange}
-                                        name="birth_date"
-                                    />
-                                    <Label>Grade in School</Label>
-                                    <GradeField
-                                        value={this.state.grade}
-                                        onChange={this.handleInputChange}
-                                        name="grade"
-                                    />
-                                    <Label>Location</Label>
-                                    <LocationField
-                                        value={this.state.kidLocation}
-                                        onChange={this.handleInputChange}
-                                        name="kidLocation"
-                                    />
-                                    <Label>Bio</Label>
-                                    <InputField
-                                        type="textarea"
-                                        value={this.state.bio}
-                                        onChange={this.handleInputChange}
-                                        name="bio"
-                                        placeholder="Description of the child"
-                                    />
-                                    <Label>Profile Photo</Label>
-                                    <UploadPhoto
-                                        onChange={this.fileSelectedHandler}
-                                        name="selectedFile"
-                                        id=""
-                                    />
-                                    {/* Set Submit Button to disabled until all fields are filled out */}
-                                    <SubmitBtn
-                                        disabled={!(this.state.kidFirstNames && this.state.kidLastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.kidLocation && this.state.bio && this.state.selectedFile)}        
-                                        onClick={this.handleKidFormSubmit}
-                                    />
-                                    <DiscardBtn
-                                        onClick={this.resetKidForm}
-                                    />
-                                </Form>
-                            </div> :
-                            null
-                        }
-                        {/* END OF ADD KID FORM============= */}
+                            <AddKidForm
+                                onChangeInput={this.handleInputChange}
+                                onChangeFile={this.fileSelectedHandler}
+                                firstNameValue={this.state.kidFirstNames}
+                                firstName="kidFirstNames"
+                                lastNamevalue={this.state.kidLastName}
+                                lastName="kidLastName"
+                                genderValue={this.state.gender}
+                                genderName="gender"
+                                birthdateValue={this.state.birth_date}
+                                birthdateName="birth_date"
+                                gradeValue={this.state.grade}
+                                gradeName="grade"
+                                locationValue={this.state.kidLocation}
+                                locationName="kidLocation"
+                                bioValue={this.state.bio}
+                                bioName="bio"
+                                photoName="selectedFile"
+                                photoId=""
+                                disabled={!(this.state.kidFirstNames && this.state.kidLastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.kidLocation && this.state.bio && this.state.selectedFile)}
+                                onClickSubmit={this.handleKidFormSubmit}
+                                onClickDiscard={this.resetKidForm}
+                            /> : null}
 
                         {/* SEARCH FOR KID if true================== */}
                         {this.state.showKidSearch ?
@@ -404,7 +360,7 @@ class Admin extends Component {
                                             />
                                         ))}
                                     </div>
-                                ) : <h4 className="text-center mt-4">We couldn't find any profiles that match your search.</h4> }
+                                ) : <h4 className="text-center mt-4">We couldn't find any profiles that match your search.</h4>}
                             </div>
                         ) : null
                         }
@@ -460,25 +416,25 @@ class Admin extends Component {
                         {/* Shows kids for admins */}
                         {this.state.showMultipleKids ? (
                             <AdminMultipleKids />
-                        ): null }
-                        
+                        ) : null}
+
                         {/* Shows form to add donor */}
                         {this.state.showAddUserForm ? (
-                            <AddUserForm 
-                                toggle={this.toggleAddUserForm}    
+                            <AddUserForm
+                                toggle={this.toggleAddUserForm}
                             />
-                        ): null }
-                        
+                        ) : null}
+
                         {/* Shows users for admins */}
                         {this.state.showDonors ? (
                             <ViewDonors />
-                        ): null }
+                        ) : null}
 
                         {/* Shows admins for admins */}
                         {this.state.showAdmins ? (
                             <ViewAdmins />
-                        ): null }
-                        
+                        ) : null}
+
                         {/* Shows message on screen depending on task run and result */}
                         <MainContainer>
                             <h4 className="text-center">{this.state.message}</h4>
