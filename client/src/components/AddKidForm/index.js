@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, Label } from "reactstrap";
+import { Form, Label } from "reactstrap";
 import { InputField, 
     GenderField, 
     GradeField, 
@@ -7,8 +7,6 @@ import { InputField,
     UploadPhoto, 
     SubmitBtn, 
     DiscardBtn } from "../Form";
-import LoadingSpinner from "../LoadSpinner";
-import API from "../../utils/API";
 
 function AddKidForm(props) {
     return (

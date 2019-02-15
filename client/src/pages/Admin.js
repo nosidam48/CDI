@@ -3,6 +3,7 @@ import { Row, Col, Form, Label } from "reactstrap";
 import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn, UserSearchType } from "../components/Form";
 import AdminSidebar from "../components/AdminSidebar";
 import AddKidForm from "../components/AddKidForm";
+import SearchKid from "../components/SearchKid";
 import AdminKidList from "../components/AdminKidList";
 import AdminUserList from "../components/AdminUserList"
 import AdminMultipleKids from "../components/AdminMultipleKidList";
@@ -226,6 +227,7 @@ class Admin extends Component {
         event.preventDefault();
         this.setState({
             loading: true,
+            showKidSearch: false,
             kids: [],
             showSearchResults: false,
             message: ""
@@ -239,6 +241,7 @@ class Admin extends Component {
                 this.setState({
                     kids: res.data,
                     loading: false,
+                    showKidSearch: true,
                     showSearchResults: true,
                     message: ""
                 })
@@ -246,6 +249,7 @@ class Admin extends Component {
             .catch(err => {
                 this.setState({
                     loading: false,
+                    showKidSearch: true,
                     message: "We're sorry. We encountered an error."
                 })
                 console.log(err)
@@ -331,25 +335,16 @@ class Admin extends Component {
 
                         {/* SEARCH FOR KID if true================== */}
                         {this.state.showKidSearch ?
-                            <Form inline>
-                                <InputField
-                                    value={this.state.searchTerm}
-                                    onChange={this.handleInputChange}
-                                    name="searchTerm"
-                                />
-                                <SearchType
-                                    value={this.state.searchType}
-                                    onChange={this.handleInputChange}
-                                    name="searchType"
-                                    id="searchKid"
-                                />
-                                <SubmitBtn
-                                    id="searchSubmit"
-                                    onClick={this.handleAdminKidSearch}
-                                />
-                            </Form>
-                            :
-                            null
+                            <SearchKid 
+                                onChange={this.handleInputChange}
+                                termValue={this.state.searchTerm}
+                                termName="searchTerm"
+                                typeValue={this.state.searchType}
+                                typeName="searchType"
+                                typeId="searchKid"
+                                submitId="searchSubmit"
+                                onClick={this.handleAdminKidSearch}
+                            /> : null
                         }
                         {/* If search brings back results, show results */}
                         {this.state.showSearchResults ? (
