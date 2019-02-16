@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Row, Col, Form, Label } from "reactstrap";
-import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn, UserSearchType } from "../components/Form";
+import { Row, Col } from "reactstrap";
 import AdminSidebar from "../components/AdminSidebar";
 import AddKidForm from "../components/AddKidForm";
 import SearchKid from "../components/SearchKid";
 import AdminKidList from "../components/AdminKidList";
+import SearchUser from "../components/SearchUser";
 import AdminUserList from "../components/AdminUserList"
 import AdminMultipleKids from "../components/AdminMultipleKidList";
 import AddUserForm from "../components/AddUserForm";
@@ -24,10 +24,11 @@ class Admin extends Component {
         // Toolbar functions
         showAddKidForm: false,
         showKidSearch: false,
-        showSearchResults: false,
+        showKidSearchResults: false,
+        showUserSearchResults: false,
         showMultipleKids: false,
         showAddUserForm: false,
-        showAdminSearch: false,
+        showUserSearch: false,
         showDonors: false,
         showAdmins: false,
 
@@ -55,7 +56,7 @@ class Admin extends Component {
 
         // Results arrays
         kids: [],
-        users: [],
+        users: []
     };
 
     // FUNCTIONS FOR TOOLBAR ON LEFT================================================
@@ -66,10 +67,11 @@ class Admin extends Component {
         this.setState({
             showAddKidForm: !this.state.showAddKidForm,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showMultipleKids: false,
             showAddUserForm: false,
-            showAdminSearch: false,
+            showUserSearch: false,
             showDonors: false,
             showAdmins: false,
             message: "",
@@ -80,10 +82,11 @@ class Admin extends Component {
         this.setState({
             showKidSearch: true,
             showAddKidForm: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showMultipleKids: false,
             showAddUserForm: false,
-            showAdminSearch: false,
+            showUserSearch: false,
             showDonors: false,
             showAdmins: false,
             message: "",
@@ -94,10 +97,11 @@ class Admin extends Component {
         this.setState({
             showMultipleKids: true,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showAddKidForm: false,
             showAddUserForm: false,
-            showAdminSearch: false,
+            showUserSearch: false,
             showDonors: false,
             showAdmins: false,
             message: "",
@@ -108,10 +112,11 @@ class Admin extends Component {
         this.setState({
             showAddKidForm: false,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showMultipleKids: false,
             showAddUserForm: !this.state.showAddUserForm,
-            showAdminSearch: false,
+            showUserSearch: false,
             showDonors: false,
             showAdmins: false,
             message: "",
@@ -119,14 +124,15 @@ class Admin extends Component {
     }
 
     // Lets admin search for admin
-    showAdminSearch = () => {
+    showUserSearch = () => {
         this.setState({
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showAddKidForm: false,
             showMultipleKids: false,
             showAddUserForm: false,
-            showAdminSearch: true,
+            showUserSearch: true,
             showDonors: false,
             showAdmins: false,
             message: "",
@@ -137,10 +143,11 @@ class Admin extends Component {
         this.setState({
             showMultipleKids: false,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showAddKidForm: false,
             showAddUserForm: false,
-            showAdminSearch: false,
+            showUserSearch: false,
             showDonors: true,
             showAdmins: false,
             message: "",
@@ -151,10 +158,11 @@ class Admin extends Component {
         this.setState({
             showMultipleKids: false,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showAddKidForm: false,
             showAddUserForm: false,
-            showAdminSearch: false,
+            showUserSearch: false,
             showDonors: false,
             showAdmins: true,
             message: "",
@@ -189,8 +197,12 @@ class Admin extends Component {
     // Handles when an admin adds a new child
     handleKidFormSubmit = event => {
         event.preventDefault();
-        // Set state to loading
-        this.setState({ loading: true})
+        // Set state to loading and empties results arrays
+        this.setState({ 
+            loading: true,
+            kids: [],
+            users: []
+        })
 
         // Use FormData to handle both text and the binary file
         let kidData = new FormData();
@@ -229,7 +241,9 @@ class Admin extends Component {
             loading: true,
             showKidSearch: false,
             kids: [],
-            showSearchResults: false,
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             message: ""
         })
         API.kidSearch({
@@ -242,7 +256,7 @@ class Admin extends Component {
                     kids: res.data,
                     loading: false,
                     showKidSearch: true,
-                    showSearchResults: true,
+                    showKidSearchResults: true,
                     message: ""
                 })
             })
@@ -256,25 +270,28 @@ class Admin extends Component {
             });
     }
 
-    handleAdminSearch = event => {
+    handleAdminUserSearch = event => {
         event.preventDefault();
         this.setState({
             loading: true,
+            kids: [],
             users: [],
-            showSearchResults: false,
+            showUserSearch: false,
+            showUserSearchResults: false,
+            showKidSearchResults: false,
         })
         API.userSearch({
             searchTerm: this.state.userSearchTerm,
             searchType: this.state.userSearchType
         })
             .then(res => {
-                // Set state of search terms back to original state, set state of kids to new search results
+                // Set state of search terms back to original state, set state of results to new search results
                 this.setState({
-                    userSearchTerm: "",
-                    userSearchType: "Name",
                     users: res.data,
                     loading: false,
-                    showSearchResults: true,
+                    showUserSearch: true,
+                    showUserSearchResults: true,
+                    message: ""
                 })
             })
             .catch(err => {
@@ -296,7 +313,7 @@ class Admin extends Component {
                         onClickKidSearch={this.showKidSearch}
                         onClickMultipleKidSearch={this.showMultipleKids}
                         onClickAddUser={this.toggleAddUserForm}
-                        onClickAdminSearch={this.showAdminSearch}
+                        onClickUserSearch={this.showUserSearch}
                         onClickShowDonors={this.showDonors}
                         onClickShowAdmins={this.showAdmins}
                     />
@@ -306,8 +323,8 @@ class Admin extends Component {
                             <LoadSpinner className="kidsSpin" />
                         ) : null
                         }
-
-                        {/* ADD KID FORM - displays if true =============== */}
+                        {/* Forms below display when value is true */}
+                        {/* ADD KID FORM */}
                         {this.state.showAddKidForm ?
                             <AddKidForm
                                 onChangeInput={this.handleInputChange}
@@ -333,7 +350,7 @@ class Admin extends Component {
                                 onClickDiscard={this.resetKidForm}
                             /> : null}
 
-                        {/* SEARCH FOR KID if true================== */}
+                        {/* UPDATE CHILD/SEARCH */}
                         {this.state.showKidSearch ?
                             <SearchKid 
                                 onChange={this.handleInputChange}
@@ -347,7 +364,7 @@ class Admin extends Component {
                             /> : null
                         }
                         {/* If search brings back results, show results */}
-                        {this.state.showSearchResults ? (
+                        {this.state.showKidSearchResults ? (
                             <div>
                                 {this.state.kids.length ? (
                                     <div>
@@ -372,30 +389,33 @@ class Admin extends Component {
                         ) : null
                         }
 
-                        {/* SEARCH FOR USER if true================== */}
-                        {this.state.showAdminSearch ?
-                            <Form inline>
-                                <InputField
-                                    value={this.state.userSearchTerm}
-                                    onChange={this.handleInputChange}
-                                    name="userSearchTerm"
+                        {/* VIEW CHILDREN */}
+                        {this.state.showMultipleKids ? (
+                            <AdminMultipleKids />
+                        ) : null}
+
+                        {/* ADD DONOR */}
+                        {this.state.showAddUserForm ? (
+                            <AddUserForm
+                                toggle={this.toggleAddUserForm}
+                            />
+                        ) : null}
+
+                        {/* USER SEARCH */}
+                        {this.state.showUserSearch ?
+                            <SearchUser
+                                onChange={this.handleInputChange}
+                                termValue={this.state.userSearchTerm}
+                                termName="userSearchTerm"
+                                typeValue={this.state.userSearchType}
+                                typeName="userSearchType"
+                                typeId="userSearchType"
+                                submitId="searchSubmit"
+                                onClick={this.handleAdminUserSearch}
                                 />
-                                <UserSearchType
-                                    value={this.state.userSearchType}
-                                    onChange={this.handleInputChange}
-                                    name="userSearchType"
-                                    id="userSearchType"
-                                />
-                                <SubmitBtn
-                                    id="searchSubmit"
-                                    onClick={this.handleAdminSearch}
-                                />
-                            </Form>
-                            :
-                            null
-                        }
+                            : null}
                         {/* If search brings back results, show results */}
-                        {this.state.showSearchResults ? (
+                        {this.state.showUserSearchResults ? (
                             <div>
                                 {this.state.users.length ? (
                                     <div>
@@ -406,31 +426,18 @@ class Admin extends Component {
                                                 firstName={user.first_name}
                                                 lastName={user.last_name}
                                                 email={user.email}
-                                                password={user.password}
-                                                user_address={user.user_address}
-                                                user_city={user.user_city}
-                                                user_state={user.user_state}
-                                                user_zip={user.user_zip}
-                                                redoSearch={this.handleAdminSearch}
+                                                address={user.address}
+                                                city={user.city}
+                                                state={user.state}
+                                                zip={user.zip}
+                                                redoSearch={this.handleAdminUserSearch}
                                             />
                                         ))}
                                     </div>
-                                ) : null}
+                                ) : <h4 className="text-center mt-4">We couldn't find any users that match your search.</h4>}
                             </div>
                         ) : null
                         }
-
-                        {/* Shows kids for admins */}
-                        {this.state.showMultipleKids ? (
-                            <AdminMultipleKids />
-                        ) : null}
-
-                        {/* Shows form to add donor */}
-                        {this.state.showAddUserForm ? (
-                            <AddUserForm
-                                toggle={this.toggleAddUserForm}
-                            />
-                        ) : null}
 
                         {/* Shows users for admins */}
                         {this.state.showDonors ? (
