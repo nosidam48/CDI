@@ -73,7 +73,6 @@ export default {
 
     //Donor updates profile info
     donorProfile: (profileData) => {
-        console.log("Update profile request received")
         return axios.post("/api/users/profile", profileData);
     },
 
@@ -119,7 +118,6 @@ export default {
     },
 
     addUser: (userData) => {
-        console.log("request received");
         return axios.post("/api/admin/addUser", userData)
     },
 
@@ -136,7 +134,25 @@ export default {
 
     userEdit: (userData) => {
         let id = userData.id;
-        return axios.put("/api/admin/users/" + id, userData)
+        // Set admin statuses based on user input
+        switch (userData.adminChoice) {
+            case ("Regular admin status"):
+                userData.admin_status = true;
+                userData.master_admin_status = false;
+                return axios.put("/api/admin/users/" + id, userData);
+                break;
+
+            case ("Master admin status"):
+                userData.admin_status = true;
+                userData.master_admin_status = true;
+                return axios.put("/api/admin/users/" + id, userData);
+                break;
+            default:
+                userData.admin_status = false;
+                userData.master_admin_status = false;
+                return axios.put("/api/admin/users/" + id, userData);
+                break;
+        }
     },
 
     removeUser: (id) => {
