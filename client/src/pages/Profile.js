@@ -30,9 +30,8 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    // Grab the user's email address from the jwt token and update state
+    // Grab the user's email address from the jwt token
     let profile = auth0Client.getProfile();
-    this.setState({ email: profile.name})
     // Get user info if user is already in db to put in form
     API.getDonor({ email: profile.name })
       .then(response => {

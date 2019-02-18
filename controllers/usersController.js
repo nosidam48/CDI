@@ -92,7 +92,7 @@ module.exports = {
     donorKid: (req, res) => {
         db.users.findOne({
             where: {
-                id: req.params.id
+                email: req.body.email
             },
         }).then(user => user.getKids())
             .then(data =>

@@ -56,7 +56,7 @@ class MainNavbar extends React.Component {
             {/* Only show Donors link if user is signed in */}
             {auth0Client.isAuthenticated() ? (
               <NavItem>
-                <NavLink href={"/donors/1"} className="mr-4">Donors</NavLink>
+                <NavLink href={"/donors"} className="mr-4">Donors</NavLink>
               </NavItem>
             ) : null}
 
