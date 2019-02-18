@@ -95,19 +95,25 @@ module.exports = {
                 email: req.body.email
             },
         }).then(user => user.getKids())
-            .then(data =>
-                db.content.findAll({
-                    where: {
-                        kidId: data[0].dataValues.id
-                    }
-                }).then(data2 => {
-                    let donorObject = {
-                        kid: data[0].dataValues,
-                        content: data2
-                    }
-                    res.json(donorObject)
-                })
-            )
+            .then(data => {
+                // If no data was returned (donor is not sponsoring a child), send back message
+                if (data.length === 0) {
+                    res.send("Not a sponsor")
+                } else {
+                    // If donor is sponsoring a child, send child info
+                    db.content.findAll({
+                        where: {
+                            kidId: data[0].dataValues.id
+                        }
+                    }).then(data2 => {
+                        let donorObject = {
+                            kid: data[0].dataValues,
+                            content: data2
+                        }
+                        res.json(donorObject)
+                    })
+                }
+            })
             .catch(err => res.status(422).json(err))
     },
 
