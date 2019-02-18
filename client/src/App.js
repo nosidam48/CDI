@@ -23,45 +23,52 @@ class App extends React.Component {
     }
   }
 
-  async componentDidMount() {
-    // Checks to see if login was successful. If so, calls Callback route 
-    if (this.props.location.pathname === '/callback') {
-      this.setState({ checkingSession: false });
-      return;
-    }
-    // If user didn't just log in, auth0 checks if already logged in 
-    try {
-      await auth0Client.silentAuth();
-      this.forceUpdate();
-    } catch (err) {
-      if (err.error !== 'login_required') console.log(err.error);
-    }
-
-    // Check to see if user has admin privileges
+  // Function to check if user has admin privileges
+  checkAdminStatus() {
+    // Grab the user's email address from the jwt token
     let profile = auth0Client.getProfile();
-    // Get user info from the db to determine whether user had admin privileges and set state
+
+    // Make call to the database to get user info
     API.getDonor({ email: profile.name })
       .then(response => {
         if (response.data.admin_status === true) {
           this.setState({ 
             admin: true,
-            checkingSession: false
            })
         } else {
           this.setState({ 
             admin: false,
-            checkingSession: false 
           })
         }
-        console.log(this.state);
       })
+    }  
+
+  async componentDidMount() {
+    // I DON'T THINK I NEED THIS BECAUSE I WANT TO CHECK ADMIN STATUS NO MATTER WHAT
+    // // Checks to see if login was successful (callback route was called). 
+    // if (this.props.location.pathname === '/callback') {
+    //   await auth0Client.silentAuth();
+    //   this.checkAdminStatus();
+    //   this.setState({ checkingSession: false });
+    //   return;
+    // }
+    // If user didn't just log in, auth0 checks if already logged in 
+    try {
+      await auth0Client.silentAuth();
+      this.forceUpdate();
+      this.checkAdminStatus();
+
+    } catch (err) {
+      if (err.error !== 'login_required') console.log(err.error);
+    }
+    this.setState({ checkingSession: false });
   }
 
   // Renders routes
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar admin={this.state.admin}/>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/kids" component={Kids} />
