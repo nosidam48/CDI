@@ -9,7 +9,7 @@ import AdminUserList from "../components/AdminUserList"
 import AdminMultipleKids from "../components/AdminMultipleKidList";
 import AddUserForm from "../components/AddUserForm";
 import ViewAdmins from "../components/ViewAdmins"
-import ViewDonors from "../components/ViewDonors"
+import ViewUsers from "../components/ViewUsers"
 import MainContainer from "../components/Container";
 import LoadSpinner from "../components/LoadSpinner";
 import API from "../utils/API";
@@ -29,7 +29,7 @@ class Admin extends Component {
         showMultipleKids: false,
         showAddUserForm: false,
         showUserSearch: false,
-        showDonors: false,
+        showUsers: false,
         showAdmins: false,
 
         // Message & loading
@@ -72,7 +72,7 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddUserForm: false,
             showUserSearch: false,
-            showDonors: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         });
@@ -87,7 +87,7 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddUserForm: false,
             showUserSearch: false,
-            showDonors: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         })
@@ -102,12 +102,12 @@ class Admin extends Component {
             showAddKidForm: false,
             showAddUserForm: false,
             showUserSearch: false,
-            showDonors: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         })
     }
-    // Toggles display of form to add a donor
+    // Toggles display of form to add a user
     toggleAddUserForm = () => {
         this.setState({
             showAddKidForm: false,
@@ -117,7 +117,7 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddUserForm: !this.state.showAddUserForm,
             showUserSearch: false,
-            showDonors: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         });
@@ -133,13 +133,13 @@ class Admin extends Component {
             showMultipleKids: false,
             showAddUserForm: false,
             showUserSearch: true,
-            showDonors: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         })
     }
-    // Lets admin see all donors
-    showDonors = () => {
+    // Lets admin see all users
+    showUsers = () => {
         this.setState({
             showMultipleKids: false,
             showKidSearch: false,
@@ -148,7 +148,7 @@ class Admin extends Component {
             showAddKidForm: false,
             showAddUserForm: false,
             showUserSearch: false,
-            showDonors: true,
+            showUsers: true,
             showAdmins: false,
             message: "",
         })
@@ -163,7 +163,7 @@ class Admin extends Component {
             showAddKidForm: false,
             showAddUserForm: false,
             showUserSearch: false,
-            showDonors: false,
+            showUsers: false,
             showAdmins: true,
             message: "",
         })
@@ -314,7 +314,7 @@ class Admin extends Component {
                         onClickMultipleKidSearch={this.showMultipleKids}
                         onClickAddUser={this.toggleAddUserForm}
                         onClickUserSearch={this.showUserSearch}
-                        onClickShowDonors={this.showDonors}
+                        onClickShowUsers={this.showUsers}
                         onClickShowAdmins={this.showAdmins}
                     />
                     <Col xs="12" sm="8" md="9" className="px-3" id="addKid">
@@ -394,7 +394,7 @@ class Admin extends Component {
                             <AdminMultipleKids />
                         ) : null}
 
-                        {/* ADD DONOR */}
+                        {/* ADD USER */}
                         {this.state.showAddUserForm ? (
                             <AddUserForm
                                 toggle={this.toggleAddUserForm}
@@ -440,8 +440,8 @@ class Admin extends Component {
                         }
 
                         {/* Shows users for admins */}
-                        {this.state.showDonors ? (
-                            <ViewDonors />
+                        {this.state.showUsers ? (
+                            <ViewUsers />
                         ) : null}
 
                         {/* Shows admins for admins */}

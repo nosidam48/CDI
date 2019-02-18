@@ -4,8 +4,8 @@ const usersController = require("../../controllers/usersController");
 router.route("/viewAdmins")
     .get(usersController.viewAdmins);
 
-router.route("/viewDonors")
-    .get(usersController.viewDonors);
+router.route("/viewUsers")
+    .get(usersController.viewUsers);
 
 router.route("/viewKids")
     .get(usersController.viewAllKids);

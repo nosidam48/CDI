@@ -119,11 +119,8 @@ module.exports = {
         }).then(data => res.json(data))
     },
 
-    viewDonors: (req, res) => {
+    viewUsers: (req, res) => {
         db.users.findAll({
-            where: {
-                admin_status: !1
-            },
             include: [db.kids]
         }).then(data => res.json(data))
     },

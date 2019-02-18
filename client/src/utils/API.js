@@ -113,8 +113,8 @@ export default {
     },
 
     // ADMIN-DONOR FUNCTIONS=======================================================
-    viewDonors: () => {
-        return axios.get("/api/admin/viewDonors")
+    viewUsers: () => {
+        return axios.get("/api/admin/viewUsers")
     },
 
     addUser: (userData) => {
