@@ -23,7 +23,8 @@ class MainNavbar extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      showAdminLink: true
     };
   }
   toggle() {
@@ -61,7 +62,7 @@ class MainNavbar extends React.Component {
             ) : null}
 
             {/* Only show Admin link if user is signed in */}
-            {auth0Client.isAuthenticated() ? (
+            {auth0Client.isAuthenticated()  && this.state.showAdminLink ? (
               <NavItem>
                 <NavLink href="/admin" className="mr-4">Admin</NavLink>
               </NavItem>
