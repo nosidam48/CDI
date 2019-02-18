@@ -20,6 +20,7 @@ class App extends React.Component {
     this.state = {
       checkingSession: true,
       admin: false,
+      authenticated: false
     }
   }
 
@@ -34,10 +35,12 @@ class App extends React.Component {
         if (response.data.admin_status === true) {
           this.setState({ 
             admin: true,
+            authenticated: true
            })
         } else {
           this.setState({ 
             admin: false,
+            authenticated: true,
           })
         }
       })
@@ -68,7 +71,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar admin={this.state.admin}/>
+        <Navbar 
+          admin={this.state.admin}
+          authenticated={this.state.authenticated}
+        />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/kids" component={Kids} />

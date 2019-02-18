@@ -53,42 +53,41 @@ class MainNavbar extends React.Component {
               <NavLink href="/kids/" className="mr-4">Kids</NavLink>
             </NavItem>
 
-            {/* Only show Donors link if user is signed in */}
-            {auth0Client.isAuthenticated() ? (
-              <NavItem>
-                <NavLink href={"/donors"} className="mr-4">Donors</NavLink>
-              </NavItem>
-            ) : null}
-
-            {/* Only show Admin link if user is signed in */}
-            {auth0Client.isAuthenticated() && this.props.admin ? (
-              <NavItem>
-                <NavLink href="/admin" className="mr-4">Admin</NavLink>
-              </NavItem>
-            ) : null}
-
-            {/* If user is not signed in, show Log in button and click to go to log in. If use is signed in, show dropdown menu with links to user profile and log out */}
-            {!auth0Client.isAuthenticated() ? (
-                <NavLink onClick={auth0Client.signIn}>Log In</NavLink>
-              ) : (
-                  <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>
-                      User
+            {/* If user is not signed in, show Log in button and click to go to log in. If use is signed in, show dropdown menu with links*/}
+            {!this.props.authenticated ? (
+              <NavLink onClick={auth0Client.signIn}>Log In</NavLink>
+            ) : (
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    User
                     </DropdownToggle>
-                    <DropdownMenu right>
+                  <DropdownMenu right>
                       <DropdownItem>
-                        <NavLink href="/userprofile">
+                        <NavLink href="/donors">
+                          Who I Sponsor
+                        </NavLink>
+                      </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="/userprofile">
                         My Profile
                         </NavLink>
-                      </DropdownItem>
+                    </DropdownItem>
+                    {/* Shows link to admin route if user has admin privileges */}
+                    {this.props.admin ? (
                       <DropdownItem>
-                        <NavLink onClick={() => { this.signOut() }}>
-                          Log Out
+                        <NavLink href="/admin">
+                          Admin Tools
                         </NavLink>
                       </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                )}
+                    ) : null}
+                    <DropdownItem>
+                      <NavLink onClick={() => { this.signOut() }}>
+                        Log Out
+                        </NavLink>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              )}
           </Nav>
         </Collapse>
       </Navbar>
