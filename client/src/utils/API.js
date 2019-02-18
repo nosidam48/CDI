@@ -135,23 +135,21 @@ export default {
     userEdit: (userData) => {
         let id = userData.id;
         // Set admin statuses based on user input
-        switch (userData.adminChoice) {
+        switch (userData.admin_status) {
             case ("Regular admin status"):
                 userData.admin_status = true;
                 userData.master_admin_status = false;
                 return axios.put("/api/admin/users/" + id, userData);
-                break;
 
             case ("Master admin status"):
                 userData.admin_status = true;
                 userData.master_admin_status = true;
                 return axios.put("/api/admin/users/" + id, userData);
-                break;
+
             default:
                 userData.admin_status = false;
                 userData.master_admin_status = false;
                 return axios.put("/api/admin/users/" + id, userData);
-                break;
         }
     },
 

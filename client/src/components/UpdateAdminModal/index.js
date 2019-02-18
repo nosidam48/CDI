@@ -52,7 +52,7 @@ class UpdateAdminModal extends React.Component {
       user_city: this.state.city,
       user_state: this.state.state,
       user_zip: this.state.zip,
-      adminChoice: this.state.adminChoice,
+      // adminChoice: this.state.adminChoice,
       admin_status: this.state.admin,
       master_admin_status: this.state.masterAdmin
     })
@@ -120,7 +120,7 @@ class UpdateAdminModal extends React.Component {
                 onChange={this.handleInputChange}
                 name="zip"
               />
-              <Input type="select" value={this.state.adminChoice} onChange={this.handleInputChange} name="adminChoice" >
+              <Input type="select" value={this.state.admin} onChange={this.handleInputChange} name="admin" >
                 <option defaultValue>Admin status</option>
                 <option>No status</option>
                 <option>Regular admin status</option>
