@@ -48,7 +48,6 @@ class AddUserForm extends React.Component {
       admin: this.state.admin
     })
       .then(res => {
-        console.log(res);
         this.resetUserForm();
         // Set message in state based on response
         if (res.data !== "Already exists.") {

@@ -68,7 +68,6 @@ export default {
 
     // Show donor the child they are connected to
     donorKid: (email) => {
-        console.log("Donor page request received");
         return axios.post("/api/donors", email)
     },
 

@@ -57,7 +57,6 @@ class UpdateAdminModal extends React.Component {
       master_admin_status: this.state.masterAdmin
     })
       .then(res => {
-        console.log(res);
         // When update is received, the original search will fire again, which will show the updated data
         this.props.redoSearch(event)
       })

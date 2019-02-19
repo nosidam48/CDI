@@ -11,8 +11,8 @@ class Profile extends Component {
     super()
     this.state = {
       email: '',
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       address: '',
       city: '',
       state: '',
@@ -32,22 +32,21 @@ class Profile extends Component {
   componentDidMount() {
     // Grab the user's email address from the jwt token
     let profile = auth0Client.getProfile();
-    console.log(profile);
     // Get user info if user is already in db to put in form
     API.getDonor({ email: profile.name })
       .then(response => {
-        // If the user has profile info already, set state with response data to fill in form with previous data and set state to false
+        // Check if the user has profile info already
         if (response.data) {
-          this.setState({
-            firstName: response.data.first_name,
-            lastName: response.data.last_name,
-            address: response.data.address,
-            city: response.data.city,
-            state: response.data.state,
-            zip: response.data.zip,
-            loading: false
-          })
-          // If no profile info was found, just set state of loading to false
+          // Set any null data from database to empty string to manage state without null value (for example, if the user did not enter an address earlier)
+          for (let [key, value] of Object.entries(response.data)) {
+            if (value === null) {
+              value = ""
+            }
+            this.setState({
+              [key]: value,
+              loading: false
+            })
+          }
         } else {
           this.setState({ loading: false });
         }
@@ -61,8 +60,8 @@ class Profile extends Component {
     //Request to add/update user profile
     API.donorProfile({
       email: this.state.email,
-      first_name: this.state.firstName,
-      last_name: this.state.lastName,
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
       address: this.state.address,
       city: this.state.city,
       state: this.state.state,
@@ -97,15 +96,15 @@ class Profile extends Component {
                 <Form className="mt-3">
                   <Label>First Name*</Label>
                   <InputField
-                    value={this.state.firstName}
+                    value={this.state.first_name}
                     onChange={this.handleChange}
-                    name="firstName"
+                    name="first_name"
                   />
                   <Label>Last Name*</Label>
                   <InputField
-                    value={this.state.lastName}
+                    value={this.state.last_name}
                     onChange={this.handleChange}
-                    name="lastName"
+                    name="last_name"
                   />
                   <Label>Street Address</Label>
                   <InputField
@@ -134,7 +133,7 @@ class Profile extends Component {
 
                   {/* Display submit button once first name and last name have values */}
                   <SubmitBtn
-                    disabled={!(this.state.firstName && this.state.lastName)}
+                    disabled={!(this.state.first_name && this.state.last_name)}
                     onClick={this.handleSubmit}
                   />
                 </Form>
@@ -145,6 +144,4 @@ class Profile extends Component {
     )
   }
 }
-
-
 export default Profile;
