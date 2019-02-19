@@ -170,6 +170,11 @@ class Admin extends Component {
     }
     // ==============================================================
 
+    componentDidUpdate() {
+        // Takes user to top of page after any updates
+        window.scrollTo(0, 0);    
+    }
+    
     // Function that runs after a kid has been added
     resetKidForm = () => {
         this.setState({
