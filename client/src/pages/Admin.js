@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { Row, Col, Form, Label } from "reactstrap";
-import { InputField, GenderField, GradeField, LocationField, UploadPhoto, SearchType, SubmitBtn, DiscardBtn, UserSearchType } from "../components/Form";
+import { Row, Col } from "reactstrap";
 import AdminSidebar from "../components/AdminSidebar";
+import AddKidForm from "../components/AddKidForm";
+import SearchKid from "../components/SearchKid";
 import AdminKidList from "../components/AdminKidList";
+import SearchUser from "../components/SearchUser";
 import AdminUserList from "../components/AdminUserList"
 import AdminMultipleKids from "../components/AdminMultipleKidList";
 import AddUserForm from "../components/AddUserForm";
 import ViewAdmins from "../components/ViewAdmins"
-import ViewDonors from "../components/ViewDonors"
+import ViewUsers from "../components/ViewUsers"
 import MainContainer from "../components/Container";
 import LoadSpinner from "../components/LoadSpinner";
 import API from "../utils/API";
@@ -22,15 +24,17 @@ class Admin extends Component {
         // Toolbar functions
         showAddKidForm: false,
         showKidSearch: false,
-        showSearchResults: false,
+        showKidSearchResults: false,
+        showUserSearchResults: false,
         showMultipleKids: false,
         showAddUserForm: false,
-        showAdminSearch: false,
-        showDonors: false,
+        showUserSearch: false,
+        showUsers: false,
         showAdmins: false,
 
-        // Message
+        // Message & loading
         message: "Choose an admin tool from the menu to get started.",
+        loading: false,
 
         // Kid form inputs
         kidFirstNames: "",
@@ -52,7 +56,7 @@ class Admin extends Component {
 
         // Results arrays
         kids: [],
-        users: [],
+        users: []
     };
 
     // FUNCTIONS FOR TOOLBAR ON LEFT================================================
@@ -63,11 +67,12 @@ class Admin extends Component {
         this.setState({
             showAddKidForm: !this.state.showAddKidForm,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showMultipleKids: false,
             showAddUserForm: false,
-            showAdminSearch: false,
-            showDonors: false,
+            showUserSearch: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         });
@@ -77,11 +82,12 @@ class Admin extends Component {
         this.setState({
             showKidSearch: true,
             showAddKidForm: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showMultipleKids: false,
             showAddUserForm: false,
-            showAdminSearch: false,
-            showDonors: false,
+            showUserSearch: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         })
@@ -91,54 +97,58 @@ class Admin extends Component {
         this.setState({
             showMultipleKids: true,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showAddKidForm: false,
             showAddUserForm: false,
-            showAdminSearch: false,
-            showDonors: false,
+            showUserSearch: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         })
     }
-    // Toggles display of form to add a donor
+    // Toggles display of form to add a user
     toggleAddUserForm = () => {
         this.setState({
             showAddKidForm: false,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showMultipleKids: false,
             showAddUserForm: !this.state.showAddUserForm,
-            showAdminSearch: false,
-            showDonors: false,
+            showUserSearch: false,
+            showUsers: false,
             showAdmins: false,
             message: "",
         });
     }
-    
+
     // Lets admin search for admin
-    showAdminSearch = () => {
+    showUserSearch = () => {
         this.setState({
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showAddKidForm: false,
             showMultipleKids: false,
             showAddUserForm: false,
-            showAdminSearch: true,
-            showDonors: false,
+            showUserSearch: true,
+            showUsers: false,
             showAdmins: false,
             message: "",
         })
     }
-    // Lets admin see all donors
-    showDonors = () => {
+    // Lets admin see all users
+    showUsers = () => {
         this.setState({
             showMultipleKids: false,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showAddKidForm: false,
             showAddUserForm: false,
-            showAdminSearch: false,
-            showDonors: true,
+            showUserSearch: false,
+            showUsers: true,
             showAdmins: false,
             message: "",
         })
@@ -148,17 +158,23 @@ class Admin extends Component {
         this.setState({
             showMultipleKids: false,
             showKidSearch: false,
-            showSearchResults: false,
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             showAddKidForm: false,
             showAddUserForm: false,
-            showAdminSearch: false,
-            showDonors: false,
+            showUserSearch: false,
+            showUsers: false,
             showAdmins: true,
             message: "",
         })
     }
     // ==============================================================
 
+    componentDidUpdate() {
+        // Takes user to top of page after any updates
+        window.scrollTo(0, 0);    
+    }
+    
     // Function that runs after a kid has been added
     resetKidForm = () => {
         this.setState({
@@ -176,6 +192,7 @@ class Admin extends Component {
         })
     };
 
+    // Function to handle photo uploads
     fileSelectedHandler = event => {
         this.setState({
             selectedFile: event.target.files[0]
@@ -185,6 +202,13 @@ class Admin extends Component {
     // Handles when an admin adds a new child
     handleKidFormSubmit = event => {
         event.preventDefault();
+        // Set state to loading and empties results arrays
+        this.setState({ 
+            loading: true,
+            kids: [],
+            users: []
+        })
+
         // Use FormData to handle both text and the binary file
         let kidData = new FormData();
         kidData.append("first_name", this.state.kidFirstNames);
@@ -201,13 +225,15 @@ class Admin extends Component {
             .then(res => {
                 this.resetKidForm();
                 this.setState({
-                    message: "A child was added to the database."
+                    message: "A child was added to the database.",
+                    loading: false
                 })
             })
             .catch(err => {
                 this.resetKidForm();
                 this.setState({
-                    message: "There was an error adding the child to the database."
+                    message: "There was an error adding the child to the database.",
+                    loading: false
                 });
                 console.log(err);
             })
@@ -218,8 +244,11 @@ class Admin extends Component {
         event.preventDefault();
         this.setState({
             loading: true,
+            showKidSearch: false,
             kids: [],
-            showSearchResults: false,
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
             message: ""
         })
         API.kidSearch({
@@ -231,38 +260,43 @@ class Admin extends Component {
                 this.setState({
                     kids: res.data,
                     loading: false,
-                    showSearchResults: true,
+                    showKidSearch: true,
+                    showKidSearchResults: true,
                     message: ""
                 })
             })
             .catch(err => {
                 this.setState({
                     loading: false,
+                    showKidSearch: true,
                     message: "We're sorry. We encountered an error."
                 })
                 console.log(err)
             });
     }
 
-    handleAdminSearch = event => {
+    handleAdminUserSearch = event => {
         event.preventDefault();
         this.setState({
             loading: true,
+            kids: [],
             users: [],
-            showSearchResults: false,
+            showUserSearch: false,
+            showUserSearchResults: false,
+            showKidSearchResults: false,
         })
         API.userSearch({
             searchTerm: this.state.userSearchTerm,
             searchType: this.state.userSearchType
         })
             .then(res => {
-                // Set state of search terms back to original state, set state of kids to new search results
+                // Set state of search terms back to original state, set state of results to new search results
                 this.setState({
-                    userSearchTerm: "",
-                    userSearchType: "Name",
                     users: res.data,
                     loading: false,
-                    showSearchResults: true,
+                    showUserSearch: true,
+                    showUserSearchResults: true,
+                    message: ""
                 })
             })
             .catch(err => {
@@ -284,107 +318,58 @@ class Admin extends Component {
                         onClickKidSearch={this.showKidSearch}
                         onClickMultipleKidSearch={this.showMultipleKids}
                         onClickAddUser={this.toggleAddUserForm}
-                        onClickAdminSearch={this.showAdminSearch}
-                        onClickShowDonors={this.showDonors}
+                        onClickUserSearch={this.showUserSearch}
+                        onClickShowUsers={this.showUsers}
                         onClickShowAdmins={this.showAdmins}
                     />
                     <Col xs="12" sm="8" md="9" className="px-3" id="addKid">
-                        {/* ADD KID FORM - displays if true =============== */}
-                        {this.state.showAddKidForm ?
-                            <div>
-                                <h5 className="border-bottom">Add a child to the database</h5>
-                                <Form className="mt-4">
-                                    <Label>First Names</Label>
-                                    <InputField
-                                        value={this.state.kidFirstNames}
-                                        onChange={this.handleInputChange}
-                                        name="kidFirstNames"
-                                        placeholder="First names"
-                                    />
-                                    <Label>Last Names</Label>
-                                    <InputField
-                                        value={this.state.kidLastName}
-                                        onChange={this.handleInputChange}
-                                        name="kidLastName"
-                                        placeholder="Last name"
-                                    />
-                                    <Label>Gender</Label>
-                                    <GenderField
-                                        value={this.state.gender}
-                                        onChange={this.handleInputChange}
-                                        name="gender"
-                                    />
-                                    <Label>Birthdate</Label>
-                                    <InputField
-                                        type="date"
-                                        value={this.state.birth_date}
-                                        onChange={this.handleInputChange}
-                                        name="birth_date"
-                                    />
-                                    <Label>Grade in School</Label>
-                                    <GradeField
-                                        value={this.state.grade}
-                                        onChange={this.handleInputChange}
-                                        name="grade"
-                                    />
-                                    <Label>Location</Label>
-                                    <LocationField
-                                        value={this.state.kidLocation}
-                                        onChange={this.handleInputChange}
-                                        name="kidLocation"
-                                    />
-                                    <Label>Bio</Label>
-                                    <InputField
-                                        type="textarea"
-                                        value={this.state.bio}
-                                        onChange={this.handleInputChange}
-                                        name="bio"
-                                        placeholder="Description of the child"
-                                    />
-                                    <Label>Profile Photo</Label>
-                                    <UploadPhoto
-                                        onChange={this.fileSelectedHandler}
-                                        name="selectedFile"
-                                        id=""
-                                    />
-                                    {/* Set Submit Button to disabled until all fields are filled out */}
-                                    <SubmitBtn
-                                        disabled={!(this.state.kidFirstNames && this.state.kidLastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.kidLocation && this.state.bio && this.state.selectedFile)}        
-                                        onClick={this.handleKidFormSubmit}
-                                    />
-                                    <DiscardBtn
-                                        onClick={this.resetKidForm}
-                                    />
-                                </Form>
-                            </div> :
-                            null
+                        {/* Shows loading spinner if loading is true */}
+                        {this.state.loading ? (
+                            <LoadSpinner className="kidsSpin" />
+                        ) : null
                         }
-                        {/* END OF ADD KID FORM============= */}
+                        {/* Forms below display when value is true */}
+                        {/* ADD KID FORM */}
+                        {this.state.showAddKidForm ?
+                            <AddKidForm
+                                onChangeInput={this.handleInputChange}
+                                onChangeFile={this.fileSelectedHandler}
+                                firstNameValue={this.state.kidFirstNames}
+                                firstName="kidFirstNames"
+                                lastNamevalue={this.state.kidLastName}
+                                lastName="kidLastName"
+                                genderValue={this.state.gender}
+                                genderName="gender"
+                                birthdateValue={this.state.birth_date}
+                                birthdateName="birth_date"
+                                gradeValue={this.state.grade}
+                                gradeName="grade"
+                                locationValue={this.state.kidLocation}
+                                locationName="kidLocation"
+                                bioValue={this.state.bio}
+                                bioName="bio"
+                                photoName="selectedFile"
+                                photoId=""
+                                disabled={!(this.state.kidFirstNames && this.state.kidLastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.kidLocation && this.state.bio && this.state.selectedFile)}
+                                onClickSubmit={this.handleKidFormSubmit}
+                                onClickDiscard={this.resetKidForm}
+                            /> : null}
 
-                        {/* SEARCH FOR KID if true================== */}
+                        {/* UPDATE CHILD/SEARCH */}
                         {this.state.showKidSearch ?
-                            <Form inline>
-                                <InputField
-                                    value={this.state.searchTerm}
-                                    onChange={this.handleInputChange}
-                                    name="searchTerm"
-                                />
-                                <SearchType
-                                    value={this.state.searchType}
-                                    onChange={this.handleInputChange}
-                                    name="searchType"
-                                    id="searchKid"
-                                />
-                                <SubmitBtn
-                                    id="searchSubmit"
-                                    onClick={this.handleAdminKidSearch}
-                                />
-                            </Form>
-                            :
-                            null
+                            <SearchKid 
+                                onChange={this.handleInputChange}
+                                termValue={this.state.searchTerm}
+                                termName="searchTerm"
+                                typeValue={this.state.searchType}
+                                typeName="searchType"
+                                typeId="searchKid"
+                                submitId="searchSubmit"
+                                onClick={this.handleAdminKidSearch}
+                            /> : null
                         }
                         {/* If search brings back results, show results */}
-                        {this.state.showSearchResults ? (
+                        {this.state.showKidSearchResults ? (
                             <div>
                                 {this.state.kids.length ? (
                                     <div>
@@ -404,35 +389,38 @@ class Admin extends Component {
                                             />
                                         ))}
                                     </div>
-                                ) : <h4 className="text-center mt-4">We couldn't find any profiles that match your search.</h4> }
+                                ) : <h4 className="text-center mt-4">We couldn't find any profiles that match your search.</h4>}
                             </div>
                         ) : null
                         }
 
-                        {/* SEARCH FOR USER if true================== */}
-                        {this.state.showAdminSearch ?
-                            <Form inline>
-                                <InputField
-                                    value={this.state.userSearchTerm}
-                                    onChange={this.handleInputChange}
-                                    name="userSearchTerm"
+                        {/* VIEW CHILDREN */}
+                        {this.state.showMultipleKids ? (
+                            <AdminMultipleKids />
+                        ) : null}
+
+                        {/* ADD USER */}
+                        {this.state.showAddUserForm ? (
+                            <AddUserForm
+                                toggle={this.toggleAddUserForm}
+                            />
+                        ) : null}
+
+                        {/* USER SEARCH */}
+                        {this.state.showUserSearch ?
+                            <SearchUser
+                                onChange={this.handleInputChange}
+                                termValue={this.state.userSearchTerm}
+                                termName="userSearchTerm"
+                                typeValue={this.state.userSearchType}
+                                typeName="userSearchType"
+                                typeId="userSearchType"
+                                submitId="searchSubmit"
+                                onClick={this.handleAdminUserSearch}
                                 />
-                                <UserSearchType
-                                    value={this.state.userSearchType}
-                                    onChange={this.handleInputChange}
-                                    name="userSearchType"
-                                    id="userSearchType"
-                                />
-                                <SubmitBtn
-                                    id="searchSubmit"
-                                    onClick={this.handleAdminSearch}
-                                />
-                            </Form>
-                            :
-                            null
-                        }
+                            : null}
                         {/* If search brings back results, show results */}
-                        {this.state.showSearchResults ? (
+                        {this.state.showUserSearchResults ? (
                             <div>
                                 {this.state.users.length ? (
                                     <div>
@@ -443,52 +431,33 @@ class Admin extends Component {
                                                 firstName={user.first_name}
                                                 lastName={user.last_name}
                                                 email={user.email}
-                                                password={user.password}
-                                                user_address={user.user_address}
-                                                user_city={user.user_city}
-                                                user_state={user.user_state}
-                                                user_zip={user.user_zip}
-                                                redoSearch={this.handleAdminSearch}
+                                                address={user.address}
+                                                city={user.city}
+                                                state={user.state}
+                                                zip={user.zip}
+                                                redoSearch={this.handleAdminUserSearch}
                                             />
                                         ))}
                                     </div>
-                                ) : null}
+                                ) : <h4 className="text-center mt-4">We couldn't find any users that match your search.</h4>}
                             </div>
                         ) : null
                         }
 
-                        {/* Shows kids for admins */}
-                        {this.state.showMultipleKids ? (
-                            <AdminMultipleKids />
-                        ): null }
-                        
-                        {/* Shows form to add donor */}
-                        {this.state.showAddUserForm ? (
-                            <AddUserForm 
-                                toggle={this.toggleAddUserForm}    
-                            />
-                        ): null }
-                        
                         {/* Shows users for admins */}
-                        {this.state.showDonors ? (
-                            <ViewDonors />
-                        ): null }
+                        {this.state.showUsers ? (
+                            <ViewUsers />
+                        ) : null}
 
                         {/* Shows admins for admins */}
                         {this.state.showAdmins ? (
                             <ViewAdmins />
-                        ): null }
-                        
+                        ) : null}
+
                         {/* Shows message on screen depending on task run and result */}
                         <MainContainer>
                             <h4 className="text-center">{this.state.message}</h4>
                         </MainContainer>
-
-                        {/* Shows loading spinner if loading is true */}
-                        {this.state.loading ? (
-                            <LoadSpinner className="kidsSpin" />
-                        ) : null
-                        }
                     </Col>
                 </Row>
             </MainContainer>

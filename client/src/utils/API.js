@@ -67,13 +67,12 @@ export default {
     },
 
     // Show donor the child they are connected to
-    donorKid: (id) => {
-        return axios.get("/api/donors/" + id)
+    donorKid: (email) => {
+        return axios.post("/api/donors", email)
     },
 
     //Donor updates profile info
     donorProfile: (profileData) => {
-        console.log("Update profile request received")
         return axios.post("/api/users/profile", profileData);
     },
 
@@ -114,12 +113,11 @@ export default {
     },
 
     // ADMIN-DONOR FUNCTIONS=======================================================
-    viewDonors: () => {
-        return axios.get("/api/admin/viewDonors")
+    viewUsers: () => {
+        return axios.get("/api/admin/viewUsers")
     },
 
     addUser: (userData) => {
-        console.log("request received");
         return axios.post("/api/admin/addUser", userData)
     },
 
@@ -136,7 +134,23 @@ export default {
 
     userEdit: (userData) => {
         let id = userData.id;
-        return axios.put("/api/admin/users/" + id, userData)
+        // Set admin statuses based on user input
+        switch (userData.admin_status) {
+            case ("Regular admin status"):
+                userData.admin_status = true;
+                userData.master_admin_status = false;
+                return axios.put("/api/admin/users/" + id, userData);
+
+            case ("Master admin status"):
+                userData.admin_status = true;
+                userData.master_admin_status = true;
+                return axios.put("/api/admin/users/" + id, userData);
+
+            default:
+                userData.admin_status = false;
+                userData.master_admin_status = false;
+                return axios.put("/api/admin/users/" + id, userData);
+        }
     },
 
     removeUser: (id) => {

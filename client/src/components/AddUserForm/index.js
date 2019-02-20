@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Label } from "reactstrap";
 import { InputField, AdminField, SubmitBtn, DiscardBtn } from "../Form";
+import LoadingSpinner from "../LoadSpinner";
 import API from "../../utils/API";
 
 // Form that is called when an admin wants to add/update user profile
@@ -14,7 +15,8 @@ class AddUserForm extends React.Component {
     state: "",
     zip: "",
     admin: false,
-    message: ""
+    message: "",
+    loading: false
   }
 
   // Function that runs after a user has been updated
@@ -34,6 +36,7 @@ class AddUserForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    this.setState({ loading: true });
     API.addUser({
       first_name: this.state.firstName,
       last_name: this.state.lastName,
@@ -45,13 +48,18 @@ class AddUserForm extends React.Component {
       admin: this.state.admin
     })
       .then(res => {
-        console.log(res);
         this.resetUserForm();
         // Set message in state based on response
         if (res.data !== "Already exists.") {
-          this.setState({ message: "The donor was added to the database." })
+          this.setState({ 
+            message: "The donor was added to the database.",
+            loading: false 
+          })
         } else {
-          this.setState({ message: "The donor already exists in the database."})
+          this.setState({ 
+            message: "The donor already exists in the database.",
+            loading: false
+          })
         }
       })
       .catch(err => console.log(err))
@@ -60,7 +68,11 @@ class AddUserForm extends React.Component {
   render() {
     return (
       <div>
-        {this.state.message ? <h4 className="text-center">{this.state.message}</h4>
+        {/* Show the spinner if waiting on data */}
+        {this.state.loading ? <LoadingSpinner className="kidsSpin"/>
+          : 
+          <div>
+            {this.state.message ? <h4 className="text-center">{this.state.message}</h4>
           : (
             <div>
               <h5 className="border-bottom">Add/update user profile</h5>
@@ -104,6 +116,7 @@ class AddUserForm extends React.Component {
               </Form>
             </div>
           )}
+          </div>}
       </div>
     )
   }

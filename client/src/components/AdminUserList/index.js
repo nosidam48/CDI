@@ -8,8 +8,7 @@ function AdminUserList(props) {
             <h5>{props.firstName} {props.lastName}</h5>
             ID: {props.id}<br /> 
             Email: {props.email}<br />
-            Password: {props.password}<br />
-            Address: {props.user_address} {props.user_city} {props.user_state} {props.user_zip}<br /> 
+            Address: {props.address}, {props.city}, {props.state} {props.zip}<br /> 
             
             {/* Button functions */}
             <div className="mt-2">
@@ -19,11 +18,10 @@ function AdminUserList(props) {
                     firstName={props.firstName}
                     lastName={props.lastName}
                     email={props.email}
-                    password={props.password}
-                    address={props.user_address}
-                    city={props.user_city}
-                    state={props.user_state}
-                    zip={props.user_zip}
+                    address={props.address}
+                    city={props.city}
+                    state={props.state}
+                    zip={props.zip}
                     redoSearch={props.redoSearch}
                 />                        
                 {/* Button that opens RemoveKidModal */}

@@ -31,8 +31,8 @@ function AdminSidebar(props) {
       <AdminMasterSidebar 
         onClickAddDonor={props.onClickAddDonor}
         onClickAddAdmin={props.onClickAddAdmin}
-        onClickAdminSearch={props.onClickAdminSearch}
-        onClickShowDonors={props.onClickShowDonors} 
+        onClickUserSearch={props.onClickUserSearch}
+        onClickShowUsers={props.onClickShowUsers} 
         onClickShowAdmins={props.onClickShowAdmins} 
         onClickAddUser={props.onClickAddUser} 
       />

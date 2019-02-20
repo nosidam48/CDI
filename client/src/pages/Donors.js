@@ -4,6 +4,7 @@ import MainContainer from "../components/Container";
 import SponsoredPhotos from "../components/Sponsored-Photos";
 import SponsoredBio from "../components/Sponsored-Bio";
 import LoadSpinner from "../components/LoadSpinner";
+import auth0Client from "../Auth";
 import API from "../utils/API";
 
 class Donors extends Component {
@@ -16,22 +17,31 @@ class Donors extends Component {
     }
     //On mount, return the kid with an id that matches the url
     componentDidMount() {
-        this.loadOneKid();
-    }
-    //Call the findOneKid function by passing in the url id
-    loadOneKid = (res) => {
-        API.donorKid(this.props.match.params.id)
+        // Grab the user's email address from the jwt token and update state
+        let profile = auth0Client.getProfile();
+
+        //Call the db, passing in the user's email address as the id
+        API.donorKid({ email: profile.name })
             .then(res => {
-                this.removeNote(res.data.content);
-                this.removePhoto(res.data.content);
-                this.setState({
-                    kid: res.data.kid,
-                    content: res.data.content,
-                    loading: false
-                })
+                // If message received is "Not a sponsor", set state.kid to false
+                if (res.data === "Not a sponsor") {
+                    this.setState({
+                        kid: false,
+                        loading: false
+                    })
+                } else {
+                    // If data was received, run functions and set state
+                    this.removeNote(res.data.content);
+                    this.removePhoto(res.data.content);
+                    this.setState({
+                        kid: res.data.kid,
+                        content: res.data.content,
+                        loading: false
+                    })
+                }
             })
             .catch(err => console.log(err));
-    };
+    }
 
     calculateAge = (dateString) => {
         var today = new Date();
@@ -66,17 +76,25 @@ class Donors extends Component {
     render() {
         return (
             <MainContainer>
+                {/* Show loader if no results yet */}
                 {this.state.loading ? (
                     <Row className="justify-content-center">
                         <LoadSpinner
-                            className="kidsSpin" 
+                            className="kidsSpin"
                         />
                     </Row>
-                    ) : (
-                    <Row>
-                        <SponsoredPhotos kid={this.state.kid} content={this.state.photos} />
-                        <SponsoredBio key={this.state.id} kid={this.state.kid} age={this.calculateAge} notes={this.state.notes} />
-                    </Row>
+                ) : (
+                        <div>
+                            {/* If results are found, show kid info. If not, alert user. */}
+                            {this.state.kid ? (
+                                <Row>
+                                    <SponsoredPhotos kid={this.state.kid} content={this.state.photos} />
+                                    <SponsoredBio key={this.state.id} kid={this.state.kid} age={this.calculateAge} notes={this.state.notes} />
+                                </Row>
+                            ) : (
+                                    <h4 className="text-center mt-4">We're sorry. We couldn't find any children that you sponsor.</h4>
+                                )}
+                        </div>
                     )}
             </MainContainer>
         )

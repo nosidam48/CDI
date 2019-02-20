@@ -4,30 +4,29 @@ import API from "../../utils/API";
 import LoadingSpinner from "../LoadSpinner";
 
 // Displays table of kid results
-class ViewAdmins extends React.Component {
+class ViewUsers extends React.Component {
 
     state = {
-        admins: [],
-        loading: false,
+        users: [],
+        loading: false
     }
 
     componentDidMount() {
-        this.loadAdmins();
+        this.loadUsers();
     }
 
-    loadAdmins = (res) => {
+    loadUsers = (res) => {
         // Set loading to true so spinner displays
         this.setState({ loading: true });
 
-        API.viewAdmins()
+        API.viewUsers()
             .then(res => {
                 this.setState({
-                    admins: res.data,
+                    users: res.data,
                     loading: false
                 })
             })
     }
-
     render() {
         return (
             <div>
@@ -41,17 +40,19 @@ class ViewAdmins extends React.Component {
                                     <th>First Names</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
-                                    <th>Master Level?</th>
+                                    <th>Children Sponsored</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.admins.map(admin => (
-                                    <tr key={admin.id}>
-                                        <th scope="row">{admin.id}</th>
-                                        <td>{admin.first_name}</td>
-                                        <td>{admin.last_name}</td>
-                                        <td>{admin.email}</td>
-                                        <td>{admin.master_admin_status ? "Yes" : "No"}</td>
+                                {this.state.users.map(user => (
+                                    <tr key={user.id}>
+                                        <th scope="row">{user.id}</th>
+                                        <td>{user.first_name}</td>
+                                        <td>{user.last_name}</td>
+                                        <td>{user.email}</td>
+                                        {user.kids.map(kid =>
+                                            <td key={kid.id}><a href={"/kids/" + kid.id}>{kid.first_name}</a></td>
+                                        )}
                                     </tr>
                                 ))}
                             </tbody>
@@ -62,4 +63,4 @@ class ViewAdmins extends React.Component {
     };
 }
 
-export default ViewAdmins;
+export default ViewUsers;
