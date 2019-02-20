@@ -172,9 +172,9 @@ class Admin extends Component {
 
     componentDidUpdate() {
         // Takes user to top of page after any updates
-        window.scrollTo(0, 0);    
+        window.scrollTo(0, 0);
     }
-    
+
     // Function that runs after a kid has been added
     resetKidForm = () => {
         this.setState({
@@ -203,7 +203,7 @@ class Admin extends Component {
     handleKidFormSubmit = event => {
         event.preventDefault();
         // Set state to loading and empties results arrays
-        this.setState({ 
+        this.setState({
             loading: true,
             kids: [],
             users: []
@@ -289,7 +289,7 @@ class Admin extends Component {
             searchTerm: this.state.userSearchTerm,
             searchType: this.state.userSearchType
         })
-            .then(res => {
+            .then(res => {            
                 // Set state of search terms back to original state, set state of results to new search results
                 this.setState({
                     users: res.data,
@@ -298,7 +298,8 @@ class Admin extends Component {
                     showUserSearchResults: true,
                     message: ""
                 })
-            })
+                // console.log(this.state.users)
+                })
             .catch(err => {
                 this.setState({
                     loading: false,
@@ -357,7 +358,7 @@ class Admin extends Component {
 
                         {/* UPDATE CHILD/SEARCH */}
                         {this.state.showKidSearch ?
-                            <SearchKid 
+                            <SearchKid
                                 onChange={this.handleInputChange}
                                 termValue={this.state.searchTerm}
                                 termName="searchTerm"
@@ -417,7 +418,7 @@ class Admin extends Component {
                                 typeId="userSearchType"
                                 submitId="searchSubmit"
                                 onClick={this.handleAdminUserSearch}
-                                />
+                            />
                             : null}
                         {/* If search brings back results, show results */}
                         {this.state.showUserSearchResults ? (

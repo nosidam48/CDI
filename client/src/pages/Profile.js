@@ -38,15 +38,26 @@ class Profile extends Component {
         // Check if the user has profile info already
         if (response.data) {
           // Set any null data from database to empty string to manage state without null value (for example, if the user did not enter an address earlier)
+          // Create new object to hold data
+          let donorData = {}
           for (let [key, value] of Object.entries(response.data)) {
             if (value === null) {
               value = ""
             }
-            this.setState({
-              [key]: value,
-              loading: false
-            })
+            donorData[key] = value
           }
+            this.setState({
+                email: donorData.email,
+                first_name: donorData.first_name,
+                last_name: donorData.last_name,
+                address: donorData.address,
+                city: donorData.city,
+                state: donorData.state,
+                zip: donorData.zip,
+                loading: false
+              })
+            
+            console.log(this.state);
         } else {
           this.setState({ loading: false });
         }
