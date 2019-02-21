@@ -436,6 +436,8 @@ class Admin extends Component {
                                                 city={user.city}
                                                 state={user.state}
                                                 zip={user.zip}
+                                                admin={user.admin_status}
+                                                masterAdmin={user.master_admin_status}
                                                 redoSearch={this.handleAdminUserSearch}
                                             />
                                         ))}
