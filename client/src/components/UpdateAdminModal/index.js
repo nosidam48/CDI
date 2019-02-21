@@ -52,7 +52,6 @@ class UpdateAdminModal extends React.Component {
       user_city: this.state.city,
       user_state: this.state.state,
       user_zip: this.state.zip,
-      // adminChoice: this.state.adminChoice,
       admin_status: this.state.admin,
       master_admin_status: this.state.masterAdmin
     })

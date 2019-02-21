@@ -32,7 +32,8 @@ class App extends React.Component {
     // Make call to the database to get user info
     API.getDonor({ email: profile.name })
       .then(response => {
-        if (response.data.admin_status === true) {
+        // Check if user has a profile and an admin status of true 
+        if (response.data && response.data.admin_status === true) {
           this.setState({ 
             admin: true,
             authenticated: true
@@ -55,7 +56,7 @@ class App extends React.Component {
     //   this.setState({ checkingSession: false });
     //   return;
     // }
-    // If user didn't just log in, auth0 checks if already logged in 
+    // Auth0 checks if user is logged in 
     try {
       await auth0Client.silentAuth();
       this.forceUpdate();
