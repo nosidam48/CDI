@@ -22,6 +22,18 @@ export default {
         }
     },
 
+    // Adds kid photo to S3
+    addKidPhoto: (kidData) => {
+        return axios({
+            "method": "POST",
+            "url": "/api/kids/image",
+            "data": kidData,
+            "processData": false,
+            "contentType": false,
+            "mimeType": "multipart/form-data",
+        })
+    },
+    
     // Adds kid to database using expanded axios request to handle photo
     addKid: (kidData) => {
         return axios({

@@ -209,108 +209,118 @@ class Admin extends Component {
             users: []
         })
 
-        // Use FormData to handle both text and the binary file
-        let kidData = new FormData();
-        kidData.append("first_name", this.state.kidFirstNames);
-        kidData.append("last_name", this.state.kidLastName);
-        kidData.append("gender", this.state.gender);
-        kidData.append("birth_date", this.state.birth_date);
-        kidData.append("grade", this.state.grade);
-        kidData.append("location", this.state.kidLocation);
-        kidData.append("kid_bio", this.state.bio);
-        kidData.append("need_sponsor", true);
-        kidData.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
+        // Use FormData to send profile photo to S3
+        let kidPhoto = new FormData();
+        kidPhoto.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
 
-        API.addKid(kidData)
+        // Upload profile photo to S3 and set state with returned file 
+        API.addKidPhoto(kidPhoto)
             .then(res => {
-                this.resetKidForm();
-                this.setState({
-                    message: "A child was added to the database.",
-                    loading: false
+                if (res.data.imageUrl) {
+                    this.setState({ selectedFile: res.data.imageUrl })
+                }
+                // Send request to the database to create the new kid record
+                API.addKid({
+                    first_name: this.state.kidFirstNames,
+                    last_name: this.state.kidLastName,
+                    gender: this.state.gender,
+                    birth_date: this.state.birth_date,
+                    grade: this.state.grade,
+                    location: this.state.kidLocation,
+                    kid_bio: this.state.bio,
+                    need_sponsor: true,
+                    selectedFile: this.state.selectedFile
                 })
+                    .then(res => {
+                        this.resetKidForm();
+                        this.setState({
+                            message: "A child was added to the database.",
+                            loading: false
+                        })
+                    })
+                    .catch(err => {
+                        this.resetKidForm();
+                        this.setState({
+                            message: "There was an error adding the child to the database.",
+                            loading: false
+                        });
+                        console.log(err);
+                    })
             })
-            .catch(err => {
-                this.resetKidForm();
-                this.setState({
-                    message: "There was an error adding the child to the database.",
-                    loading: false
-                });
-                console.log(err);
-            })
-    }
+        }
 
     // Handles when an admin is searching for a child
     handleAdminKidSearch = event => {
-        event.preventDefault();
-        this.setState({
-            loading: true,
-            showKidSearch: false,
-            kids: [],
-            users: [],
-            showKidSearchResults: false,
-            showUserSearchResults: false,
-            message: ""
-        })
-        API.kidSearch({
-            searchTerm: this.state.searchTerm,
-            searchType: this.state.searchType
-        })
-            .then(res => {
-                // Set state of kids to new search results
-                this.setState({
-                    kids: res.data,
-                    loading: false,
-                    showKidSearch: true,
-                    showKidSearchResults: true,
-                    message: ""
-                })
-            })
-            .catch(err => {
-                this.setState({
-                    loading: false,
-                    showKidSearch: true,
-                    message: "We're sorry. We encountered an error."
-                })
-                console.log(err)
-            });
-    }
+                    event.preventDefault();
+                    this.setState({
+                        loading: true,
+                        showKidSearch: false,
+                        kids: [],
+                        users: [],
+                        showKidSearchResults: false,
+                        showUserSearchResults: false,
+                        message: ""
+                    })
+                    API.kidSearch({
+                        searchTerm: this.state.searchTerm,
+                        searchType: this.state.searchType
+                    })
+                        .then(res => {
+                            // Set state of kids to new search results
+                            this.setState({
+                                kids: res.data,
+                                loading: false,
+                                showKidSearch: true,
+                                showKidSearchResults: true,
+                                message: ""
+                            })
+                        })
+                        .catch(err => {
+                            this.setState({
+                                loading: false,
+                                showKidSearch: true,
+                                message: "We're sorry. We encountered an error."
+                            })
+                            console.log(err)
+                        });
+                }
 
     handleAdminUserSearch = event => {
-        event.preventDefault();
-        this.setState({
-            loading: true,
-            kids: [],
-            users: [],
-            showUserSearch: false,
-            showUserSearchResults: false,
-            showKidSearchResults: false,
-        })
-        API.userSearch({
-            searchTerm: this.state.userSearchTerm,
-            searchType: this.state.userSearchType
-        })
-            .then(res => {            
-                // Set state of search terms back to original state, set state of results to new search results
-                this.setState({
-                    users: res.data,
-                    loading: false,
-                    showUserSearch: true,
-                    showUserSearchResults: true,
-                    message: ""
-                })
-                // console.log(this.state.users)
-                })
-            .catch(err => {
-                this.setState({
-                    loading: false,
-                    message: "We're sorry. We encountered an error."
-                })
-                console.log(err)
-            });
-    }
+                    event.preventDefault();
+                    this.setState({
+                        loading: true,
+                        kids: [],
+                        users: [],
+                        showUserSearch: false,
+                        showUserSearchResults: false,
+                        showKidSearchResults: false,
+                    })
+                    API.userSearch({
+                        searchTerm: this.state.userSearchTerm,
+                        searchType: this.state.userSearchType
+                    })
+                        .then(res => {
+                            // Set state of search terms back to original state, set state of results to new search results
+                            this.setState({
+                                users: res.data,
+                                loading: false,
+                                showUserSearch: true,
+                                showUserSearchResults: true,
+                                message: ""
+                            })
+                            // console.log(this.state.users)
+                        })
+                        .catch(err => {
+                            this.setState({
+                                loading: false,
+                                message: "We're sorry. We encountered an error."
+                            })
+                            console.log(err)
+                        });
+                }
 
     render() {
-        return (
+                    return(
             <MainContainer>
                 <Row>
                     {/* Displays the AdminSidebar with needed props */}
@@ -463,7 +473,7 @@ class Admin extends Component {
                         </MainContainer>
                     </Col>
                 </Row>
-            </MainContainer>
+            </MainContainer >
         )
     }
 }
