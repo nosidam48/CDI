@@ -76,6 +76,7 @@ class Admin extends Component {
             showAdmins: false,
             message: "",
         });
+        window.scrollTo(0, 0);
     }
     // Lets admin search for specific kid
     showKidSearch = () => {
@@ -91,6 +92,7 @@ class Admin extends Component {
             showAdmins: false,
             message: "",
         })
+        window.scrollTo(0, 0);
     }
     // Lets admin search for group of kids
     showMultipleKids = () => {
@@ -106,6 +108,7 @@ class Admin extends Component {
             showAdmins: false,
             message: "",
         })
+        window.scrollTo(0, 0);
     }
     // Toggles display of form to add a user
     toggleAddUserForm = () => {
@@ -121,6 +124,7 @@ class Admin extends Component {
             showAdmins: false,
             message: "",
         });
+        window.scrollTo(0, 0);
     }
 
     // Lets admin search for admin
@@ -137,6 +141,7 @@ class Admin extends Component {
             showAdmins: false,
             message: "",
         })
+        window.scrollTo(0, 0);
     }
     // Lets admin see all users
     showUsers = () => {
@@ -152,6 +157,7 @@ class Admin extends Component {
             showAdmins: false,
             message: "",
         })
+        window.scrollTo(0, 0);
     }
     // Lets admin see all admins
     showAdmins = () => {
@@ -167,13 +173,9 @@ class Admin extends Component {
             showAdmins: true,
             message: "",
         })
-    }
-    // ==============================================================
-
-    componentDidUpdate() {
-        // Takes user to top of page after any updates
         window.scrollTo(0, 0);
     }
+    // ==============================================================
 
     // Function that runs after a kid has been added
     resetKidForm = () => {
@@ -237,6 +239,8 @@ class Admin extends Component {
                             message: "A child was added to the database.",
                             loading: false
                         })
+                        window.scrollTo(0, 0);
+
                     })
                     .catch(err => {
                         this.resetKidForm();
@@ -244,6 +248,7 @@ class Admin extends Component {
                             message: "There was an error adding the child to the database.",
                             loading: false
                         });
+                        window.scrollTo(0, 0);
                         console.log(err);
                     })
             })

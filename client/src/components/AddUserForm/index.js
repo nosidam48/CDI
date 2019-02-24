@@ -64,8 +64,12 @@ class AddUserForm extends Component {
             loading: false
           })
         }
+        window.scrollTo(0, 0);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        window.scrollTo(0, 0);
+      })
   }
 
   render() {
