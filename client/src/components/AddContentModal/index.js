@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
 import { SubmitBtn, DiscardBtn } from "../Form"
 import { InputField, UploadPhoto } from "../Form";
+import LoadSpinner from "../LoadSpinner";
 import API from "../../utils/API";
 
 // Modal where admin can add photo or update to a child
@@ -100,8 +101,11 @@ render() {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>Add Content for {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
 
-                {/* If message has success text, show the text */}
-                {this.state.message ? (
+                {/* If loading is true, show spinner. If not, check if a message exists and show message, if not, show form */}
+                {this.state.loading ? (
+                    <LoadSpinner className="kidsSpin" />
+                ) : (
+                this.state.message ? (
                     <h4 className="text-center py-3">{this.state.message}</h4>
                 ) : (
                         <div>
@@ -131,7 +135,7 @@ render() {
                                 <DiscardBtn onClick={this.toggle} className="modalCancel">Cancel</DiscardBtn>
                             </ModalFooter>
                         </div>
-                    )}
+                    ))}
             </Modal>
         </div>
     );
