@@ -149,6 +149,7 @@ module.exports = {
         if (req.body.admin === "Yes") {
             admin = true;
         }
+
         // Make sure user doesn't already exist in the database
         db.users.findOne({
             where: {
@@ -164,10 +165,10 @@ module.exports = {
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
                     email: req.body.email,
-                    user_address: req.body.address,
-                    user_city: req.body.city,
-                    user_state: req.body.state,
-                    user_zip: req.body.zip,
+                    address: req.body.address,
+                    city: req.body.city,
+                    state: req.body.state,
+                    zip: req.body.zip,
                     admin_status: admin,
                     master_admin_status: false,
                 })

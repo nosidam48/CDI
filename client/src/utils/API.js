@@ -22,16 +22,21 @@ export default {
         }
     },
 
-    // Adds kid to database using expanded axios request to handle photo
-    addKid: (kidData) => {
+    // Adds kid photo to S3
+    addKidPhoto: (kidData) => {
         return axios({
             "method": "POST",
-            "url": "/api/kids",
+            "url": "/api/kids/image",
             "data": kidData,
             "processData": false,
             "contentType": false,
             "mimeType": "multipart/form-data",
         })
+    },
+    
+    // Adds kid to database using expanded axios request to handle photo
+    addKid: (kidData) => {
+        return axios.post("/api/kids", kidData)
     },
 
     //to return a single kid by id
@@ -99,17 +104,7 @@ export default {
 
     // Add content for child, includes expanded axios request to handle photo
     addContent: (contentData) => {
-        // Extract id from contentData 
-        let id = contentData.get("kidId")
-        let url = "/api/content/" + id;
-        return axios({
-            "method": "POST",
-            "url": url,
-            "data": contentData,
-            "processData": false,
-            "contentType": false,
-            "mimeType": "multipart/form-data",
-        })
+        return axios.post("/api/content/" + contentData.kidId, contentData);
     },
 
     // ADMIN-DONOR FUNCTIONS=======================================================
@@ -118,6 +113,7 @@ export default {
     },
 
     addUser: (userData) => {
+        console.log(userData);
         return axios.post("/api/admin/addUser", userData)
     },
 

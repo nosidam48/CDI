@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
-import {SubmitBtn, DiscardBtn} from "../Form"
+import { SubmitBtn, DiscardBtn } from "../Form"
 import { InputField, UploadPhoto } from "../Form";
+import LoadSpinner from "../LoadSpinner";
 import API from "../../utils/API";
 
 // Modal where admin can add photo or update to a child
-class ConnectDonorModal extends Component {
+class AddContentModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
             modal: false,
             update: "",
+            selectedFile: null,
+            imageUrl: "",
+            kidId: props.kidId,
             userId: props.id,
             message: "",
             loading: false
@@ -45,73 +49,97 @@ class ConnectDonorModal extends Component {
         this.setState({
             loading: true
         })
-        // Use FormData to handle both text and the binary file
-        let contentData = new FormData();
-        contentData.append("kidId", this.props.kidId);
-        // The user can submit an update or a photo but doesn't have to do both. 
-        // So check to see if an update was submitted. If so, append to contentData 
-        if (this.state.update) {
-            contentData.append("kid_notes", this.state.update);
-        }
-        // Check to see if a photo was submitted. If so, append to contentData
+
+        // Check to see if a photo was added. If so, upload to S3
         if (this.state.selectedFile) {
-            contentData.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
-        }
-        //Call the add content function
-        API.addContent(contentData)
-            .then(res => {
-                // Update message to success to alert the user the content went through
-                this.setState({
-                    message: "Content successfully added",
-                    loading: false
+            let kidPhoto = new FormData();
+            kidPhoto.append('selectedFile', this.state.selectedFile, this.state.selectedFile.name);
+
+            // Upload profile photo to S3 and set state with returned file 
+            API.addKidPhoto(kidPhoto)
+                .then(res => {
+                    if (res.data.imageUrl) {
+                        this.setState({ imageUrl: res.data.imageUrl })
+                    }
+                                        
+                    // Then send a request to add both content and the link to the image to the db
+                    API.addContent({
+                        kidId: this.state.kidId,
+                        kid_notes: this.state.update,
+                        kid_pics: this.state.imageUrl
+                    })
+                        .then(res => {
+                            // Update message to success to alert the user the content went through
+                            this.setState({
+                                message: "Content successfully added",
+                                loading: false
+                            })
+                        })
+                        .catch(err => console.log(err));
                 })
+        } else {
+            // If there's no photo, just send the db request with the text update
+            API.addContent({
+                kidId: this.state.kidId,
+                kid_notes: this.state.update,
             })
-            .catch(err => console.log(err));
+                .then(res => {
+                    // Update message to success to alert the user the content went through
+                    this.setState({
+                        message: "Content successfully added",
+                        loading: false
+                    })
+                })
+                .catch(err => console.log(err));
+        }
     }
 
-    render() {
-        return (
-            <div className="d-inline mr-2">
-                <Button inline="true" size="sm" className="mt-2" onClick={this.toggle}>Add Content</Button>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}>Add Content for {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
-                    
-                    {/* If message has success text, show the text */}
-                    {this.state.message ? (
-                        <h4 className="text-center py-3">{this.state.message}</h4>
-                    ) : (
-                            <div>
+render() {
+    return (
+        <div className="d-inline mr-2">
+            <Button inline="true" size="sm" className="mt-2" onClick={this.toggle}>Add Content</Button>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <ModalHeader toggle={this.toggle}>Add Content for {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
+
+                {/* If loading is true, show spinner. If not, check if a message exists and show message, if not, show form */}
+                {this.state.loading ? (
+                    <LoadSpinner className="kidsSpin" />
+                ) : (
+                this.state.message ? (
+                    <h4 className="text-center py-3">{this.state.message}</h4>
+                ) : (
+                        <div>
                             {/* If there is no success message, show the content submission form */}
-                                <ModalBody>
-                                    <Form>
-                                        <Label>Update for donor (not required)</Label>
-                                        <InputField
-                                            type="textarea"
-                                            value={this.state.update}
-                                            onChange={this.handleInputChange}
-                                            name="update"
-                                        />
-                                        <Label>Add photo (not required)</Label>
-                                        <UploadPhoto
-                                            onChange={this.fileSelectedHandler}
-                                            name="selectedFile"
-                                            id=""
-                                        />
-                                    </Form>
-                                </ModalBody>
-                                <ModalFooter>
-                                    <SubmitBtn 
-                                        onClick={(event) => this.handleContentSubmit(event)} 
-                                        disabled={!(this.state.update || this.state.selectedFile)}
-                                        className="modalBtn">Submit</SubmitBtn>{' '}
-                                    <DiscardBtn onClick={this.toggle} className="modalCancel">Cancel</DiscardBtn>
-                                </ModalFooter>
-                            </div>
-                        )}
-                </Modal>
-            </div>
-        );
-    }
+                            <ModalBody>
+                                <Form>
+                                    <Label>Update for donor (not required)</Label>
+                                    <InputField
+                                        type="textarea"
+                                        value={this.state.update}
+                                        onChange={this.handleInputChange}
+                                        name="update"
+                                    />
+                                    <Label>Add photo (not required)</Label>
+                                    <UploadPhoto
+                                        onChange={this.fileSelectedHandler}
+                                        name="selectedFile"
+                                        id=""
+                                    />
+                                </Form>
+                            </ModalBody>
+                            <ModalFooter>
+                                <SubmitBtn
+                                    onClick={(event) => this.handleContentSubmit(event)}
+                                    disabled={!(this.state.update || this.state.selectedFile)}
+                                    className="modalBtn">Submit</SubmitBtn>{' '}
+                                <DiscardBtn onClick={this.toggle} className="modalCancel">Cancel</DiscardBtn>
+                            </ModalFooter>
+                        </div>
+                    ))}
+            </Modal>
+        </div>
+    );
+}
 }
 
-export default ConnectDonorModal;
+export default AddContentModal;

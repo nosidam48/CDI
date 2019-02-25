@@ -1,6 +1,8 @@
 const db = require("../models");
 var Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const upload = require("../services/file-upload")
+const singleUpload = upload.single("selectedFile");
 
 // Defining methods for the kidsController
 module.exports = {
@@ -62,6 +64,16 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  // Function to upload kid profile image to S3
+  uploadProfilePhoto: (req, res) => {
+    singleUpload(req, res, function (err) {
+      if (err) {
+        return res.status(422).send({ errors: [{ title: "File Upload Error", detail: err.message }] })
+      }
+      return res.json({ "imageUrl": req.file.location })
+    })
+  },
+
   // Function to add kid from form data
   create: (req, res) => {
     db.kids.create({
@@ -73,11 +85,10 @@ module.exports = {
       location: req.body.location,
       kid_bio: req.body.kid_bio,
       need_sponsor: true,
-      profile_image: "/" + req.file.path
+      profile_image: req.body.selectedFile
     }).then(kidData => res.json(kidData))
       .catch(err => res.status(422).json(err));
   },
-
 
   //A database call to find one kid by a passed in id
   findOneKid: (req, res) => {

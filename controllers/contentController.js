@@ -10,13 +10,13 @@ module.exports = {
         if (req.body.kid_notes) {
             kid_notes = req.body.kid_notes
         } else {
-            kid_notes = null
+            kid_notes = ""
         };
         // Check if a photo was submitted and store path value or null. 
-        if (req.file) {
-            kid_pics = "/" + req.file.path
+        if (req.body.kid_pics) {
+            kid_pics = req.body.kid_pics
         } else {
-            kid_pics = null
+            kid_pics = ""
         };
         //create the new entry in the content table
         db.content.create({

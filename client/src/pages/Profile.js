@@ -7,8 +7,8 @@ import auth0Client from "../Auth";
 import API from "../utils/API";
 
 class Profile extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       email: '',
       first_name: '',
@@ -37,18 +37,20 @@ class Profile extends Component {
       .then(response => {
         // Check if the user has profile info already
         if (response.data) {
-          // Set any null data from database to empty string to manage state without null value (for example, if the user did not enter an address earlier)
-          for (let [key, value] of Object.entries(response.data)) {
-            if (value === null) {
-              value = ""
-            }
             this.setState({
-              [key]: value,
-              loading: false
-            })
-          }
-        } else {
-          this.setState({ loading: false });
+                email: response.data.email,
+                first_name: response.data.first_name,
+                last_name: response.data.last_name,
+                address: response.data.address,
+                city: response.data.city,
+                state: response.data.state,
+                zip: response.data.zip,
+                loading: false
+              })
+          } else {
+          this.setState({ 
+            email: profile.name,
+            loading: false });
         }
       })
   }

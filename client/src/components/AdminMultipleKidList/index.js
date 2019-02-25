@@ -24,6 +24,7 @@ class AdminMultipleKids extends React.Component {
                     kids: res.data,
                     loading: false
                 })
+                window.scrollTo(0, 0);
             })
     }
     // Loads only sponsored kids
@@ -37,6 +38,7 @@ class AdminMultipleKids extends React.Component {
                     kids: res.data,
                     loading: false
                 })
+                window.scrollTo(0, 0);
             })
     }
     // Loads only unsponsored kids
@@ -50,6 +52,7 @@ class AdminMultipleKids extends React.Component {
                     kids: res.data,
                     loading: false
                 })
+                window.scrollTo(0, 0);
             })
     }
     render() {

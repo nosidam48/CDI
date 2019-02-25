@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateAdminModal from "../UpdateAdminModal";
+import UpdateUserModal from "../UpdateUserModal";
 import RemoveUserModal from "../RemoveUserModal";
 
 function AdminUserList(props) {
@@ -13,7 +13,7 @@ function AdminUserList(props) {
             {/* Button functions */}
             <div className="mt-2">
                 {/* Button that toggles update child form and includes data from search*/ }
-                <UpdateAdminModal 
+                <UpdateUserModal 
                     id={props.id}
                     firstName={props.firstName}
                     lastName={props.lastName}
@@ -22,6 +22,8 @@ function AdminUserList(props) {
                     city={props.city}
                     state={props.state}
                     zip={props.zip}
+                    admin={props.admin}
+                    masterAdmin={props.masterAdmin}
                     redoSearch={props.redoSearch}
                 />                        
                 {/* Button that opens RemoveKidModal */}
