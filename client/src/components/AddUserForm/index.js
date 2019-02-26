@@ -40,6 +40,9 @@ class AddUserForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     this.setState({ loading: true });
+    // Hide form and send user to top of the page
+    this.props.toggle();
+    
     API.addUser({
       first_name: this.state.firstName,
       last_name: this.state.lastName,
@@ -64,7 +67,6 @@ class AddUserForm extends Component {
             loading: false
           })
         }
-        window.scrollTo(0, 0);
       })
       .catch(err => {
         console.log(err)
