@@ -4,10 +4,10 @@ import auth0 from 'auth0-js';
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
-      domain: 'gentle-bush-8840.auth0.com',
-      audience: 'https://gentle-bush-8840.auth0.com/userinfo',
-      clientID: '2t4G7uKJfnfgW9ZQhqf5e_9IDmQ5DG7G',
-      redirectUri: 'http://cdi2019.herokuapp.com/callback',
+      domain: 'dev-pzu1ax5c.auth0.com',
+      audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
+      clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+      redirectUri: 'http://localhost:3000/callback',
       responseType: 'id_token',
       scope: 'openid profile'
     });
@@ -57,8 +57,8 @@ class Auth {
 
   signOut() {
     this.auth0.logout({
-      returnTo: 'http://cdi2019.herokuapp.com/',
-      clientID: '2t4G7uKJfnfgW9ZQhqf5e_9IDmQ5DG7G',
+      returnTo: 'http://localhost:3000',
+      clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
     });
   }
 
