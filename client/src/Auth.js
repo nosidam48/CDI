@@ -4,8 +4,8 @@ import auth0 from 'auth0-js';
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
-      domain: 'https://gentle-bush-8840.auth0.com/userinfo',
-      audience: 'gentle-bush-8840.auth0.com',
+      domain: 'gentle-bush-8840.auth0.com',
+      audience: 'https://gentle-bush-8840.auth0.com/userinfo',
       clientID: '2t4G7uKJfnfgW9ZQhqf5e_9IDmQ5DG7G',
       redirectUri: 'http://cdi2019.herokuapp.com/callback',
       responseType: 'id_token',
