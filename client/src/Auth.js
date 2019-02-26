@@ -4,9 +4,9 @@ import auth0 from 'auth0-js';
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
-      domain: 'dev-pzu1ax5c.auth0.com',
-      audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
-      clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+      domain: 'gentle-bush-8840.auth0.com',
+      // audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
+      clientID: '2t4G7uKJfnfgW9ZQhqf5e_9IDmQ5DG7G',
       redirectUri: 'http://cdi2019.herokuapp.com/callback',
       responseType: 'id_token',
       scope: 'openid profile'
@@ -58,7 +58,7 @@ class Auth {
   signOut() {
     this.auth0.logout({
       returnTo: 'http://cdi2019.herokuapp.com/',
-      clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+      clientID: '2t4G7uKJfnfgW9ZQhqf5e_9IDmQ5DG7G',
     });
   }
 
