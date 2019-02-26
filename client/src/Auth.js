@@ -3,14 +3,26 @@ import auth0 from 'auth0-js';
 // Sets user authentication functions through Auth0
 class Auth {
   constructor() {
-    this.auth0 = new auth0.WebAuth({
-      domain: 'dev-pzu1ax5c.auth0.com',
-      audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
-      clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
-      redirectUri: 'https://cdi2019.herokuapp.com/callback',
-      responseType: 'id_token',
-      scope: 'openid profile'
-    });
+    // Set redirectUri based on production or dev mode
+    if (process.env.NODE_ENV === "production") {
+      this.auth0 = new auth0.WebAuth({
+        domain: 'dev-pzu1ax5c.auth0.com',
+        audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
+        clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+        redirectUri: 'https://cdi2019.herokuapp.com/callback',
+        responseType: 'id_token',
+        scope: 'openid profile'
+      });
+    } else {
+      this.auth0 = new auth0.WebAuth({
+        domain: 'dev-pzu1ax5c.auth0.com',
+        audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
+        clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+        redirectUri: 'http://localhost:3000/callback',
+        responseType: 'id_token',
+        scope: 'openid profile'
+      });
+    }
 
     this.getProfile = this.getProfile.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
@@ -56,10 +68,19 @@ class Auth {
   }
 
   signOut() {
-    this.auth0.logout({
-      returnTo: 'https://cdi2019.herokuapp.com/callback',
-      clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
-    });
+    if (process.env.NODE_ENV === "production") {
+      this.auth0.logout({
+        returnTo: 'https://cdi2019.herokuapp.com',
+        clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+
+      });
+    } else {
+      this.auth0.logout({
+        returnTo: 'http://localhost:3000',
+        clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+
+      });
+    }
   }
 
   silentAuth() {
