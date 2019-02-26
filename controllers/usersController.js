@@ -88,7 +88,7 @@ module.exports = {
         })
     },
 
-    // viewSponsees: (req, res)
+    // Function to display kid data for whom donor sponsors
     donorKid: (req, res) => {
         db.users.findOne({
             where: {
@@ -100,11 +100,12 @@ module.exports = {
                 if (data.length === 0) {
                     res.send("Not a sponsor")
                 } else {
-                    // If donor is sponsoring a child, send child info
+                    // If donor is sponsoring a child, send child info, sorting content by created date
                     db.content.findAll({
                         where: {
                             kidId: data[0].dataValues.id
-                        }
+                        },
+                        order: [['createdAt', 'DESC']]                        
                     }).then(data2 => {
                         let donorObject = {
                             kid: data[0].dataValues,
