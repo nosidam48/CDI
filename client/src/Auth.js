@@ -7,7 +7,7 @@ class Auth {
       domain: 'dev-pzu1ax5c.auth0.com',
       audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
       clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
-      redirectUri: 'http://localhost:3000/callback',
+      redirectUri: 'http://cdi2019.herokuapp.com/callback',
       responseType: 'id_token',
       scope: 'openid profile'
     });
@@ -57,7 +57,7 @@ class Auth {
 
   signOut() {
     this.auth0.logout({
-      returnTo: 'http://localhost:3000',
+      returnTo: 'http://cdi2019.herokuapp.com/',
       clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
     });
   }
