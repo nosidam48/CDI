@@ -44,7 +44,8 @@ class ConnectDonorModal extends Component {
   handleDonorSearch = event => {
     event.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      donors: []
     })
     API.donorSearch({
       first_name: this.state.donorFirstName,
@@ -70,7 +71,7 @@ class ConnectDonorModal extends Component {
     this.setState({
       loading: true
     })
-    
+
     // Create object to send
     let connectData = {
       donor_id: donorId,
@@ -78,12 +79,12 @@ class ConnectDonorModal extends Component {
     }
     API.connectDonor(connectData)
       .then(res => {
-          this.setState({
-            message: "The donor and child have been successfully connected.",
-            loading: false,
-            connected: true  
-          })
-    }).catch(err => console.log(err));
+        this.setState({
+          message: "The donor and child have been successfully connected.",
+          loading: false,
+          connected: true
+        })
+      }).catch(err => console.log(err));
   }
 
   render() {
@@ -93,32 +94,36 @@ class ConnectDonorModal extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Connect donor to {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
           <ModalBody>
-            <h5>Search for donor (one field required)</h5>
-            <Form>
-              <InputField
-                value={this.state.donorFirstName}
-                onChange={this.handleInputChange}
-                name="donorFirstName"
-                placeholder="First name"
-              />
-              <InputField
-                value={this.state.donorLastName}
-                onChange={this.handleInputChange}
-                name="donorLastName"
-                placeholder="Last name"
-              />
-              <InputField
-                value={this.state.donorEmail}
-                onChange={this.handleInputChange}
-                name="donorEmail"
-                placeholder="Email address"
-              />
-              <SubmitBtn
-                disabled={!(this.state.donorFirstName || this.state.donorLastName || this.state.donorEmail)}
-                onClick={this.handleDonorSearch}
-              />
-            </Form>
-            {this.state.donors.length > 0 ? (
+            {!this.state.connected ? (
+              <div>
+                <h5>Search for donor (one field required)</h5>
+                <Form>
+                  <InputField
+                    value={this.state.donorFirstName}
+                    onChange={this.handleInputChange}
+                    name="donorFirstName"
+                    placeholder="First name"
+                  />
+                  <InputField
+                    value={this.state.donorLastName}
+                    onChange={this.handleInputChange}
+                    name="donorLastName"
+                    placeholder="Last name"
+                  />
+                  <InputField
+                    value={this.state.donorEmail}
+                    onChange={this.handleInputChange}
+                    name="donorEmail"
+                    placeholder="Email address"
+                  />
+                  <SubmitBtn
+                    disabled={!(this.state.donorFirstName || this.state.donorLastName || this.state.donorEmail)}
+                    onClick={this.handleDonorSearch}
+                  />
+                </Form>
+              </div>
+            ) : null}
+            {this.state.donors.length > 0 && !this.state.connected ? (
               <div className="mt-2">
                 <hr />
                 <p className="font-weight-bold">Users found</p>
@@ -135,12 +140,7 @@ class ConnectDonorModal extends Component {
                   </div>
                 ))}
               </div>
-            ) : (
-              <h4 className="text-center py-3">{this.state.message}</h4>
-            )}
-            { this.state.connected ? (
-              <h4 className="text-center py-3">{this.state.message}</h4>
-            ) : null }
+            ) : <h4 className="text-center py-3">{this.state.message}</h4>}
           </ModalBody>
           <ModalFooter>
             <DiscardBtn onClick={this.toggle} className="modalCancel"></DiscardBtn>

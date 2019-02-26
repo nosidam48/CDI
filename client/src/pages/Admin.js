@@ -210,6 +210,8 @@ class Admin extends Component {
             kids: [],
             users: []
         })
+        // Hide form and send user to top of the page 
+        this.toggleAddKidForm();
 
         // Use FormData to send profile photo to S3
         let kidPhoto = new FormData();
@@ -239,7 +241,6 @@ class Admin extends Component {
                             message: "A child was added to the database.",
                             loading: false
                         })
-                        window.scrollTo(0, 0);
 
                     })
                     .catch(err => {
