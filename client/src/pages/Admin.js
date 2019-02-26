@@ -22,15 +22,9 @@ class Admin extends Component {
     }
     state = {
         // Toolbar functions
-        showAddKidForm: false,
-        showKidSearch: false,
+        displayTool: "",
         showKidSearchResults: false,
         showUserSearchResults: false,
-        showMultipleKids: false,
-        showAddUserForm: false,
-        showUserSearch: false,
-        showUsers: false,
-        showAdmins: false,
 
         // Message & loading
         message: "Choose an admin tool from the menu to get started.",
@@ -65,15 +59,7 @@ class Admin extends Component {
     // Toggles display of form to add a kid
     toggleAddKidForm = () => {
         this.setState({
-            showAddKidForm: !this.state.showAddKidForm,
-            showKidSearch: false,
-            showKidSearchResults: false,
-            showUserSearchResults: false,
-            showMultipleKids: false,
-            showAddUserForm: false,
-            showUserSearch: false,
-            showUsers: false,
-            showAdmins: false,
+            displayTool: "AddKidForm",
             message: "",
         });
         window.scrollTo(0, 0);
@@ -81,15 +67,7 @@ class Admin extends Component {
     // Lets admin search for specific kid
     showKidSearch = () => {
         this.setState({
-            showKidSearch: true,
-            showAddKidForm: false,
-            showKidSearchResults: false,
-            showUserSearchResults: false,
-            showMultipleKids: false,
-            showAddUserForm: false,
-            showUserSearch: false,
-            showUsers: false,
-            showAdmins: false,
+            displayTool: "KidSearch",
             message: "",
         })
         window.scrollTo(0, 0);
@@ -97,15 +75,7 @@ class Admin extends Component {
     // Lets admin search for group of kids
     showMultipleKids = () => {
         this.setState({
-            showMultipleKids: true,
-            showKidSearch: false,
-            showKidSearchResults: false,
-            showUserSearchResults: false,
-            showAddKidForm: false,
-            showAddUserForm: false,
-            showUserSearch: false,
-            showUsers: false,
-            showAdmins: false,
+            displayTool: "MultipleKids",
             message: "",
         })
         window.scrollTo(0, 0);
@@ -113,15 +83,7 @@ class Admin extends Component {
     // Toggles display of form to add a user
     toggleAddUserForm = () => {
         this.setState({
-            showAddKidForm: false,
-            showKidSearch: false,
-            showKidSearchResults: false,
-            showUserSearchResults: false,
-            showMultipleKids: false,
-            showAddUserForm: !this.state.showAddUserForm,
-            showUserSearch: false,
-            showUsers: false,
-            showAdmins: false,
+            displayTool: "AddUserForm",
             message: "",
         });
         window.scrollTo(0, 0);
@@ -130,15 +92,7 @@ class Admin extends Component {
     // Lets admin search for admin
     showUserSearch = () => {
         this.setState({
-            showKidSearch: false,
-            showKidSearchResults: false,
-            showUserSearchResults: false,
-            showAddKidForm: false,
-            showMultipleKids: false,
-            showAddUserForm: false,
-            showUserSearch: true,
-            showUsers: false,
-            showAdmins: false,
+            displayTool: "UserSearch",
             message: "",
         })
         window.scrollTo(0, 0);
@@ -146,15 +100,7 @@ class Admin extends Component {
     // Lets admin see all users
     showUsers = () => {
         this.setState({
-            showMultipleKids: false,
-            showKidSearch: false,
-            showKidSearchResults: false,
-            showUserSearchResults: false,
-            showAddKidForm: false,
-            showAddUserForm: false,
-            showUserSearch: false,
-            showUsers: true,
-            showAdmins: false,
+            displayTool: "Users",
             message: "",
         })
         window.scrollTo(0, 0);
@@ -162,14 +108,7 @@ class Admin extends Component {
     // Lets admin see all admins
     showAdmins = () => {
         this.setState({
-            showMultipleKids: false,
-            showKidSearch: false,
-            showKidSearchResults: false,
-            showUserSearchResults: false,
-            showAddKidForm: false,
-            showAddUserForm: false,
-            showUserSearch: false,
-            showUsers: false,
+            displayTool: "Admins",
             showAdmins: true,
             message: "",
         })
@@ -182,7 +121,7 @@ class Admin extends Component {
         this.setState({
             kidFirstNames: "", kidLastName: "", gender: "", birth_date: "",
             grade: "", kidLocation: "", bio: "",
-            showAddKidForm: false,
+            displayTool: ""
         })
     }
 
@@ -260,11 +199,9 @@ class Admin extends Component {
                     event.preventDefault();
                     this.setState({
                         loading: true,
-                        showKidSearch: false,
+                        displayTool: "",
                         kids: [],
                         users: [],
-                        showKidSearchResults: false,
-                        showUserSearchResults: false,
                         message: ""
                     })
                     API.kidSearch({
@@ -276,7 +213,7 @@ class Admin extends Component {
                             this.setState({
                                 kids: res.data,
                                 loading: false,
-                                showKidSearch: true,
+                                displayTool: "KidSearch",
                                 showKidSearchResults: true,
                                 message: ""
                             })
@@ -284,7 +221,7 @@ class Admin extends Component {
                         .catch(err => {
                             this.setState({
                                 loading: false,
-                                showKidSearch: true,
+                                displayTool: "KidSearch",
                                 message: "We're sorry. We encountered an error."
                             })
                             console.log(err)
@@ -297,9 +234,8 @@ class Admin extends Component {
                         loading: true,
                         kids: [],
                         users: [],
-                        showUserSearch: false,
-                        showUserSearchResults: false,
-                        showKidSearchResults: false,
+                        displayTool: "",
+
                     })
                     API.userSearch({
                         searchTerm: this.state.userSearchTerm,
@@ -310,11 +246,10 @@ class Admin extends Component {
                             this.setState({
                                 users: res.data,
                                 loading: false,
-                                showUserSearch: true,
+                                displayTool: "UserSearch",
                                 showUserSearchResults: true,
                                 message: ""
                             })
-                            // console.log(this.state.users)
                         })
                         .catch(err => {
                             this.setState({
@@ -347,7 +282,7 @@ class Admin extends Component {
                         }
                         {/* Forms below display when value is true */}
                         {/* ADD KID FORM */}
-                        {this.state.showAddKidForm ?
+                        {this.state.displayTool === "AddKidForm" ?
                             <AddKidForm
                                 onChangeInput={this.handleInputChange}
                                 onChangeFile={this.fileSelectedHandler}
@@ -373,7 +308,7 @@ class Admin extends Component {
                             /> : null}
 
                         {/* UPDATE CHILD/SEARCH */}
-                        {this.state.showKidSearch ?
+                        {this.state.displayTool === "KidSearch" ?
                             <SearchKid
                                 onChange={this.handleInputChange}
                                 termValue={this.state.searchTerm}
@@ -412,19 +347,19 @@ class Admin extends Component {
                         }
 
                         {/* VIEW CHILDREN */}
-                        {this.state.showMultipleKids ? (
+                        {this.state.displayTool === "MultipleKids" ? (
                             <AdminMultipleKids />
                         ) : null}
 
                         {/* ADD USER */}
-                        {this.state.showAddUserForm ? (
+                        {this.state.displayTool === "AddUserForm" ? (
                             <AddUserForm
                                 toggle={this.toggleAddUserForm}
                             />
                         ) : null}
 
                         {/* USER SEARCH */}
-                        {this.state.showUserSearch ?
+                        {this.state.displayTool === "UserSearch" ?
                             <SearchUser
                                 onChange={this.handleInputChange}
                                 termValue={this.state.userSearchTerm}
@@ -464,12 +399,12 @@ class Admin extends Component {
                         }
 
                         {/* Shows users for admins */}
-                        {this.state.showUsers ? (
+                        {this.state.displayTool === "Users" ? (
                             <ViewUsers />
                         ) : null}
 
                         {/* Shows admins for admins */}
-                        {this.state.showAdmins ? (
+                        {this.state.displayTool === "Admins" ? (
                             <ViewAdmins />
                         ) : null}
 
