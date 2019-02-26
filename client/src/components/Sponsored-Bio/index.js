@@ -1,5 +1,6 @@
 import React from "react";
 import { Col } from "reactstrap";
+import moment from "moment";
 import "./style.css";
 
 // Displays text to donor of child they sponsor
@@ -17,6 +18,7 @@ function SponsoredBio(props) {
       <div>
         {props.notes.map(note => (
           <div key={note.id}>
+            <span className="small font-italic">{moment(note.createdAt).format("MMMM D, YYYY")}</span>
             <p>{note.kid_notes}</p>
             <hr />
           </div>
@@ -25,5 +27,4 @@ function SponsoredBio(props) {
     </Col>
   );
 }
-
 export default SponsoredBio;
