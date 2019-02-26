@@ -1,5 +1,6 @@
 # Centro de Dessarollo Infantil
 A web application to serve donors and administrators of Centro de Dessarollo Infantil
+https://cdi2019.herokuapp.com
 
 Centro de Dessarollo Infantil (Child Development Center) is a charitable organization that oversees the health and development of at-risk boys and girls, providing help in four main areas:
   * Nutritional meals/dietary supplements as needed
@@ -14,22 +15,23 @@ This web applicaton attempts to serve the following:
   * Current donors, by giving them a place to see updates and new photos of children they sponsor.
   * CDI workers, by giving them a place to add updates, photos and take care of other administrative tasks. CDI workers are busy taking care of children and don't have a lot of time for administrative work, so it's important that this app makes the administrative tasks as easy and clear as possible. Access to reliable computers can be difficult as well, but smartphones are more abundant, so the app should be able to be used easily on a mobile device as well.
   
-Note: For demo purposes, all routes (public, donor and admin) are viewable. 
-
 ## Prospective Donor features
-  * On the home page, the donor will see an introduction to the CDI program, as well as a sidebar that shows two children who are in need of a sponsor.
+  (Prospective donors do not need to log in)
+  * On the home page, the user sees an introduction to the CDI program, as well as a sidebar that shows two children who are in need of a sponsor.
   * The sidebar randomly chooses two unsponsored children to display.
   * The prospective donor can also go to the /kids page to see a photo and brief info for all of the unsponsored children.
-  * The user can filter search results by location, gender and age.
+  * The user can filter search results by location and gender.
   * Each kid bio has a link to learn more about them. This takes the user to a page displaying the individual child's information.
   * On the individual child's page, more information is included, as well as a photo gallery of any photos of the child.
   
 ## Current Donor features
-  * Current donors will create an account so they can access information about the children they sponsor.
-  * When logged in, clicking on the donors page will show the donor the information for all the kids they sponsor. 
-  * This page will also show any updates that have been posted for each child.
+  (For a donor-only view, log in with username: donor@example.com  password: Password1! )
+  * Current donors can create an account to access information about the children they sponsor.
+  * When logged in, clicking on the Who I Sponsor link takes the donor to a page with all the information for all the kids they sponsor. 
+  * This page shows any updates that have been posted for each child.
   
 ## Admin features
+(For an admin-donor view, log in with username: admin@example.com  password: Password1! )
   * CDI workers with admin privileges have access to several tools to help them manage children and donors.
   ### Add a child
    * The admin fills out a form with the new child's information and adds a profile image. This child will now appear in the list of unsponsored children that prospective donors are able to see.
@@ -48,7 +50,10 @@ Note: For demo purposes, all routes (public, donor and admin) are viewable.
   
 ## Technical Notes
   * This web app utilizes Javascript, React, Node, Express, MySQL and Sequelize.
+  * Auth0's authentication service is used to verify user credentials. Routes are protected based on whether a user is a visitor, donor or admin.
   * Uses multer to allow handling of forms that include both text and binary images.
+  * Uses Amazon S3 to store uploaded photos.
+  * A loading spinner and messages are used to alert users when a task is still being run or has completed.
   
 ***
 ## Screenshots
