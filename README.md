@@ -2,6 +2,8 @@
 A web application to serve donors and administrators of Centro de Dessarollo Infantil
 
 https://cdi2019.herokuapp.com
+Admin view: username: admin@example.com  password: Password1! — also includes donor view
+Donor-only view: username: donor@example.com  password: Password1!
 
 Centro de Dessarollo Infantil (Child Development Center) is a charitable organization that oversees the health and development of at-risk boys and girls, providing help in four main areas:
   * Nutritional meals/dietary supplements as needed
@@ -25,14 +27,12 @@ This web applicaton attempts to serve the following:
   * Each kid bio has a link to learn more about them. This takes the user to a page displaying the individual child's information.
   * On the individual child's page, more information is included, as well as a photo gallery of any photos of the child.
   
-## Current Donor features
-  (For a donor-only view, log in with username: donor@example.com  password: Password1! )
+## Current Donor features  
   * Current donors can create an account to access information about the children they sponsor.
   * When logged in, clicking on the Who I Sponsor link takes the donor to a page with all the information for all the kids they sponsor. 
   * This page shows any updates that have been posted for each child.
   
 ## Admin features
-(For an admin-donor view, log in with username: admin@example.com  password: Password1! )
   * CDI workers with admin privileges have access to several tools to help them manage children and donors.
   ### Add a child
    * The admin fills out a form with the new child's information and adds a profile image. This child will now appear in the list of unsponsored children that prospective donors are able to see.
