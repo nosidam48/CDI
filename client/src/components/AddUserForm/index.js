@@ -6,7 +6,7 @@ import { InputField, AdminField, SubmitBtn, DiscardBtn } from "../Form";
 function AddUserForm(props) {
   return (
     <div>
-      <h5 className="border-bottom">Add/update user profile</h5>
+      <h5 className="border-bottom">Add user profile</h5>
       <Form className="mt-4">
         <FormGroup>
           <Label>First name</Label>

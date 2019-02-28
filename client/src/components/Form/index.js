@@ -27,6 +27,7 @@ export function GradeField(props) {
   return (
     <FormGroup>
       <Input type="select" value={props.value} onChange={props.onChange} name={props.name} >
+        <option value="">Choose a grade</option>
         <option>Pre-K</option>
         <option>1</option>
         <option>2</option>
@@ -104,9 +105,9 @@ export function AdminField(props) {
   return (
     <FormGroup>
       <Input type="select" value={props.value} onChange={props.onChange} name={props.name} >
-        <option value="">Choose admin status</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
+        <option value="No">No admin status</option>
+        <option value="Regular admin status">Regular admin status</option>
+        <option value="Master admin status">Master admin status</option>
       </Input>
     </FormGroup>
   )

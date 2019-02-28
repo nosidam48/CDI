@@ -201,7 +201,7 @@ class Admin extends Component {
             })
     }
 
-    // Handles when a new user form is submitted
+    // Handles when an admin submits a new user form
     handleUserFormSubmit = (event) => {
         event.preventDefault()
         this.setState({
@@ -212,6 +212,7 @@ class Admin extends Component {
         // Hide form and send user to top of the page
         this.toggleAddUserForm();
 
+        // Post to db
         API.addUser({
             first_name: this.state.firstNames,
             last_name: this.state.lastName,
