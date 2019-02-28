@@ -16,10 +16,10 @@ class Donors extends Component {
         loading: true,
     }
     //On mount, return the kid with an id that matches the url
-    componentDidMount() {
+    componentWillMount() {
         // Grab the user's email address from the jwt token and update state
         let profile = auth0Client.getProfile();
-
+        console.log(profile);
         //Call the db, passing in the user's email address as the id
         API.donorKid({ email: profile.name })
             .then(res => {
