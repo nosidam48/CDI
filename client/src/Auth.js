@@ -6,18 +6,18 @@ class Auth {
     // Set redirectUri based on production or dev mode
     if (process.env.NODE_ENV === "production") {
       this.auth0 = new auth0.WebAuth({
-        domain: 'dev-pzu1ax5c.auth0.com',
-        audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
-        clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+        domain: 'cdi2019.auth0.com',
+        audience: 'https://cdi2019.auth0.com/userinfo',
+        clientID: 'CEi4Rq-aEjddunnP1KxSnbnDXNH0sl8r',
         redirectUri: 'https://cdi2019.herokuapp.com/callback',
         responseType: 'id_token',
         scope: 'openid profile'
       });
     } else {
       this.auth0 = new auth0.WebAuth({
-        domain: 'dev-pzu1ax5c.auth0.com',
-        audience: 'https://dev-pzu1ax5c.auth0.com/userinfo',
-        clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+        domain: 'cdi2019.auth0.com',
+        audience: 'https://cdi2019.auth0.com/userinfo',
+        clientID: 'CEi4Rq-aEjddunnP1KxSnbnDXNH0sl8r',
         redirectUri: 'http://localhost:3000/callback',
         responseType: 'id_token',
         scope: 'openid profile'
@@ -71,13 +71,13 @@ class Auth {
     if (process.env.NODE_ENV === "production") {
       this.auth0.logout({
         returnTo: 'https://cdi2019.herokuapp.com',
-        clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+        clientID: 'CEi4Rq-aEjddunnP1KxSnbnDXNH0sl8r',
 
       });
     } else {
       this.auth0.logout({
         returnTo: 'http://localhost:3000',
-        clientID: 'qERXk4yg7W7ZmmIULlj5hWLlsr22WXQd',
+        clientID: 'CEi4Rq-aEjddunnP1KxSnbnDXNH0sl8r',
 
       });
     }
