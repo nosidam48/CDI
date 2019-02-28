@@ -30,14 +30,20 @@ class Admin extends Component {
         message: "Choose an admin tool from the menu to get started.",
         loading: false,
 
-        // Kid form inputs
-        kidFirstNames: "",
-        kidLastName: "",
+        // Inputs for add kid/add user form
+        firstNames: "",
+        lastName: "",
         gender: "",
         birth_date: "",
         grade: "",
-        kidLocation: "",
+        location: "",
         bio: "",
+        email: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        admin: false,
 
         // Search inputs
         searchTerm: "",
@@ -117,10 +123,11 @@ class Admin extends Component {
     // ==============================================================
 
     // Function that runs after a kid has been added
-    resetKidForm = () => {
+    resetForm = () => {
         this.setState({
-            kidFirstNames: "", kidLastName: "", gender: "", birth_date: "",
-            grade: "", kidLocation: "", bio: "",
+            firstNames: "", lastName: "", gender: "", birth_date: "",
+            grade: "", location: "", bio: "", email: "", password: "",
+            address: "", city: "", state: "", zip: "", admin: false,
             displayTool: ""
         })
     }
@@ -164,18 +171,18 @@ class Admin extends Component {
                 }
                 // Send request to the database to create the new kid record
                 API.addKid({
-                    first_name: this.state.kidFirstNames,
-                    last_name: this.state.kidLastName,
+                    first_name: this.state.firstNames,
+                    last_name: this.state.lastName,
                     gender: this.state.gender,
                     birth_date: this.state.birth_date,
                     grade: this.state.grade,
-                    location: this.state.kidLocation,
+                    location: this.state.location,
                     kid_bio: this.state.bio,
                     need_sponsor: true,
                     selectedFile: this.state.selectedFile
                 })
                     .then(res => {
-                        this.resetKidForm();
+                        this.resetForm();
                         this.setState({
                             message: "A child was added to the database.",
                             loading: false
@@ -183,7 +190,7 @@ class Admin extends Component {
 
                     })
                     .catch(err => {
-                        this.resetKidForm();
+                        this.resetForm();
                         this.setState({
                             message: "There was an error adding the child to the database.",
                             loading: false
@@ -192,76 +199,118 @@ class Admin extends Component {
                         console.log(err);
                     })
             })
-        }
+    }
+
+    // Handles when a new user form is submitted
+    handleUserFormSubmit = (event) => {
+        event.preventDefault()
+        this.setState({
+            loading: true,
+            kids: [],
+            users: []
+        });
+        // Hide form and send user to top of the page
+        this.toggleAddUserForm();
+
+        API.addUser({
+            first_name: this.state.firstNames,
+            last_name: this.state.lastName,
+            email: this.state.email,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            admin: this.state.admin
+        })
+            .then(res => {
+                this.resetForm();
+                // Set message in state based on response
+                if (res.data !== "Already exists.") {
+                    this.setState({
+                        message: "The donor was added to the database.",
+                        loading: false
+                    })
+                } else {
+                    this.setState({
+                        message: "The donor already exists in the database.",
+                        loading: false
+                    })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                window.scrollTo(0, 0);
+            })
+    }
 
     // Handles when an admin is searching for a child
     handleAdminKidSearch = event => {
-                    event.preventDefault();
-                    this.setState({
-                        loading: true,
-                        displayTool: "",
-                        kids: [],
-                        users: [],
-                        message: ""
-                    })
-                    API.kidSearch({
-                        searchTerm: this.state.searchTerm,
-                        searchType: this.state.searchType
-                    })
-                        .then(res => {
-                            // Set state of kids to new search results
-                            this.setState({
-                                kids: res.data,
-                                loading: false,
-                                displayTool: "KidSearch",
-                                showKidSearchResults: true,
-                                message: ""
-                            })
-                        })
-                        .catch(err => {
-                            this.setState({
-                                loading: false,
-                                displayTool: "KidSearch",
-                                message: "We're sorry. We encountered an error."
-                            })
-                            console.log(err)
-                        });
-                }
+        event.preventDefault();
+        this.setState({
+            loading: true,
+            displayTool: "",
+            kids: [],
+            users: [],
+            message: ""
+        })
+        API.kidSearch({
+            searchTerm: this.state.searchTerm,
+            searchType: this.state.searchType
+        })
+            .then(res => {
+                // Set state of kids to new search results
+                this.setState({
+                    kids: res.data,
+                    loading: false,
+                    displayTool: "KidSearch",
+                    showKidSearchResults: true,
+                    message: ""
+                })
+            })
+            .catch(err => {
+                this.setState({
+                    loading: false,
+                    displayTool: "KidSearch",
+                    message: "We're sorry. We encountered an error."
+                })
+                console.log(err)
+            });
+    }
 
     handleAdminUserSearch = event => {
-                    event.preventDefault();
-                    this.setState({
-                        loading: true,
-                        kids: [],
-                        users: [],
-                        displayTool: "",
+        event.preventDefault();
+        this.setState({
+            loading: true,
+            kids: [],
+            users: [],
+            displayTool: "",
 
-                    })
-                    API.userSearch({
-                        searchTerm: this.state.userSearchTerm,
-                        searchType: this.state.userSearchType
-                    })
-                        .then(res => {
-                            // Set state of search terms back to original state, set state of results to new search results
-                            this.setState({
-                                users: res.data,
-                                loading: false,
-                                displayTool: "UserSearch",
-                                showUserSearchResults: true,
-                                message: ""
-                            })
-                        })
-                        .catch(err => {
-                            this.setState({
-                                loading: false,
-                                message: "We're sorry. We encountered an error."
-                            })
-                            console.log(err)
-                        });
-                }
+        })
+        API.userSearch({
+            searchTerm: this.state.userSearchTerm,
+            searchType: this.state.userSearchType
+        })
+            .then(res => {
+                // Set state of search terms back to original state, set state of results to new search results
+                this.setState({
+                    users: res.data,
+                    loading: false,
+                    displayTool: "UserSearch",
+                    showUserSearchResults: true,
+                    message: ""
+                })
+            })
+            .catch(err => {
+                this.setState({
+                    loading: false,
+                    message: "We're sorry. We encountered an error."
+                })
+                console.log(err)
+            });
+    }
 
     render() {
-                    return(
+        return (
             <MainContainer>
                 <Row>
                     {/* Displays the AdminSidebar with needed props */}
@@ -280,31 +329,31 @@ class Admin extends Component {
                             <LoadSpinner className="kidsSpin" />
                         ) : null
                         }
-                        {/* Forms below display when value is true */}
+                        {/* Forms below display when clicked on */}
                         {/* ADD KID FORM */}
                         {this.state.displayTool === "AddKidForm" ?
                             <AddKidForm
                                 onChangeInput={this.handleInputChange}
                                 onChangeFile={this.fileSelectedHandler}
-                                firstNameValue={this.state.kidFirstNames}
-                                firstName="kidFirstNames"
-                                lastNamevalue={this.state.kidLastName}
-                                lastName="kidLastName"
+                                firstNameValue={this.state.firstNames}
+                                firstName="firstNames"
+                                lastNamevalue={this.state.lastName}
+                                lastName="lastName"
                                 genderValue={this.state.gender}
                                 genderName="gender"
                                 birthdateValue={this.state.birth_date}
                                 birthdateName="birth_date"
                                 gradeValue={this.state.grade}
                                 gradeName="grade"
-                                locationValue={this.state.kidLocation}
-                                locationName="kidLocation"
+                                locationValue={this.state.location}
+                                locationName="location"
                                 bioValue={this.state.bio}
                                 bioName="bio"
                                 photoName="selectedFile"
                                 photoId=""
-                                disabled={!(this.state.kidFirstNames && this.state.kidLastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.kidLocation && this.state.bio && this.state.selectedFile)}
+                                disabled={!(this.state.firstNames && this.state.lastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.location && this.state.bio && this.state.selectedFile)}
                                 onClickSubmit={this.handleKidFormSubmit}
-                                onClickDiscard={this.resetKidForm}
+                                onClickDiscard={this.resetForm}
                             /> : null}
 
                         {/* UPDATE CHILD/SEARCH */}
@@ -354,9 +403,29 @@ class Admin extends Component {
                         {/* ADD USER */}
                         {this.state.displayTool === "AddUserForm" ? (
                             <AddUserForm
-                                toggle={this.toggleAddUserForm}
-                            />
-                        ) : null}
+                                onChangeInput={this.handleInputChange}
+                                firstNameValue={this.state.firstNames}
+                                firstName="firstNames"
+                                lastNamevalue={this.state.lastName}
+                                lastName="lastName"
+                                emailValue={this.state.email}
+                                emailName="email"
+                                addressValue={this.state.address}
+                                addressName="address"
+                                cityValue={this.state.city}
+                                cityName="city"
+                                stateValue={this.state.state}
+                                stateName="state"
+                                zipValue={this.state.zip}
+                                zipName="zip"
+                                adminValue={this.state.admin}
+                                adminName="admin"
+                                disabled={!(this.state.firstNames && this.state.lastName && this.state.email)}
+                                onClickSubmit={this.handleUserFormSubmit}
+                                onClickDiscard={this.resetForm}
+                        />
+                    ) : null}
+
 
                         {/* USER SEARCH */}
                         {this.state.displayTool === "UserSearch" ?
