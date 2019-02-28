@@ -94,28 +94,35 @@ module.exports = {
             where: {
                 email: req.body.email
             },
-        }).then(user => user.getKids())
-            .then(data => {
-                // If no data was returned (donor is not sponsoring a child), send back message
-                if (data.length === 0) {
-                    res.send("Not a sponsor")
-                } else {
-                    // If donor is sponsoring a child, send child info, sorting content by created date
-                    db.content.findAll({
-                        where: {
-                            kidId: data[0].dataValues.id
-                        },
-                        order: [['createdAt', 'DESC']]                        
-                    }).then(data2 => {
-                        let donorObject = {
-                            kid: data[0].dataValues,
-                            content: data2
+        }).then(user => {
+            // Check to see if donor is already in database. If not, send back message
+            if (!user) {
+                res.send("Not a sponsor")
+            } else {
+                console.log("this ran");
+                user.getKids()
+                    .then(data => {
+                        // If no data was returned (donor is not sponsoring a child), send back message
+                        if (data.length === 0) {
+                            res.send("Not a sponsor")
+                        } else {
+                            // If donor is sponsoring a child, send child info, sorting content by created date
+                            db.content.findAll({
+                                where: {
+                                    kidId: data[0].dataValues.id
+                                },
+                                order: [['createdAt', 'DESC']]
+                            }).then(data2 => {
+                                let donorObject = {
+                                    kid: data[0].dataValues,
+                                    content: data2
+                                }
+                                res.json(donorObject)
+                            })
                         }
-                        res.json(donorObject)
                     })
-                }
-            })
-            .catch(err => res.status(422).json(err))
+            }
+        }).catch(err => res.status(422).json(err))
     },
 
     viewAdmins: (req, res) => {
