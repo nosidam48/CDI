@@ -48,15 +48,6 @@ class App extends React.Component {
     }  
 
   async componentDidMount() {
-    // I DON'T THINK I NEED THIS BECAUSE I WANT TO CHECK ADMIN STATUS NO MATTER WHAT
-    // // Checks to see if login was successful (callback route was called). 
-    // if (this.props.location.pathname === '/callback') {
-    //   await auth0Client.silentAuth();
-    //   this.checkAdminStatus();
-    //   this.setState({ checkingSession: false });
-    //   return;
-    // }
-    // Auth0 checks if user is logged in 
     try {
       await auth0Client.silentAuth();
       this.forceUpdate();
