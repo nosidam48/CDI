@@ -3,9 +3,9 @@ A web application to serve donors and administrators of Centro de Dessarollo Inf
 
 https://cdi2019.herokuapp.com
 
-Admin view: username: admin@example.com  password: Password1! — also includes donor view
+Admin view login — username: admin@example.com  password: Password1! (also includes donor view)
 
-Donor-only view: username: donor@example.com  password: Password1!
+Donor-only view login — username: donor@example.com  password: Password1!
 
 Centro de Dessarollo Infantil (Child Development Center) is a charitable organization that oversees the health and development of at-risk boys and girls, providing help in four main areas:
   * Nutritional meals/dietary supplements as needed
