@@ -11,7 +11,4 @@ router.use("/users", userRoutes);
 router.use("/content", contentRoutes);
 router.use("/admin", adminRoutes);
 
-router.route("/donors")
-    .post(usersController.donorKid)
-
 module.exports = router;
