@@ -12,7 +12,6 @@ class SponsoredPhotos extends React.Component {
         thumbnail: this.props.kid.profile_image
       }
     ]
-
     // wait till we have images
     if (this.props.content.length > 0) {
         //push into array
@@ -22,8 +21,7 @@ class SponsoredPhotos extends React.Component {
             thumbnail: pic.kid_pics
           })
         ))  
-    }
-    
+    }    
     return (
       <Col sm="5" lg="4" className="image my-4">
       {/* Passes the image array in as items, takes away play and fullscreen buttons */}
@@ -31,7 +29,6 @@ class SponsoredPhotos extends React.Component {
       </Col>
     );
   }
- 
 }
 
 export default SponsoredPhotos

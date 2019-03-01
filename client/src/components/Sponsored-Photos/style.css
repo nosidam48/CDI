@@ -1,11 +1,12 @@
 @import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
 .image-gallery-thumbnail {
-    width: 75px; 
+    max-width: 75px;
 }
 
+
 .image-gallery-thumbnail img {
-    width: auto;
+    max-width: auto;
     height: 75px;
 }
 
@@ -15,7 +16,7 @@
 }
 
 .image-gallery-image {
-    width: auto;
+    max-width: auto;
     max-height: 500px;
 }
 
