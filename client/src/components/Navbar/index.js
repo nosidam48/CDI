@@ -45,6 +45,9 @@ class MainNavbar extends React.Component {
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
+          {/* Don't display Navbar links until user is authenticated */}
+          {this.props.checkingSession ? null 
+          : (
           <Nav className="ml-auto mr-5 mt-4" navbar>
             <NavItem>
               <NavLink href="/" className="mr-4">Home</NavLink>
@@ -89,6 +92,7 @@ class MainNavbar extends React.Component {
                 </UncontrolledDropdown>
               )}
           </Nav>
+          )}
         </Collapse>
       </Navbar>
     );

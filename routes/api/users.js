@@ -6,7 +6,11 @@ router.route("/")
   // .get(usersController.findAll)
   .post(usersController.findByCriteria);
 
-// Matches with "/api/users/connect"
+// Matches with "api/users/donor-child"
+  router.route("/donor-child")
+  .post(usersController.donorKid)
+
+  // Matches with "/api/users/connect"
 router.route("/connect")
   .post(usersController.connectDonor);
 

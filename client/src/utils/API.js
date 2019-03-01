@@ -73,7 +73,7 @@ export default {
 
     // Show donor the child they are connected to
     donorKid: (email) => {
-        return axios.post("/api/donors", email)
+        return axios.post("/api/users/donor-child", email)
     },
 
     //Donor updates profile info

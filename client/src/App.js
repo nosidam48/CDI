@@ -47,7 +47,7 @@ class App extends React.Component {
       })
     }  
 
-  async componentDidMount() {
+  async componentWillMount() {
     try {
       await auth0Client.silentAuth();
       this.forceUpdate();
@@ -66,6 +66,7 @@ class App extends React.Component {
         <Navbar 
           admin={this.state.admin}
           authenticated={this.state.authenticated}
+          checkingSession={this.state.checkingSession}
         />
         <Switch>
           <Route exact path="/" component={Home} />

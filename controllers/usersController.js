@@ -152,12 +152,20 @@ module.exports = {
     },
 
     addUser: (req, res) => {
-        // Convert yes admin response to true boolean; default is false
+        // Convert admin response received to db booleans
         let admin = false;
-        if (req.body.admin === "Yes") {
-            admin = true;
-        }
+        let masterAdmin = false;
 
+        switch(req.body.admin) {
+            case ("Regular admin status"):
+                admin = true;
+                break;
+            case ("Master admin status"):
+                admin = true;
+                masterAdmin = true;
+                break;
+        }
+               
         // Make sure user doesn't already exist in the database
         db.users.findOne({
             where: {
@@ -178,7 +186,7 @@ module.exports = {
                     state: req.body.state,
                     zip: req.body.zip,
                     admin_status: admin,
-                    master_admin_status: false,
+                    master_admin_status: masterAdmin,
                 })
                     .then(userData => res.json(userData))
                     .catch(err => res.status(422).json(err));
