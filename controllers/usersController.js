@@ -99,7 +99,6 @@ module.exports = {
             if (!user) {
                 res.send("Not a sponsor")
             } else {
-                console.log("this ran");
                 user.getKids()
                     .then(data => {
                         // If no data was returned (donor is not sponsoring a child), send back message

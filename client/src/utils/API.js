@@ -104,7 +104,7 @@ export default {
 
     // Add content for child, includes expanded axios request to handle photo
     addContent: (contentData) => {
-        return axios.post("/api/content/" + contentData.kidId, contentData);
+        return axios.post("/api/content", contentData);
     },
 
     // ADMIN-DONOR FUNCTIONS=======================================================

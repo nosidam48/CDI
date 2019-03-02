@@ -1,4 +1,6 @@
 const db = require("../models");
+require('dotenv').config();
+const nodemailer = require('nodemailer');
 
 // Defining methods for the kidsController
 module.exports = {
@@ -23,8 +25,40 @@ module.exports = {
             kidId: kidId,
             kid_notes: kid_notes,
             kid_pics: kid_pics
-
-        }).then(contentData => res.json(contentData))
-            .catch(err => console.log(err));
-    },
+        }).then(data => {
+            // Once content has been added, find kid info, including all connected users         
+            db.kids.findOne({
+                where: {
+                    id: kidId
+                },
+                include: [db.users]
+            }).then(userData => {
+                // Once user data is retrieved, set mail options and send notification emails
+                
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: `${process.env.GMAIL_USER}`,
+                        pass: `${process.env.GMAIL_PASSWORD}`,
+                    }
+                })                
+                const mailOptions = {
+                    from: 'edcourtney74@gmail.com',
+                    to: "edcourtney74@gmail.com",
+                    subject: "New update for your sponsored child",
+                    text: "We have added a new update about the child you sponsor. Please log in to http://cdi2019.herokuapp.com and visit the Who I Sponsor page. \n Thank you! \n CDI Staff"
+                }
+                                
+                transporter.sendMail(mailOptions, function(err, response) {
+                    if (err) {
+                        console.error("There was an error: ", err);
+                    } else {
+                        console.log("Here is the res: ", response);
+                        res.status(200).json("Email notification sent");
+                    }
+                })
+            })
+        })    
+          .catch(err => console.log(err));
+        },
 }

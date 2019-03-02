@@ -70,10 +70,12 @@ class AddContentModal extends Component {
                     })
                         .then(res => {
                             // Update message to success to alert the user the content went through
+                            console.log(res);
                             this.setState({
                                 message: "Content successfully added",
                                 loading: false
                             })
+                            // 
                         })
                         .catch(err => console.log(err));
                 })
@@ -83,8 +85,10 @@ class AddContentModal extends Component {
                 kidId: this.state.kidId,
                 kid_notes: this.state.update,
             })
-                .then(res => {
+                .then(response => {  
                     // Update message to success to alert the user the content went through
+                    console.log(response);
+                    console.log(response.data.users[0].email)
                     this.setState({
                         message: "Content successfully added",
                         loading: false

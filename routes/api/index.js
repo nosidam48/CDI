@@ -3,7 +3,6 @@ const kidRoutes = require("./kids");
 const userRoutes = require("./users");
 const contentRoutes = require("./content");
 const adminRoutes = require("./admin");
-const usersController = require("../../controllers/usersController");
 
 // Routes
 router.use("/kids", kidRoutes);
