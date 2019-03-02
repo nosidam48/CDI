@@ -68,14 +68,13 @@ class AddContentModal extends Component {
                         kid_notes: this.state.update,
                         kid_pics: this.state.imageUrl
                     })
-                        .then(res => {
-                            // Update message to success to alert the user the content went through
-                            console.log(res);
-                            this.setState({
-                                message: "Content successfully added",
-                                loading: false
-                            })
-                            // 
+                        .then(response => {
+                            if (response.data === "Email notification sent") {
+                                this.setState({
+                                    message: "Content successfully added, and the connected donors have been notified.",
+                                    loading: false
+                                })
+                            }
                         })
                         .catch(err => console.log(err));
                 })
@@ -88,7 +87,7 @@ class AddContentModal extends Component {
                 .then(response => {
                     if (response.data === "Email notification sent") {
                         this.setState({
-                            message: "Content successfully added, and the connected donors have been notified",
+                            message: "Content successfully added, and the connected donors have been notified.",
                             loading: false
                         })
                     }
