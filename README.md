@@ -33,6 +33,7 @@ This web applicaton attempts to serve the following:
   * Current donors can create an account to access information about the children they sponsor.
   * When logged in, clicking on the Who I Sponsor link takes the donor to a page with all the information for all the kids they sponsor. 
   * This page shows any updates that have been posted for each child.
+  * Donors receive an email notification when any new content has been added about the child they sponsor.
   
 ## Admin features
   * CDI workers with admin privileges have access to several tools to help them manage children and donors.
@@ -45,6 +46,7 @@ This web applicaton attempts to serve the following:
    * A modal appears that includes the information that is currently in the child's profile. The admin can make any changes necessary and submit. Those new changes will edit the child's entry in the database.
   ### Add content
    * A modal appears that lets the admin add a text update to the child or add a new photo. On submit, a new entry is created in the Content table that includes the selected kid's ID.
+   * Once the new content entry is created, nodemailer sends an email notification to all donors who are connected to the child to alert the donor to check the website for an update.
   ### Connect donor to child
    * When a donor has decided to sponsor a child, an admin can find the child and click Connect to Donor. A modal appears, prompting the admin to search for a donor by name or email.
    * The search displays all donors that match the search criteria. When the submit button is clicked next to the donor's name, a record is created in the KidsUsers table that connects the donor and child.
@@ -56,6 +58,7 @@ This web applicaton attempts to serve the following:
   * Auth0's authentication service is used to verify user credentials. Routes are protected based on whether a user is a visitor, donor or admin.
   * Uses multer to allow handling of forms that include both text and binary images.
   * Uses Amazon S3 to store uploaded photos.
+  * Uses nodemailer to alert donors when updates have been made.
   * A loading spinner and messages are used to alert users when a task is still being run or has completed.
   
 ***
