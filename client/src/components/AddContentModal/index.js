@@ -61,19 +61,20 @@ class AddContentModal extends Component {
                     if (res.data.imageUrl) {
                         this.setState({ imageUrl: res.data.imageUrl })
                     }
-                                        
+
                     // Then send a request to add both content and the link to the image to the db
                     API.addContent({
                         kidId: this.state.kidId,
                         kid_notes: this.state.update,
                         kid_pics: this.state.imageUrl
                     })
-                        .then(res => {
-                            // Update message to success to alert the user the content went through
-                            this.setState({
-                                message: "Content successfully added",
-                                loading: false
-                            })
+                        .then(response => {
+                            if (response.data === "Email notification sent") {
+                                this.setState({
+                                    message: "Content successfully added, and the connected donors have been notified.",
+                                    loading: false
+                                })
+                            }
                         })
                         .catch(err => console.log(err));
                 })
@@ -83,63 +84,64 @@ class AddContentModal extends Component {
                 kidId: this.state.kidId,
                 kid_notes: this.state.update,
             })
-                .then(res => {
-                    // Update message to success to alert the user the content went through
-                    this.setState({
-                        message: "Content successfully added",
-                        loading: false
-                    })
+                .then(response => {
+                    if (response.data === "Email notification sent") {
+                        this.setState({
+                            message: "Content successfully added, and the connected donors have been notified.",
+                            loading: false
+                        })
+                    }
                 })
                 .catch(err => console.log(err));
         }
     }
 
-render() {
-    return (
-        <div className="d-inline mr-2">
-            <Button inline="true" size="sm" className="mt-2" onClick={this.toggle}>Add Content</Button>
-            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <ModalHeader toggle={this.toggle}>Add Content for {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
+    render() {
+        return (
+            <div className="d-inline mr-2">
+                <Button inline="true" size="sm" className="mt-2" onClick={this.toggle}>Add Content</Button>
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <ModalHeader toggle={this.toggle}>Add Content for {this.props.kidFirstNames + " " + this.props.kidLastName}</ModalHeader>
 
-                {/* If loading is true, show spinner. If not, check if a message exists and show message, if not, show form */}
-                {this.state.loading ? (
-                    <LoadSpinner className="kidsSpin" />
-                ) : (
-                this.state.message ? (
-                    <h4 className="text-center py-3">{this.state.message}</h4>
-                ) : (
-                        <div>
-                            {/* If there is no success message, show the content submission form */}
-                            <ModalBody>
-                                <Form>
-                                    <Label>Update for donor (not required)</Label>
-                                    <InputField
-                                        type="textarea"
-                                        value={this.state.update}
-                                        onChange={this.handleInputChange}
-                                        name="update"
-                                    />
-                                    <Label>Add photo (not required)</Label>
-                                    <UploadPhoto
-                                        onChange={this.fileSelectedHandler}
-                                        name="selectedFile"
-                                        id=""
-                                    />
-                                </Form>
-                            </ModalBody>
-                            <ModalFooter>
-                                <SubmitBtn
-                                    onClick={(event) => this.handleContentSubmit(event)}
-                                    disabled={!(this.state.update || this.state.selectedFile)}
-                                    className="modalBtn">Submit</SubmitBtn>{' '}
-                                <DiscardBtn onClick={this.toggle} className="modalCancel">Cancel</DiscardBtn>
-                            </ModalFooter>
-                        </div>
-                    ))}
-            </Modal>
-        </div>
-    );
-}
+                    {/* If loading is true, show spinner. If not, check if a message exists and show message, if not, show form */}
+                    {this.state.loading ? (
+                        <LoadSpinner className="kidsSpin" />
+                    ) : (
+                            this.state.message ? (
+                                <h4 className="text-center py-3">{this.state.message}</h4>
+                            ) : (
+                                    <div>
+                                        {/* If there is no success message, show the content submission form */}
+                                        <ModalBody>
+                                            <Form>
+                                                <Label>Update for donor (not required)</Label>
+                                                <InputField
+                                                    type="textarea"
+                                                    value={this.state.update}
+                                                    onChange={this.handleInputChange}
+                                                    name="update"
+                                                />
+                                                <Label>Add photo (not required)</Label>
+                                                <UploadPhoto
+                                                    onChange={this.fileSelectedHandler}
+                                                    name="selectedFile"
+                                                    id=""
+                                                />
+                                            </Form>
+                                        </ModalBody>
+                                        <ModalFooter>
+                                            <SubmitBtn
+                                                onClick={(event) => this.handleContentSubmit(event)}
+                                                disabled={!(this.state.update || this.state.selectedFile)}
+                                                className="modalBtn">Submit</SubmitBtn>{' '}
+                                            <DiscardBtn onClick={this.toggle} className="modalCancel">Cancel</DiscardBtn>
+                                        </ModalFooter>
+                                    </div>
+                                ))}
+                </Modal>
+            </div>
+        );
+    }
 }
 
 export default AddContentModal;
