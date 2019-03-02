@@ -33,32 +33,37 @@ module.exports = {
                 },
                 include: [db.users]
             }).then(userData => {
-                // Once user data is retrieved, set mail options and send notification emails
-                
+                console.log(userData);
+                console.log(userData.dataValues.first_name);
+                // Once user data is retrieved, set nodemailer transporter constant with sending email account info    
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: `${process.env.GMAIL_USER}`,
-                        pass: `${process.env.GMAIL_PASSWORD}`,
-                    }
-                })                
-                const mailOptions = {
-                    from: 'edcourtney74@gmail.com',
-                    to: "edcourtney74@gmail.com",
-                    subject: "New update for your sponsored child",
-                    text: "We have added a new update about the child you sponsor. Please log in to http://cdi2019.herokuapp.com and visit the Who I Sponsor page. \n Thank you! \n CDI Staff"
-                }
-                                
-                transporter.sendMail(mailOptions, function(err, response) {
-                    if (err) {
-                        console.error("There was an error: ", err);
-                    } else {
-                        console.log("Here is the res: ", response);
-                        res.status(200).json("Email notification sent");
+                        user: process.env.GMAIL_USER,
+                        pass: process.env.GMAIL_PASSWORD,
                     }
                 })
+                const mailOptions = {
+                    from: 'Centro de Desarrollo Infantil',
+                    subject: `You have a new update for ${userData.dataValues.first_name}`,
+                    text: `We have added a new update for ${userData.dataValues.first_name}. Please log in to http://cdi2019.herokuapp.com and visit the Who I Sponsor page. \nThank you for your continued support of ${userData.dataValues.first_name}! \nCDI Staff`
+                }
+                // Run for loop through connected users to send emails to each donor connected to the child
+                for (let i = 0; i < userData.users.length; i++) {
+                    // Add users email to the "to" section of mailOptions object
+                    mailOptions.to = userData.users[i].dataValues.email,                   
+                    
+                    // Send email to user
+                    transporter.sendMail(mailOptions, function (err, response) {
+                        if (err) {
+                            console.error("There was an error: ", err);
+                        } else {
+                            res.status(200).json("Email notification sent");
+                        }
+                    })
+                }
             })
-        })    
-          .catch(err => console.log(err));
-        },
+        })
+            .catch(err => console.log(err));
+    },
 }
