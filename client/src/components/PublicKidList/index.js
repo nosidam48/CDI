@@ -6,7 +6,7 @@ import moment from "moment";
 import LoadingSpinner from "../LoadSpinner"
 
 // Shows list of kids available to sponsor; default is to show all kids and user can enter search options
-function KidsList(props) {
+function PublicKidList(props) {
     return (
         <Col md="9" className="my-4">
             {props.loading ? (
@@ -42,7 +42,7 @@ function KidsList(props) {
                     ))}
                 </Row>
             ) : (
-                    <h4 className="text-center">We're sorry. We're unable to find any kid profiles.</h4>
+                    <h4 className="text-center">We're sorry. We're unable to find any kids that match the search criteria.</h4>
                 )}
             </div>
             )}
@@ -50,5 +50,5 @@ function KidsList(props) {
     )
 }
 
-export default KidsList;
+export default PublicKidList;
 

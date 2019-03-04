@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row } from "reactstrap";
 import MainContainer from "../components/Container";
-import KidsList from "../components/KidsList";
+import PublicKidList from "../components/PublicKidList";
 import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
 
@@ -77,7 +77,7 @@ class Kids extends Component {
                         onChange={this.handleInputChange}
                         onClick={this.handleSubmit}
                         value={this.state} />
-                    <KidsList
+                    <PublicKidList
                         kids={this.state.kids}
                         calculateAge={this.calculateAge}
                         loading={this.state.loading}

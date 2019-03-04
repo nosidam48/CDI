@@ -91,7 +91,7 @@ class Donors extends Component {
                                     <SponsoredBio key={this.state.id} kid={this.state.kid} age={this.calculateAge} notes={this.state.notes} />
                                 </Row>
                             ) : (
-                                    <h4 className="text-center mt-4">We're sorry. We couldn't find any children that you sponsor.</h4>
+                                    <h4 className="text-center mt-4">We're sorry. We couldn't find any kids that you sponsor.</h4>
                                 )}
                         </div>
                     )}

@@ -20,11 +20,12 @@ class App extends React.Component {
     this.state = {
       checkingSession: true,
       admin: false,
-      authenticated: false
+      authenticated: false,
+      userName: "User"
     }
   }
 
-  // Function to check if user has admin privileges
+  // Function to check if user has admin privileges and to store user name
   checkAdminStatus() {
     // Grab the user's email address from the jwt token
     let profile = auth0Client.getProfile();
@@ -32,14 +33,28 @@ class App extends React.Component {
     // Make call to the database to get user info
     API.getDonor({ email: profile.name })
       .then(response => {
-        // Check if user has a profile and an admin status of true 
-        if (response.data && response.data.admin_status === true) {
-          this.setState({ 
-            admin: true,
+        // Set userName variable if user has a profile and a first name. 
+        let userName = "User";
+        if (response.data) {
+          if (response.data.first_name) {
+            userName = response.data.first_name
+          }
+          // Set admin status based on db info
+          let admin = false;
+          if (response.data.admin_status === true) {
+            admin = true;
+          }
+          // Set state with new info
+          this.setState({
+            userName: userName,
+            admin: admin,
             authenticated: true
-           })
+          }) 
+
+        // If no profile exists yet, set state with values
         } else {
           this.setState({ 
+            userName: "User",
             admin: false,
             authenticated: true,
           })
@@ -64,6 +79,7 @@ class App extends React.Component {
     return (
       <div>
         <Navbar 
+          userName={this.state.userName}
           admin={this.state.admin}
           authenticated={this.state.authenticated}
           checkingSession={this.state.checkingSession}
