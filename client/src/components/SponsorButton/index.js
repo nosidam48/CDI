@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-import "./style.css";
 
 // Button to sponsor a child
 function SponsorButton(props) {

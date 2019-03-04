@@ -33,8 +33,6 @@ module.exports = {
                 },
                 include: [db.users]
             }).then(userData => {
-                console.log(userData);
-                console.log(userData.dataValues.first_name);
                 // Once user data is retrieved, set nodemailer transporter constant with sending email account info    
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',

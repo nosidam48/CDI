@@ -3,20 +3,27 @@ import { Row } from "reactstrap";
 import MainContainer from "../components/Container";
 import PublicKidList from "../components/PublicKidList";
 import FilterPublic from "../components/FilterPublic";
+import { withRouter } from 'react-router-dom';
 import API from "../utils/API";
 
-class Kids extends Component {
-    //set the kids state to an empty array
-    state = {
-        kids: [],
-        loading: true,
-        location: "",
-        gender: "",
+class Kids extends React.Component {
+    constructor(props) {
+        super(props);
+
+        //set the kids state to an empty array
+        this.state = {
+            kids: [],
+            loading: true,
+            location: "",
+            gender: "",
+        }
     }
+
     //on mount call the function to return kids cards
     componentDidMount() {
         this.loadKidsUnsponsored();
     }
+
     //a function to get several kid profiles from the database
     loadKidsUnsponsored = () => {
         API.getKidsUnsponsored()
@@ -71,24 +78,29 @@ class Kids extends Component {
 
     render() {
         return (
-            <MainContainer>
-                <Row>
-                    <FilterPublic
-                        onChange={this.handleInputChange}
-                        onClick={this.handleSubmit}
-                        value={this.state} />
-                    <PublicKidList
-                        kids={this.state.kids}
-                        calculateAge={this.calculateAge}
-                        loading={this.state.loading}
-                    />
-                </Row>
-            </MainContainer>
+            // Don't display until user is authenticated
+            this.props.checkingSession ? null
+                : (
+                    <MainContainer>
+                        <Row>
+                            <FilterPublic
+                                onChange={this.handleInputChange}
+                                onClick={this.handleSubmit}
+                                value={this.state} />
+                            <PublicKidList
+                                kids={this.state.kids}
+                                calculateAge={this.calculateAge}
+                                loading={this.state.loading}
+                                authenticated={this.props.authenticated}
+                            />
+                        </Row>
+                    </MainContainer>
+                )
         )
     }
 }
 
-export default Kids;
+export default withRouter(Kids);
 
 
 

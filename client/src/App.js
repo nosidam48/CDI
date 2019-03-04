@@ -26,6 +26,19 @@ class App extends React.Component {
     }
   }
 
+  // Checks to see if the user is currently logged in
+  async componentWillMount() {
+    try {
+      await auth0Client.silentAuth();
+      this.forceUpdate();
+      this.checkAdminStatus();
+
+    } catch (err) {
+      if (err.error !== 'login_required') console.log(err.error);
+    }
+    this.setState({ checkingSession: false });
+  }
+  
   // Function to check if user has admin privileges and to store user name
   checkAdminStatus() {
     // Grab the user's email address from the jwt token
@@ -63,18 +76,6 @@ class App extends React.Component {
       })
   }
 
-  async componentWillMount() {
-    try {
-      await auth0Client.silentAuth();
-      this.forceUpdate();
-      this.checkAdminStatus();
-
-    } catch (err) {
-      if (err.error !== 'login_required') console.log(err.error);
-    }
-    this.setState({ checkingSession: false });
-  }
-
   // Renders routes
   render() {
     return (
@@ -88,7 +89,11 @@ class App extends React.Component {
           />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/kids" component={Kids} />
+            <Route exact path="/kids" 
+              render={(props) => <Kids {...props} 
+              authenticated={this.state.authenticated}
+              checkingSession={this.state.checkingSession} />}
+            />
             <Route exact path="/kids/:id" component={KidProfilePublic} />
             <SecuredRoute
               path="/donors"
