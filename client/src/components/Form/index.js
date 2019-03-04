@@ -113,15 +113,16 @@ export function AdminField(props) {
   )
 }
 
-export function SubmitBtn(props) {
+export function FormBtn(props) {
   return (
-    <Button type="submit" inline="true" {...props}>Submit </Button>
+    <Button 
+      inline="true" 
+      className={props.className} 
+      type={props.type} 
+      onClick={props.onClick}
+      disabled={props.disabled}
+    >
+      {props.btnText}
+    </Button>
   )
 }
-
-export function DiscardBtn(props) {
-  return (
-    <Button inline="true" className="ml-2 discardBtn" {...props}>Discard</Button> 
-  )
-}
-

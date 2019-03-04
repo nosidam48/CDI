@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label } from 'reactstrap';
-import { SubmitBtn, DiscardBtn } from "../Form"
-import { InputField, UploadPhoto } from "../Form";
+import { InputField, UploadPhoto, FormBtn } from "../Form";
 import LoadSpinner from "../LoadSpinner";
 import API from "../../utils/API";
 
@@ -130,11 +129,18 @@ class AddContentModal extends Component {
                                             </Form>
                                         </ModalBody>
                                         <ModalFooter>
-                                            <SubmitBtn
+                                            <FormBtn
                                                 onClick={(event) => this.handleContentSubmit(event)}
                                                 disabled={!(this.state.update || this.state.selectedFile)}
-                                                className="modalBtn">Submit</SubmitBtn>{' '}
-                                            <DiscardBtn onClick={this.toggle} className="modalCancel">Cancel</DiscardBtn>
+                                                className="modalBtn"
+                                                btnText="Submit"
+                                                type="submit"
+                                            />{' '}
+                                            <FormBtn 
+                                                onClick={this.toggle} 
+                                                className="modalCancel"
+                                                btnText="Discard"
+                                            />
                                         </ModalFooter>
                                     </div>
                                 ))}
