@@ -4,7 +4,7 @@ import "./style.css";
 import ImageGallery from 'react-image-gallery';
 
 // Displays photo gallery of specific child
-class SponsoredPhotos extends React.Component {
+class GalleryPhotos extends React.Component {
     render() {
     const images = [
       {
@@ -34,4 +34,4 @@ class SponsoredPhotos extends React.Component {
  
 }
 
-export default SponsoredPhotos
+export default GalleryPhotos

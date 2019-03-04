@@ -11,6 +11,7 @@ import NoMatch from "./pages/NoMatch";
 import Callback from "./pages/Callback";
 import SecuredRoute from "./SecuredRoute/SecuredRoute";
 import SecuredAdminRoute from "./SecuredAdminRoute/SecuredAdminRoute";
+import Footer from "./components/Footer";
 import API from "./utils/API";
 import auth0Client from "./Auth";
 
@@ -49,18 +50,18 @@ class App extends React.Component {
             userName: userName,
             admin: admin,
             authenticated: true
-          }) 
+          })
 
-        // If no profile exists yet, set state with values
+          // If no profile exists yet, set state with values
         } else {
-          this.setState({ 
+          this.setState({
             userName: "User",
             admin: false,
             authenticated: true,
           })
         }
       })
-    }  
+  }
 
   async componentWillMount() {
     try {
@@ -77,33 +78,36 @@ class App extends React.Component {
   // Renders routes
   render() {
     return (
-      <div>
-        <Navbar 
-          userName={this.state.userName}
-          admin={this.state.admin}
-          authenticated={this.state.authenticated}
-          checkingSession={this.state.checkingSession}
-        />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/kids" component={Kids} />
-          <Route exact path="/kids/:id" component={KidProfilePublic} />
-          <SecuredRoute 
-            path="/donors" 
-            component={Donors} 
-            checkingSession={this.state.checkingSession} />
-          <SecuredRoute 
-            path="/userprofile" 
-            component={Profile} 
-            checkingSession={this.state.checkingSession} />
-          <SecuredAdminRoute 
-            path="/admin" 
-            component={Admin} 
-            checkingSession={this.state.checkingSession} 
-            admin={this.state.admin}/>
-          <Route exact path="/callback" component={Callback} />
-          <Route component={NoMatch} />
-        </Switch>
+      <div className="site">
+        <div className="site-content">
+          <Navbar
+            userName={this.state.userName}
+            admin={this.state.admin}
+            authenticated={this.state.authenticated}
+            checkingSession={this.state.checkingSession}
+          />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/kids" component={Kids} />
+            <Route exact path="/kids/:id" component={KidProfilePublic} />
+            <SecuredRoute
+              path="/donors"
+              component={Donors}
+              checkingSession={this.state.checkingSession} />
+            <SecuredRoute
+              path="/userprofile"
+              component={Profile}
+              checkingSession={this.state.checkingSession} />
+            <SecuredAdminRoute
+              path="/admin"
+              component={Admin}
+              checkingSession={this.state.checkingSession}
+              admin={this.state.admin} />
+            <Route exact path="/callback" component={Callback} />
+            <Route component={NoMatch} />
+          </Switch>
+        </div>
+        <Footer />
       </div>
     );
   }

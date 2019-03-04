@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row } from "reactstrap";
 import MainContainer from "../components/Container";
-import SponsoredPhotos from "../components/Sponsored-Photos";
+import GalleryPhotos from "../components/GalleryPhotos";
 import SponsoredBio from "../components/Sponsored-Bio";
 import LoadSpinner from "../components/LoadSpinner";
 import auth0Client from "../Auth";
@@ -87,7 +87,7 @@ class Donors extends Component {
                             {/* If results are found, show kid info. If not, alert user. */}
                             {this.state.kid ? (
                                 <Row>
-                                    <SponsoredPhotos kid={this.state.kid} content={this.state.photos} />
+                                    <GalleryPhotos kid={this.state.kid} content={this.state.photos} />
                                     <SponsoredBio key={this.state.id} kid={this.state.kid} age={this.calculateAge} notes={this.state.notes} />
                                 </Row>
                             ) : (
