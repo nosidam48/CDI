@@ -87,7 +87,6 @@ class Kids extends React.Component {
                         kids={this.state.kids}
                         calculateAge={this.calculateAge}
                         loading={this.state.loading}
-                        authenticated={this.props.authenticated}
                         email={this.props.email}
                     />
                 </Row>

@@ -99,11 +99,12 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/kids" 
               render={(props) => <Kids {...props} 
-              authenticated={this.state.authenticated}
-              email={this.state.email}
-              checkingSession={this.state.checkingSession} />}
+              email={this.state.email} />}
             />
-            <Route exact path="/kids/:id" component={KidProfilePublic} />
+            <Route exact path="/kids/:id" 
+              render={(props) => <KidProfilePublic {...props} 
+              email={this.state.email} />}
+            />  
             <SecuredRoute
               path="/donors"
               component={Donors}

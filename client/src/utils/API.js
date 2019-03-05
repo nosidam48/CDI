@@ -82,7 +82,6 @@ export default {
     },
 
     sponsorMe: (sponsorData) => {
-        console.log(sponsorData)
         return axios.post("/api/users/sponsor-me", sponsorData)
     },
 

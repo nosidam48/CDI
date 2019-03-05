@@ -1,7 +1,7 @@
 import React from "react";
-import {Row, Col} from "reactstrap";
+import { Row, Col } from "reactstrap";
 import "./style.css";
-import SponsorButton from "../SponsorButton"
+import SponsorMeModal from "../SponsorMeModal"
 
 // Card that appears when a user clicks to see more about a kid. Props is one kid based on the id in the url.
 function PublicKidCard(props) {
@@ -16,7 +16,12 @@ function PublicKidCard(props) {
                     <br />
                     <h5 className="text-uppercase">About {props.kid.first_name}</h5>
                     <p>{props.kid.kid_bio}</p>
-                    <SponsorButton />
+                    <SponsorMeModal
+                        id={props.kid.id}
+                        kidFirstName={props.kid.first_name}
+                        kidLastName={props.kid.last_name}
+                        email={props.email}
+                    />
                     <hr />
                     <a href="/kids"><span className="small"><i className="fas fa-child mr-2"></i>Back to all kids</span></a>
                 </Col>

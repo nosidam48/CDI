@@ -34,7 +34,6 @@ function PublicKidList(props) {
                                             <h6><span className="font-weight-bold">Location:</span> {kid.location}</h6>
                                             <p className="small"><a href={"/kids/" + kid.id}>Learn more about me</a></p>
                                             <SponsorMeModal
-                                                authenticated={props.authenticated}
                                                 id={kid.id}
                                                 kidFirstName={kid.first_name}
                                                 kidLastName={kid.last_name}
