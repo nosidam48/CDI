@@ -22,7 +22,8 @@ class App extends React.Component {
       checkingSession: true,
       admin: false,
       authenticated: false,
-      userName: "User"
+      userName: "User",
+      email: ""
     }
   }
 
@@ -47,12 +48,17 @@ class App extends React.Component {
     // Make call to the database to get user info
     API.getDonor({ email: profile.name })
       .then(response => {
-        // Set userName variable if user has a profile and a first name. 
+        // Set userName and email variables if they exist in user profile. 
         let userName = "User";
+        let email = "";
         if (response.data) {
           if (response.data.first_name) {
             userName = response.data.first_name
           }
+          if (response.data.email) {
+            email = response.data.email
+          }
+
           // Set admin status based on db info
           let admin = false;
           if (response.data.admin_status === true) {
@@ -61,6 +67,7 @@ class App extends React.Component {
           // Set state with new info
           this.setState({
             userName: userName,
+            email: email,
             admin: admin,
             authenticated: true
           })
@@ -69,6 +76,7 @@ class App extends React.Component {
         } else {
           this.setState({
             userName: "User",
+            email: "",
             admin: false,
             authenticated: true,
           })
@@ -92,6 +100,7 @@ class App extends React.Component {
             <Route exact path="/kids" 
               render={(props) => <Kids {...props} 
               authenticated={this.state.authenticated}
+              email={this.state.email}
               checkingSession={this.state.checkingSession} />}
             />
             <Route exact path="/kids/:id" component={KidProfilePublic} />

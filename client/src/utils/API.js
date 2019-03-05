@@ -81,6 +81,11 @@ export default {
         return axios.post("/api/users/profile", profileData);
     },
 
+    sponsorMe: (sponsorData) => {
+        console.log(sponsorData)
+        return axios.post("/api/users/sponsor-me", sponsorData)
+    },
+
     // ADMIN-KID FUNCTIONS==============================================================
 
     // View all kids
@@ -102,7 +107,7 @@ export default {
         return axios.post("/api/users/connect", connectData);
     },
 
-    // Add content for child, includes expanded axios request to handle photo
+    // Add content for child
     addContent: (contentData) => {
         return axios.post("/api/content", contentData);
     },

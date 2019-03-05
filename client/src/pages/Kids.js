@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { Row } from "reactstrap";
 import MainContainer from "../components/Container";
 import PublicKidList from "../components/PublicKidList";
 import FilterPublic from "../components/FilterPublic";
-import { withRouter } from 'react-router-dom';
 import API from "../utils/API";
 
 class Kids extends React.Component {
@@ -78,29 +77,26 @@ class Kids extends React.Component {
 
     render() {
         return (
-            // Don't display until user is authenticated
-            this.props.checkingSession ? null
-                : (
-                    <MainContainer>
-                        <Row>
-                            <FilterPublic
-                                onChange={this.handleInputChange}
-                                onClick={this.handleSubmit}
-                                value={this.state} />
-                            <PublicKidList
-                                kids={this.state.kids}
-                                calculateAge={this.calculateAge}
-                                loading={this.state.loading}
-                                authenticated={this.props.authenticated}
-                            />
-                        </Row>
-                    </MainContainer>
-                )
+            <MainContainer>
+                <Row>
+                    <FilterPublic
+                        onChange={this.handleInputChange}
+                        onClick={this.handleSubmit}
+                        value={this.state} />
+                    <PublicKidList
+                        kids={this.state.kids}
+                        calculateAge={this.calculateAge}
+                        loading={this.state.loading}
+                        authenticated={this.props.authenticated}
+                        email={this.props.email}
+                    />
+                </Row>
+            </MainContainer>
         )
     }
 }
 
-export default withRouter(Kids);
+export default Kids;
 
 
 
