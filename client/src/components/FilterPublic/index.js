@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Col, Form }
-    from "reactstrap";
+import { Col, Form } from "reactstrap";
 import "./style.css";
-import { GenderField, LocationField, SubmitBtn } from "../Form"
+import { GenderField, LocationField, FormBtn } from "../Form"
 
 // Provides search options on /kids page
 class FilterPublic extends Component {
@@ -17,7 +16,11 @@ class FilterPublic extends Component {
                     <LocationField name="location" value={this.props.value.location} onChange={this.props.onChange} />
                     
                     <GenderField name="gender" value={this.props.value.gender} onChange={this.props.onChange} />
-                    <SubmitBtn onClick={this.props.onClick} />
+                    <FormBtn 
+                        onClick={this.props.onClick}
+                        btnText="Search"
+                        type="submit"
+                         />
                 </Form>
             </Col>
         )

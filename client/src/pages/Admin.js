@@ -130,6 +130,7 @@ class Admin extends Component {
             address: "", city: "", state: "", zip: "", admin: false,
             displayTool: ""
         })
+        window.scrollTo(0, 0);
     }
 
     //function that sets the state to the name and value of the form input when the form data is changed
@@ -252,7 +253,9 @@ class Admin extends Component {
             displayTool: "",
             kids: [],
             users: [],
-            message: ""
+            message: "",
+            showKidSearchResults: false,
+
         })
         API.kidSearch({
             searchTerm: this.state.searchTerm,
@@ -285,7 +288,7 @@ class Admin extends Component {
             kids: [],
             users: [],
             displayTool: "",
-
+            showUserSearchResults: false,
         })
         API.userSearch({
             searchTerm: this.state.userSearchTerm,

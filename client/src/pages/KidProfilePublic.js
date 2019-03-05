@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col } from 'reactstrap';
 import MainContainer from "../components/Container";
 import PublicKidCard from "../components/BigKidsCardPublic"
-import SponsoredPhotos from "../components/Sponsored-Photos";
+import GalleryPhotos from "../components/GalleryPhotos";
 import API from "../utils/API";
 import LoadSpinner from "../components/LoadSpinner";
 
@@ -69,7 +69,7 @@ class KidProfilePublic extends Component {
                         <div>
                             {this.state.kid ? (
                                 <Row>
-                                    <SponsoredPhotos kid={this.state.kid} content={this.state.photos} />
+                                    <GalleryPhotos kid={this.state.kid} content={this.state.photos} />
                                     <PublicKidCard kid={this.state.kid} age={this.calculateAge} />
                                 </Row>
                             ) : (

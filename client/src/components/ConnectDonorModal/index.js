@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
-import { InputField, SubmitBtn, DiscardBtn } from "../Form";
+import { InputField, FormBtn } from "../Form";
 import API from "../../utils/API";
 
 
@@ -116,9 +116,11 @@ class ConnectDonorModal extends Component {
                     name="donorEmail"
                     placeholder="Email address"
                   />
-                  <SubmitBtn
+                  <FormBtn
                     disabled={!(this.state.donorFirstName || this.state.donorLastName || this.state.donorEmail)}
                     onClick={this.handleDonorSearch}
+                    btnText="Search"
+                    type="submit"
                   />
                 </Form>
               </div>
@@ -128,13 +130,15 @@ class ConnectDonorModal extends Component {
                 <hr />
                 <p className="font-weight-bold">Users found</p>
                 {this.state.donors.map(donor => (
-                  <div className="mb-1">
-                    <SubmitBtn
+                  <div className="mb-1" key={donor.id}>
+                    <FormBtn
                       size="sm"
                       onClick={() => this.handleConnectDonor(donor.id, this.props.kidId)}
                       donorId={donor.id}
                       kidId={this.props.kidId}
                       className="mr-2"
+                      btnText="Connect"
+                      type="submit"
                     />
                     {donor.first_name} {donor.last_name} {donor.email}
                   </div>
@@ -143,7 +147,11 @@ class ConnectDonorModal extends Component {
             ) : <h4 className="text-center py-3">{this.state.message}</h4>}
           </ModalBody>
           <ModalFooter>
-            <DiscardBtn onClick={this.toggle} className="modalCancel"></DiscardBtn>
+            <FormBtn 
+              onClick={this.toggle} 
+              className="modalCancel"
+              btnText="Close" 
+            />
           </ModalFooter>
         </Modal>
       </div>

@@ -5,8 +5,8 @@ import { InputField,
     GradeField, 
     LocationField, 
     UploadPhoto, 
-    SubmitBtn, 
-    DiscardBtn } from "../Form";
+    FormBtn 
+    } from "../Form";
 
 function AddKidForm(props) {
     return (
@@ -67,12 +67,15 @@ function AddKidForm(props) {
                     id={props.photoId}
                 />
                 {/* Set Submit Button to disabled until all fields are filled out */}
-                <SubmitBtn
+                <FormBtn
                     disabled={props.disabled}
                     onClick={props.onClickSubmit}
-                />
-                <DiscardBtn
+                    btnText="Submit"
+                    type="submit"
+                />{' '}
+                <FormBtn
                     onClick={props.onClickDiscard}
+                    btnText="Discard"
                 />
             </Form>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, FormGroup, Label } from "reactstrap";
-import { InputField, AdminField, SubmitBtn, DiscardBtn } from "../Form";
+import { InputField, AdminField, FormBtn } from "../Form";
 
 // Form that is called when an admin wants to add/update user profile
 function AddUserForm(props) {
@@ -68,10 +68,17 @@ function AddUserForm(props) {
             value={props.adminValue} 
             name={props.adminName} />
         </FormGroup>
-        <SubmitBtn
+        <FormBtn
           disabled={props.disabled}
-          onClick={props.onClickSubmit} inline="true"></SubmitBtn>
-        <DiscardBtn onClick={props.onClickDiscard} inline="true" className="ml-2" />
+          onClick={props.onClickSubmit} 
+          btnText="Submit"
+          type="submit"          
+        />
+        <FormBtn 
+          onClick={props.onClickDiscard} 
+          className="ml-2"
+          btnText="Discard"
+        />
       </Form>
     </div>
   )

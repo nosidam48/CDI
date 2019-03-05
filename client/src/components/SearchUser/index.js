@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "reactstrap";
-import { InputField, UserSearchType, SubmitBtn,} from "../Form";
+import { InputField, UserSearchType, FormBtn,} from "../Form";
 
 function SearchUser(props) {
     return (
@@ -17,9 +17,11 @@ function SearchUser(props) {
                     name={props.typeName}
                     id={props.typeId}
                 />
-                <SubmitBtn
+                <FormBtn
                     id={props.submitId}
                     onClick={props.onClick}
+                    btnText="Search"
+                    type="submit"
                 />
             </Form>
         </div>

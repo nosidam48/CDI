@@ -1,12 +1,12 @@
 import React from "react";
 import { Row, Col, Card } from "reactstrap";
 import "./style.css";
-import SponsorButton from "../SponsorButton";
 import moment from "moment";
 import LoadingSpinner from "../LoadSpinner"
+import SponsorMeModal from "../SponsorMeModal";
 
 // Shows list of kids available to sponsor; default is to show all kids and user can enter search options
-function KidsList(props) {
+function PublicKidList(props) {
     return (
         <Col md="9" className="my-4">
             {props.loading ? (
@@ -33,7 +33,14 @@ function KidsList(props) {
                                             <h6><span className="font-weight-bold">Birthday: </span>{moment(kid.birth_date).format("MMMM D")}</h6>
                                             <h6><span className="font-weight-bold">Location:</span> {kid.location}</h6>
                                             <p className="small"><a href={"/kids/" + kid.id}>Learn more about me</a></p>
-                                            <SponsorButton />
+                                            <SponsorMeModal
+                                                authenticated={props.authenticated}
+                                                id={kid.id}
+                                                kidFirstName={kid.first_name}
+                                                kidLastName={kid.last_name}
+                                                email={props.email}
+                                                
+                                            />
                                         </div>
                                     </Col>
                                 </Row>
@@ -42,7 +49,7 @@ function KidsList(props) {
                     ))}
                 </Row>
             ) : (
-                    <h4 className="text-center">We're sorry. We're unable to find any kid profiles.</h4>
+                    <h4 className="text-center">We're sorry. We're unable to find any kids that match the search criteria.</h4>
                 )}
             </div>
             )}
@@ -50,5 +57,5 @@ function KidsList(props) {
     )
 }
 
-export default KidsList;
+export default PublicKidList;
 

@@ -1,22 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 import { Row } from "reactstrap";
 import MainContainer from "../components/Container";
-import KidsList from "../components/KidsList";
+import PublicKidList from "../components/PublicKidList";
 import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
 
-class Kids extends Component {
-    //set the kids state to an empty array
-    state = {
-        kids: [],
-        loading: true,
-        location: "",
-        gender: "",
+class Kids extends React.Component {
+    constructor(props) {
+        super(props);
+
+        //set the kids state to an empty array
+        this.state = {
+            kids: [],
+            loading: true,
+            location: "",
+            gender: "",
+        }
     }
+
     //on mount call the function to return kids cards
     componentDidMount() {
         this.loadKidsUnsponsored();
     }
+
     //a function to get several kid profiles from the database
     loadKidsUnsponsored = () => {
         API.getKidsUnsponsored()
@@ -77,10 +83,12 @@ class Kids extends Component {
                         onChange={this.handleInputChange}
                         onClick={this.handleSubmit}
                         value={this.state} />
-                    <KidsList
+                    <PublicKidList
                         kids={this.state.kids}
                         calculateAge={this.calculateAge}
                         loading={this.state.loading}
+                        authenticated={this.props.authenticated}
+                        email={this.props.email}
                     />
                 </Row>
             </MainContainer>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Form, Label } from "reactstrap";
-import { InputField, SubmitBtn } from "../components/Form";
+import { InputField, FormBtn } from "../components/Form";
 import MainContainer from "../components/Container";
 import LoadingSpinner from "../components/LoadSpinner";
 import auth0Client from "../Auth";
@@ -134,9 +134,11 @@ class Profile extends Component {
                   />
 
                   {/* Display submit button once first name and last name have values */}
-                  <SubmitBtn
+                  <FormBtn
                     disabled={!(this.state.first_name && this.state.last_name)}
                     onClick={this.handleSubmit}
+                    btnText="Update"
+                    type="submit"
                   />
                 </Form>
               </Col>

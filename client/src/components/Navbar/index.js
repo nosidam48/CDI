@@ -62,7 +62,7 @@ class MainNavbar extends React.Component {
             ) : (
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
-                    User
+                    {this.props.userName}
                     </DropdownToggle>
                   <DropdownMenu right>
                       <DropdownItem>

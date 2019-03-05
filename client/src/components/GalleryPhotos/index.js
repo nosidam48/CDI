@@ -4,7 +4,7 @@ import "./style.css";
 import ImageGallery from 'react-image-gallery';
 
 // Displays photo gallery of specific child
-class SponsoredPhotos extends React.Component {
+class GalleryPhotos extends React.Component {
     render() {
     const images = [
       {
@@ -25,7 +25,7 @@ class SponsoredPhotos extends React.Component {
     }
     
     return (
-      <Col sm="5" lg="4" className="image my-4">
+      <Col sm="5" lg="3" className="image my-4">
       {/* Passes the image array in as items, takes away play and fullscreen buttons */}
         <ImageGallery items={images} showPlayButton={false} showFullscreenButton={false} showNav={true}/>
       </Col>
@@ -34,4 +34,4 @@ class SponsoredPhotos extends React.Component {
  
 }
 
-export default SponsoredPhotos
+export default GalleryPhotos
