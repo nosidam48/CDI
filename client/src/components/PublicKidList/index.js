@@ -37,8 +37,7 @@ function PublicKidList(props) {
                                                 id={kid.id}
                                                 kidFirstName={kid.first_name}
                                                 kidLastName={kid.last_name}
-                                                email={props.email}
-                                                
+                                                email={props.email}                                                
                                             />
                                         </div>
                                     </Col>
