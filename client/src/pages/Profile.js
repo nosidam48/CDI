@@ -37,6 +37,7 @@ class Profile extends Component {
     // Get user info if user is already in db to put in form
     API.getDonor({ email: profile.name })
       .then(response => {
+        console.log(response);
         this.setState({
           first_name: response.data.first_name,
           last_name: response.data.last_name,
@@ -61,7 +62,9 @@ class Profile extends Component {
   handleSubmit(event) {
     event.preventDefault()
     // Set loading state to true
-    this.setState({ loading: true })
+    this.setState({ 
+      loading: true,
+    })
     //Request to add/update user profile
     API.donorProfile({
       email: this.state.email,
@@ -73,13 +76,15 @@ class Profile extends Component {
       zip: this.state.zip
     })
       .then(response => {
+          console.log(response)
         this.setState({
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          address: this.state.address,
-          city: this.state.city,
-          state: this.state.state,
-          zip: this.state.zip,
+          first_name: response.data.first_name,
+          last_name: response.data.last_name,
+          address: response.data.address,
+          city: response.data.city,
+          state: response.data.state,
+          zip: response.data.zip,
+          results: response.data,
           loading: false,
           updateProfile: false
         })

@@ -19,7 +19,6 @@ function UserProfileCurrent(props) {
                             onClick={props.onClick}
                             btnText="Update"
                             className="btn-sm"
-
                         />
                     </div>
                 </Col>

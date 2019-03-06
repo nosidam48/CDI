@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer');
 module.exports = {
     // Function to retrieve donor profile info
     getDonor: (req, res) => {
+        console.log("running")
         db.users.findOne({
             where: {
                 email: req.body.email
@@ -34,8 +35,14 @@ module.exports = {
                             email: req.body.email
                         }
                     }
-                )
-                    .then(userData => res.json(userData))
+                    ).then(function (data) {
+                        // Once user is updated, find user complete info and send back
+                        db.users.findOne({
+                            where: {
+                                email: req.body.email
+                            }
+                        }).then(userData => res.json(userData))                   
+                })
                     .catch(err => res.status(422).json(err));
             }
         })
