@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import MainContainer from "../components/Container";
 import LoadingSpinner from "../components/LoadSpinner";
-import UserProfileCurrent from "../components/UserProfileCurrent"
+import UserProfile from "../components/UserProfile"
 import auth0Client from "../Auth";
 import API from "../utils/API";
 
@@ -99,7 +99,7 @@ class Profile extends Component {
         {/* Shows loading spinner if loading is true */}
         {this.state.loading ? (
           <LoadingSpinner className="kidsSpin" />
-        ) : <UserProfileCurrent 
+        ) : <UserProfile 
               updateProfile={this.state.updateProfile}
               firstNameValue={this.state.first_name}
               firstName="first_name"

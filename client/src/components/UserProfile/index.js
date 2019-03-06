@@ -4,7 +4,7 @@ import { InputField, FormBtn, } from "../Form";
 import "./style.css";
 
 // Profile that appears with current info for user.
-function UserProfileCurrent(props) {
+function UserProfile(props) {
     return (
         // Default will show user's current profile. Once update button is clicked, an update form will be displayed
         !props.updateProfile ? (
@@ -80,5 +80,5 @@ function UserProfileCurrent(props) {
     )
 }
 
-export default UserProfileCurrent
+export default UserProfile
 
