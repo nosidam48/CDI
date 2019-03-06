@@ -98,8 +98,8 @@ class Profile extends Component {
       <MainContainer>
         {/* Shows loading spinner if loading is true */}
         {this.state.loading ? (
-          <LoadingSpinner className="kidsSpin" />
-        ) : <UserProfile 
+          <LoadingSpinner className="kidsSpin"  />
+        ) : <UserProfile
               updateProfile={this.state.updateProfile}
               firstNameValue={this.state.first_name}
               firstName="first_name"

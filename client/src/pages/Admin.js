@@ -25,9 +25,10 @@ class Admin extends Component {
         displayTool: "",
         showKidSearchResults: false,
         showUserSearchResults: false,
+        menuOpen: true,
 
         // Message & loading
-        message: "Choose an admin tool from the menu to get started.",
+        message: "Choose an admin tool to get started.",
         loading: false,
 
         // Inputs for add kid/add user form
@@ -67,6 +68,7 @@ class Admin extends Component {
         this.setState({
             displayTool: "AddKidForm",
             message: "",
+            menuOpen: false
         });
         window.scrollTo(0, 0);
     }
@@ -75,6 +77,7 @@ class Admin extends Component {
         this.setState({
             displayTool: "KidSearch",
             message: "",
+            menuOpen: false
         })
         window.scrollTo(0, 0);
     }
@@ -83,6 +86,7 @@ class Admin extends Component {
         this.setState({
             displayTool: "MultipleKids",
             message: "",
+            menuOpen: false
         })
         window.scrollTo(0, 0);
     }
@@ -91,6 +95,7 @@ class Admin extends Component {
         this.setState({
             displayTool: "AddUserForm",
             message: "",
+            menuOpen: false
         });
         window.scrollTo(0, 0);
     }
@@ -100,6 +105,7 @@ class Admin extends Component {
         this.setState({
             displayTool: "UserSearch",
             message: "",
+            menuOpen: false
         })
         window.scrollTo(0, 0);
     }
@@ -108,6 +114,7 @@ class Admin extends Component {
         this.setState({
             displayTool: "Users",
             message: "",
+            menuOpen: false
         })
         window.scrollTo(0, 0);
     }
@@ -117,6 +124,7 @@ class Admin extends Component {
             displayTool: "Admins",
             showAdmins: true,
             message: "",
+            menuOpen: false
         })
         window.scrollTo(0, 0);
     }
@@ -315,179 +323,185 @@ class Admin extends Component {
 
     render() {
         return (
-            <MainContainer>
-                <Row>
-                    {/* Displays the AdminSidebar with needed props */}
-                    <AdminSidebar
-                        onClickAddKid={this.toggleAddKidForm}
-                        onClickKidSearch={this.showKidSearch}
-                        onClickMultipleKidSearch={this.showMultipleKids}
-                        onClickAddUser={this.toggleAddUserForm}
-                        onClickUserSearch={this.showUserSearch}
-                        onClickShowUsers={this.showUsers}
-                        onClickShowAdmins={this.showAdmins}
-                    />
-                    <Col xs="12" sm="8" md="9" className="px-3" id="addKid">
-                        {/* Shows loading spinner if loading is true */}
-                        {this.state.loading ? (
-                            <LoadSpinner className="kidsSpin" />
-                        ) : null
-                        }
-                        {/* Forms below display when clicked on */}
-                        {/* ADD KID FORM */}
-                        {this.state.displayTool === "AddKidForm" ?
-                            <AddKidForm
-                                onChangeInput={this.handleInputChange}
-                                onChangeFile={this.fileSelectedHandler}
-                                firstNameValue={this.state.firstNames}
-                                firstName="firstNames"
-                                lastNamevalue={this.state.lastName}
-                                lastName="lastName"
-                                genderValue={this.state.gender}
-                                genderName="gender"
-                                birthdateValue={this.state.birth_date}
-                                birthdateName="birth_date"
-                                gradeValue={this.state.grade}
-                                gradeName="grade"
-                                locationValue={this.state.location}
-                                locationName="location"
-                                bioValue={this.state.bio}
-                                bioName="bio"
-                                photoName="selectedFile"
-                                photoId=""
-                                disabled={!(this.state.firstNames && this.state.lastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.location && this.state.bio && this.state.selectedFile)}
-                                onClickSubmit={this.handleKidFormSubmit}
-                                onClickDiscard={this.resetForm}
-                            /> : null}
+            <div id="admin">
+                <AdminSidebar
+                    pageWrapId={"page-wrap"}
+                    outerContainerId={"app"}
+                    isOpen={this.state.menuOpen}
+                    onClickAddKid={this.toggleAddKidForm}
+                    onClickKidSearch={this.showKidSearch}
+                    onClickMultipleKidSearch={this.showMultipleKids}
+                    onClickAddUser={this.toggleAddUserForm}
+                    onClickUserSearch={this.showUserSearch}
+                    onClickShowUsers={this.showUsers}
+                    onClickShowAdmins={this.showAdmins}
+                />
+                <div id="page-wrap">
+                <MainContainer id="admin-container">
+                    <Row className="mt-0">
+                        <Col xs="12" sm="8" md={{ size: 9, offset: 1 }} className="px-3" id="addKid">
+                            {/* Shows loading spinner if loading is true */}
+                            {this.state.loading ? (
+                                <LoadSpinner className="kidsSpin" />
+                            ) : null
+                            }
+                            {/* Forms below display when clicked on */}
+                            {/* ADD KID FORM */}
+                            {this.state.displayTool === "AddKidForm" ?
+                                <AddKidForm
+                                    onChangeInput={this.handleInputChange}
+                                    onChangeFile={this.fileSelectedHandler}
+                                    firstNameValue={this.state.firstNames}
+                                    firstName="firstNames"
+                                    lastNamevalue={this.state.lastName}
+                                    lastName="lastName"
+                                    genderValue={this.state.gender}
+                                    genderName="gender"
+                                    birthdateValue={this.state.birth_date}
+                                    birthdateName="birth_date"
+                                    gradeValue={this.state.grade}
+                                    gradeName="grade"
+                                    locationValue={this.state.location}
+                                    locationName="location"
+                                    bioValue={this.state.bio}
+                                    bioName="bio"
+                                    photoName="selectedFile"
+                                    photoId=""
+                                    disabled={!(this.state.firstNames && this.state.lastName && this.state.gender && this.state.birth_date && this.state.grade && this.state.location && this.state.bio && this.state.selectedFile)}
+                                    onClickSubmit={this.handleKidFormSubmit}
+                                    onClickDiscard={this.resetForm}
+                                /> : null}
 
-                        {/* UPDATE CHILD/SEARCH */}
-                        {this.state.displayTool === "KidSearch" ?
-                            <SearchKid
-                                onChange={this.handleInputChange}
-                                termValue={this.state.searchTerm}
-                                termName="searchTerm"
-                                typeValue={this.state.searchType}
-                                typeName="searchType"
-                                typeId="searchKid"
-                                submitId="searchSubmit"
-                                onClick={this.handleAdminKidSearch}
-                            /> : null
-                        }
-                        {/* If search brings back results, show results */}
-                        {this.state.showKidSearchResults ? (
-                            <div>
-                                {this.state.kids.length ? (
-                                    <div>
-                                        {this.state.kids.map(kid => (
-                                            <AdminKidList
-                                                key={kid.id}
-                                                id={kid.id}
-                                                firstNames={kid.first_name}
-                                                lastName={kid.last_name}
-                                                gender={kid.gender}
-                                                birthdate={kid.birth_date}
-                                                grade={kid.grade}
-                                                location={kid.location}
-                                                needSponsor={kid.need_sponsor}
-                                                bio={kid.kid_bio}
-                                                redoSearch={this.handleAdminKidSearch}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : <h4 className="text-center mt-4">We couldn't find any profiles that match your search.</h4>}
-                            </div>
-                        ) : null
-                        }
+                            {/* UPDATE CHILD/SEARCH */}
+                            {this.state.displayTool === "KidSearch" ?
+                                <SearchKid
+                                    onChange={this.handleInputChange}
+                                    termValue={this.state.searchTerm}
+                                    termName="searchTerm"
+                                    typeValue={this.state.searchType}
+                                    typeName="searchType"
+                                    typeId="searchKid"
+                                    submitId="searchSubmit"
+                                    onClick={this.handleAdminKidSearch}
+                                /> : null
+                            }
+                            {/* If search brings back results, show results */}
+                            {this.state.showKidSearchResults ? (
+                                <div>
+                                    {this.state.kids.length ? (
+                                        <div>
+                                            {this.state.kids.map(kid => (
+                                                <AdminKidList
+                                                    key={kid.id}
+                                                    id={kid.id}
+                                                    firstNames={kid.first_name}
+                                                    lastName={kid.last_name}
+                                                    gender={kid.gender}
+                                                    birthdate={kid.birth_date}
+                                                    grade={kid.grade}
+                                                    location={kid.location}
+                                                    needSponsor={kid.need_sponsor}
+                                                    bio={kid.kid_bio}
+                                                    redoSearch={this.handleAdminKidSearch}
+                                                />
+                                            ))}
+                                        </div>
+                                    ) : <h4 className="text-center mt-4">We couldn't find any profiles that match your search.</h4>}
+                                </div>
+                            ) : null
+                            }
 
-                        {/* VIEW CHILDREN */}
-                        {this.state.displayTool === "MultipleKids" ? (
-                            <AdminMultipleKids />
-                        ) : null}
+                            {/* VIEW CHILDREN */}
+                            {this.state.displayTool === "MultipleKids" ? (
+                                <AdminMultipleKids />
+                            ) : null}
 
-                        {/* ADD USER */}
-                        {this.state.displayTool === "AddUserForm" ? (
-                            <AddUserForm
-                                onChangeInput={this.handleInputChange}
-                                firstNameValue={this.state.firstNames}
-                                firstName="firstNames"
-                                lastNamevalue={this.state.lastName}
-                                lastName="lastName"
-                                emailValue={this.state.email}
-                                emailName="email"
-                                addressValue={this.state.address}
-                                addressName="address"
-                                cityValue={this.state.city}
-                                cityName="city"
-                                stateValue={this.state.state}
-                                stateName="state"
-                                zipValue={this.state.zip}
-                                zipName="zip"
-                                adminValue={this.state.admin}
-                                adminName="admin"
-                                disabled={!(this.state.firstNames && this.state.lastName && this.state.email)}
-                                onClickSubmit={this.handleUserFormSubmit}
-                                onClickDiscard={this.resetForm}
-                        />
-                    ) : null}
+                            {/* ADD USER */}
+                            {this.state.displayTool === "AddUserForm" ? (
+                                <AddUserForm
+                                    onChangeInput={this.handleInputChange}
+                                    firstNameValue={this.state.firstNames}
+                                    firstName="firstNames"
+                                    lastNamevalue={this.state.lastName}
+                                    lastName="lastName"
+                                    emailValue={this.state.email}
+                                    emailName="email"
+                                    addressValue={this.state.address}
+                                    addressName="address"
+                                    cityValue={this.state.city}
+                                    cityName="city"
+                                    stateValue={this.state.state}
+                                    stateName="state"
+                                    zipValue={this.state.zip}
+                                    zipName="zip"
+                                    adminValue={this.state.admin}
+                                    adminName="admin"
+                                    disabled={!(this.state.firstNames && this.state.lastName && this.state.email)}
+                                    onClickSubmit={this.handleUserFormSubmit}
+                                    onClickDiscard={this.resetForm}
+                                />
+                            ) : null}
 
 
-                        {/* USER SEARCH */}
-                        {this.state.displayTool === "UserSearch" ?
-                            <SearchUser
-                                onChange={this.handleInputChange}
-                                termValue={this.state.userSearchTerm}
-                                termName="userSearchTerm"
-                                typeValue={this.state.userSearchType}
-                                typeName="userSearchType"
-                                typeId="userSearchType"
-                                submitId="searchSubmit"
-                                onClick={this.handleAdminUserSearch}
-                            />
-                            : null}
-                        {/* If search brings back results, show results */}
-                        {this.state.showUserSearchResults ? (
-                            <div>
-                                {this.state.users.length ? (
-                                    <div>
-                                        {this.state.users.map(user => (
-                                            <AdminUserList
-                                                key={user.id}
-                                                id={user.id}
-                                                firstName={user.first_name}
-                                                lastName={user.last_name}
-                                                email={user.email}
-                                                address={user.address}
-                                                city={user.city}
-                                                state={user.state}
-                                                zip={user.zip}
-                                                admin={user.admin_status}
-                                                masterAdmin={user.master_admin_status}
-                                                redoSearch={this.handleAdminUserSearch}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : <h4 className="text-center mt-4">We couldn't find any users that match your search.</h4>}
-                            </div>
-                        ) : null
-                        }
+                            {/* USER SEARCH */}
+                            {this.state.displayTool === "UserSearch" ?
+                                <SearchUser
+                                    onChange={this.handleInputChange}
+                                    termValue={this.state.userSearchTerm}
+                                    termName="userSearchTerm"
+                                    typeValue={this.state.userSearchType}
+                                    typeName="userSearchType"
+                                    typeId="userSearchType"
+                                    submitId="searchSubmit"
+                                    onClick={this.handleAdminUserSearch}
+                                />
+                                : null}
+                            {/* If search brings back results, show results */}
+                            {this.state.showUserSearchResults ? (
+                                <div>
+                                    {this.state.users.length ? (
+                                        <div>
+                                            {this.state.users.map(user => (
+                                                <AdminUserList
+                                                    key={user.id}
+                                                    id={user.id}
+                                                    firstName={user.first_name}
+                                                    lastName={user.last_name}
+                                                    email={user.email}
+                                                    address={user.address}
+                                                    city={user.city}
+                                                    state={user.state}
+                                                    zip={user.zip}
+                                                    admin={user.admin_status}
+                                                    masterAdmin={user.master_admin_status}
+                                                    redoSearch={this.handleAdminUserSearch}
+                                                />
+                                            ))}
+                                        </div>
+                                    ) : <h4 className="text-center mt-4">We couldn't find any users that match your search.</h4>}
+                                </div>
+                            ) : null
+                            }
 
-                        {/* Shows users for admins */}
-                        {this.state.displayTool === "Users" ? (
-                            <ViewUsers />
-                        ) : null}
+                            {/* Shows users for admins */}
+                            {this.state.displayTool === "Users" ? (
+                                <ViewUsers />
+                            ) : null}
 
-                        {/* Shows admins for admins */}
-                        {this.state.displayTool === "Admins" ? (
-                            <ViewAdmins />
-                        ) : null}
+                            {/* Shows admins for admins */}
+                            {this.state.displayTool === "Admins" ? (
+                                <ViewAdmins />
+                            ) : null}
 
-                        {/* Shows message on screen depending on task run and result */}
-                        <MainContainer>
-                            <h4 className="text-center">{this.state.message}</h4>
-                        </MainContainer>
-                    </Col>
-                </Row>
-            </MainContainer >
+                            {/* Shows message on screen depending on task run and result */}
+                            <MainContainer>
+                                <h4>{this.state.message}</h4>
+                            </MainContainer>
+                        </Col>
+                    </Row>
+                </MainContainer>
+                </div>
+            </div>
         )
     }
 }
