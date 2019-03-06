@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col } from 'reactstrap';
 import MainContainer from "../components/Container";
-import PublicKidCard from "../components/BigKidsCardPublic"
+import PublicKidCard from "../components/PublicKidCard"
 import GalleryPhotos from "../components/GalleryPhotos";
 import API from "../utils/API";
 import LoadSpinner from "../components/LoadSpinner";
@@ -70,7 +70,11 @@ class KidProfilePublic extends Component {
                             {this.state.kid ? (
                                 <Row>
                                     <GalleryPhotos kid={this.state.kid} content={this.state.photos} />
-                                    <PublicKidCard kid={this.state.kid} age={this.calculateAge} />
+                                    <PublicKidCard 
+                                        kid={this.state.kid} 
+                                        age={this.calculateAge}
+                                        email={this.props.email}
+                                    />                                             
                                 </Row>
                             ) : (
                                     <h4 className="text-center">We're sorry. We're unable to display this kid's profile at this time.</h4>

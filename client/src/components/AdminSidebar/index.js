@@ -16,7 +16,7 @@ function AdminSidebar(props) {
           
           {/* Update child displays AdminKidSearch, which lets the admin search for a child */}
           <ListGroupItem onClick={props.onClickKidSearch} tag="button" action>Update child
-            <ul>
+            <ul className="small">
               <li>Update info</li>
               <li>Connect to donor</li>
               <li>Remove child</li>

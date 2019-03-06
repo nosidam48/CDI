@@ -53,7 +53,6 @@ class SponsorMeModal extends React.Component {
             email: email
         })
             .then(res => {
-                console.log(res);
                 if (res.data === "Email notification sent") {
                     this.setState({
                         message: "We have received your request and will contact you soon.",

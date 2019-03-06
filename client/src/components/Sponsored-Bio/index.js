@@ -11,8 +11,7 @@ function SponsoredBio(props) {
       <h5><span className="font-weight-bold">Age: </span>{props.age(props.kid.birth_date)}</h5>
       <h5><span className="font-weight-bold">Grade: </span>{props.kid.grade} </h5>
       <h5><span className="font-weight-bold">Location: </span>{props.kid.location}</h5>
-      <br />
-      <h5 className="text-uppercase">About {props.kid.first_name}</h5>
+      <h5 className="text-uppercase mt-4">About {props.kid.first_name}</h5>
       <p>{props.kid.kid_bio}</p>
       <h5 className="text-uppercase mt-4">Latest messages</h5>
       <div>
