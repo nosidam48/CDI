@@ -1,17 +1,19 @@
 @import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
-.image-gallery-thumbnail {
-    width: 75px; 
-}
+.image-gallery-thumbnail { 
+    width: 60px;
+    border: 2px solid transparent;
+} 
 
 .image-gallery-thumbnail img {
-    width: auto;
-    height: 75px;
-}
+    object-fit: cover;
+    object-position: top;
+    height: 60px;
+} 
 
 .image-gallery-thumbnail.active {
-    border: #717175 1px solid;
-    width: auto;
+    border: #717175 2px solid;
+    
 }
 
 .image-gallery-image {
@@ -19,10 +21,11 @@
     max-height: 500px;
 }
 
-.image-gallery-left-nav {
+.image-gallery-left-nav, .image-gallery-right-nav {
     font-size: 3rem;
 }
 
-.image-gallery-right-nav {
-    font-size: 3rem;
+button.image-gallery-left-nav:focus, button.image-gallery-right-nav:focus {
+    outline: none;
+    background-color: transparent;
 }

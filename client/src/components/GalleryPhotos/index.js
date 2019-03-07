@@ -25,7 +25,7 @@ class GalleryPhotos extends React.Component {
     }
     
     return (
-      <Col sm="5" lg="3" className="image my-4">
+      <Col sm="5" lg="4" xl="3" className="image my-4">
       {/* Passes the image array in as items, takes away play and fullscreen buttons */}
         <ImageGallery items={images} showPlayButton={false} showFullscreenButton={false} showNav={true}/>
       </Col>
