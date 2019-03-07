@@ -59,6 +59,7 @@ This web applicaton attempts to serve the following:
   * Uses multer to allow handling of forms that include both text and binary images.
   * Uses Amazon S3 to store uploaded photos.
   * Uses nodemailer to alert donors when updates have been made.
+  * Uses a collapsible sidebar to display admin tools
   * A loading spinner and messages are used to alert users when a task is still being run or has completed.
   
 ***
