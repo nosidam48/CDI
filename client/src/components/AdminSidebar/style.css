@@ -1,3 +1,81 @@
 button:hover {
     cursor: pointer;
 }
+
+#admin-btn {
+    background-color: transparent;
+    color: white;
+    vertical-align: none;
+    padding: 0;
+}
+
+#admin-container {
+    margin-top: 0!important;
+}
+
+#admin-head {
+    font-style: normal;
+}
+
+#admin-line {
+    background-color: white;
+}
+  
+#page-wrap {
+    overflow: auto;
+}
+  
+.bm-item {
+    display: inline-block;
+    text-decoration: none;
+    margin-bottom: 10px;
+    color:white;
+    transition: color 0.2s;
+}
+  
+.bm-item:hover {
+    font-style: italic;
+    color:white!important;
+}
+  
+.bm-burger-button {
+    position: relative;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+}
+  
+.bm-burger-bars {
+    background: #97442f;
+}
+  
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+  
+.bm-cross {
+    background: #bdc3c7;
+}
+  
+.bm-menu {
+    background: #97442f;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+}
+  
+/* Morph shape necessary with bubble or elastic */
+  .bm-morph-shape {
+    fill: #373a47;
+}
+  
+/* Wrapper for item list */
+  .bm-item-list {
+    color: #b8b7ad;
+}
+  
+/* Styling of overlay */
+  .bm-overlay {
+    background:none!important
+}

@@ -8,10 +8,10 @@ function UserProfile(props) {
     return (
         // Default will show user's current profile. Once update button is clicked, an update form will be displayed
         !props.updateProfile ? (
-            <Row>
+            <Row className="mt-4">
                 <Col md={{ size: 6, offset: 3 }}>
                     <h4>Your Current Profile</h4>
-                    <div className="profile mt-4">
+                    <div className="profile mt-3">
                         <p>{props.results.first_name} {props.results.last_name}</p>
                         <p>{props.results.address}</p>
                         <p>{props.results.city}, {props.results.state} {props.results.zip}</p>

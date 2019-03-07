@@ -31,6 +31,7 @@ function AdminUserList(props) {
                     userId={props.id}
                     userFirstName={props.firstName}
                     userLastName={props.lastName}
+                    redoSearch={props.redoSearch}
                 />
             </div>
             <hr />

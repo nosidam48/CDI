@@ -39,7 +39,7 @@ class App extends React.Component {
     }
     this.setState({ checkingSession: false });
   }
-  
+
   // Function to check if user has admin privileges and to store user name
   checkAdminStatus() {
     // Grab the user's email address from the jwt token
@@ -97,14 +97,14 @@ class App extends React.Component {
           />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/kids" 
-              render={(props) => <Kids {...props} 
-              email={this.state.email} />}
+            <Route exact path="/kids"
+              render={(props) => <Kids {...props}
+                email={this.state.email} />}
             />
-            <Route exact path="/kids/:id" 
-              render={(props) => <KidProfilePublic {...props} 
-              email={this.state.email} />}
-            />  
+            <Route exact path="/kids/:id"
+              render={(props) => <KidProfilePublic {...props}
+                email={this.state.email} />}
+            />
             <SecuredRoute
               path="/donors"
               component={Donors}
@@ -122,7 +122,7 @@ class App extends React.Component {
             <Route component={NoMatch} />
           </Switch>
         </div>
-        <Footer />
+      <Footer />
       </div>
     );
   }
