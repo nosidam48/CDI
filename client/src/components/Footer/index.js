@@ -5,7 +5,7 @@ import "./style.css";
 function Footer (props) {
         return (
             <footer>
-                <div className="text-center">Copyright Centro de Desarrollo Infantil</div></footer>
+                <div className="text-center small">&copy; 2019 Centro de Desarrollo Infantil</div></footer>
         )
 }
 
