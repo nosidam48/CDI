@@ -8,7 +8,6 @@ const nodemailer = require('nodemailer');
 module.exports = {
     // Function to retrieve donor profile info
     getDonor: (req, res) => {
-        console.log("running")
         db.users.findOne({
             where: {
                 email: req.body.email

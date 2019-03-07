@@ -44,7 +44,7 @@ module.exports = {
                 const mailOptions = {
                     from: 'Centro de Desarrollo Infantil',
                     subject: `You have a new update for ${userData.dataValues.first_name}`,
-                    text: `We have added a new update and/or photo for ${userData.dataValues.first_name}. Please log in to http://cdi2019.herokuapp.com and visit the Who I Sponsor page. \nThank you for your continued support of ${userData.dataValues.first_name}! \nCDI Staff`
+                    text: `We have added a new update and/or photo for ${userData.dataValues.first_name}. Please log in to http://cdi2019.herokuapp.com/donors and visit the Who I Sponsor page. \nThank you for your continued support of ${userData.dataValues.first_name}! \nCDI Staff`
                 }
                 // Run for loop through connected users to send emails to each donor connected to the child
                 for (let i = 0; i < userData.users.length; i++) {

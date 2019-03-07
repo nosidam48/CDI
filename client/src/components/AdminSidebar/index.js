@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "reactstrap";
 import { push as Menu } from "react-burger-menu";
 import "./style.css";
 
@@ -6,29 +7,23 @@ import "./style.css";
 function AdminSidebar(props) {
   return (
     <Menu width={ 220 } {...props}>
-        <div className="text-bold">Admin tools</div>
+        <div id="admin-head">Admin tools</div>
         <hr id="admin-line"/>
           {/* Add a child displays AddKidForm to be filled out */}
-          <a className="mt-3" onClick={props.onClickAddKid}>Add a child</a>
+          <Button id="admin-btn" className="mt-3" onClick={props.onClickAddKid}>Add a child</Button>
           
           {/* Update child displays AdminKidSearch, which lets the admin search for a child */}
-          <a onClick={props.onClickKidSearch}>Update child
-            <ul className="small">
-              <li>Update info</li>
-              <li>Connect to donor</li>
-              <li>Remove child</li>
-            </ul>
-          </a>
+          <Button id="admin-btn" onClick={props.onClickKidSearch}>Update child</Button>
 
           {/* View all children, sponsored/unsponsored/both */}
-          <a onClick={props.onClickMultipleKidSearch}>View Children</a>
+          <Button id="admin-btn" onClick={props.onClickMultipleKidSearch}>View Children</Button>
           <hr id="admin-line"/>
       
       {/* Display, pass props to master admin sidebar */}
-      <a className="mt-3" onClick={props.onClickAddUser}>Add User</a>
-      <a onClick={props.onClickUserSearch}>Update User</a>
-      <a onClick={props.onClickShowUsers}>View all users</a>
-      <a onClick={props.onClickShowAdmins}>View all admins</a>
+      <Button id="admin-btn" className="mt-3" onClick={props.onClickAddUser}>Add User</Button>
+      <Button id="admin-btn" onClick={props.onClickUserSearch}>Update User</Button>
+      <Button id="admin-btn" onClick={props.onClickShowUsers}>View all users</Button>
+      <Button id="admin-btn" onClick={props.onClickShowAdmins}>View all admins</Button>
     </Menu>
   )
 }

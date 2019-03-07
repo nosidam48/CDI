@@ -2,16 +2,23 @@ button:hover {
     cursor: pointer;
 }
 
+#admin-btn {
+    background-color: transparent;
+    color: white;
+    vertical-align: none;
+    padding: 0;
+}
+
 #admin-container {
     margin-top: 0!important;
 }
 
-#admin-line {
-    background-color: white;
+#admin-head {
+    font-style: normal;
 }
 
-#app {
-    height: 100vh;
+#admin-line {
+    background-color: white;
 }
   
 #page-wrap {

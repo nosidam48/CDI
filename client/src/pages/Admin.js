@@ -19,6 +19,8 @@ class Admin extends Component {
     constructor(props) {
         super(props);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleAdminUserSearch = this.handleAdminUserSearch.bind(this);
+        this.handleAdminKidSearch = this.handleAdminKidSearch.bind(this);
     }
     state = {
         // Toolbar functions
@@ -68,7 +70,11 @@ class Admin extends Component {
         this.setState({
             displayTool: "AddKidForm",
             message: "",
-            menuOpen: false
+            menuOpen: false,
+            kids: [],
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
         });
         window.scrollTo(0, 0);
     }
@@ -77,7 +83,11 @@ class Admin extends Component {
         this.setState({
             displayTool: "KidSearch",
             message: "",
-            menuOpen: false
+            menuOpen: false,
+            kids: [],
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
         })
         window.scrollTo(0, 0);
     }
@@ -86,7 +96,11 @@ class Admin extends Component {
         this.setState({
             displayTool: "MultipleKids",
             message: "",
-            menuOpen: false
+            menuOpen: false,
+            kids: [],
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
         })
         window.scrollTo(0, 0);
     }
@@ -95,7 +109,11 @@ class Admin extends Component {
         this.setState({
             displayTool: "AddUserForm",
             message: "",
-            menuOpen: false
+            menuOpen: false,
+            kids: [],
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
         });
         window.scrollTo(0, 0);
     }
@@ -105,7 +123,11 @@ class Admin extends Component {
         this.setState({
             displayTool: "UserSearch",
             message: "",
-            menuOpen: false
+            menuOpen: false,
+            kids: [],
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
         })
         window.scrollTo(0, 0);
     }
@@ -114,7 +136,11 @@ class Admin extends Component {
         this.setState({
             displayTool: "Users",
             message: "",
-            menuOpen: false
+            menuOpen: false,
+            kids: [],
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
         })
         window.scrollTo(0, 0);
     }
@@ -124,19 +150,23 @@ class Admin extends Component {
             displayTool: "Admins",
             showAdmins: true,
             message: "",
-            menuOpen: false
+            menuOpen: false,
+            kids: [],
+            users: [],
+            showKidSearchResults: false,
+            showUserSearchResults: false,
         })
         window.scrollTo(0, 0);
     }
     // ==============================================================
 
-    // Function that runs after a kid has been added
+    // Function that empties form after it's been completed or discarded.
     resetForm = () => {
         this.setState({
             firstNames: "", lastName: "", gender: "", birth_date: "",
             grade: "", location: "", bio: "", email: "", password: "",
             address: "", city: "", state: "", zip: "", admin: false,
-            displayTool: ""
+            displayTool: "", kids: [], users: []
         })
         window.scrollTo(0, 0);
     }
@@ -159,14 +189,16 @@ class Admin extends Component {
     // Handles when an admin adds a new child
     handleKidFormSubmit = event => {
         event.preventDefault();
-        // Set state to loading and empties results arrays
+        // Updates state 
         this.setState({
             loading: true,
             kids: [],
-            users: []
+            users: [],
+            displayTool: "",
+            message: "",
         })
-        // Hide form and send user to top of the page 
-        this.toggleAddKidForm();
+        // Sends user to top of the page
+        window.scrollTo(0, 0);
 
         // Use FormData to send profile photo to S3
         let kidPhoto = new FormData();
@@ -216,10 +248,12 @@ class Admin extends Component {
         this.setState({
             loading: true,
             kids: [],
-            users: []
-        });
-        // Hide form and send user to top of the page
-        this.toggleAddUserForm();
+            users: [],
+            displayTool: "",
+            message: "",
+        })
+        // Sends user to top of the page
+        window.scrollTo(0, 0);
 
         // Post to db
         API.addUser({
@@ -263,7 +297,6 @@ class Admin extends Component {
             users: [],
             message: "",
             showKidSearchResults: false,
-
         })
         API.kidSearch({
             searchTerm: this.state.searchTerm,
@@ -296,6 +329,7 @@ class Admin extends Component {
             kids: [],
             users: [],
             displayTool: "",
+            message: "",
             showUserSearchResults: false,
         })
         API.userSearch({
@@ -326,7 +360,6 @@ class Admin extends Component {
             <div id="admin">
                 <AdminSidebar
                     pageWrapId={"page-wrap"}
-                    outerContainerId={"app"}
                     isOpen={this.state.menuOpen}
                     onClickAddKid={this.toggleAddKidForm}
                     onClickKidSearch={this.showKidSearch}

@@ -22,12 +22,14 @@ class RemoveUserModal extends React.Component {
   }
 
   // Handles when an admin removes a child
-  handleRemoveUser = id => {
-    API.removeUser(id)
+  handleRemoveUser = (id, event) => {
+    API.removeUser(id, event)
       .then(res => {
         this.setState({
           message: "The user's record was successfully removed"
         })
+        // When update was received, the original search will fire again, which will show the updated data
+      this.props.redoSearch(event)  
       })
       .catch(err => console.log(err));
   }
@@ -49,7 +51,7 @@ class RemoveUserModal extends React.Component {
                   Are you sure you want to remove {this.props.userFirstName} {this.props.userLastName}'s record from the database? It will be removed permanently.
                 </ModalBody>
                 <ModalFooter>
-                  <Button size="sm" onClick={() => this.handleRemoveUser(this.props.userId)} className="modalBtn">Yes, remove record</Button>{' '}
+                  <Button size="sm" onClick={(event) => this.handleRemoveUser(this.props.userId, event)} className="modalBtn">Yes, remove record</Button>{' '}
                   <Button size="sm" onClick={this.toggle} className="modalCancel">Cancel</Button>
                 </ModalFooter>
               </div>

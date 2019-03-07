@@ -37,7 +37,6 @@ class Profile extends Component {
     // Get user info if user is already in db to put in form
     API.getDonor({ email: profile.name })
       .then(response => {
-        console.log(response);
         this.setState({
           first_name: response.data.first_name,
           last_name: response.data.last_name,
@@ -56,7 +55,6 @@ class Profile extends Component {
   initiateUpdate(event) {
     event.preventDefault();
     this.setState({ updateProfile: !this.state.updateProfile })
-    console.log(this.state);
   }
 
   handleSubmit(event) {
@@ -76,7 +74,6 @@ class Profile extends Component {
       zip: this.state.zip
     })
       .then(response => {
-          console.log(response)
         this.setState({
           first_name: response.data.first_name,
           last_name: response.data.last_name,

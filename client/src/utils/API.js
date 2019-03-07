@@ -68,7 +68,6 @@ export default {
     // DONOR FUNCTIONS ============================================================
     // Get logged-in donor profile
     getDonor: (email) => {
-        console.log(email);
         return axios.post("/api/users/profile-check", email)
     },
 

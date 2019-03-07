@@ -34,7 +34,7 @@ class ViewAdmins extends React.Component {
                 {/* Display loader until results come, then display results */}
                 {this.state.loading ? <LoadingSpinner className="kidsSpin" />
                     : (
-                        <Table className="mt-3">
+                        <Table>
                             <thead>
                                 <tr>
                                     <th>ID</th>
