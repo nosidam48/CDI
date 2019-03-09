@@ -2,9 +2,10 @@ import React from "react";
 import { Table, Button } from "reactstrap";
 import API from "../../utils/API";
 import LoadingSpinner from "../LoadSpinner";
+import "./style.css";
 
 // Displays table of kid results
-class AdminMultipleKids extends React.Component {
+class ViewKids extends React.Component {
     state = {
         kids: [],
         loading: false
@@ -62,9 +63,9 @@ class AdminMultipleKids extends React.Component {
                 {this.state.loading ? <LoadingSpinner className="kidsSpin" />
                     : (
                         <div>
-                            <Button inline="true" size="sm" className="mr-2" onClick={this.loadKids}>View all children</Button>
-                            <Button inline="true" size="sm" className="mr-2" onClick={this.sponsoredKids}>View sponsored children</Button>
-                            <Button inline="true" size="sm" onClick={this.unsponsoredKids}>View unsponsored children</Button>
+                            <Button inline="true" size="sm" className="mr-2" id="view-btn" onClick={this.loadKids}>View all children</Button>
+                            <Button inline="true" size="sm" className="mr-2" id="view-btn" onClick={this.sponsoredKids}>View sponsored children</Button>
+                            <Button inline="true" size="sm" id="view-btn" onClick={this.unsponsoredKids}>View unsponsored children</Button>
                             <Table className="mt-3">
                                 <thead>
                                     <tr>
@@ -83,10 +84,10 @@ class AdminMultipleKids extends React.Component {
                                             <th scope="row">{kid.id}</th>
                                             <td>{kid.first_name}</td>
                                             <td>{kid.last_name}</td>
-                                            <td>{kid.birth_date}</td>
-                                            <td>{kid.grade}</td>
+                                            <td><span className="mobile-col">Birthdate: </span>{kid.birth_date}</td>
+                                            <td><span className="mobile-col">Grade: </span>{kid.grade}</td>
                                             <td>{kid.location}</td>
-                                            <td>{kid.need_sponsor ? "Yes" : "No"}</td>
+                                            <td><span className="mobile-col">Need Sponsor? </span>{kid.need_sponsor ? "Yes" : "No"}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -98,4 +99,4 @@ class AdminMultipleKids extends React.Component {
     };
 }
 
-export default AdminMultipleKids;
+export default ViewKids;

@@ -1,0 +1,30 @@
+.mobile-col {
+    display: none;
+}
+
+@media screen and (max-width: 575.98px) {
+    .table > tbody > tr > td {
+        display: block;
+        border-top: none;
+        padding: 3px;
+    }
+
+    .table > tbody > tr > th {
+        display: block;
+        padding: 3px;
+        margin-top: 15px;
+    }
+
+    .table > thead > tr > th {
+        display: none;
+  }
+
+  .mobile-col {
+      display: inline;
+  }
+
+  #view-btn {
+    margin-top: .5rem; 
+    margin-bottom: 0; 
+  }
+}

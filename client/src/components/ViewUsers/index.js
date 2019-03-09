@@ -51,7 +51,7 @@ class ViewUsers extends React.Component {
                                         <td>{user.last_name}</td>
                                         <td>{user.email}</td>
                                         {user.kids.map(kid =>
-                                            <td key={kid.id}><a href={"/kids/" + kid.id}>{kid.first_name}</a></td>
+                                            <td key={kid.id}><span className="mobile-col">Kids sponsored: </span><a href={"/kids/" + kid.id}>{kid.first_name}</a></td>
                                         )}
                                     </tr>
                                 ))}

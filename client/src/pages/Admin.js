@@ -6,7 +6,7 @@ import SearchKid from "../components/SearchKid";
 import AdminKidList from "../components/AdminKidList";
 import SearchUser from "../components/SearchUser";
 import AdminUserList from "../components/AdminUserList"
-import AdminMultipleKids from "../components/AdminMultipleKidList";
+import ViewKids from "../components/ViewKids";
 import AddUserForm from "../components/AddUserForm";
 import ViewAdmins from "../components/ViewAdmins"
 import ViewUsers from "../components/ViewUsers"
@@ -446,7 +446,7 @@ class Admin extends Component {
 
                             {/* VIEW CHILDREN */}
                             {this.state.displayTool === "MultipleKids" ? (
-                                <AdminMultipleKids />
+                                <ViewKids />
                             ) : null}
 
                             {/* ADD USER */}

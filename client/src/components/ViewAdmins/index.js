@@ -51,7 +51,7 @@ class ViewAdmins extends React.Component {
                                         <td>{admin.first_name}</td>
                                         <td>{admin.last_name}</td>
                                         <td>{admin.email}</td>
-                                        <td>{admin.master_admin_status ? "Yes" : "No"}</td>
+                                        <td><span className="mobile-col">Master status? </span>{admin.master_admin_status ? "Yes" : "No"}</td>
                                     </tr>
                                 ))}
                             </tbody>
