@@ -27,7 +27,7 @@ class Admin extends Component {
         displayTool: "",
         showKidSearchResults: false,
         showUserSearchResults: false,
-        menuOpen: true,
+        menuOpen: false,
 
         // Message & loading
         message: "Choose an admin tool to get started.",
@@ -372,7 +372,7 @@ class Admin extends Component {
                 <div id="page-wrap">
                 <MainContainer id="admin-container">
                     <Row className="mt-0">
-                        <Col xs="12" sm="8" md={{ size: 9, offset: 1 }} className="px-3" id="addKid">
+                        <Col xs="12" sm="8" md={{ size: 9 }} className="px-3" id="addKid">
                             {/* Shows loading spinner if loading is true */}
                             {this.state.loading ? (
                                 <LoadSpinner className="kidsSpin" />

@@ -12,7 +12,7 @@ function SecuredAdminRoute(props) {
                 return <div></div>;
             }
             if (admin !== true) {
-                return<h4 className="text-center mt-4">You do not have admin privileges.</h4>
+                return<h4 className="text-center mt-4"></h4>
             } else {
             return <Component />
             }
