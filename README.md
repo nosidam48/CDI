@@ -65,7 +65,7 @@ This web applicaton attempts to serve the following:
 ***
 ## Screenshots
 ### Home page
-![Home page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/Readme-Homepage.png "Home")
+![Home page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-Homepage.png "Home")
 
 ### Kids page
 ![Kids page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-kids.png "Kids")
