@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import "./style.css";
 import SponsorMeModal from "../SponsorMeModal"
 
 // Card that appears when a user clicks to see more about a kid. Props is one kid based on the id in the url.

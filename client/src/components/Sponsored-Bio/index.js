@@ -1,7 +1,6 @@
 import React from "react";
 import { Col } from "reactstrap";
 import moment from "moment";
-import "./style.css";
 
 // Displays text to donor of child they sponsor
 function SponsoredBio(props) {

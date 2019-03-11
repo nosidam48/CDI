@@ -4,7 +4,6 @@ import AddContentModal from "../AddContentModal";
 import RemoveKidModal from "../RemoveKidModal";
 import ConnectDonorModal from "../ConnectDonorModal";
 
-
 // Displays list from admin search for kids
 function AdminKidList(props) {
     return (
