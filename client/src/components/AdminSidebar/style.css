@@ -79,3 +79,13 @@ button:hover {
   .bm-overlay {
     background:none!important
 }
+
+@media screen and (max-width: 575.98px) {
+    #admin-btn {
+        padding-bottom: 8px;
+    }
+
+    .bm-burger-btn {
+        margin-left: -20px;
+    }
+}

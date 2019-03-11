@@ -6,16 +6,16 @@ function SearchUser(props) {
     return (
         <div>
             <Form inline>
-                <InputField
-                    value={props.termValue}
-                    onChange={props.onChange}
-                    name={props.termName}
-                />
                 <UserSearchType
                     value={props.typeValue}
                     onChange={props.onChange}
                     name={props.typeName}
                     id={props.typeId}
+                />
+                <InputField
+                    value={props.termValue}
+                    onChange={props.onChange}
+                    name={props.termName}
                 />
                 <FormBtn
                     id={props.submitId}

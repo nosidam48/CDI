@@ -25,7 +25,10 @@ class Home extends Component {
                     loading: false
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                this.setState({ loading: false })
+            })
     }
 
     // Function to calculate age using the birthdate in the database
