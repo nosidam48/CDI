@@ -78,6 +78,6 @@ This web applicaton attempts to serve the following:
 
 ### Add a Child
 ![Add a Child process](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-AddChild.gif "Add a Child")
-
+ 
 ### Add a Photo/Note
 ![Add a Photo process](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/Readme-addphoto.gif "Add a Photo/Note")
