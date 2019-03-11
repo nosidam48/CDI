@@ -17,6 +17,7 @@ function SearchKid(props) {
                     value={props.termValue}
                     onChange={props.onChange}
                     name={props.termName}
+                    className="mr-2"
                 />
                 <FormBtn
                     id={props.submitId}
