@@ -65,16 +65,16 @@ This web applicaton attempts to serve the following:
 ***
 ## Screenshots
 ### Home page
-![Home page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/Readme-Homepage.pn "Home")
+![Home page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/Readme-Homepage.png "Home")
 
 ### Kids page
-![Kids page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-kids.pn "Kids")
+![Kids page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-kids.png "Kids")
 
 ### Donor page
-![Donor page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-donor.pn "Donor")
+![Donor page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-donor.png "Donor")
 
 ### Admin page
-![Admin page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-admin.pn "Admin")
+![Admin page](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-admin.png "Admin")
 
 ### Add a Child
 ![Add a Child process](https://github.com/nosidam48/Padrinos/blob/master/client/public/images/ReadMe-AddChild.gif "Add a Child")
