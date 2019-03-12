@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Form, Label } from "reactstrap";
 import { InputField, FormBtn, } from "../Form";
+import MainContainer from "../Container";
 import "./style.css";
 
 // Profile that appears with current info for user.
@@ -8,6 +9,7 @@ function UserProfile(props) {
     return (
         // Default will show user's current profile. Once update button is clicked, an update form will be displayed
         !props.updateProfile ? (
+            <MainContainer>
             <Row className="mt-4">
                 <Col md={{ size: 6, offset: 3 }}>
                     <h4>Your Current Profile</h4>
@@ -18,14 +20,16 @@ function UserProfile(props) {
                         <FormBtn
                             onClick={props.onClick}
                             btnText="Update"
-                            className="btn-sm"
+                            className="btn-sm mt-1"
                         />
                     </div>
                 </Col>
             </Row>
+            </MainContainer>
         ) : (
-                <Row>
-                    <Col md={{ size: 6, offset: 3 }}>
+                <MainContainer>
+                <Row className="my-4">
+                    <Col md={{ size: 6, offset: 3 }} >
                         <h4>Update Your Current Profile</h4>
                         <Form className="mt-3">
                             <Label>First Name</Label>
@@ -76,6 +80,7 @@ function UserProfile(props) {
                         </Form>
                     </Col>
                 </Row>
+                </MainContainer>
             )
     )
 }

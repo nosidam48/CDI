@@ -61,6 +61,14 @@ class UpdateKidModal extends React.Component {
       })
   }
 
+  // Function to reset form after a discard
+  resetForm = () => {
+    this.setState({
+      kidFirstNames: this.props.firstNames, kidLastName: this.props.lastName, gender: this.props.gender, birth_date: this.props.birth_date, grade: this.props.grade,
+      kidLocation: this.props.location, bio: this.props.bio,
+    })
+}
+
   render() {
     return (
       <div className="d-inline mr-2">
@@ -123,7 +131,7 @@ class UpdateKidModal extends React.Component {
               type="submit"
             />{' '}
             <FormBtn 
-              onClick={this.toggle} 
+              onClick={() => { this.toggle(); this.resetForm() }} 
               className="modalCancel"
               btnText="Discard"  
             />

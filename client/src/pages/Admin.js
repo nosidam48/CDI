@@ -372,7 +372,8 @@ class Admin extends Component {
                 <div id="page-wrap">
                 <MainContainer id="admin-container">
                     <Row className="mt-0">
-                        <Col xs="12" sm="8" md={{ size: 9 }} className="px-3" id="addKid">
+                        <Col className="px-3" id="addKid">
+                        {/* xs="12" sm="8" md={{ size: 9 }}  */}
                             {/* Shows loading spinner if loading is true */}
                             {this.state.loading ? (
                                 <LoadSpinner className="kidsSpin" />
@@ -528,7 +529,7 @@ class Admin extends Component {
 
                             {/* Shows message on screen depending on task run and result */}
                             <MainContainer>
-                                <h4>{this.state.message}</h4>
+                                <h4 className="text-center">{this.state.message}</h4>
                             </MainContainer>
                         </Col>
                     </Row>

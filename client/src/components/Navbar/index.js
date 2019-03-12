@@ -58,7 +58,9 @@ class MainNavbar extends React.Component {
 
             {/* If user is not signed in, show Log in button and click to go to log in. If use is signed in, show dropdown menu with links*/}
             {!this.props.authenticated ? (
-              <NavLink onClick={auth0Client.signIn}>Log In</NavLink>
+              <NavItem>
+                <NavLink onClick={auth0Client.signIn}>Log In</NavLink>
+              </NavItem>
             ) : (
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Input, Label } from 'reactstrap';
-import { InputField } from "../Form";
+import { InputField, FormBtn } from "../Form";
 import API from "../../utils/API";
 
 //A modal to udate an Admin
@@ -85,6 +85,19 @@ class UpdateUserModal extends React.Component {
         })
     }
 
+  // Function to reset form after a discard
+  resetForm = () => {
+    this.setState({
+      userFirstName: this.props.firstName,
+      userLastName: this.props.lastName,
+      email: this.props.email,
+      address: this.props.address,
+      city: this.props.city,
+      state: this.props.state,
+      zip: this.props.zip,
+    })
+}
+
     render() {
       return (
         <div className="d-inline mr-2">
@@ -143,8 +156,17 @@ class UpdateUserModal extends React.Component {
               </Form>
             </ModalBody>
             <ModalFooter>
-              <Button onClick={(event) => { this.toggle(); this.handleUserEdit(event) }} className="modalBtn">Submit Changes</Button>{' '}
-              <Button onClick={this.toggle} className="modalCancel">Cancel</Button>
+              <FormBtn 
+                onClick={(event) => { this.toggle(); this.handleUserEdit(event) }} 
+                className="modalBtn"
+                btnText="Update"
+                type="submit"
+              />{' '}
+              <FormBtn 
+                onClick={() => { this.toggle(); this.resetForm() }} 
+                className="modalCancel" 
+                btnText="Discard"
+              />
             </ModalFooter>
           </Modal>
         </div>
