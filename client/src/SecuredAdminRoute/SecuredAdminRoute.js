@@ -12,7 +12,7 @@ function SecuredAdminRoute(props) {
                 return <div></div>;
             }
             if (admin !== true) {
-                return<h4 className="text-center mt-4"></h4>
+                return<div></div>
             } else {
             return <Component />
             }

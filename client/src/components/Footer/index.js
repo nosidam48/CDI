@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 // Calculate date for footer
-let d = new Date;
+let d = new Date();
 let year = d.getFullYear();
 
 // Footer
