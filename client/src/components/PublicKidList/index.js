@@ -4,6 +4,7 @@ import "./style.css";
 import moment from "moment";
 import LoadingSpinner from "../LoadSpinner"
 import SponsorMeModal from "../SponsorMeModal";
+import { todayDate, calculateAge } from "../../utils/functions";  
 
 // Shows list of kids available to sponsor; default is to show all kids and user can enter search options
 function PublicKidList(props) {   
@@ -28,7 +29,7 @@ function PublicKidList(props) {
                                         <div className="card-block p-2">
                                             <h4 className="card-title font-weight-bold">{kid.first_name} {kid.last_name}</h4>
                                             <h6><span className="font-weight-bold">Age: </span>
-                                                {props.calculateAge(kid.birth_date, props.todayDate)}
+                                                {calculateAge(kid.birth_date, todayDate)}
                                             </h6>
                                             <h6><span className="font-weight-bold">Birthday: </span>{moment(kid.birth_date).format("MMMM D")}</h6>
                                             <h6><span className="font-weight-bold">Location:</span> {kid.location}</h6>

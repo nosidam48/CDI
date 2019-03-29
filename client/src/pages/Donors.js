@@ -42,20 +42,6 @@ class Donors extends Component {
             .catch(err => console.log(err));
     }
 
-    calculateAge = (dateString) => {
-        var today = new Date();
-        var birthday = new Date(dateString);
-        // Use .getFullYear method to set age variable by subtracting birth year from current year
-        var age = today.getFullYear() - birthday.getFullYear();
-        // Use .getMonth method to subtract birth month from current month
-        var months = today.getMonth() - birthday.getMonth();
-        // If months is less than 0 or if months = 0 and days in the current month is less than days in birth month, decrease age by a year
-        if (months < 0 || (months === 0 && today.getDate() < birthday.getDate())) {
-            age--;
-        }
-        return age;
-    };
-
     // Function to filter content returned and save only notes that contain content
     removeNote = note => {
         // Filter this.state.content and remove any blank notes
@@ -88,7 +74,7 @@ class Donors extends Component {
                             {this.state.kid ? (
                                 <Row>
                                     <GalleryPhotos kid={this.state.kid} content={this.state.photos} />
-                                    <SponsoredBio key={this.state.id} kid={this.state.kid} age={this.calculateAge} notes={this.state.notes} />
+                                    <SponsoredBio key={this.state.id} kid={this.state.kid} notes={this.state.notes} />
                                 </Row>
                             ) : (
                                     <h4 className="text-center mt-4">We're sorry. We couldn't find any kids that you sponsor.</h4>

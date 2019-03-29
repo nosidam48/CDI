@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { todayDate, calculateAge } from "../../utils/functions";
 
 // Kid card that shows up in home page sidebar
 function SidebarCard(props) {
@@ -14,7 +15,7 @@ function SidebarCard(props) {
                             <div className="card-body p-1">
                                 <h6><strong><a href={"/kids/" + kid.id}>{kid.first_name}
                                 </a></strong></h6>
-                                <div className="small"><i className="fas fa-birthday-cake mr-2"></i>{props.age(kid.birth_date) + " years old"}<br />
+                                <div className="small"><i className="fas fa-birthday-cake mr-2"></i>{calculateAge(kid.birth_date, todayDate) + " years old"}<br />
                                     <i className="fas fa-globe-americas mr-2"></i>{kid.location}</div>
                             </div>
                         </div>
