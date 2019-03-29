@@ -5,6 +5,23 @@ import PublicKidList from "../components/PublicKidList";
 import FilterPublic from "../components/FilterPublic";
 import API from "../utils/API";
 
+// Store today's date in a variable
+let todayDate = new Date();
+
+// Calculate age by using today's date and birthdate
+export const calculateAge = (dateString, today) => {
+    let birthday = new Date(dateString);
+    // Use .getFullYear method to set age variable by subtracting birth year from current year
+    let age = today.getFullYear() - birthday.getFullYear();
+    // Use .getMonth method to subtract birth month from current month
+    let months = today.getMonth() - birthday.getMonth();
+    // If months is less than 0 or if months = 0 and days in the current month is less than days in birth month, decrease age by a year
+    if (months < 0 || (months === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 class Kids extends React.Component {
     constructor(props) {
         super(props);
@@ -60,21 +77,6 @@ class Kids extends React.Component {
             }).catch(err => console.log(err))
     }
 
-    // Calculate age by using today's date and birthdate
-    calculateAge = (dateString) => {
-        var today = new Date();
-        var birthday = new Date(dateString);
-        // Use .getFullYear method to set age variable by subtracting birth year from current year
-        var age = today.getFullYear() - birthday.getFullYear();
-        // Use .getMonth method to subtract birth month from current month
-        var months = today.getMonth() - birthday.getMonth();
-        // If months is less than 0 or if months = 0 and days in the current month is less than days in birth month, decrease age by a year
-        if (months < 0 || (months === 0 && today.getDate() < birthday.getDate())) {
-            age--;
-        }
-        return age;
-    }
-
     render() {
         return (
             <MainContainer>
@@ -85,7 +87,8 @@ class Kids extends React.Component {
                         value={this.state} />
                     <PublicKidList
                         kids={this.state.kids}
-                        calculateAge={this.calculateAge}
+                        todayDate={todayDate}
+                        calculateAge={calculateAge}
                         loading={this.state.loading}
                         email={this.props.email}
                     />
