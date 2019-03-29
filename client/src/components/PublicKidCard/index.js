@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
-import SponsorMeModal from "../SponsorMeModal"
+import SponsorMeModal from "../SponsorMeModal";
+import { todayDate, calculateAge } from "../../utils/functions";
 
 // Card that appears when a user clicks to see more about a kid. Props is one kid based on the id in the url.
 function PublicKidCard(props) {
@@ -9,7 +10,7 @@ function PublicKidCard(props) {
             <Row>
                 <Col>
                     <h2 className="font-weight-bold">{props.kid.first_name}</h2>
-                    <h5><span className="font-weight-bold">Age: </span>{props.age(props.kid.birth_date)}</h5>
+                    <h5><span className="font-weight-bold">Age: </span>{calculateAge(props.kid.birth_date, todayDate)}</h5>
                     <h5><span className="font-weight-bold">Grade: </span>{props.kid.grade}</h5>
                     <h5><span className="font-weight-bold">Location: </span>{props.kid.location}</h5>
                     <br />
